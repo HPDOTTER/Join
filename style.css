@@ -1,3 +1,41 @@
-body {
-    margin: 0;
+.menu-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 232px;
+    height: 932px;
+    padding: 66px 0;
+    background-color: aqua;
+}
+
+.menu-main {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 186px;
+}
+
+.menu-legal-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.menu-main > button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 186px;
+    padding: 8px 30px;
+    border: none;
+    border-radius: 8px;
+}
+
+.menu-legal-section > button {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border: none;
+    border-radius: 10px;
 }
