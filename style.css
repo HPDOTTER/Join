@@ -1,5 +1,21 @@
+:root {
+
+    --menu-color: #42526E;
+
+
+    --primary-bg-color:#4589FF;
+    --secondary-bg-color: #005DFF;
+
+
+}
+
 * {
     font-family: 'Open Sans';
+    color: #000000;
+}
+
+a {
+    color: #000000;
 }
 
 .menu-bar {
@@ -10,7 +26,7 @@
     width: 232px;
     height: 932px;
     padding: 66px 0;
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 
 .menu-main {
@@ -26,20 +42,22 @@
     gap: 16px;
 }
 
-.menu-main > button {
+.menu-main > a {
     display: flex;
     align-items: center;
     gap: 8px;
     width: 186px;
     padding: 8px 30px;
+    color: var(--menu-color);
     border: none;
     border-radius: 8px;
 }
 
-.menu-legal-section > button {
+.menu-legal-section > a {
     display: flex;
     align-items: center;
     padding: 8px;
+    color: var(--menu-color);
     border: none;
     border-radius: 10px;
 }
