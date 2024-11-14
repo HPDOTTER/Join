@@ -1,3 +1,7 @@
+* {
+    font-family: 'Open Sans';
+}
+
 .menu-bar {
     display: flex;
     flex-direction: column;
