@@ -61,3 +61,7 @@ a {
     border: none;
     border-radius: 10px;
 }
+
+.menu-bar-left {
+    display: flex;
+}
