@@ -1,0 +1,83 @@
+.container {
+    display: flex;
+}
+
+.contactListSection {
+    width: 30%;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
+
+.contactListSection button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.contactList {
+    margin-top: 20px;
+}
+
+.contactItem {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.contactItem:hover {
+    background-color: #f0f0f0;
+}
+
+.contactItem.active {
+    background-color: lightblue;
+}
+
+.contactAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: orange;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.contactDetailSection {
+    width: 70%;
+    padding: 20px;
+}
+
+.contactDetailSection h2 {
+    margin-top: 0;
+}
+
+.contactDetailSection button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.contactForm,
+.contactDetail {
+    display: none;
+}
+
+.contactFormOverlay,
+.contactDetailOverlay {
+    display: none;
+}
+
+#contactDetailSection {
+    display: none;
+}
