@@ -1,10 +1,29 @@
 :root {
-
-    --menu-color: #42526E;
-
-
-    --primary-bg-color:#4589FF;
-    --secondary-bg-color: #005DFF;
+    --primary-color:#4589FF;
+    --secondary-color: #005DFF;
+    --primary-highlight-color: #D2E3FF;
+    --secondary-highlight-color: #B5DBFF33;
+    --grey: #42526E;
+    --dark: #091931;
+    --orange: #FF7A00;
+    --pink: #FF5EB3;
+    --violet: #6E52FF;
+    --purple: #9327FF;
+    --turquoise: #00BEE8;
+    --aqua: #1FD7C1;
+    --salmon: #FF745E;
+    --pastel-orange: #FFA35E;
+    --fuchsia: #FC71FF;
+    --pastel-gold: #FFC701;
+    --blue: #0038FF;
+    --lime: #C3FF2B;
+    --yellow: #FFE62B;
+    --coral: #FF4646;
+    --gold: #FFBB2B;
+    --priority-urgent: #FF3D00;
+    --priority-medium: #FFA800;
+    --priority-low: #7AE229;
+    --warning: #FF8190;
 
 
 }
