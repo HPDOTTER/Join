@@ -77,6 +77,11 @@ a {
     border-radius: 8px;
 }
 
+.menu-main > a:hover {
+    background-color: var(--primary-highlight-color);
+    scale: 1.05;
+}
+
 .menu-legal-section > a {
     display: flex;
     align-items: center;
@@ -84,6 +89,10 @@ a {
     color: var(--menu-color);
     border: none;
     border-radius: 10px;
+}
+
+.menu-legal-section > a:hover {
+    color: var(--secondary-color);
 }
 
 .menu-bar-left {
