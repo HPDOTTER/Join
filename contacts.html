@@ -1,59 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join</title>
-    <link rel="shortcut icon" href="./assets/icons/favicon/favicon.png" type="image/x-icon">
-
-    <link rel="stylesheet" href="./style/standard.css">
-    <link rel="stylesheet" href="./style/fonts.css">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="contacts.css">
-
-    <script src="./script.js"></script>
-    <script src="contacts.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontaktverwaltung</title>
+  <link rel="stylesheet" href="contacts.css">
+  <script src="contacts.js"></script>
 </head>
+
 <body onload="renderContacts()">
-    <header w3-include-html="header.html"></header>
-    <div class="menu-bar-left">
-        <div w3-include-html="menu-bar.html"></div>
-        <div>
-            <h1>Contacts</h1>
-            <div class="container">
-                <div class="contactListSection">
-                  <button onclick="showForm()">Add new contact</button>
-                  <div id="contactList"></div>
-                </div>
-            
-                <div class="contactDetailSection" id="contactDetailSection">
-                  <div id="contactDetail">
-                    <div class="contactAvatar" id="contactAvatar"></div>
-                    <h2 id="detailName"></h2>
-                    <button onclick="editContact()">Edit</button>
-                    <button onclick="deleteContact()">Delete</button>
-                    
-                    <h3>Contact Information</h3>
-                    <p><strong>Email:</strong> <span id="detailEmail"></span></p>
-                    <p><strong>Phone:</strong> <span id="detailPhone"></span></p>
-                  </div>
-                </div>
-              </div>
-            
-              <div class="contactFormOverlay" id="contactFormOverlay" onclick="hideForm()"></div>
-              <div class="contactForm" id="contactForm">
-                <h2>Neuen Kontakt hinzufügen</h2>
-                <label for="contactListName">Name:</label>
-                <input type="text" id="contactListName" required><br>
-                <label for="contactListEmail">E-Mail-Adresse:</label>
-                <input type="email" id="contactListEmail" required><br>
-                <label for="contactListPhone">Telefonnummer:</label>
-                <input type="tel" id="contactListPhone" required><br>
-                <button onclick="addContact()">Hinzufügen</button>
-                <button onclick="hideForm()">Abbrechen</button>
-              </div>
-        </div>
+
+  <div class="container">
+    <div class="contactListSection">
+      <button onclick="showForm()">Add new contact</button>
+      <div id="contactList"></div>
     </div>
+    <div class="contactDetailSection" id="contactDetailSection">
+      <div id="contactDetail">
+        <div class="contactAvatar" id="contactAvatar"></div>
+        <h2 id="detailName"></h2>
+        <button onclick="editContact()">Edit</button>
+        <button onclick="deleteContact()">Delete</button>
+        
+        <h3>Contact Information</h3>
+        <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+        <p><strong>Phone:</strong> <span id="detailPhone"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contactFormOverlay" id="contactFormOverlay" onclick="hideForm()"></div>
+  <div class="contactForm" id="contactForm">
+    <h2>Neuen Kontakt hinzufügen</h2>
+    <label for="contactListName">Name:</label>
+    <input type="text" id="contactListName" required><br>
+    <label for="contactListEmail">E-Mail-Adresse:</label>
+    <input type="email" id="contactListEmail" required><br>
+    <label for="contactListPhone">Telefonnummer:</label>
+    <input type="tel" id="contactListPhone" required><br>
+    <button onclick="addContact()">Hinzufügen</button>
+    <button onclick="hideForm()">Abbrechen</button>
+  </div>
+
+  <div id="contactEditOverlay" class="overlay" onclick="hideEditForm()"></div>
+  <div id="contactEditForm" class="contactEditForm">
+    <h2>Kontakt bearbeiten</h2>
+    <label for="editName">Name:</label>
+    <input type="text" id="editName" required><br>
+    <label for="editEmail">E-Mail-Adresse:</label>
+    <input type="email" id="editEmail" required><br>
+    <label for="editPhone">Telefonnummer:</label>
+    <input type="tel" id="editPhone" required><br>
+    <button onclick="saveContact()">Speichern</button>
+    <button onclick="cancelEdit()">Abbrechen</button>
+  </div>
+  
 </body>
-<script src="./scripts/w3-include-html.js"></script>
+
 </html>
