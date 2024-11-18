@@ -3,6 +3,7 @@
     --secondary-color: #005DFF;
     --primary-highlight-color: #D2E3FF;
     --secondary-highlight-color: #f0f8ff;
+    --menu-color: #42526E;
     --grey: #42526E;
     --dark: #091931;
     --orange: #FF7A00;
@@ -35,121 +36,12 @@
     cursor: pointer;
 }
 
+.non-clickable {
+    pointer-events: none;
+    cursor: default;
+}
+
 .color-white {
     color: #FFFFFF
 }
 
-a {
-    color: #000000;
-}
-
-.menu-bar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 232px;
-    height: 932px;
-    padding: 66px 0;
-    box-shadow: 0px 0px 4px 0px #00000029;
-    ;
-}
-
-.menu-main {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 186px;
-}
-
-.menu-legal-section {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.menu-main > a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 186px;
-    padding: 8px 30px;
-    color: var(--menu-color);
-    border: none;
-    border-radius: 8px;
-}
-
-.menu-main > a:hover {
-    background-color: var(--primary-highlight-color);
-    scale: 1.05;
-}
-
-.menu-legal-section > a {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    color: var(--menu-color);
-    border: none;
-    border-radius: 10px;
-}
-
-.menu-legal-section > a:hover {
-    color: var(--secondary-color);
-}
-
-.menu-bar-left {
-    display: flex;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1440px;
-    height: 96px;
-    padding: 20px 39px;
-    background-color: var(--primary-color);
-    font-size: 19px;
-}
-
-.header-logo {
-    height: 56px;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 20px;
-    color: #FFFFFF;
-}
-
-.icon-help:hover {
-    scale: 1.2;
-}
-
-.header-user-profile-outer-circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 56px;
-    height: 56px;
-    background-color: var(--primary-color);
-    border: 3px solid #FFFFFF;
-    border-radius: 100px;
-}
-
-.header-user-profile {
-    width: 46px;
-    height: 46px;
-    text-align: center;
-    line-height: 46px;
-    color: var(--secondary-color);
-    background-color: #FFFFFF;
-    border-radius: 100px;
-    font-size: 22px;
-    font-weight: 600;
-}
-
-.header-user-profile-outer-circle:hover .header-user-profile{
-    background-color: var(--secondary-highlight-color);
-}
