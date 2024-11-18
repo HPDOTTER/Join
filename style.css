@@ -3,8 +3,7 @@
     --secondary-color: #005DFF;
     --primary-highlight-color: #D2E3FF;
     --secondary-highlight-color: #f0f8ff;
-    --menu-color: #42526E;
-    --grey: #42526E;
+    --grey: #5d6e42;
     --dark: #091931;
     --orange: #FF7A00;
     --pink: #FF5EB3;
@@ -43,5 +42,59 @@
 
 .color-white {
     color: #FFFFFF
+}
+
+h1 {
+    margin: 0;
+    font-size: 61px;
+    font-weight: 700;
+}
+
+h2 {
+    color: var(--primary-color);
+    font-size: 33px;
+    font-weight: 700;
+}
+
+h3 {
+    margin-bottom: 0;
+    color: var(--secondary-color);
+    font-size: 19px;
+    font-weight: 700;
+}
+
+p {
+    margin-top: 0;
+}
+
+.site-wrapper {
+    max-width: 1440px;
+}
+
+.site-body-wrapper {
+    display: flex;
+    height: 932px;
+}
+
+.content-wrapper {
+    overflow-y: scroll;
+}
+
+.content-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.text-content {
+    padding: 100px;
+}
+
+.text-content-headline-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+p > a {
+    color: var(--primary-color);
 }
 

@@ -29,7 +29,7 @@
     gap: 8px;
     width: 186px;
     padding: 8px 30px;
-    color: var(--menu-color);
+    color: var(--grey);
     border: none;
     border-radius: 8px;
 }
@@ -43,7 +43,7 @@
     display: flex;
     align-items: center;
     padding: 8px;
-    color: var(--menu-color);
+    color: var(--grey);
     border: none;
     border-radius: 10px;
 }
