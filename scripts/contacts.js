@@ -30,6 +30,30 @@ let contacts = [
     'email' : 'tm@gmx.de',
     'phone' : '+49123 456789',
     'isUser' : false,
+  },
+  {
+    'name' : 'Bruce Wayne',
+    'email' : 'the-bat@gmail.com',
+    'phone' : '+49123 456789',
+    'isUser' : false,
+  },
+  {
+    'name' : 'Saul Goodman',
+    'email' : 'mcgill@gmail.com',
+    'phone' : '+49123 456789',
+    'isUser' : false,
+  },
+  {
+    'name' : 'Lisa Simpson',
+    'email' : 'l.simpson@gmail.com',
+    'phone' : '+49123 456789',
+    'isUser' : false,
+  },
+  {
+    'name' : 'Daenerys Targaryen',
+    'email' : 'motherofdragons@gmail.com',
+    'phone' : '+49123 456789',
+    'isUser' : false,
   }
 ];
 
@@ -139,7 +163,7 @@ function deleteContact() {
 }
 
 function renderContacts() {
-  const contactList = document.getElementById('contact-list');
+  const contactList = document.getElementById('contactList');
   contactList.innerHTML = '';
 
   const groupedContacts = {};

@@ -1,10 +1,11 @@
 :root {
-    --primary-color:#4589FF;
+    --primary-color: #4589FF;
     --secondary-color: #005DFF;
     --primary-highlight-color: #D2E3FF;
     --secondary-highlight-color: #f0f8ff;
     --divider-color: #D1D1D1;
     --email-color: #007CEE;
+    --scrollbar-handle-color: #A8A8A8;
     --grey: #5d6e42;
     --dark: #091931;
     --orange: #FF7A00;
@@ -56,7 +57,7 @@ p {
     margin-top: 0;
 }
 
-p > a {
+p>a {
     color: var(--primary-color);
 }
 
@@ -69,12 +70,22 @@ p > a {
     cursor: default;
 }
 
+.scale-on-hover {
+    transform-origin: right bottom;
+    transition: transform 100ms ease-in-out;
+}
+
+.scale-on-hover:hover {
+    transform: scale(1.01);
+}
+
 .color-white {
     color: #FFFFFF
 }
 
 .site-wrapper {
     max-width: 1440px;
+    height: 1028px;
 }
 
 .site-body-wrapper {
@@ -82,16 +93,13 @@ p > a {
     height: 932px;
 }
 
-.content-wrapper {
-    overflow-y: scroll;
-}
-
-.content-wrapper::-webkit-scrollbar {
+.text-content::-webkit-scrollbar {
     display: none;
 }
 
 .text-content {
     padding: 50px 100px 20px;
+    overflow-y: scroll;
 }
 
 .horizontal-content {
@@ -114,4 +122,34 @@ p > a {
     color: var(--secondary-color);
     font-size: 33px;
     font-weight: 700;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+    background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-handle-color);
+    border: 6px solid #ffffff;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-button {
+    width: 20px;
+    height: 20px;
+}
+
+::-webkit-scrollbar-button:vertical:decrement {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 -5 12 16"><path fill="%23A8A8A8" d="M8 4l4 4H4z"/></svg>'); /* Pfeil nach oben */
+}
+
+::-webkit-scrollbar-button:vertical:increment {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 3 12 16"><path fill="%23A8A8A8" d="M8 12l-4-4h8z"/></svg>'); /* Pfeil nach unten */
+}
+
+::-webkit-scrollbar-button:vertical:start:increment,
+::-webkit-scrollbar-button:vertical:end:decrement
+{
+    display: none;
 }

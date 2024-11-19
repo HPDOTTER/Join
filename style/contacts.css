@@ -3,16 +3,35 @@
     flex-direction: column;
     align-items: center;
     width: 456px;
+    height: 932px;
     box-shadow: 4px 0px 6px 0px #00000014;
-    padding: 10px;
+    overflow-y: scroll;
+}
+
+.contact-list-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    width: 400px;
+    min-height: 120px;
+    background-color: #FFFFFF;
 }
 
 .contact-list-button {
+    /* position: sticky;
+    top: 32px; */
     width: 357px;
 }
 
+.icon-user {
+    content:url('../assets/icons/icon-add-contact.png');
+}
+
 /* .contact-list {
-    margin-top: 20px;
+    height: 500px;
+    overflow: hidden;
 } */
 
 .contact-list-letter-header {
