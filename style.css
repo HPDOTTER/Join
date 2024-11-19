@@ -3,6 +3,8 @@
     --secondary-color: #005DFF;
     --primary-highlight-color: #D2E3FF;
     --secondary-highlight-color: #f0f8ff;
+    --divider-color: #D1D1D1;
+    --email-color: #007CEE;
     --grey: #5d6e42;
     --dark: #091931;
     --orange: #FF7A00;
@@ -90,6 +92,11 @@ p > a {
 
 .text-content {
     padding: 50px 100px 20px;
+}
+
+.horizontal-content {
+    display: flex;
+    flex: 1;
 }
 
 .text-content-headline-area {

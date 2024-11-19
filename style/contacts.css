@@ -1,57 +1,76 @@
-.container {
+.contact-list-section {
     display: flex;
-}
-
-.contactListSection {
-    width: 30%;
-    border-right: 1px solid #ccc;
+    flex-direction: column;
+    align-items: center;
+    width: 456px;
+    box-shadow: 4px 0px 6px 0px #00000014;
     padding: 10px;
 }
 
-.contactListSection button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
+.contact-list-button {
+    width: 357px;
 }
 
-.contactList {
+/* .contact-list {
     margin-top: 20px;
-}
+} */
 
-.contactItem {
+.contact-list-letter-header {
     display: flex;
     align-items: center;
-    padding: 10px;
-    cursor: pointer;
+    width: 352px;
+    height: 56px;
+    padding: 17px 36px;
+    font-size: 18px;
+    border-bottom: 1px solid var(--divider-color);
 }
 
-.contactItem:hover {
-    background-color: #f0f0f0;
+.contact-item {
+    display: flex;
+    gap: 35px;
+    width: 352px;
+    /* align-items: center; */
+    padding: 15px 24px;
+    border-radius: 10px;
+    /* cursor: pointer; */
 }
 
-.contactItem.active {
-    background-color: lightblue;
+.contact-list-name {
+    font-size: 19px;
 }
 
-.contactAvatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: orange;
-    color: white;
+.contact-list-email {
+    color: var(--email-color);
+}
+
+.contact-item:hover {
+    color: #FFFFFF;
+    background-color: var(--primary-highlight-color)
+}
+
+.contact-item:active{
+    background-color: var(--primary-color);
+}
+
+.contact-item:active .contact-list-name, .contact-item:active .contact-list-email{
+    color: #FFFFFF;
+}
+
+.contact-list-avatar {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    margin-right: 10px;
+    width: 42px;
+    height: 42px;
+    color: white;
+    background-color: var(--salmon);
+    font-size: 12px;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
 }
 
 .contactDetailSection {
-    width: 70%;
+    /* width: 70%; */
     padding: 20px;
 }
 

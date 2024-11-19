@@ -11,9 +11,8 @@
   <link rel="stylesheet" href="./style/fonts.css">
   <link rel="stylesheet" href="./style/assets.css">
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style/contacts.css">
 
-
-  <link rel="stylesheet" href="contacts.css">
   <script src="./scripts/contacts.js"></script>
 </head>
 
@@ -24,26 +23,24 @@
       <div class="menu-bar-left">
         <div w3-include-html="menu-bar.html"></div>
       </div>
-      <div class="content-wrapper">
-        <div class="container">
-          <div class="contactListSection">
-            <button class="button-primary scale-on-hover" onclick="showForm()">
-              Add new contact
-              <img class="icon-user">
-            </button>
-            <div id="contactList"></div>
-          </div>
-          <div class="contactDetailSection" id="contactDetailSection">
-            <div id="contactDetail">
-              <div class="contactAvatar" id="contactAvatar"></div>
-              <h2 id="detailName"></h2>
-              <button onclick="editContact()">Edit</button>
-              <button onclick="deleteContact()">Delete</button>
+      <div class="content-wrapper horizontal-content">
+        <div class="contact-list-section">
+          <button class="button-primary scale-on-hover contact-list-button" onclick="showForm()">
+            Add new contact
+            <img class="icon-user">
+          </button>
+          <div id="contact-list"></div>
+        </div>
+        <div class="contactDetailSection" id="contactDetailSection">
+          <div id="contactDetail">
+            <div class="contactAvatar" id="contactAvatar"></div>
+            <h2 id="detailName"></h2>
+            <button onclick="editContact()">Edit</button>
+            <button onclick="deleteContact()">Delete</button>
 
-              <h3>Contact Information</h3>
-              <p><strong>Email:</strong> <span id="detailEmail"></span></p>
-              <p><strong>Phone:</strong> <span id="detailPhone"></span></p>
-            </div>
+            <h3>Contact Information</h3>
+            <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="detailPhone"></span></p>
           </div>
         </div>
       </div>

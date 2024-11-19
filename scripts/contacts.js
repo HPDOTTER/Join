@@ -139,7 +139,7 @@ function deleteContact() {
 }
 
 function renderContacts() {
-  const contactList = document.getElementById('contactList');
+  const contactList = document.getElementById('contact-list');
   contactList.innerHTML = '';
 
   const groupedContacts = {};
@@ -156,17 +156,17 @@ function renderContacts() {
 
   sortedLetters.forEach(letter => {
     const letterHeader = document.createElement('div');
-    letterHeader.className = 'letterHeader';
+    letterHeader.className = 'contact-list-letter-header';
     letterHeader.textContent = letter;
     contactList.appendChild(letterHeader);
 
     groupedContacts[letter].forEach(contact => {
       const contactItem = document.createElement('div');
-      contactItem.className = 'contactItem';
-      contactItem.innerHTML = `<div class="contactAvatar">${getInitials(contact.name)}</div>
+      contactItem.className = 'contact-item pointer';
+      contactItem.innerHTML = `<div class="contact-list-avatar">${getInitials(contact.name)}</div>
                                <div>
-                                 <strong>${contact.name}</strong><br>
-                                 ${contact.email}
+                                 <span class="contact-list-name">${contact.name}</span><br>
+                                 <span class="contact-list-email">${contact.email}<span>
                                </div>`;
       contactItem.onclick = () => showDetail(contact, contactItem);
       contactList.appendChild(contactItem);
