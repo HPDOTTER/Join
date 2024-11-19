@@ -1,35 +1,57 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kontaktverwaltung</title>
+  <title>Join</title>
+  <link rel="shortcut icon" href="./assets/icons/favicon/favicon.png" type="image/x-icon">
+
+  <link rel="stylesheet" href="./style/standard.css">
+  <link rel="stylesheet" href="./style/fonts.css">
+  <link rel="stylesheet" href="./style/assets.css">
+  <link rel="stylesheet" href="./style.css">
+
+
   <link rel="stylesheet" href="contacts.css">
-  <script src="contacts.js"></script>
+  <script src="./scripts/contacts.js"></script>
 </head>
 
 <body onload="renderContacts()">
+  <div class="site-wrapper">
+    <header w3-include-html="header.html"></header>
+    <div class="site-body-wrapper">
+      <div class="menu-bar-left">
+        <div w3-include-html="menu-bar.html"></div>
+      </div>
+      <div class="content-wrapper">
+        <div class="container">
+          <div class="contactListSection">
+            <button class="button-primary scale-on-hover" onclick="showForm()">
+              Add new contact
+              <img class="icon-user">
+            </button>
+            <div id="contactList"></div>
+          </div>
+          <div class="contactDetailSection" id="contactDetailSection">
+            <div id="contactDetail">
+              <div class="contactAvatar" id="contactAvatar"></div>
+              <h2 id="detailName"></h2>
+              <button onclick="editContact()">Edit</button>
+              <button onclick="deleteContact()">Delete</button>
 
-  <div class="container">
-    <div class="contactListSection">
-      <button onclick="showForm()">Add new contact</button>
-      <div id="contactList"></div>
-    </div>
-    <div class="contactDetailSection" id="contactDetailSection">
-      <div id="contactDetail">
-        <div class="contactAvatar" id="contactAvatar"></div>
-        <h2 id="detailName"></h2>
-        <button onclick="editContact()">Edit</button>
-        <button onclick="deleteContact()">Delete</button>
-        
-        <h3>Contact Information</h3>
-        <p><strong>Email:</strong> <span id="detailEmail"></span></p>
-        <p><strong>Phone:</strong> <span id="detailPhone"></span></p>
+              <h3>Contact Information</h3>
+              <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+              <p><strong>Phone:</strong> <span id="detailPhone"></span></p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="contactFormOverlay" id="contactFormOverlay" onclick="hideForm()"></div>
+
+  <!-- <div class="contactFormOverlay" id="contactFormOverlay" onclick="hideForm()"></div>
   <div class="contactForm" id="contactForm">
     <h2>Neuen Kontakt hinzufügen</h2>
     <label for="contactListName">Name:</label>
@@ -53,8 +75,9 @@
     <input type="tel" id="editPhone" required><br>
     <button onclick="saveContact()">Speichern</button>
     <button onclick="cancelEdit()">Abbrechen</button>
-  </div>
-  
+  </div> -->
+
 </body>
+<script src="./scripts/w3-include-html.js"></script>
 
 </html>
