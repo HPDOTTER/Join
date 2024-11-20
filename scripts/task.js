@@ -34,6 +34,7 @@ let statusTask = 1;
 
 
 function addTask(status) {
+  load();
   statusTask = status;
   window.location.href = "./add-task.html";
 }
@@ -46,6 +47,7 @@ function addTaskCancel() {
 
 
 function addTaskSave() {
+  load();
   const title = document.getElementById('taskTitle').value;
   const description = document.getElementById('taskDescription').value;
   const category = document.getElementById('taskCategory').value === 'true';
@@ -66,11 +68,13 @@ function addTaskSave() {
 
   tasks.push(newTask);
   window.location.href = "./board.html";
+  save();
   renderTasks();
 }
 
 
 function renderTasks() {
+  load();
   const columns = document.querySelectorAll('.column .tasks');
   columns.forEach(column => (column.innerHTML = ''));
 
@@ -126,6 +130,3 @@ function renderTasks() {
   console.log(tasks);
   
 }
-
-
-
