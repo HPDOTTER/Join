@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./style.css">
 
     <script src="./script.js"></script>
+    <script src="./scripts/task.js"></script>
 </head>
 <body>
     <header w3-include-html="header.html"></header>
@@ -18,6 +19,35 @@
         <div w3-include-html="menu-bar.html"></div>
         <div>
             <h1>Add Task</h1>
+            <div id="taskAdd" class="task-add">
+                <div class="task-add-content">
+                  <h2>Create Task</h2>
+                  <label for="taskTitle">Title:</label>
+                  <input type="text" id="taskTitle" placeholder="Enter title">
+                  
+                  <label for="taskDescription">Description:</label>
+                  <textarea id="taskDescription" placeholder="Enter description"></textarea>
+            
+                  <label for="taskCategory">Category:</label>
+                  <select id="taskCategory">
+                    <option value="true">User Story</option>
+                    <option value="false">Technical Task</option>
+                  </select>
+            
+                  <label for="taskDate">Due Date:</label>
+                  <input type="date" id="taskDate">
+            
+                  <label for="taskPriority">Priority:</label>
+                  <select id="taskPriority">
+                    <option value="2">Medium</option>
+                    <option value="1">Urgent</option>
+                    <option value="3">Low</option>
+                  </select>
+            
+                  <button onclick="addTaskSave()">Save Task</button>
+                  <button onclick="addTaskCancel()">Cancel</button>
+                </div>
+              </div>
         </div>
     </div>
 </body>

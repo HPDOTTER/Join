@@ -121,18 +121,14 @@ main {
   flex-direction: row;
 }
 
-.hidden {
-  display: none;
-}
-
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Modal Styles */
-.modal {
+/* task-add Styles */
+.task-add {
   position: fixed;
   top: 0;
   left: 0;
@@ -141,7 +137,7 @@ main {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
+.task-add-content {
   background-color: white;
   padding: 20px;
   border-radius: 5px;

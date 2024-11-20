@@ -33,20 +33,19 @@ let tasks = [
 let statusTask = 1;
 
 
-function openModal(status) {
+function addTask(status) {
   statusTask = status;
-  document.getElementById('taskModal').classList.remove('hidden');
-  document.getElementById('taskModal').classList.add('flex');
+  window.location.href = "./add-task.html";
 }
 
 
-function closeModal() {
-  document.getElementById('taskModal').classList.remove('flex');
-  document.getElementById('taskModal').classList.add('hidden');
+function addTaskCancel() {
+  window.location.href = "./board.html";
+  renderTasks();
 }
 
 
-function saveTask() {
+function addTaskSave() {
   const title = document.getElementById('taskTitle').value;
   const description = document.getElementById('taskDescription').value;
   const category = document.getElementById('taskCategory').value === 'true';
@@ -66,8 +65,7 @@ function saveTask() {
   };
 
   tasks.push(newTask);
-  document.getElementById('taskModal').classList.remove('flex');
-  document.getElementById('taskModal').classList.add('hidden');
+  window.location.href = "./board.html";
   renderTasks();
 }
 
@@ -125,7 +123,9 @@ function renderTasks() {
     const column = document.querySelector(`.column[data-status="${task.status}"] .tasks`);
     column.appendChild(taskElement);
   });
+  console.log(tasks);
+  
 }
 
 
-renderTasks();
+
