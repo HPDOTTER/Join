@@ -1,0 +1,174 @@
+/* Allgemeines Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fc;
+}
+
+.container {
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+header input {
+  padding: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+header button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.column h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tasks {
+  margin-top: 10px;
+}
+
+.task {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.task h3 {
+  margin: 0;
+}
+
+.task .category {
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.task .category.user {
+  background-color: #ff9100;
+  color: white;
+}
+
+.task .category.technical {
+  background-color: #007bff;
+  color: white;
+}
+
+.progress-bar {
+  height: 6px;
+  width: 50%;
+  background-color: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-right: 20px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #28a745;
+}
+
+.progress-section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.members-prio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.avatar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.hidden {
+  display: none;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+}
+
+.prio2 img{
+  margin: 10px;
+  height: 10px;
+  width: 46px;;
+}
+
+.prio13 img{
+  margin: 10px;
+  height: 33px;
+  width: 46px;;
+}
+
+.contactAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: orange;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 10px;
+}
