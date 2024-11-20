@@ -190,7 +190,7 @@ function renderContacts() {
       contactItem.innerHTML = `<div class="contact-list-avatar">${getInitials(contact.name)}</div>
                                <div>
                                  <span class="contact-list-name">${contact.name}</span><br>
-                                 <span class="contact-list-email">${contact.email}<span>
+                                 <span class="contact-email">${contact.email}<span>
                                </div>`;
       contactItem.onclick = () => showDetail(contact, contactItem);
       contactList.appendChild(contactItem);

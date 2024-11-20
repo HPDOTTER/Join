@@ -33,16 +33,31 @@
           </div>
           <div id="contactList" class="contact-list"></div>
         </div>
-        <div class="contactDetailSection" id="contactDetailSection">
-          <div id="contactDetail">
-            <div class="contactAvatar" id="contactAvatar"></div>
-            <h2 id="detailName"></h2>
-            <button onclick="editContact()">Edit</button>
-            <button onclick="deleteContact()">Delete</button>
-
-            <h3>Contact Information</h3>
-            <p><strong>Email:</strong> <span id="detailEmail"></span></p>
-            <p><strong>Phone:</strong> <span id="detailPhone"></span></p>
+        <div id="contactDetailSection" class="contact-detail-section">
+          <div id="contactDetail" class="contact-detail">
+            <div class="contact-detail-head">
+              <div id="contactAvatar" class="contact-detail-avatar"></div>
+              <div class="contact-detail-name-section">
+                <div id="detailName" class="contact-detail-name"></div>
+                <div class="contact-detail-button-section">
+                  <button class="button-edit" onclick="editContact()">
+                    <img class="icon-edit">
+                    Edit
+                  </button>
+                  <button class="button-delete" onclick="deleteContact()">
+                    <img class="icon-delete">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="contact-detail-body">
+              <div class="contact-detail-sub-headline">Contact Information</div>
+              <strong>Email:</strong>
+              <span id="detailEmail" class="contact-email"></span>
+              <strong>Phone:</strong>
+              <span id="detailPhone"></span>
+            </div>
           </div>
         </div>
       </div>

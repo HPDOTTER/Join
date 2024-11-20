@@ -32,6 +32,7 @@
 * {
     font-family: 'Open Sans';
     color: #000000;
+    font-size: 16px;
 }
 
 h1 {
@@ -71,7 +72,7 @@ p>a {
 }
 
 .scale-on-hover {
-    transform-origin: right bottom;
+    /* transform-origin: right bottom; */
     transition: transform 100ms ease-in-out;
 }
 
