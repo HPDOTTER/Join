@@ -10,18 +10,21 @@
     <link rel="stylesheet" href="./style/fonts.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="./style/assets.css">
 
     <script src="./script.js" defer></script>
 </head>
 <body class="login-body">
-
     <header class="login-header">
-        <div class="login-header-icon">
-            <img src="./assets/icons/login/joiniconblue.svg" alt="">
+        <div class="login-header-icon-div">
+            <a class="login-header-icon" href="index.html"></a>
         </div>
+        <div id="logo-overlay" class="logo-overlay">
+            <img src="./assets/icons/login/joiniconwhite.svg" alt="Join Logo" class="logo-overlay-img">
+        </div>  
         <div class="login-header-right">
             <p>Not a join user?</p>
-            <a href="signup.html">Sign up</a>
+            <a href="signup.html" class="button-primary">Sign up</a>
         </div>
     </header>
 
@@ -57,8 +60,8 @@
                 </div>
             </div>
             <div class="login-button-div">
-                <button type="submit">Log in</button>
-                <button>Guest log in</button>
+                <button type="submit" class="button-primary">Log in</button>
+                <button class="button-secondary">Guest log in</button>
             </div>
         </form>
     </main>
