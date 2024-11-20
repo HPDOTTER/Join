@@ -36,6 +36,7 @@ let statusTask = 1;
 function addTask(status) {
   load();
   statusTask = status;
+  save();
   window.location.href = "./add-task.html";
 }
 

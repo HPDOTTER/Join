@@ -2,15 +2,16 @@
 
 function save() {
     let tasksSave = JSON.stringify(tasks);
+    let statusTaskSave = JSON.stringify(statusTask);
     localStorage.setItem('tasks', tasksSave);
-    console.log('save');
-    
+    localStorage.setItem('statusTask', statusTaskSave);
 }
 
 
 function load() {
     let tasksSave = localStorage.getItem('tasks');
+    let statusTaskSave = localStorage.getItem('statusTask');
     tasks = JSON.parse(tasksSave);
-    console.log('load');
+    statusTask = JSON.parse(statusTaskSave);
 }
 
