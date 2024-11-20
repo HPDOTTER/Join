@@ -62,6 +62,27 @@
         </div>
       </div>
     </div>
+    <div id="contactEditOverlay" class="form-overlay" onclick="hideEditForm()"></div>
+    <div id="contactEditForm" class="contact-edit-form">
+      <div class="contact-edit-form-head">
+        <img src="./assets/img/logo/logo-white.png" alt="">
+        <h2>Edit contact</h2>
+        <img class="icon-close pointer" onclick="hideEditForm()"></img>
+      </div>
+      <div class="contact-edit-form-body">
+        <div class="contact-detail-avatar"></div>
+        <input type="text" id="editName" required>
+        <input type="email" id="editEmail" required>
+        <input type="tel" id="editPhone" required>
+        <div class="contact-edit-form-button-section">
+          <button class="button-secondary contact-edit-form-button-delete scale-on-hover" onclick="deleteContact(), hideEditForm()">Delete</button>
+          <button class="button-primary contact-edit-form-button-save scale-on-hover" onclick="saveContact()">
+            Save
+            <img class="icon-check">
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -76,19 +97,6 @@
     <input type="tel" id="contactListPhone" required><br>
     <button onclick="addContact()">Hinzufügen</button>
     <button onclick="hideForm()">Abbrechen</button>
-  </div>
-
-  <div id="contactEditOverlay" class="overlay" onclick="hideEditForm()"></div>
-  <div id="contactEditForm" class="contactEditForm">
-    <h2>Kontakt bearbeiten</h2>
-    <label for="editName">Name:</label>
-    <input type="text" id="editName" required><br>
-    <label for="editEmail">E-Mail-Adresse:</label>
-    <input type="email" id="editEmail" required><br>
-    <label for="editPhone">Telefonnummer:</label>
-    <input type="tel" id="editPhone" required><br>
-    <button onclick="saveContact()">Speichern</button>
-    <button onclick="cancelEdit()">Abbrechen</button>
   </div> -->
 
 </body>
