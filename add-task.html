@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="./style.css">
 
     <script src="./script.js"></script>
+    <script src="./scripts/contacts.js"></script>
     <script src="./scripts/task.js"></script>
     <script src="./scripts/dataStorage.js"></script>
 </head>
-<body>
+<body onload="renderAssignedTo()">
     <header w3-include-html="header.html"></header>
     <div class="menu-bar-left">
         <div w3-include-html="menu-bar.html"></div>
@@ -22,7 +23,6 @@
             <h1>Add Task</h1>
             <div id="taskAdd" class="task-add">
                 <div class="task-add-content">
-                  <h2>Create Task</h2>
                   <label for="taskTitle">Title:</label>
                   <input type="text" id="taskTitle" placeholder="Enter title">
                   
@@ -34,7 +34,11 @@
                     <option value="true">User Story</option>
                     <option value="false">Technical Task</option>
                   </select>
-            
+
+                  <label for="taskAssignedTo">Assigned to:</label>
+                  <select id="taskAssignedTo">
+                  </select>
+
                   <label for="taskDate">Due Date:</label>
                   <input type="date" id="taskDate">
             

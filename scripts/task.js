@@ -54,7 +54,10 @@ function addTaskSave() {
   const category = document.getElementById('taskCategory').value === 'true';
   const date = document.getElementById('taskDate').value;
   const priority = parseInt(document.getElementById('taskPriority').value);
+  const member = document.getElementById('taskAssignedTo').value;
 
+  console.log(member);
+  
   const newTask = {
     titel: title,
     description: description,
@@ -63,7 +66,7 @@ function addTaskSave() {
     priority,
     status: statusTask,
     progress: 0,
-    members: [],
+    members: [getInitials(member)],
     subtasks: []
   };
 
@@ -128,6 +131,14 @@ function renderTasks() {
     const column = document.querySelector(`.column[data-status="${task.status}"] .tasks`);
     column.appendChild(taskElement);
   });
-  console.log(tasks);
-  
 }
+
+
+function renderAssignedTo() {
+  let assignedTo = document.getElementById('taskAssignedTo');
+  assignedTo.innerHTML = /*html*/`<option value="true">${contacts[0].name}</option>`;
+  for (let i = 1; i < contacts.length; i++) {
+    assignedTo.innerHTML += /*html*/`<option value="${contacts[i].name}">${contacts[i].name}</option>`;
+  }
+}
+
