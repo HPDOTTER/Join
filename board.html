@@ -9,16 +9,45 @@
     <link rel="stylesheet" href="./style/standard.css">
     <link rel="stylesheet" href="./style/fonts.css">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style/task.css">
 
     <script src="./script.js"></script>
+    <script src="./scripts/dataStorage.js"></script>
 </head>
-<body>
+<body onload="renderTasks()">
     <header w3-include-html="header.html"></header>
     <div class="menu-bar-left">
         <div w3-include-html="menu-bar.html"></div>
-        <div>
-            <h1>Board</h1>
-        </div>
+        
+        <div class="container">
+            <header>
+              <input type="text" id="searchTask" placeholder="Find Task">
+              <button id="addTaskButton" onclick="addTask(1)">Add Task +</button>
+            </header>
+            <main id="kanbanBoard">
+              <div class="column" data-status="1">
+                <h2>To do <button class="add-column" onclick="addTask(1)">+</button></h2>
+                <div class="tasks"></div>
+              </div>
+              <div class="column" data-status="2">
+                <h2>In Progress <button class="add-column" onclick="addTask(2)">+</button></h2>
+                <div class="tasks"></div>
+              </div>
+              <div class="column" data-status="3">
+                <h2>Await Feedback <button class="add-column" onclick="addTask(3)">+</button></h2>
+                <div class="tasks"></div>
+              </div>
+              <div class="column" data-status="4">
+                <h2>Done <button class="add-column" onclick="addTask(4)">+</button></h2>
+                <div class="tasks"></div>
+              </div>
+            </main>
+          </div>
+        
+
+          
+          <script src="./scripts/task.js"></script>
+
     </div>
 </body>
 <script src="./scripts/w3-include-html.js"></script>
