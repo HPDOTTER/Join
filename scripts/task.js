@@ -56,9 +56,7 @@ function addTaskSave() {
   const priority = parseInt(document.getElementById('taskPriority').value);
   const member = document.getElementById('taskAssignedTo').value;
 
-  console.log(member);
-  
-  const newTask = {
+  let newTask = {
     titel: title,
     description: description,
     categoryUser: category,
@@ -66,9 +64,24 @@ function addTaskSave() {
     priority,
     status: statusTask,
     progress: 0,
-    members: [getInitials(member)],
+    members: [],
     subtasks: []
   };
+
+  if (member != '') {
+    newTask = {
+      titel: title,
+      description: description,
+      categoryUser: category,
+      date: new Date(date),
+      priority,
+      status: statusTask,
+      progress: 0,
+      members: [getInitials(member)],
+      subtasks: []
+    };
+  }
+
 
   tasks.push(newTask);
   window.location.href = "./board.html";
@@ -136,7 +149,7 @@ function renderTasks() {
 
 function renderAssignedTo() {
   let assignedTo = document.getElementById('taskAssignedTo');
-  assignedTo.innerHTML = /*html*/`<option value="true">${contacts[0].name}</option>`;
+  assignedTo.innerHTML += /*html*/`<option value="true">${contacts[0].name}</option>`;
   for (let i = 1; i < contacts.length; i++) {
     assignedTo.innerHTML += /*html*/`<option value="${contacts[i].name}">${contacts[i].name}</option>`;
   }
