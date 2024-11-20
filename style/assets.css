@@ -3,18 +3,19 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    height: 60px;
+    height: 48px;
     padding: 16px 10px;
     color: #FFFFFF;
     background-color: var(--primary-color);
     font-size: 23px;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .button-primary:hover {
     background-color: var(--secondary-color);
     box-shadow: 0px 4px 8px 0px #00000033;
+    transition: ease-in-out 0.1s;
 }
 
 .button-primary:active {
@@ -24,6 +25,32 @@
 
 .button-primary:active .icon-user {
     content:url('../assets/icons/icon-add-contact-active.png');
+}
+
+.button-primary:disabled {
+    background-color: var(--primary-color);
+    font-size: 23px;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+.button-secondary {
+    color: #647188;
+    background-color: #FFFFFF;
+    height: 48px;
+    padding: 10px 18px 10px 18px;
+    border-radius: 8px;
+    border: 1px solid #647188
+}
+
+.button-secondary:hover {
+    color: var(--primary-color);
+    transition: ease-in-out 0.1s;
+    border: 2px solid var(--primary-color);
+}
+
+.button-secondary:active {
+    border: 1px solid var(--secondary-color)
 }
 
 .icon-user {

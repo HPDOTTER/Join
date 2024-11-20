@@ -6,25 +6,63 @@
     -ms-user-select: none;
     user-select: none;
 }
+
 .login-header {
     display: flex;
     justify-content: space-between;
+    padding-top: 50px;
 }
+
+.login-header p {
+    font-size: 23px;
+}
+
+.login-header a {
+    padding: 10px 16px 10px 16px;
+}
+
+.login-header-icon-div {
+    height: 122px;
+    width: 100px;   
+}
+
+.login-header-icon {
+    content: url(assets/icons/login/joiniconblue.svg);
+    padding: 0px !important;  
+}
+
+.signup-header-icon {
+    height: 122px;
+    width: 100px;
+    padding: 0px !important;  
+    content: url(assets/icons/login/joiniconwhite.svg);
+}
+
+.login-header-right {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    height: 48px;
+}
+
 .login-main {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .login-body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
-    padding: 60px;
+    padding: 10px 60px;
 }
+
 .sign-up-body {
     background-color: var(--primary-color);
 }
+
 .login-form {
     position: relative;
     width: 652px;
@@ -36,22 +74,27 @@
     box-shadow: 0px 0px 10px 3px #00000014;
     gap: 39px;
 }
+
 .sign-up-form {
     background-color: #ffffff;
     padding: 48px 88px 48px 88px !important;
     gap: 35px !important;
 }
+
 .login-h1-div {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
+
 .login-h1 {
     font-size: 48px !important;
 }
+
 .login-h1-underline {
     border: 1px solid var(--primary-color);
 }
+
 .arrow-left-line-icon {
     position: absolute;
     height: 37px;
@@ -61,6 +104,7 @@
     cursor: pointer;
     content: url(assets/icons/login/arrow-left-line.svg);
 }
+
 .arrow-left-line-icon:hover {
     background-color: var( --hover-slight-blue);
     border-radius: 50%;
@@ -72,6 +116,7 @@
     align-items: center;
     width: 100%;
 }
+
 .login-input-div {
     display: flex;
     justify-content: space-between;
@@ -81,32 +126,40 @@
     padding: 12px 21px 12px 21px;
     gap: 10px;
 }
+
 .login-input-div:focus-within {
     border-bottom: 1px solid var(--primary-color);
 }
+
 .incorrect {
     border-bottom: 1px solid var(--warning) !important;
 }
+
 #login-password-icon {
     height: 24px;
     width: 24px;
 }
+
 .login-error-message-div {
     width: 100%;
     height: 32px;
 }
+
 .login-error-message {
     font-size: 13px;
     color: var(--warning);
 }
+
 .login-input {
     font-size: 19px;
     width: 100%;
     border: none;
 }
+
 .login-input:focus {
     outline: none;
 }
+
 .login-check-box {
     display: flex;
     flex-direction: row;
@@ -114,15 +167,23 @@
     left: 0;
     gap: 4px;
 }
+
 .sign-up-check-box {
     justify-content: center;
 }
+
 .login-button-div {
     display: flex;
     justify-content: center;
     width: 100%;
     gap: 35px;
 }
+
+.login-button-div button {
+    padding: 10px 35px 10px 35px;
+    height: 48px;
+}
+
 .login-footer {
     display: flex;
     justify-content: center;
@@ -130,32 +191,28 @@
     height: 50px;
     gap: 30px;
 }
+
 .sign-up-footer-a {
     color: white !important;
 }
+
 footer a:hover {
     color: var(--secondary-color) !important;
 }
+
 .login-remember-checkbox {
     height: 24px;
     width: 24px;
 }
-.login-header-icon {
-    top: 80px;
-    left: 77px;
-    height: 122px;
-    width: 100px;
-}
-.login-header-right {
-    display: flex;
-    gap: 35px;
-}
+
 label:hover {
     cursor: pointer;
 }
+
 input[type="checkbox"][id="rememberMe"] {
     display: none;
 }
+
 input[type="checkbox"][id="rememberMe"] + label {
     display: inline-block;
     width: 24px;
@@ -163,17 +220,21 @@ input[type="checkbox"][id="rememberMe"] + label {
     cursor: pointer;
     content: url(/assets/icons/login/checkboxdefault.svg);
 }
+
 input[type="checkbox"][id="rememberMe"]:checked + label {
 	content: url(/assets/icons/login/checkboxchecked.svg);
 }
+
 input[type="checkbox"][id="rememberMe"]:hover + label {
     background-color:  var( --hover-slight-blue);
     box-shadow: 0px 0px 20px 1px var(--hover-slight-blue);
     border-radius: 40%;
 }
+
 input[type="checkbox"][id="acceptPrivacyPolicy"] {
     display: none;
 }
+
 input[type="checkbox"][id="acceptPrivacyPolicy"] + label {
     display: inline-block;
     width: 24px;
@@ -181,11 +242,60 @@ input[type="checkbox"][id="acceptPrivacyPolicy"] + label {
     cursor: pointer;
     content: url(/assets/icons/login/checkboxdefault.svg);
 }
+
 input[type="checkbox"][id="acceptPrivacyPolicy"]:checked + label {
 	content: url(/assets/icons/login/checkboxchecked.svg);
 }
+
 input[type="checkbox"][id="acceptPrivacyPolicy"]:hover + label {
     background-color:  var( --hover-slight-blue);
     box-shadow: 0px 0px 20px 1px var(--hover-slight-blue);
     border-radius: 40%;
+}
+
+.logo-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: all 1s ease-in-out;
+}
+
+.logo-overlay-img {
+    width: 200px;
+    height: 200px;
+    transition: all 1s ease-in-out;
+}
+
+@keyframes moveToTopLeft {
+    100% {
+        transform: translate(-410%, -270%);
+        width: 130px;
+        height: 130px;
+    }
+    0% {
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* Apply the animation */
+.logo-overlay.hidden .logo-overlay-img {
+    animation: moveToTopLeft 1s forwards;
+}
+
+.logo-overlay.hidden {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
 }

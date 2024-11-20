@@ -9,22 +9,39 @@ const signUpNameInput = document.getElementById('sign-up-name-input')
 
 const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null)
 
+
 visibilityBtn.addEventListener('click', () => toggleVisibility(passwordInput, visibilityBtn))
-visibilityBtn1.addEventListener('click', () => toggleVisibility(repeatPasswordInput, visibilityBtn1))
+
+document.addEventListener('DOMContentLoaded', () => {
+  const logoOverlay = document.getElementById('logo-overlay');
+  const logoOverlayImg = document.querySelector('.logo-overlay-img');
+
+    setTimeout(() => {
+        logoOverlay.classList.add('hidden');
+    }, 100); // Adjust the timeout as needed
+
+    logoOverlayImg.addEventListener('animationend', () => {
+      logoOverlay.style.display = 'none';
+  });
+  if (visibilityBtn1) {
+    visibilityBtn1.addEventListener('click', () => toggleVisibility(repeatPasswordInput, visibilityBtn1));
+  }
+  if (repeatPasswordInput) {
+    repeatPasswordInput.addEventListener('keyup', () => {
+        if (repeatPasswordInput.value === "" || repeatPasswordInput.value === null) {
+            visibilityBtn1.src = 'assets/icons/login/lock.svg';
+        } else {
+            visibilityBtn1.src = 'assets/icons/login/visibility_off.svg';
+        }
+    });
+  }
+});
 
 passwordInput.addEventListener('keyup', () => {
   if(passwordInput.value === "" || passwordInput.value === null){
     visibilityBtn.src = 'assets/icons/login/lock.svg'
   } else {
     visibilityBtn.src = 'assets/icons/login/visibility_off.svg'
-  }
-})
-
-repeatPasswordInput.addEventListener('keyup', () => {
-  if(repeatPasswordInput.value === "" || repeatPasswordInput.value === null){
-    visibilityBtn1.src = 'assets/icons/login/lock.svg'
-  } else {
-    visibilityBtn1.src = 'assets/icons/login/visibility_off.svg'
   }
 })
 
@@ -121,3 +138,5 @@ form.addEventListener('submit', (e) => {
       submitButton.disabled = true
     }
   }
+
+ 
