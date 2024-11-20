@@ -27,6 +27,8 @@
     --priority-medium: #FFA800;
     --priority-low: #7AE229;
     --warning: #FF8190;
+    --hover-slight-blue: #E3EEFF;
+    --hover-bright-blue: #D2E3FF;
 }
 
 * {

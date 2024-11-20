@@ -13,25 +13,31 @@
 
     <script src="./script.js" defer></script>
 </head>
-<body class="login-body">
+<body class="login-body sign-up-body">
 
     <header class="login-header">
-        <div class="login-header-icon">
-            <img src="./assets/icons/login/joiniconblue.svg" alt="">
-        </div>
-        <div class="login-header-right">
-            <p>Not a join user?</p>
-            <a href="signup.html">Sign up</a>
+        <div>
+            <img src="./assets/icons/login/joiniconwhite.svg" alt=""  class="login-header-icon">
         </div>
     </header>
 
     <main class="login-main">
-        <form action="" class="login-form" id="form">
+        <form action="" class="login-form sign-up-form" id="form">
+            <a href="login.html" alt="" class="arrow-left-line-icon"></a>
             <div class="login-h1-div">
-                <h1 class="login-h1">Log in</h1>
+                <h1 class="login-h1">Sign Up</h1>
                 <div class="login-h1-underline"></div>
             </div>
             <div class="login-input-section">
+                <div class="login-input-div">
+                    <input type="text" placeholder="Name" class="login-input" id="sign-up-name-input">
+                    <label for="sign-up-name-input">
+                        <img src="./assets/icons/login/person.svg" alt="person">
+                    </label>
+                </div>
+                <div class="login-error-message-div">
+                    <p class="login-error-message"></p>
+                </div>
                 <div class="login-input-div">
                     <input type="mail" placeholder="Email" class="login-input" id="login-email-input">
                     <label for="login-email-input">
@@ -48,24 +54,32 @@
                     </label>
                 </div>
                 <div class="login-error-message-div">
+                    <p class="login-error-message"></p>
+                </div>
+                <div class="login-input-div">
+                    <input type="password" placeholder="Confirm password" class="login-input" id="repeat-password-input">
+                    <label for="repeat-password-input">
+                        <img src="./assets/icons/login/lock.svg" alt="lock" id="repeat-password-icon">
+                    </label>
+                </div>
+                <div class="login-error-message-div">
                     <p class="login-error-message" id="login-error-message"></p>
                 </div>
-                <div class="login-check-box">
-                    <input type="checkbox" id="rememberMe" class="login-remember-checkbox value="">
-                    <label for="rememberMe"></label>
-                    <p>Remember me</p>
+                <div class="login-check-box sign-up-check-box">
+                    <input type="checkbox" id="acceptPrivacyPolicy" class="login-remember-checkbox value="" onclick="enableSubmitButton()">
+                    <label for="acceptPrivacyPolicy"></label>
+                    <p>I accept the <a href="">Privacy Policy</a></p>
                 </div>
             </div>
             <div class="login-button-div">
-                <button type="submit">Log in</button>
-                <button>Guest log in</button>
+                <button id="submit-button" type="submit" disabled>Sign up</button>
             </div>
         </form>
     </main>
     
     <footer class="login-footer">
-        <a href="./privacy-policy.html" target="_blank">Privacy Policy</a>
-        <a href="./legal-notice.html" target="_blank">Legal notice</a>
+        <a class="sign-up-footer-a" href="./privacy-policy.html" target="_blank">Privacy Policy</a>
+        <a class="sign-up-footer-a" href="./legal-notice.html" target="_blank">Legal notice</a>
     </footer>
 </body>
 </html>
