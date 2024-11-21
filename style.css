@@ -89,8 +89,8 @@ p>a {
 
 .site-wrapper {
     position: relative;
-    max-width: 1440px;
-    height: 1028px;
+    max-width: 1920px;
+    height: 100vh;
     overflow: hidden;
 }
 
