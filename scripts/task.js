@@ -90,11 +90,11 @@ function renderTasks() {
 }
 
 
-function renderAssignedTo() {
-  let assignedTo = document.getElementById('taskAssignedTo');
-  assignedTo.innerHTML += /*html*/`<option value="true">${contacts[0].name}</option>`;
-  for (let i = 1; i < contacts.length; i++) {
-    assignedTo.innerHTML += /*html*/`<option value="${contacts[i].name}">${contacts[i].name}</option>`;
-  }
-}
+// function renderAssignedTo() {
+//   let assignedTo = document.getElementById('taskAssignedTo');
+//   assignedTo.innerHTML += /*html*/`<option value="true">${contacts[0].name}</option>`;
+//   for (let i = 1; i < contacts.length; i++) {
+//     assignedTo.innerHTML += /*html*/`<option value="${contacts[i].name}">${contacts[i].name}</option>`;
+//   }
+// }
 

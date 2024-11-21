@@ -39,9 +39,12 @@
                   </select>
 
                   <label for="taskAssignedTo">Assigned to:</label>
-                  <select id="taskAssignedTo">
-                    <option value=""></option>
-                  </select>
+                  <div id="taskAssignedToDropdown" class="custom-dropdown">
+                    <button class="dropdown-btn" onclick="toggleDropdown()">Select contacts</button>
+                    <div id="taskAssignedToMenu" class="dropdown-menu">
+                      <!-- Dynamisch generierte Kontakte mit Checkboxen -->
+                    </div>
+                  </div>
 
                   <label for="taskDate">Due Date:</label>
                   <input type="date" id="taskDate">
