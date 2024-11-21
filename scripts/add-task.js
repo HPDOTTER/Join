@@ -25,7 +25,6 @@ function addTaskSave() {
   const category = document.getElementById('taskCategory').value === 'true';
   const date = document.getElementById('taskDate').value;
   const priority = parseInt(document.getElementById('taskPriority').value);
-//   const member = document.getElementById('taskAssignedTo').value;
 
   let newTask = {
     titel: title,
@@ -39,29 +38,11 @@ function addTaskSave() {
     subtasks: []
   };
 
-//   if (member != '') {
-//     newTask = {
-//       titel: title,
-//       description: description,
-//       categoryUser: category,
-//       date: new Date(date),
-//       priority,
-//       status: statusTask,
-//       progress: 0,
-//       members: [],//[getInitials(member)],
-//       subtasks: []
-//     };
-//   }
-
-
   tasks.push(newTask);
   window.location.href = "./board.html";
   save();
   renderTasks();
 }
-
-
-
 
 
 const toggleDropdown = () => {
@@ -93,6 +74,7 @@ const toggleDropdown = () => {
     });
   };
   
+
   const handleCheckboxChange = (event, contact) => {
     if (event.target.checked) {
       if (!members.includes(contact.name)) {
@@ -101,9 +83,9 @@ const toggleDropdown = () => {
     } else {
       members = members.filter((member) => member !== contact.name);
     }
-  
-    console.log("Aktualisierte Mitglieder:", members);
   };
+  
   
   // Initialisierung
   document.addEventListener("DOMContentLoaded", renderContactsWithCheckboxes);
+
