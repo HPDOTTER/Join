@@ -3,32 +3,102 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f8f9fc;
+  background-color: #FFFFFF;
 }
 
 .container {
   padding: 20px;
+  width: 100%;
 }
 
-header input {
-  padding: 10px;
-  width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
 
-header button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
-main {
+
+
+
+.boardheader {
+  position: relative;
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  height: 215px;
+}
+.boardheader-search {
+  display: flex;
+  gap: 35px;
+  padding-top: 72px;
+  padding-bottom: 16px;
+}
+.task-search-bar {
+  display: flex;
+  align-items: center;
+  width: 312px;
+  height: 48px;
+  padding: 8px 16px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+.task-search-bar:focus-within {
+  border: 1px solid var(--secondary-color);
+}
+.task-search-bar label {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 48px;
+}
+.task-search-bar label img:hover {
+  background-color: var( --hover-slight-blue);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+.task-search-input {
+  padding: 10px;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+}
+.task-search-input:focus {
+  outline: none;
+  border: none;
+}
+.task-search-devider {
+  border: 1px solid #ccc;
+  width: 1px;
+  height: 31px;
+}
+.task-table-headers {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% -232px);
+  height: 28px;
+  gap: 24px;
+  padding-left: 64px;
+  padding-right: 64px;
+  bottom: 20px;
+}
+.task-table-headers h4 {
+  margin: 0;
+  font-size: 23px;
+  font-weight: 700;
+}
+.task-table-header-element {
+  display: flex;
+  justify-content: space-between;
+  width: 244px;
+}
+
+
+
+
+task-kanban-board {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% -232px);
+  gap: 24px;
+  padding-left: 64px;
+  padding-right: 64px;
 }
 
 .column {
@@ -155,4 +225,8 @@ main {
   justify-content: center;
   font-weight: bold;
   margin-right: 10px;
+}
+
+.button-add-task {
+  height: 51px;
 }

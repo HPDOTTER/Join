@@ -4,10 +4,9 @@
     justify-content: space-between;
     align-items: center;
     width: 232px;
-    height: 932px;
+    height: calc(100vh - 96px);
     padding: 66px 0;
     box-shadow: 0px 0px 4px 0px #00000029;
-    ;
 }
 
 .menu-main {
