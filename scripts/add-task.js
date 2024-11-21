@@ -1,6 +1,7 @@
 
 
 let statusTask = 1;
+let members = [];
 
 
 function addTask(status) {
@@ -34,7 +35,7 @@ function addTaskSave() {
     priority,
     status: statusTask,
     progress: 0,
-    members: [],
+    members: members,
     subtasks: []
   };
 
@@ -79,7 +80,7 @@ const toggleDropdown = () => {
       checkbox.type = "checkbox";
       checkbox.className = "contact-checkbox";
       checkbox.id = `contact-${index}`;
-      checkbox.checked = tasks[0].members.includes(contact.name); // Vorab ausgewählte Kontakte
+      checkbox.checked = false; //tasks[0].members.includes(contact.name); // Vorab ausgewählte Kontakte
       checkbox.addEventListener("change", (event) => handleCheckboxChange(event, contact));
   
       const label = document.createElement("label");
@@ -93,19 +94,15 @@ const toggleDropdown = () => {
   };
   
   const handleCheckboxChange = (event, contact) => {
-    const task = tasks[0]; // Beispielhaft die erste Aufgabe
-  
     if (event.target.checked) {
-      // Kontakt hinzufügen
-      if (!task.members.includes(contact.name)) {
-        task.members.push(contact.name);
+      if (!members.includes(contact.name)) {
+        members.push(contact.name);
       }
     } else {
-      // Kontakt entfernen
-      task.members = task.members.filter((member) => member !== contact.name);
+      members = members.filter((member) => member !== contact.name);
     }
   
-    console.log("Aktualisierte Mitglieder:", task.members);
+    console.log("Aktualisierte Mitglieder:", members);
   };
   
   // Initialisierung

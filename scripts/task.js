@@ -7,7 +7,7 @@ let tasks = [
     'priority': 1,
     'status': 2,
     'progress': 0,
-    'members': ['AM', 'EM', 'MB'],
+    'members': ['Jutta Berger', 'Anna Horn'],
     'subtasks': [
       { 'subtitel': 'Design UI', 'isDone': false },
       { 'subtitel': 'function b', 'isDone': true }
@@ -21,7 +21,7 @@ let tasks = [
     'priority': 3,
     'status': 4,
     'progress': 0,
-    'members': ['SN', 'BZ'],
+    'members': ['Josef Müller', 'Anton Sippel', 'Saul Goodman'],
     'subtasks': [
       { 'subtitel': 'menue design', 'isDone': true },
       { 'subtitel': 'function a', 'isDone': true }
@@ -70,7 +70,7 @@ function renderTasks() {
     html += /*html*/`<div class="avatar">`;
     if (task.members) {
       for (let i = 0; i < task.members.length; i++) {
-        html += /*html*/`<div class="contactAvatar">${task.members[i]}</div>`;
+        html += /*html*/`<div class="contactAvatar">${getInitials(task.members[i])}</div>`;
       }
     }
     html += /*html*/`</div>`;
@@ -87,6 +87,8 @@ function renderTasks() {
     const column = document.querySelector(`.column[data-status="${task.status}"] .tasks`);
     column.appendChild(taskElement);
   });
+  console.log(tasks);
+  
 }
 
 
