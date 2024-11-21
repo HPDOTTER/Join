@@ -8,19 +8,22 @@
 
     <link rel="stylesheet" href="./style/standard.css">
     <link rel="stylesheet" href="./style/fonts.css">
+    <link rel="stylesheet" href="./style/assets.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./style/task.css">
     <link rel="stylesheet" href="./style/add-task.css">
-    <link rel="stylesheet" href="./style/assets.css">
+    <link rel="stylesheet" href="./style/menu-bar.css">
+    
 
     <script src="./scripts/contacts.js" defer></script>
     <script src="./scripts/dataStorage.js" defer></script>
 </head>
 <body onload="save(), renderTasks()">
     <header w3-include-html="header.html"></header>
+    <div class="site-body-wrapper">
     <div class="menu-bar-left">
         <div w3-include-html="menu-bar.html"></div>
-        
+    </div>
         <div class="container">
             <div class="boardheader">
               <div class="boardheader-search">
@@ -65,14 +68,10 @@
                 <div class="tasks"></div>
               </div>
             </main>
-          </div>
-        
-
-          
-          <script src="./scripts/task.js"></script>
-          <script src="./scripts/add-task.js"></script>
-
+        </div>
     </div>
 </body>
 <script src="./scripts/w3-include-html.js"></script>
+<script src="./scripts/task.js"></script>
+<script src="./scripts/add-task.js"></script>
 </html>
