@@ -93,14 +93,14 @@ function getInitials(name) {
   return name.split(' ').map(word => word[0]).join('').toUpperCase();
 }
 
-function hideDetail() {
-  document.getElementById('contactDetailSection').style.display = 'none';
-  if (activeContactItem) {
-    activeContactItem.classList.remove('active');
-    activeContactItem = null;
-  }
-  currentContact = null;
-}
+// function hideDetail() {
+//   document.getElementById('contactDetailSection').style.display = 'none';
+//   if (activeContactItem) {
+//     activeContactItem.classList.remove('active');
+//     activeContactItem = null;
+//   }
+//   currentContact = null;
+// }
 
 function addContact() {
   const name = document.getElementById('contactListName').value.trim();
@@ -112,7 +112,7 @@ function addContact() {
     contacts.sort((a, b) => a.name.localeCompare(b.name));
     renderContacts();
     hideForm();
-    hideDetail();
+    // hideDetail();
   } else {
     alert("Bitte füllen Sie alle Felder aus.");
   }
@@ -137,7 +137,7 @@ function saveContact() {
     contacts.sort((a, b) => a.name.localeCompare(b.name));
     renderContacts();
     hideEditForm();
-    hideDetail();
+    // hideDetail();
   }
 }
 
@@ -158,7 +158,7 @@ function deleteContact() {
   if (currentContact) {
     contacts = contacts.filter(contact => contact !== currentContact);
     renderContacts();
-    hideDetail();
+    // hideDetail();
   }
 }
 
@@ -198,5 +198,5 @@ function renderContacts() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', hideDetail);
+// document.addEventListener('DOMContentLoaded', hideDetail);
 
