@@ -93,14 +93,14 @@ function getInitials(name) {
   return name.split(' ').map(word => word[0]).join('').toUpperCase();
 }
 
-// function hideDetail() {
-//   document.getElementById('contactDetailSection').style.display = 'none';
-//   if (activeContactItem) {
-//     activeContactItem.classList.remove('active');
-//     activeContactItem = null;
-//   }
-//   currentContact = null;
-// }
+function hideDetail() {
+  document.getElementById('contactDetailSection').style.display = 'none';
+  if (activeContactItem) {
+    activeContactItem.classList.remove('active');
+    activeContactItem = null;
+  }
+  currentContact = null;
+}
 
 function addContact() {
   const name = document.getElementById('contactListName').value.trim();
@@ -158,7 +158,7 @@ function deleteContact() {
   if (currentContact) {
     contacts = contacts.filter(contact => contact !== currentContact);
     renderContacts();
-    // hideDetail();
+    hideDetail();
   }
 }
 
