@@ -168,11 +168,13 @@
 
 .contact-edit-form {
     border-top-right-radius: 30px;
+    animation: slideFromLeft 200ms ease-in-out;
 }
 
 .contact-add-form {
     right: 0;
     border-top-left-radius: 30px;
+    animation: slideFromRight 200ms ease-in-out;
 }
 
 .contact-edit-form-head,
@@ -264,5 +266,15 @@
 
 .contact-add-form-button-create-contact:active .icon-check {
     content: url('../assets/icons/icon-check-active.png');
+}
+
+@keyframes slideFromLeft {
+    0%{transform: translateX(-100%)}
+    100%{}
+}
+
+@keyframes slideFromRight {
+    0%{transform: translateX(100%)}
+    100%{}
 }
 
