@@ -8,50 +8,70 @@
 
     <link rel="stylesheet" href="./style/standard.css">
     <link rel="stylesheet" href="./style/fonts.css">
+    <link rel="stylesheet" href="./style/assets.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./style/task.css">
     <link rel="stylesheet" href="./style/add-task.css">
+    <link rel="stylesheet" href="./style/menu-bar.css">
+    
 
-    <script src="./script.js"></script>
-    <script src="./scripts/contacts.js"></script>
-    <script src="./scripts/dataStorage.js"></script>
+    <script src="./scripts/contacts.js" defer></script>
+    <script src="./scripts/dataStorage.js" defer></script>
 </head>
 <body onload="renderTasks(), save()">
     <header w3-include-html="header.html"></header>
+    <div class="site-body-wrapper">
     <div class="menu-bar-left">
         <div w3-include-html="menu-bar.html"></div>
-        
-        <div class="container">
-            <header>
-              <input type="text" id="searchTask" placeholder="Find Task">
-              <button id="addTaskButton" onclick="addTask(1)">Add Task +</button>
-            </header>
-            <main id="kanbanBoard">
+    </div>
+        <div>
+            <div class="boardheader">
+              <div class="boardheader-search">
+                <div class="task-search-bar">
+                  <input class="task-search-input" type="text" id="searchTask" placeholder="Find Task">
+                  <div class="task-search-devider"></div>
+                  <label for="searchTask">
+                    <img src="./assets/icons/icon-search.svg" alt="">
+                  </label>
+                </div>
+                <button class="button-primary button-add-task" id="addTaskButton" onclick="addTask(1)">Add Task +</button>
+              </div>
+              <div class="task-table-headers">
+                <div class="task-table-header-element">
+                  <h4>To do</h2> 
+                  <button class="add-column" onclick="addTask(1)"><img src="/assets/icons/icon-plus-button.svg"></button>
+                </div>
+                <div class="task-table-header-element">
+                  <h4>In Progress</h2> 
+                  <button class="add-column" onclick="addTask(2)"><img src="/assets/icons/icon-plus-button.svg"></button>
+                </div>
+                <div class="task-table-header-element">
+                  <h4>Await Feedback</h2> 
+                   <button class="add-column" onclick="addTask(3)"><img src="/assets/icons/icon-plus-button.svg"></button>
+                </div>
+                <div class="task-table-header-element">
+                  <h4>Done</h2> 
+                </div>
+              </div>
+            </div>
+            <main id="kanbanBoard" class="task-kanban-board">
               <div class="column" data-status="1">
-                <h2>To do <button class="add-column" onclick="addTask(1)">+</button></h2>
                 <div class="tasks"></div>
               </div>
               <div class="column" data-status="2">
-                <h2>In Progress <button class="add-column" onclick="addTask(2)">+</button></h2>
                 <div class="tasks"></div>
               </div>
               <div class="column" data-status="3">
-                <h2>Await Feedback <button class="add-column" onclick="addTask(3)">+</button></h2>
                 <div class="tasks"></div>
               </div>
               <div class="column" data-status="4">
-                <h2>Done <button class="add-column" onclick="addTask(4)">+</button></h2>
                 <div class="tasks"></div>
               </div>
             </main>
-          </div>
-        
-
-          
-          <script src="./scripts/task.js"></script>
-          <script src="./scripts/add-task.js"></script>
-
+        </div>
     </div>
 </body>
 <script src="./scripts/w3-include-html.js"></script>
+<script src="./scripts/task.js"></script>
+<script src="./scripts/add-task.js"></script>
 </html>
