@@ -15,24 +15,31 @@ visibilityBtn.addEventListener('click', () => toggleVisibility(passwordInput, vi
 document.addEventListener('DOMContentLoaded', () => {
   const logoOverlay = document.getElementById('logo-overlay');
   const logoOverlayImg = document.querySelector('.logo-overlay-img');
+  const overlayShown = sessionStorage.getItem('overlayShown');
 
+  if (!overlayShown) {
     setTimeout(() => {
-        logoOverlay.classList.add('hidden');
+      logoOverlay.classList.add('hidden');
     }, 100); // Adjust the timeout as needed
 
     logoOverlayImg.addEventListener('animationend', () => {
       logoOverlay.style.display = 'none';
-  });
+    });
+
+    sessionStorage.setItem('overlayShown', 'true');
+  } else {
+    logoOverlay.style.display = 'none';
+  }
   if (visibilityBtn1) {
     visibilityBtn1.addEventListener('click', () => toggleVisibility(repeatPasswordInput, visibilityBtn1));
   }
   if (repeatPasswordInput) {
     repeatPasswordInput.addEventListener('keyup', () => {
-        if (repeatPasswordInput.value === "" || repeatPasswordInput.value === null) {
-            visibilityBtn1.src = 'assets/icons/login/lock.svg';
-        } else {
-            visibilityBtn1.src = 'assets/icons/login/visibility_off.svg';
-        }
+      if (repeatPasswordInput.value === "" || repeatPasswordInput.value === null) {
+        visibilityBtn1.src = 'assets/icons/login/lock.svg';
+      } else {
+        visibilityBtn1.src = 'assets/icons/login/visibility_off.svg';
+      }
     });
   }
 });
