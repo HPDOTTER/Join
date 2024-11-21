@@ -30,9 +30,13 @@
 }
 
 .button-secondary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
     color: #647188;
     background-color: #FFFFFF;
-    padding: 10px 18px;
     border-radius: 8px;
     border: 1px solid #647188
 }
@@ -93,4 +97,8 @@
 
 .icon-close {
     content: url('../assets/icons/icon-close.png');
+}
+
+.icon-cancel {
+    content: url('../assets/icons/icon-cancel.png');
 }

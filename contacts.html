@@ -75,7 +75,8 @@
         <input type="email" id="editEmail" required>
         <input type="tel" id="editPhone" required>
         <div class="contact-edit-form-button-section">
-          <button class="button-secondary contact-edit-form-button-delete scale-on-hover" onclick="deleteContact(), hideEditForm()">Delete</button>
+          <button class="button-secondary contact-edit-form-button-delete scale-on-hover"
+            onclick="deleteContact(), hideEditForm()">Delete</button>
           <button class="button-primary contact-edit-form-button-save scale-on-hover" onclick="saveContact()">
             Save
             <img class="icon-check">
@@ -86,18 +87,31 @@
   </div>
 
 
-  <!-- <div class="contactFormOverlay" id="contactFormOverlay" onclick="hideForm()"></div>
-  <div class="contactForm" id="contactForm">
-    <h2>Neuen Kontakt hinzufügen</h2>
-    <label for="contactListName">Name:</label>
-    <input type="text" id="contactListName" required><br>
-    <label for="contactListEmail">E-Mail-Adresse:</label>
-    <input type="email" id="contactListEmail" required><br>
-    <label for="contactListPhone">Telefonnummer:</label>
-    <input type="tel" id="contactListPhone" required><br>
-    <button onclick="addContact()">Hinzufügen</button>
-    <button onclick="hideForm()">Abbrechen</button>
-  </div> -->
+  <div id="contactFormOverlay" class="form-overlay" onclick="hideForm()"></div>
+  <div id="contactForm" class="contact-add-form">
+    <div class="contact-add-form-head">
+      <img src="./assets/img/logo/logo-white.png" alt="">
+      <h2>Add contact</h2>
+      Tasks are better with a team!
+      <img class="icon-close pointer" onclick="hideForm()"></img>
+    </div>
+    <div class="contact-add-form-body">
+      <div class="contact-detail-avatar"></div>
+      <input type="text" id="contactListName" required>
+      <input type="email" id="contactListEmail" required>
+      <input type="tel" id="contactListPhone" required>
+      <div class="contact-add-form-button-section">
+        <button class="button-secondary contact-add-form-button-cancel scale-on-hover" onclick="hideForm()">
+          Cancel
+          <img class="icon-cancel">
+        </button>
+        <button class="button-primary contact-add-form-button-create-contact scale-on-hover" onclick="addContact()">
+          Create contact
+          <img class="icon-check">
+        </button>
+      </div>
+    </div>
+  </div>
 
 </body>
 <script src="./scripts/w3-include-html.js"></script>
