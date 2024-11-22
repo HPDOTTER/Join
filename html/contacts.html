@@ -71,9 +71,24 @@
       </div>
       <div class="contact-edit-form-body">
         <div class="contact-detail-avatar"></div>
-        <input type="text" id="editName" required>
-        <input type="email" id="editEmail" required>
-        <input type="tel" id="editPhone" required>
+        <div class="input-wrapper">
+          <input type="text" placeholder="Name" class="input" id="editName" required>
+          <label for="editName">
+            <img src="../assets/icons/icon-person.svg" alt="person">
+          </label>
+        </div>
+        <div class="input-wrapper">
+          <input type="mail" placeholder="Email" class="input" id="editEmail" required>
+          <label for="editEmail">
+            <img src="../assets/icons/icon-mail.svg" alt="mail">
+          </label>
+        </div>
+        <div class="input-wrapper">
+          <input type="text" placeholder="Phone" class="input" id="editPhone" required>
+          <label for="editPhone">
+            <img src="../assets/icons/icon-phone.svg" alt="phone">
+          </label>
+        </div>
         <div class="contact-edit-form-button-section">
           <button class="button-secondary contact-edit-form-button-delete scale-on-hover"
             onclick="deleteContact(), hideEditForm()">Delete</button>
@@ -85,34 +100,49 @@
       </div>
     </div>
     <div id="contactFormOverlay" class="form-overlay" onclick="hideForm()"></div>
-  <div id="contactForm" class="contact-add-form">
-    <div class="contact-add-form-head">
-      <img src="../assets/img/logo/logo-white.png" alt="">
-      <h2>Add contact</h2>
-      Tasks are better with a team!
-      <img class="icon-close pointer" onclick="hideForm()"></img>
-    </div>
-    <div class="contact-add-form-body">
-      <div class="contact-detail-avatar"></div>
-      <input type="text" id="contactListName" required>
-      <input type="email" id="contactListEmail" required>
-      <input type="tel" id="contactListPhone" required>
-      <div class="contact-add-form-button-section">
-        <button class="button-secondary contact-add-form-button-cancel scale-on-hover" onclick="hideForm()">
-          Cancel
-          <img class="icon-cancel">
-        </button>
-        <button class="button-primary contact-add-form-button-create-contact scale-on-hover" onclick="addContact()">
-          Create contact
-          <img class="icon-check">
-        </button>
+    <div id="contactForm" class="contact-add-form">
+      <div class="contact-add-form-head">
+        <img src="../assets/img/logo/logo-white.png" alt="">
+        <h2>Add contact</h2>
+        Tasks are better with a team!
+        <img class="icon-close pointer" onclick="hideForm()"></img>
+      </div>
+      <div class="contact-add-form-body">
+        <div class="contact-detail-avatar"></div>
+        <div class="input-wrapper">
+          <input type="text" placeholder="Name" class="input" id="contactListName" required>
+          <label for="contactListName">
+            <img src="../assets/icons/icon-person.svg" alt="person">
+          </label>
+        </div>
+        <div class="input-wrapper">
+          <input type="mail" placeholder="Email" class="input" id="contactListEmail" required>
+          <label for="contactListEmail">
+            <img src="../assets/icons/icon-mail.svg" alt="mail">
+          </label>
+        </div>
+        <div class="input-wrapper">
+          <input type="text" placeholder="Phone" class="input" id="contactListPhone" required>
+          <label for="contactListPhone">
+            <img src="../assets/icons/icon-phone.svg" alt="phone">
+          </label>
+        </div>
+        <div class="contact-add-form-button-section">
+          <button class="button-secondary contact-add-form-button-cancel scale-on-hover" onclick="hideForm()">
+            Cancel
+            <img class="icon-cancel">
+          </button>
+          <button class="button-primary contact-add-form-button-create-contact scale-on-hover" onclick="addContact()">
+            Create contact
+            <img class="icon-check">
+          </button>
+        </div>
       </div>
     </div>
   </div>
-  </div>
 
 
-  
+
 
 </body>
 <script src="../scripts/w3-include-html.js"></script>

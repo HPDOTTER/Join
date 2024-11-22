@@ -91,7 +91,7 @@
     display: flex;
     flex-direction: column;
     gap: 22px;
-    animation: slideFromRight 300ms ease-in-out;
+    animation: slideFromRight 200ms ease-in-out;
 }
 
 .contact-detail-head {
@@ -223,10 +223,11 @@
 .contact-add-form-body  {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 32px;
     height: 65%;
-    padding: 80px;
+    padding: 0 80px;
 }
 
 .contact-edit-form-button-section,
