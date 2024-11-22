@@ -8,12 +8,12 @@ function addTask(status) {
   load();
   statusTask = status;
   save();
-  window.location.href = "./add-task.html";
+  window.location.href = "../html/add-task.html";
 }
 
 
 function addTaskCancel() {
-  window.location.href = "./board.html";
+  window.location.href = "../html/board.html";
   renderTasks();
 }
 
@@ -39,7 +39,7 @@ function addTaskSave() {
   };
 
   tasks.push(newTask);
-  window.location.href = "./board.html";
+  window.location.href = "../html/board.html";
   save();
   renderTasks();
 }

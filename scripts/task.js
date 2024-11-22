@@ -75,11 +75,11 @@ function renderTasks() {
     }
     html += /*html*/`</div>`;
     if (task.priority == 1) {
-      html += /*html*/`<div class="prio13"><img src="./assets/img/prio1.png" alt=""></div>`
+      html += /*html*/`<div class="prio13"><img src="../assets/img/prio1.png" alt=""></div>`
     } else if (task.priority == 2) {
-      html += /*html*/`<div class="prio2"><img src="./assets/img/prio2.png" alt=""></div>`
+      html += /*html*/`<div class="prio2"><img src="../assets/img/prio2.png" alt=""></div>`
     } else if (task.priority == 3) {
-      html += /*html*/`<div class="prio13"><img src="./assets/img/prio3.png" alt=""></div>`
+      html += /*html*/`<div class="prio13"><img src="../assets/img/prio3.png" alt=""></div>`
     }
     html += /*html*/`</section>`;
     taskElement.innerHTML += html;

@@ -27,7 +27,7 @@
 }
 
 .login-header-icon {
-    content: url(assets/icons/login/joiniconblue.svg);
+    content: url('../assets/img/logo/logo-join-blue.svg');
     padding: 0px !important;  
 }
 
@@ -84,7 +84,7 @@
     height: 122px;
     width: 100px;
     padding: 0px !important;  
-    content: url(assets/icons/login/joiniconwhite.svg);
+    content: url('../assets/img/logo/logo-join-white.svg');
 }
 
 .login-header-right {
@@ -151,7 +151,7 @@
     top: 60px;
     left: 40px;
     cursor: pointer;
-    content: url(assets/icons/login/arrow-left-line.svg);
+    content: url('../assets/icons/icon-arrow-back.png');
 }
 
 .arrow-left-line-icon:hover {
@@ -267,11 +267,11 @@ input[type="checkbox"][id="rememberMe"] + label {
     width: 24px;
     height: 24px;
     cursor: pointer;
-    content: url(/assets/icons/login/checkboxdefault.svg);
+    content: url('../assets/icons/checkbox-default.svg');
 }
 
 input[type="checkbox"][id="rememberMe"]:checked + label {
-	content: url(/assets/icons/login/checkboxchecked.svg);
+	content: url('../assets/icons/checkbox-checked.svg');
 }
 
 input[type="checkbox"][id="rememberMe"]:hover + label {
@@ -289,11 +289,11 @@ input[type="checkbox"][id="acceptPrivacyPolicy"] + label {
     width: 24px;
     height: 24px;
     cursor: pointer;
-    content: url(/assets/icons/login/checkboxdefault.svg);
+    content: url('../assets/icons/checkbox-default.svg');
 }
 
 input[type="checkbox"][id="acceptPrivacyPolicy"]:checked + label {
-	content: url(/assets/icons/login/checkboxchecked.svg);
+	content: url('../assets/icons/checkbox-checked.svg');
 }
 
 input[type="checkbox"][id="acceptPrivacyPolicy"]:hover + label {

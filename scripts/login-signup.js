@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (repeatPasswordInput) {
     repeatPasswordInput.addEventListener('keyup', () => {
       if (repeatPasswordInput.value === "" || repeatPasswordInput.value === null) {
-        visibilityBtn1.src = 'assets/icons/login/lock.svg';
+        visibilityBtn1.src = '../assets/icons/icon-lock.svg';
       } else {
-        visibilityBtn1.src = 'assets/icons/login/visibility_off.svg';
+        visibilityBtn1.src = '../assets/icons/icon-visibility-off.svg';
       }
     });
   }
@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 passwordInput.addEventListener('keyup', () => {
   if(passwordInput.value === "" || passwordInput.value === null){
-    visibilityBtn.src = 'assets/icons/login/lock.svg'
+    visibilityBtn.src = '../assets/icons/icon-lock.svg'
   } else {
-    visibilityBtn.src = 'assets/icons/login/visibility_off.svg'
+    visibilityBtn.src = '../assets/icons/icon-visibility-off.svg'
   }
 })
 
@@ -56,10 +56,10 @@ function toggleVisibility(input, btn) {
   if(input.value !== "" && input.value !== null) {
     if(input.type === 'password') {
       input.type = 'text'
-      btn.src = 'assets/icons/login/visibility.svg'
+      btn.src = '../assets/icons/icon-visibility.svg'
     } else {
       input.type = 'password'
-      btn.src = 'assets/icons/login/visibility_off.svg'
+      btn.src = '../assets/icons/icon-visibility-off.svg'
     }
   }
 }

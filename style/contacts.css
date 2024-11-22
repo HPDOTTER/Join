@@ -83,6 +83,7 @@
 
 .contact-detail-section {
     display: none;
+    flex: 1;
     padding: 50px;
 }
 
@@ -90,7 +91,7 @@
     display: flex;
     flex-direction: column;
     gap: 22px;
-    animation: slideFromRight 200ms ease-in-out;
+    animation: slideFromRight 300ms ease-in-out;
 }
 
 .contact-detail-head {
@@ -103,7 +104,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120px;
+    min-width: 120px;
     min-height: 120px;
     color: #FFFFFF;
     background-color: var(--salmon);

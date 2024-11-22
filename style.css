@@ -96,7 +96,7 @@ p>a {
 
 .site-body-wrapper {
     display: flex;
-    height: 932px;
+    height: calc(100vh - 96px);
 }
 
 .text-content::-webkit-scrollbar {
