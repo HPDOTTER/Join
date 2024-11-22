@@ -126,6 +126,7 @@ function editContact() {
     document.getElementById('editEmail').value = currentContact.email;
     document.getElementById('editPhone').value = currentContact.phone;
   }
+  renderContacts();
 }
 
 function saveContact() {
