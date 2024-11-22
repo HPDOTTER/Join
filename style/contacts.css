@@ -64,6 +64,10 @@
     background-color: var(--primary-color);
 }
 
+.active {
+    background-color: var(--primary-color);
+}
+
 .contact-item:active .contact-list-name, .contact-item:active .contact-list-email{
     color: #FFFFFF;
 }

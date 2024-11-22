@@ -74,16 +74,22 @@ function hideForm() {
 }
 
 function showDetail(contact, contactItem) {
+  renderDetail(contact);
+  showDetailActive(contact, contactItem);
+}
+
+function renderDetail(contact) {
   document.getElementById('contactDetailSection').style.display = 'block';
   document.getElementById('detailName').textContent = contact.name;
   document.getElementById('detailEmail').textContent = contact.email;
   document.getElementById('detailPhone').textContent = contact.phone;
   document.getElementById('contactAvatar').textContent = getInitials(contact.name);
+}
 
+function showDetailActive(contact, contactItem) {
   if (activeContactItem) {
     activeContactItem.classList.remove('active');
   }
-
   contactItem.classList.add('active');
   activeContactItem = contactItem;
   currentContact = contact;
@@ -126,7 +132,6 @@ function editContact() {
     document.getElementById('editEmail').value = currentContact.email;
     document.getElementById('editPhone').value = currentContact.phone;
   }
-  renderContacts();
 }
 
 function saveContact() {
@@ -137,6 +142,7 @@ function saveContact() {
 
     contacts.sort((a, b) => a.name.localeCompare(b.name));
     renderContacts();
+    renderDetail(currentContact);
     hideEditForm();
     // hideDetail();
   }
