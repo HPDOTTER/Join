@@ -166,20 +166,6 @@
     width: 100%;
 }
 
-.login-input-div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    border-bottom: 1px solid #D1D1D1;
-    padding: 12px 21px 12px 21px;
-    gap: 10px;
-}
-
-.login-input-div:focus-within {
-    border-bottom: 1px solid var(--primary-color);
-}
-
 .incorrect {
     border-bottom: 1px solid var(--warning) !important;
 }
@@ -197,16 +183,6 @@
 .login-error-message {
     font-size: 13px;
     color: var(--warning);
-}
-
-.login-input {
-    font-size: 19px;
-    width: 100%;
-    border: none;
-}
-
-.login-input:focus {
-    outline: none;
 }
 
 .login-check-box {

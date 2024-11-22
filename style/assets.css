@@ -113,3 +113,27 @@ button {
 .icon-cancel {
     content: url('../assets/icons/icon-cancel.png');
 }
+
+.input-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid #D1D1D1;
+    padding: 12px 21px 12px 21px;
+    gap: 10px;
+}
+
+.input-wrapper:focus-within {
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.input {
+    font-size: 19px;
+    width: 100%;
+    border: none;
+}
+
+.input:focus {
+    outline: none;
+}
