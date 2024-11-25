@@ -50,6 +50,8 @@ function renderTasks() {
     });
     task.progress = subtaskDone / subtaskCount;
     taskElement.classList.add('task');
+    taskElement.setAttribute('draggable', 'true');
+    // taskElement.setAttribute('ondragstart', `startDrag(${task.id})`);
     taskElement.innerHTML = `
       <span class="category ${task.categoryUser ? 'user' : 'technical'}">
         ${task.categoryUser ? 'User Story' : 'Technical Task'}
