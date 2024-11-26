@@ -98,11 +98,22 @@ p>a {
     display: flex;
     height: calc(100vh - 96px);
     width: 100%;
-    max-width: 1440px;
+}
+
+.content-wrapper {
+    display: flex;
+    flex: 1;
 }
 
 .text-content::-webkit-scrollbar {
     display: none;
+}
+
+.summary-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .text-content {

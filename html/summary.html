@@ -10,24 +10,37 @@
     <link rel="stylesheet" href="../style/standard.css">
     <link rel="stylesheet" href="../style/fonts.css">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style/summary.css">
 
     <script src="../script.js"></script>
 </head>
 
 <body>
-    <header w3-include-html="header.html"></header>
-    <div class="menu-bar-left">
-        <div w3-include-html="menu-bar.html"></div>
-        <div>
-            <h1>Summary</h1>
-            <h3>Good morning<h2 id="welcomeName"></h2></h3>
+    <div class="site-wrapper">
+        <header w3-include-html="header.html"></header>
+        <div class="site-body-wrapper">
+            <div class="menu-bar-left">
+                <div w3-include-html="menu-bar.html"></div>
+            </div>
+            <div class="content-wrapper summary-content">
+                <div>
+                    <h1 class="summary-headline">Good morning, <h2 id="welcomeName"></h2>
+                    </h1>
+                </div>
+                <div class="tile-area">
+                    <div class="tile-area-upper">
+                        <div id="tasksUrgent" class="tile tile-flex">Tasks Urgent</div>
+                        <div id="tasksAmount" class="tile">Tasks in Board</div>
+                    </div>
+                    <div class="tile-area-lower" class="tile">
+                        <div id="tasksToDo" class="tile">Tasks To-do</div>
+                        <div id="tasksInProgress" class="tile">Tasks in Progress</div>
+                        <div id="tasksAwaitingFeedback" class="tile">Awaiting Feedback</div>
+                        <div id="tasksDone" class="tile">Tasks Done</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="tasksUrgent"></div>
-        <div id="tasksAmount"></div>
-        <div id="tasksToDo"></div>
-        <div id="tasksInProgress"></div>
-        <div id="tasksAwaitingFeedback"></div>
-        <div id="tasksDone"></div>
     </div>
 </body>
 <script src="../scripts/w3-include-html.js"></script>
