@@ -16,27 +16,73 @@
 </head>
 
 <body>
+    <header w3-include-html="header.html"></header>
     <div class="site-wrapper">
-        <header w3-include-html="header.html"></header>
         <div class="site-body-wrapper">
             <div class="menu-bar-left">
                 <div w3-include-html="menu-bar.html"></div>
             </div>
             <div class="content-wrapper summary-content">
-                <div>
-                    <h1 class="summary-headline">Good morning, <h2 id="welcomeName"></h2>
-                    </h1>
+                <div class="summary-head">
+                    <h1 class="summary-headline">Good morning, <span id="welcomeName">Sofia Müller</span></h1>
                 </div>
                 <div class="tile-area">
                     <div class="tile-area-upper">
-                        <div id="tasksUrgent" class="tile tile-flex">Tasks Urgent</div>
-                        <div id="tasksAmount" class="tile">Tasks in Board</div>
+                        <div id="tasksUrgent" class="tile tile-flex">
+                            <div class="tile-upper-part">
+                                <img src="/assets/icons/summary/icon-summary-urgent.svg">
+                                <p class="task-counter">1</p>
+                            </div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div id="tasksAmount" class="tile">
+                            <div class="tile-upper-part">
+                                <img src="/assets/icons/summary/icon-summary-total-tasks.svg">
+                                <p class="task-counter">2</p>
+                            </div>
+                            <div class="tile-lower-part">
+
+                            </div>
+                        </div>
                     </div>
                     <div class="tile-area-lower" class="tile">
-                        <div id="tasksToDo" class="tile">Tasks To-do</div>
-                        <div id="tasksInProgress" class="tile">Tasks in Progress</div>
-                        <div id="tasksAwaitingFeedback" class="tile">Awaiting Feedback</div>
-                        <div id="tasksDone" class="tile">Tasks Done</div>
+                        <div id="tasksToDo" class="tile background-light">
+                            <div class="tile-upper-part">
+                                <img src="/assets/icons/summary/icon-summary-to-do.svg">
+                                <p class="task-counter"></p>
+                            </div>
+                            <div class="tile-lower-part">
+
+                            </div>
+                        </div>
+                        <div id="tasksInProgress" class="tile">
+                            <div class="tile-upper-part">
+                                <img src="/assets/icons/summary/icon-summary-done.svg">
+                                <p class="task-counter"></p>
+                            </div>
+                            <div class="tile-lower-part">
+
+                            </div>
+                        </div>
+                        <div id="tasksAwaitingFeedback" class="tile">
+                            <div class="tile-upper-part">
+                                <img src="/assets/icons/summary/icon-summary-awaiting-feedback.svg">
+                                <p class="task-counter"></p>
+                            </div>
+                            <div class="tile-lower-part">
+
+                            </div>
+                        </div>
+                        <div id="tasksDone" class="tile">
+                            <div class="tile-upper-part">
+                                <img src="/assets/icons/summary/icon-summary-done.svg">
+                                <p class="task-counter"></p>
+                            </div>
+                            <div class="tile-lower-part">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

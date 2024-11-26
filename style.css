@@ -90,7 +90,7 @@ p>a {
 .site-wrapper {
     position: relative;
     max-width: 1920px;
-    height: 100vh;
+    height: calc(100vh - 96px);
     overflow: hidden;
 }
 
@@ -98,6 +98,7 @@ p>a {
     display: flex;
     height: calc(100vh - 96px);
     width: 100%;
+    max-width: 1920px;
 }
 
 .content-wrapper {
@@ -107,13 +108,6 @@ p>a {
 
 .text-content::-webkit-scrollbar {
     display: none;
-}
-
-.summary-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .text-content {
