@@ -14,7 +14,8 @@ function addTask(status) {
 
 function addTaskCancel() {
   window.location.href = "../html/board.html";
-  renderTasks();
+  load();
+  // renderTasks();
 }
 
 
@@ -41,7 +42,8 @@ function addTaskSave() {
   tasks.push(newTask);
   window.location.href = "../html/board.html";
   save();
-  renderTasks();
+  load();
+  // renderTasks();
 }
 
 

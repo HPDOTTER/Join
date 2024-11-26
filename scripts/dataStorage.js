@@ -32,7 +32,7 @@ function init() {
         }
       ];
       save();
-      renderTasks();
+      load();
 }
 
 
@@ -44,7 +44,7 @@ async function save() {
     // console.log(tasks);
     putData("/tasks", tasks);
     console.log('save', tasks);
-    await sleep(1000);
+    // await sleep(3000);
 }
 
 
@@ -55,7 +55,8 @@ async function load() {
     // statusTask = JSON.parse(statusTaskSave);
     await loadData("/tasks");
     console.log('load', tasks);
-    await sleep(1000);
+    // await sleep(3000);
+    renderTasks();
 }
 
 
