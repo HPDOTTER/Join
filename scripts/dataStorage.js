@@ -36,7 +36,7 @@ function init() {
 }
 
 
-function save() {
+async function save() {
     // let tasksSave = JSON.stringify(tasks);
     // let statusTaskSave = JSON.stringify(statusTask);
     // localStorage.setItem('tasks', tasksSave);
@@ -44,7 +44,7 @@ function save() {
     // console.log(tasks);
     putData("/tasks", tasks);
     console.log('save', tasks);
-    
+    await sleep(1000);
 }
 
 
@@ -55,6 +55,7 @@ async function load() {
     // statusTask = JSON.parse(statusTaskSave);
     await loadData("/tasks");
     console.log('load', tasks);
+    await sleep(1000);
 }
 
 

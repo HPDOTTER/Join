@@ -34,7 +34,7 @@ let currentDraggedElement;
 
 async function renderTasks() {
   load();
-  await sleep(2000);
+  await sleep(1000);
   const columns = document.querySelectorAll('.column .tasks');
   columns.forEach(column => (column.innerHTML = ''));
   console.log(tasks, 'render');
@@ -43,12 +43,14 @@ async function renderTasks() {
     const taskElement = document.createElement('div');
     let subtaskCount = 0;
     let subtaskDone = 0;
-    subtaskCount = task.subtasks.length;
-    task.subtasks.forEach(element => {
-      if (element.isDone == true) {
-        subtaskDone += 1;
-      }
-    });
+    if(task.subtasks) {
+      subtaskCount = task.subtasks.length;
+      task.subtasks.forEach(element => {
+        if (element.isDone == true) {
+          subtaskDone += 1;
+        }
+      });
+    }
     task.progress = subtaskDone / subtaskCount;
 
     taskElement.classList.add('task');
@@ -95,7 +97,6 @@ async function renderTasks() {
       console.error(`No column found for status ${task.status}`);
     }
   });
-  console.log(tasks, 'render');
 }
 
 function startDrag(index) {
