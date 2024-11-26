@@ -29,16 +29,14 @@ let tasks = [
   }
 ];
 
-
-
-
+let currentDraggedElement;
 
 function renderTasks() {
   load();
   const columns = document.querySelectorAll('.column .tasks');
   columns.forEach(column => (column.innerHTML = ''));
 
-  tasks.forEach(task => {
+  tasks.forEach((task, index) => {
     const taskElement = document.createElement('div');
     let subtaskCount = 0;
     let subtaskDone = 0;
@@ -53,7 +51,7 @@ function renderTasks() {
     
     taskElement.classList.add('task');
     taskElement.setAttribute('draggable', 'true');
-    // taskElement.setAttribute('ondragstart', `startDrag(${task.id})`);
+    taskElement.setAttribute('ondragstart', `startDrag(${index})`);
     taskElement.innerHTML = `
       <span class="category ${task.categoryUser ? 'user' : 'technical'}">
         ${task.categoryUser ? 'User Story' : 'Technical Task'}
@@ -79,27 +77,50 @@ function renderTasks() {
     }
     html += /*html*/`</div>`;
     if (task.priority == 1) {
-      html += /*html*/`<div class="prio13"><img src="../assets/img/prio1.png" alt=""></div>`
+      html += /*html*/`<div class="prio13 priodiv"><img src="../assets/img/prio1.png" alt=""></div>`
     } else if (task.priority == 2) {
-      html += /*html*/`<div class="prio2"><img src="../assets/img/prio2.png" alt=""></div>`
+      html += /*html*/`<div class="prio2 priodiv"><img src="../assets/img/prio2.png" alt=""></div>`
     } else if (task.priority == 3) {
-      html += /*html*/`<div class="prio13"><img src="../assets/img/prio3.png" alt=""></div>`
+      html += /*html*/`<div class="prio13 priodiv"><img src="../assets/img/prio3.png" alt=""></div>`
     }
     html += /*html*/`</section>`;
     taskElement.innerHTML += html;
 
     const column = document.querySelector(`.column[data-status="${task.status}"] .tasks`);
-    column.appendChild(taskElement);
+    if (column) {
+      column.appendChild(taskElement);
+    } else {
+      console.error(`No column found for status ${task.status}`);
+    }
   });
+<<<<<<< Updated upstream
   
+=======
+  console.log(tasks);
+>>>>>>> Stashed changes
 }
 
+function startDrag(index) {
+  currentDraggedElement = index;
+}
 
-// function renderAssignedTo() {
-//   let assignedTo = document.getElementById('taskAssignedTo');
-//   assignedTo.innerHTML += /*html*/`<option value="true">${contacts[0].name}</option>`;
-//   for (let i = 1; i < contacts.length; i++) {
-//     assignedTo.innerHTML += /*html*/`<option value="${contacts[i].name}">${contacts[i].name}</option>`;
-//   }
-// }
+function allowDrop(ev) {
+  ev.preventDefault();
+}
 
+function moveTo(status) {
+  tasks[currentDraggedElement]['status'] = status;
+  save();
+  renderTasks();
+  removeHighlight(status);
+}
+
+function highlight(status) {
+  const column = document.querySelector(`.column[data-status="${status}"]`);
+  column.classList.add('highlight');
+}
+
+function removeHighlight(status) {
+  const column = document.querySelector(`.column[data-status="${status}"]`);
+  column.classList.remove('highlight');
+}
