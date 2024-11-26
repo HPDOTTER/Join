@@ -43,12 +43,14 @@ function renderTasks() {
     let subtaskCount = 0;
     let subtaskDone = 0;
     subtaskCount = task.subtasks.length;
+    console.log('test', tasks);
     task.subtasks.forEach(element => {
       if (element.isDone == true) {
         subtaskDone += 1;
       }
     });
     task.progress = subtaskDone / subtaskCount;
+    
     taskElement.classList.add('task');
     taskElement.setAttribute('draggable', 'true');
     // taskElement.setAttribute('ondragstart', `startDrag(${task.id})`);
@@ -89,7 +91,6 @@ function renderTasks() {
     const column = document.querySelector(`.column[data-status="${task.status}"] .tasks`);
     column.appendChild(taskElement);
   });
-  console.log(tasks);
   
 }
 
