@@ -1,49 +1,15 @@
-let tasks = [
-  {
-    'titel': 'Kochwelt Page & Recipe Recommender',
-    'description': 'Build start page with recipe recommendation',
-    'categoryUser': true,
-    'date': new Date(2024, 10, 29),
-    'priority': 1,
-    'status': 2,
-    'progress': 0,
-    'members': ['Jutta Berger', 'Anna Horn'],
-    'subtasks': [
-      { 'subtitel': 'Design UI', 'isDone': false },
-      { 'subtitel': 'function b', 'isDone': true }
-    ]
-  },
-  {
-    'titel': 'CSS Architecture Planning',
-    'description': 'Define CSS naming conventions and structure',
-    'categoryUser': false,
-    'date': new Date(2024, 10, 28),
-    'priority': 3,
-    'status': 4,
-    'progress': 0,
-    'members': ['Josef Müller', 'Anton Sippel', 'Saul Goodman'],
-    'subtasks': [
-      { 'subtitel': 'menue design', 'isDone': true },
-      { 'subtitel': 'function a', 'isDone': true }
-    ]
-  }
-];
-
-
-
 
 
 function renderTasks() {
   load();
   const columns = document.querySelectorAll('.column .tasks');
   columns.forEach(column => (column.innerHTML = ''));
-
+  console.log('render', tasks);
   tasks.forEach(task => {
     const taskElement = document.createElement('div');
     let subtaskCount = 0;
     let subtaskDone = 0;
     subtaskCount = task.subtasks.length;
-    console.log('test', tasks);
     task.subtasks.forEach(element => {
       if (element.isDone == true) {
         subtaskDone += 1;
