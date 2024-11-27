@@ -108,6 +108,7 @@ function allowDrop(ev) {
 
 function moveTo(status) {
   tasks[currentDraggedElement]['status'] = status;
+  console.log(currentDraggedElement)
   save();
   load();
   removeHighlight(status);
