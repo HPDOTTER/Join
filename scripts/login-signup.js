@@ -6,9 +6,41 @@ const passwordInput = document.getElementById('login-password-input')
 const emailInput = document.getElementById('login-email-input')
 const repeatPasswordInput = document.getElementById('repeat-password-input')
 const signUpNameInput = document.getElementById('sign-up-name-input')
+const msgBox = document.getElementById('msg-box')
+const urlParams = new URLSearchParams(window.location.search)
+const msg = urlParams.get('msg')
 
 const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null)
 
+let users = [
+  {
+    'name' : 'John',
+    'email' : 'john@test.de',
+    'password': 'password'
+  }
+];
+
+function addUser() {
+  users.push({
+    'name' : signUpNameInput.value,
+    'email': emailInput.value,
+    'password': passwordInput.value
+  })
+  window.location.href = '../html/login.html?msg=You have successfully signed up. Please log in.'
+}
+
+function login() {
+  let user = users.find(user => user.email === emailInput.value && user.password === passwordInput.value)
+  if(user){
+    window.location.href = '../html/login.html?msg=You have successfully logged in.'
+  } else {
+    errorMessage.innerText = 'Email or password is incorrect'
+  }
+}
+
+if(msg){
+  msgBox.innerHTML = msg
+}
 
 visibilityBtn.addEventListener('click', () => toggleVisibility(passwordInput, visibilityBtn))
 

@@ -6,6 +6,11 @@ const tasksAwaitingFeedback = document.getElementById('tasksAwaitingFeedback');
 const tasksDone = document.getElementById('tasksDone');
 const welcomeName = document.getElementById('welcomeName');
 
+function init() {
+    welcomeUser();
+}
 
-
-
+function welcomeUser() {
+    welcomeName.innerHTML ='';
+    
+}

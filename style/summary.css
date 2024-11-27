@@ -18,6 +18,8 @@
     justify-content: center;
     align-items: center;
     gap: 72px;
+    margin: 80px;
+    max-width: 1920px;
 }
 
 .tile-area {
@@ -77,10 +79,22 @@
 .tile-flex img {
     border: 3px solid #FFFFFF;
 }
+.tile-flex container {
+    padding: 28px 48px 28px 48px;
+    gap: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tile-flex h2 {
+    color: #FFFFFF;
+}
 
 .task-counter {
     font-weight: 700;
     font-size: 48px;
+    color: black !important;
 }
 
 .tile-upper-part {
@@ -97,5 +111,27 @@
     align-items: center;
     text-align: center;
     justify-content: center;
+    flex-direction: column;
+}
+.tile-lower-part p {
+    font-size: 23px;
 }
 
+.tile-flex-left {
+    display: flex;
+    flex-direction: column;
+    gap:  9px;
+}
+
+.white-devider {
+    height: 145px;
+    border: 2px solid #FFFFFF;
+    border-radius: 30px;
+}
+.tile container div p {
+    color: var(--primary-color);
+}
+
+.white-colored-text {
+    color: #FFFFFF !important;
+}

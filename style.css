@@ -89,7 +89,7 @@ p>a {
 
 .site-wrapper {
     position: relative;
-    max-width: 1920px;
+    width: 100%;
     height: calc(100vh - 96px);
     overflow: hidden;
 }
@@ -98,7 +98,6 @@ p>a {
     display: flex;
     height: calc(100vh - 96px);
     width: 100%;
-    max-width: 1920px;
 }
 
 .content-wrapper {

@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-    <link rel="shortcut icon" href="./assets/icons/favicon/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="./style/standard.css">
-    <link rel="stylesheet" href="./style/fonts.css">
-    <link rel="stylesheet" href="./style/assets.css">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./style/login.css">
-    <script src="./scripts/login-signup.js" defer></script>
+    <link rel="shortcut icon" href="../assets/icons/favicon/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style/standard.css">
+    <link rel="stylesheet" href="../style/fonts.css">
+    <link rel="stylesheet" href="../style/assets.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style/login.css">
+    <script src="../scripts/login-signup.js" defer></script>
 </head>
 <body class="login-body">
     <div id="logo-overlay" class="logo-overlay">
-        <img src="./assets/img/logo/logo-join-white.svg" alt="Join Logo" class="logo-overlay-img">
+        <img src="../assets/img/logo/logo-join-white.svg" alt="Join Logo" class="logo-overlay-img">
     </div> 
     <header class="login-header">
         <div class="login-header-icon-div">
@@ -22,11 +22,12 @@
         </div>
         <div class="login-header-right">
             <p>Not a join user?</p>
-            <a href="./html/signup.html" class="button-primary">Sign up</a>
+            <a href="../html/signup.html" class="button-primary">Sign up</a>
         </div>
     </header>
+    <div id="msg-Box"></div>
     <main class="login-main">
-        <form action="" class="login-form" id="form">
+        <form onsubmit="login()" class="login-form" id="form">
             <div class="login-h1-div">
                 <h1 class="login-h1">Log in</h1>
                 <div class="login-h1-underline"></div>
@@ -35,7 +36,7 @@
                 <div class="input-wrapper">
                     <input type="mail" placeholder="Email" class="input" id="login-email-input">
                     <label for="login-email-input">
-                        <img src="./assets/icons/icon-mail.svg" alt="mail">
+                        <img src="../assets/icons/icon-mail.svg" alt="mail">
                     </label>
                 </div>
                 <div class="login-error-message-div">
@@ -44,7 +45,7 @@
                 <div class="input-wrapper">
                     <input type="password" placeholder="Password" class="input" id="login-password-input">
                     <label for="login-password-input">
-                        <img src="./assets/icons/icon-lock.svg" alt="lock" id="login-password-icon">
+                        <img src="../assets/icons/icon-lock.svg" alt="lock" id="login-password-icon">
                     </label>
                 </div>
                 <div class="login-error-message-div">
