@@ -55,6 +55,14 @@
                     <option value="1">Urgent</option>
                     <option value="3">Low</option>
                   </select>
+
+                  <div>
+                    Subtasks
+                    <input type="text" id="subtaskInput" placeholder="subtask">
+                    <button onclick="addSubtask()">+</button>
+                    <div id="taskAddSubtasksContent">
+                    </div>
+                  </div>
             
                   <button onclick="addTaskSave()">Save Task</button>
                   <button onclick="addTaskCancel()">Cancel</button>

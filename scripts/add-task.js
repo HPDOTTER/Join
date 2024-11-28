@@ -2,6 +2,7 @@
 
 let statusTask = 1;
 let members = [];
+let subtasks = [];
 
 
 async function addTask(status) {
@@ -35,7 +36,7 @@ async function addTaskSave() {
     status: statusTask,
     progress: 0,
     members: members,
-    subtasks: []
+    subtasks: subtasks
   };
 
   tasks.push(newTask);
@@ -86,6 +87,15 @@ const toggleDropdown = () => {
     }
   };
   
+
+  function addSubtask() {
+    let inputfield = document.getElementById('subtaskInput').value;
+    let subtask = document.getElementById('taskAddSubtasksContent');
+    subtask.innerHTML += /*html*/`<div>${inputfield}</div>`;
+    subtasks.push({ 'subtitel': inputfield, 'isDone': false });
+    console.log(subtasks);
+  }
+
   
   // Initialisierung
   document.addEventListener("DOMContentLoaded", renderContactsWithCheckboxes);
