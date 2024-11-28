@@ -1,4 +1,4 @@
-function currentUser() {
+//function currentUser() {
     const user = sessionStorage.getItem('user');
     const guest = sessionStorage.getItem('guest');
     if (user || guest) {
