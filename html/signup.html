@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../style/assets.css">
 
     <script src="../scripts/login-signup.js" defer></script>
+    <script src="../script.js"></script>
 </head>
 <body class="login-body sign-up-body">
     <div id="logo-overlay" class="logo-overlay">
@@ -24,7 +25,7 @@
         </div>
     </header>
     <main class="login-main">
-        <form onsubmit="addUser(); return false;" class="login-form sign-up-form" id="form">
+        <form onsubmit="addUser(); return false;" class="login-form sign-up-form" id="form" action="#">
             <a href="../html/login.html" alt="" class="arrow-left-line-icon"></a>
             <div class="login-h1-div">
                 <h1 class="login-h1">Sign Up</h1>
@@ -32,7 +33,7 @@
             </div>
             <div class="login-input-section">
                 <div class="input-wrapper">
-                    <input type="text" placeholder="Name" class="input" id="sign-up-name-input" required>
+                    <input type="text" placeholder="Name" class="input" id="sign-up-name-input" name="name" autocomplete="name" required>
                     <label for="sign-up-name-input">
                         <img src="../assets/icons/icon-person.svg" alt="person">
                     </label>
@@ -41,7 +42,7 @@
                     <p class="login-error-message"></p>
                 </div>
                 <div class="input-wrapper">
-                    <input type="mail" placeholder="Email" class="input" id="login-email-input"  required>
+                    <input type="email" placeholder="Email" class="input" id="login-email-input" name="email" autocomplete="email" required>
                     <label for="login-email-input">
                         <img src="../assets/icons/icon-mail.svg" alt="mail">
                     </label>
@@ -50,7 +51,7 @@
                     <p class="login-error-message"></p>
                 </div>
                 <div class="input-wrapper">
-                    <input type="password" placeholder="Password" class="input" id="login-password-input"  required>
+                    <input type="password" placeholder="Password" class="input" id="login-password-input" name="password" autocomplete="on" required>
                     <label for="login-password-input">
                         <img src="../assets/icons/icon-lock.svg" alt="lock" id="login-password-icon">
                     </label>
@@ -59,7 +60,7 @@
                     <p class="login-error-message"></p>
                 </div>
                 <div class="input-wrapper">
-                    <input type="password" placeholder="Confirm password" class="input" id="repeat-password-input" required>
+                    <input type="password" placeholder="Confirm password" class="input" id="repeat-password-input" name="confirm-password" autocomplete="on" required>
                     <label for="repeat-password-input">
                         <img src="../assets/icons/icon-lock.svg" alt="lock" id="repeat-password-icon">
                     </label>
@@ -68,7 +69,7 @@
                     <p class="login-error-message" id="login-error-message"></p>
                 </div>
                 <div class="login-check-box sign-up-check-box">
-                    <input type="checkbox" id="acceptPrivacyPolicy" class="login-remember-checkbox value="" onclick="enableSubmitButton()">
+                    <input type="checkbox" id="acceptPrivacyPolicy" class="login-remember-checkbox" onclick="enableSubmitButton()">
                     <label for="acceptPrivacyPolicy"></label>
                     <p>I accept the <a href="">Privacy Policy</a></p>
                 </div>
