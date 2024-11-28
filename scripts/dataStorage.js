@@ -42,11 +42,13 @@ const BASE_URL = "https://join-f6aef-default-rtdb.europe-west1.firebasedatabase.
 async function save() {
     await putData("/tasks", tasks);
     await putData("/status", statusTask);
+    // await putData("/user", );
 }
 
 
 async function load() {
     await loadData("/tasks", tasks);
+    // await loadData("/user", );
     await loadDataStatus();
 }
 
@@ -57,6 +59,7 @@ async function loadData(path="", data={}){
     Object.assign(data, responseToJson);
     console.log(data, 'load');
 };
+
 
 async function loadDataStatus(){
     let response = await fetch(BASE_URL + ".json");
