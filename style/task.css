@@ -17,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 180px;
+  max-width: 1920px;
 }
 
 .boardheader-search {
@@ -91,6 +92,7 @@ body {
   padding-right: 34px;
   height: 100%;
   margin-top: 10px;
+  max-width: 1920px;
 }
 
 .task-table-headers h4 {
