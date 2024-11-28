@@ -1,50 +1,62 @@
-const visibilityBtn = document.getElementById('login-password-icon')
-const visibilityBtn1 = document.getElementById('repeat-password-icon')
-const form = document.getElementById('form')
-const errorMessage = document.getElementById('login-error-message')
-const passwordInput = document.getElementById('login-password-input')
-const emailInput = document.getElementById('login-email-input')
-const repeatPasswordInput = document.getElementById('repeat-password-input')
-const signUpNameInput = document.getElementById('sign-up-name-input')
+const visibilityBtn = document.getElementById('login-password-icon');
+const visibilityBtn1 = document.getElementById('repeat-password-icon');
+const form = document.getElementById('form');
+const errorMessage = document.getElementById('login-error-message');
+const passwordInput = document.getElementById('login-password-input');
+const emailInput = document.getElementById('login-email-input');
+const repeatPasswordInput = document.getElementById('repeat-password-input');
+const signUpNameInput = document.getElementById('sign-up-name-input');
 const rememberMeCheckbox = document.getElementById('rememberMe');
 
-const urlParams = new URLSearchParams(window.location.search)
-const msg = urlParams.get('msg')
-const msgBox = document.getElementById('msgBox')
+const urlParams = new URLSearchParams(window.location.search);
+const msg = urlParams.get('msg');
+const msgBox = document.getElementById('msgBox');
 
-if(msg){
-  msgBox.innerHTML = msg
+if (msgBox) {
+  if (msg) {
+    msgBox.innerHTML = msg;
+  } else {
+    msgBox.style.display = 'none';
+  }
 } else {
-  msgBox.style.display = 'none'
+  console.error('Message box element not found');
 }
 
-const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null)
+const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null);
 
 let users = [
   {
-    'name' : 'John',
-    'email' : 'john@test.de',
+    'name': 'John',
+    'email': 'john@test.de',
     'password': 'password'
   }
 ];
 
+const guest = {
+  name: 'Guest',
+  email: 'guest@example.com',
+  password: 'guest'
+};
+
 function addUser() {
-  if(passwordInput.value === repeatPasswordInput.value){
+  if (passwordInput.value === repeatPasswordInput.value) {
     users.push({
-      'name' : signUpNameInput.value,
+      'name': signUpNameInput.value,
       'email': emailInput.value,
       'password': passwordInput.value
-    })
-    window.location.href = '../html/login.html?msg=You have successfully signed up. Please log in.'
-    } else {
-      getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value)
-    }  
+    });
+    localStorage.setItem('users', JSON.stringify(users)); // Corrected method name
+    smoothTransition('../html/login.html?msg=You have successfully signed up. Please log in.');
+  } else {
+    getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
+  }
 }
 
 function login() {
   let user = users.find(user => user.email === emailInput.value && user.password === passwordInput.value);
   if (user) {
-    if (rememberMeCheckbox.checked) {
+    loginSuccess(user);
+    if (rememberMeCheckbox && rememberMeCheckbox.checked) {
       localStorage.setItem('rememberMe', 'true');
       localStorage.setItem('email', emailInput.value);
       localStorage.setItem('password', passwordInput.value);
@@ -53,19 +65,38 @@ function login() {
       localStorage.removeItem('email');
       localStorage.removeItem('password');
     }
-    window.location.href = '../html/summary.html?msg=You have successfully logged in.';
+    smoothTransition('../html/summary.html?msg=You have successfully logged in.');
   } else {
     errorMessage.innerText = 'Email or password is incorrect';
   }
 }
 
-visibilityBtn.addEventListener('click', () => toggleVisibility(passwordInput, visibilityBtn))
+function loginAsGuest() {
+  loginSuccess(guest);
+  smoothTransition('../html/summary.html?msg=You have successfully logged in as a guest.');
+}
+
+function loginSuccess(user) {
+  if (user === guest) {
+    sessionStorage.setItem('guest', JSON.stringify(guest));
+  } else {
+    sessionStorage.setItem('user', JSON.stringify(user));
+  }
+};
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('fade-in');
+
   if (localStorage.getItem('rememberMe') === 'true') {
     emailInput.value = localStorage.getItem('email');
     passwordInput.value = localStorage.getItem('password');
-    rememberMeCheckbox.checked = true;
+    if (rememberMeCheckbox) {
+      rememberMeCheckbox.checked = true;
+    }
+  }
+
+  if (visibilityBtn) {
+    visibilityBtn.addEventListener('click', () => toggleVisibility(passwordInput, visibilityBtn));
   }
 });
 
@@ -160,12 +191,15 @@ form.addEventListener('submit', (e) => {
       errors.push('Password must have at least 8 characters')
       passwordInput.parentElement.classList.add('incorrect')
     }
+    if(!/[A-Z]/.test(password)){
+      errors.push('Password must contain at least one uppercase letter')
+      passwordInput.parentElement.classList.add('incorrect')
+    }
     if(password !== repeatPassword){
       errors.push('Password does not match repeated password')
       passwordInput.parentElement.classList.add('incorrect')
       repeatPasswordInput.parentElement.classList.add('incorrect')
     }
-  
   
     return errors;
   }
@@ -202,5 +236,3 @@ form.addEventListener('submit', (e) => {
       submitButton.disabled = true
     }
   }
-
- 

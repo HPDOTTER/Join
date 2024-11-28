@@ -12,5 +12,6 @@ function init() {
 
 function welcomeUser() {
     welcomeName.innerHTML ='';
-    
+    const userName = currentUser().user.name;
+    welcomeName.parentElement.innerHTML += `, <span id="welcomeName">${userName}</span>`;
 }

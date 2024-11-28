@@ -1,16 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
     <link rel="stylesheet" href="../style/header.css">
+
+    <script src="../scripts/login-signup.js" defer></script>
+    <script src="../script.js" defer></script>
 </head>
 
-<body>
+<body onload="currentUser()">
     <img src="../assets/img/logo/logo-white.png" alt="" class="header-logo">
     <div class="header-right pointer">
         <span class="color-white">Kanban Project Management Tool</span>
         <a href="./help.html"><img src="../assets/icons/icon-help.png" alt="" class="icon-help"></a>
         <div class="header-user-profile-outer-circle pointer">
-            <div class="header-user-profile">US</div>
+            <div class="header-user-profile" id="currentUserInitials">US</div>
         </div>
     </div>
 </body>
