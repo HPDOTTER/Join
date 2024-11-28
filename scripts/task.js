@@ -32,8 +32,8 @@ let tasks = [
 let currentDraggedElement;
 
 
-function renderTasks() {
-  // load();
+async function renderTasks() {
+  await load();
   const columns = document.querySelectorAll('.column .tasks');
   columns.forEach(column => (column.innerHTML = ''));
   console.log(tasks, 'render');
@@ -106,10 +106,10 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
-function moveTo(status) {
+async function moveTo(status) {
   tasks[currentDraggedElement]['status'] = status;
-  save();
-  load();
+  await save();
+  await renderTasks();
   removeHighlight(status);
 }
 

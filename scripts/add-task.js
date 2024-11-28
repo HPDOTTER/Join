@@ -4,23 +4,22 @@ let statusTask = 1;
 let members = [];
 
 
-function addTask(status) {
-  load();
+async function addTask(status) {
+  await load();
   statusTask = status;
-  save();
+  await save();
   window.location.href = "../html/add-task.html";
 }
 
 
 function addTaskCancel() {
   window.location.href = "../html/board.html";
-  load();
-  // renderTasks();
+  renderTasks();
 }
 
 
-function addTaskSave() {
-  load();
+async function addTaskSave() {
+  await load();
   const title = document.getElementById('taskTitle').value;
   const description = document.getElementById('taskDescription').value;
   const category = document.getElementById('taskCategory').value === 'true';
@@ -41,9 +40,8 @@ function addTaskSave() {
 
   tasks.push(newTask);
   window.location.href = "../html/board.html";
-  save();
-  load();
-  // renderTasks();
+  await save();
+  renderTasks();
 }
 
 

@@ -20,7 +20,7 @@
     <script src="../scripts/dataStorage.js" defer></script>
 </head>
 
-<body onload="load()">
+<body onload="renderTasks()">
     <header w3-include-html="header.html"></header>
     <div class="site-body-wrapper">
         <div class="menu-bar-left">
@@ -37,7 +37,7 @@
                         </label>
                     </div>
                     <button class="button-primary button-add-task" id="addTaskButton" onclick="addTask(1)">Add Task +</button>
-                    <button class="button-primary button-add-task" id="addTaskButton" onclick="save()">Init für Test</button>
+                    <button class="button-primary button-add-task" id="addTaskButton" onclick="init()">Init für Test</button>
                 </div>
                 <div class="task-table-headers">
                     <div class="task-table-header-element">

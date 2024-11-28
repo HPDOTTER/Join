@@ -1,6 +1,6 @@
 
 
-function init() {
+async function init() {
     tasks = [
         {
           'titel': 'Kochwelt Page & Recipe Recommender',
@@ -31,8 +31,8 @@ function init() {
           ]
         }
       ];
-      save();
-      load();
+      await save();
+      renderTasks();
 }
 
 
@@ -42,9 +42,8 @@ async function save() {
     // localStorage.setItem('tasks', tasksSave);
     // localStorage.setItem('statusTask', statusTaskSave);
     // console.log(tasks);
-    putData("/tasks", tasks);
-    console.log('save', tasks);
-    // await sleep(3000);
+    await putData("/tasks", tasks);
+    // console.log('save', tasks);
 }
 
 
@@ -54,9 +53,7 @@ async function load() {
     // tasks = JSON.parse(tasksSave);
     // statusTask = JSON.parse(statusTaskSave);
     await loadData("/tasks");
-    console.log('load', tasks);
-    // await sleep(3000);
-    renderTasks();
+    // console.log('load', tasks);
 }
 
 
@@ -98,7 +95,7 @@ async function loadData(path=""){
     let response = await fetch(BASE_URL + path + ".json");
     let responseToJson = await response.json();
     tasks = responseToJson;
-    console.log(tasks, 'loadDataTasks');
+    console.log(tasks, 'load');
 };
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -126,7 +123,7 @@ async function putData(path="", data={}){
         body: JSON.stringify(data)
     });
     let responseToJson = await response.json();
-    console.log(responseToJson, 'putData');
+    console.log(responseToJson, 'save');
 };
 
 
