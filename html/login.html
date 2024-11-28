@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../style/assets.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../style/login.css">
+
     <script src="../scripts/login-signup.js" defer></script>
 </head>
 <body class="login-body">
@@ -18,16 +19,15 @@
     </div> 
     <header class="login-header">
         <div class="login-header-icon-div">
-            <a class="login-header-icon" href="index.html"></a>
+            <a class="login-header-icon" href="../html/login.html"></a>
         </div>
         <div class="login-header-right">
             <p>Not a join user?</p>
             <a href="../html/signup.html" class="button-primary">Sign up</a>
         </div>
     </header>
-    <div id="msg-Box"></div>
     <main class="login-main">
-        <form onsubmit="login()" class="login-form" id="form">
+        <form onsubmit="login(); return false;" class="login-form" id="form">
             <div class="login-h1-div">
                 <h1 class="login-h1">Log in</h1>
                 <div class="login-h1-underline"></div>
@@ -62,6 +62,7 @@
                 <button class="button-secondary">Guest log in</button>
             </div>
         </form>
+        <div id="msgBox"></div>
     </main>
     <footer class="login-footer">
         <a href="./privacy-policy.html" target="_blank">Privacy Policy</a>

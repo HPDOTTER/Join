@@ -15,13 +15,14 @@
     <script src="../scripts/login-signup.js" defer></script>
 </head>
 <body class="login-body sign-up-body">
-
+    <div id="logo-overlay" class="logo-overlay">
+        <img src="../assets/img/logo/logo-join-white.svg" alt="Join Logo" class="logo-overlay-img">
+    </div> 
     <header class="login-header">
         <div class="login-header-icon-div">
             <a class="signup-header-icon" href="../html/index.html"></a>
         </div>
     </header>
-
     <main class="login-main">
         <form onsubmit="addUser(); return false;" class="login-form sign-up-form" id="form">
             <a href="../html/login.html" alt="" class="arrow-left-line-icon"></a>
@@ -31,7 +32,7 @@
             </div>
             <div class="login-input-section">
                 <div class="input-wrapper">
-                    <input type="text" placeholder="Name" class="input" id="sign-up-name-input">
+                    <input type="text" placeholder="Name" class="input" id="sign-up-name-input" required>
                     <label for="sign-up-name-input">
                         <img src="../assets/icons/icon-person.svg" alt="person">
                     </label>
@@ -40,7 +41,7 @@
                     <p class="login-error-message"></p>
                 </div>
                 <div class="input-wrapper">
-                    <input type="mail" placeholder="Email" class="input" id="login-email-input">
+                    <input type="mail" placeholder="Email" class="input" id="login-email-input"  required>
                     <label for="login-email-input">
                         <img src="../assets/icons/icon-mail.svg" alt="mail">
                     </label>
@@ -49,7 +50,7 @@
                     <p class="login-error-message"></p>
                 </div>
                 <div class="input-wrapper">
-                    <input type="password" placeholder="Password" class="input" id="login-password-input">
+                    <input type="password" placeholder="Password" class="input" id="login-password-input"  required>
                     <label for="login-password-input">
                         <img src="../assets/icons/icon-lock.svg" alt="lock" id="login-password-icon">
                     </label>
@@ -58,7 +59,7 @@
                     <p class="login-error-message"></p>
                 </div>
                 <div class="input-wrapper">
-                    <input type="password" placeholder="Confirm password" class="input" id="repeat-password-input">
+                    <input type="password" placeholder="Confirm password" class="input" id="repeat-password-input" required>
                     <label for="repeat-password-input">
                         <img src="../assets/icons/icon-lock.svg" alt="lock" id="repeat-password-icon">
                     </label>
@@ -76,6 +77,7 @@
                 <button class="button-primary" id="submit-button" type="submit" disabled>Sign up</button>
             </div>
         </form>
+        <div id="msgBox"></div>
     </main>
     
     <footer class="login-footer">

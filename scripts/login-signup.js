@@ -6,9 +6,17 @@ const passwordInput = document.getElementById('login-password-input')
 const emailInput = document.getElementById('login-email-input')
 const repeatPasswordInput = document.getElementById('repeat-password-input')
 const signUpNameInput = document.getElementById('sign-up-name-input')
-const msgBox = document.getElementById('msg-box')
+const rememberMeCheckbox = document.getElementById('rememberMe');
+
 const urlParams = new URLSearchParams(window.location.search)
 const msg = urlParams.get('msg')
+const msgBox = document.getElementById('msgBox')
+
+if(msg){
+  msgBox.innerHTML = msg
+} else {
+  msgBox.style.display = 'none'
+}
 
 const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null)
 
@@ -21,28 +29,45 @@ let users = [
 ];
 
 function addUser() {
-  users.push({
-    'name' : signUpNameInput.value,
-    'email': emailInput.value,
-    'password': passwordInput.value
-  })
-  window.location.href = '../html/login.html?msg=You have successfully signed up. Please log in.'
+  if(passwordInput.value === repeatPasswordInput.value){
+    users.push({
+      'name' : signUpNameInput.value,
+      'email': emailInput.value,
+      'password': passwordInput.value
+    })
+    window.location.href = '../html/login.html?msg=You have successfully signed up. Please log in.'
+    } else {
+      getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value)
+    }  
 }
 
 function login() {
-  let user = users.find(user => user.email === emailInput.value && user.password === passwordInput.value)
-  if(user){
-    window.location.href = '../html/login.html?msg=You have successfully logged in.'
+  let user = users.find(user => user.email === emailInput.value && user.password === passwordInput.value);
+  if (user) {
+    if (rememberMeCheckbox.checked) {
+      localStorage.setItem('rememberMe', 'true');
+      localStorage.setItem('email', emailInput.value);
+      localStorage.setItem('password', passwordInput.value);
+    } else {
+      localStorage.removeItem('rememberMe');
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+    }
+    window.location.href = '../html/summary.html?msg=You have successfully logged in.';
   } else {
-    errorMessage.innerText = 'Email or password is incorrect'
+    errorMessage.innerText = 'Email or password is incorrect';
   }
 }
 
-if(msg){
-  msgBox.innerHTML = msg
-}
-
 visibilityBtn.addEventListener('click', () => toggleVisibility(passwordInput, visibilityBtn))
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('rememberMe') === 'true') {
+    emailInput.value = localStorage.getItem('email');
+    passwordInput.value = localStorage.getItem('password');
+    rememberMeCheckbox.checked = true;
+  }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   const logoOverlay = document.getElementById('logo-overlay');
