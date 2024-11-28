@@ -36,14 +36,16 @@ async function init() {
 }
 
 
+const BASE_URL = "https://join-f6aef-default-rtdb.europe-west1.firebasedatabase.app/";
+
+
 async function save() {
     // let tasksSave = JSON.stringify(tasks);
     // let statusTaskSave = JSON.stringify(statusTask);
     // localStorage.setItem('tasks', tasksSave);
     // localStorage.setItem('statusTask', statusTaskSave);
-    // console.log(tasks);
     await putData("/tasks", tasks);
-    // console.log('save', tasks);
+    await putData("/status", statusTask);
 }
 
 
@@ -52,10 +54,9 @@ async function load() {
     // let statusTaskSave = localStorage.getItem('statusTask');
     // tasks = JSON.parse(tasksSave);
     // statusTask = JSON.parse(statusTaskSave);
-    await loadData("/tasks");
-    // console.log('load', tasks);
+    await loadData("/tasks", tasks);
+    await loadDataStatus();
 }
-
 
 
 
@@ -83,7 +84,7 @@ async function test() {
 };
 
 
-const BASE_URL = "https://join-f6aef-default-rtdb.europe-west1.firebasedatabase.app/";
+
 
 async function loadArrayData(path=""){
       let response = await fetch(BASE_URL + path + ".json");
@@ -91,15 +92,27 @@ async function loadArrayData(path=""){
 };
 
 
-async function loadData(path=""){
+async function loadData(path="", data={}){
     let response = await fetch(BASE_URL + path + ".json");
     let responseToJson = await response.json();
-    tasks = responseToJson;
-    console.log(tasks, 'load');
+    Object.assign(data, responseToJson);
+    console.log(data, 'load');
 };
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+
+async function loadDataStatus(){
+    let response = await fetch(BASE_URL + ".json");
+    let responseToJson = await response.json();
+    statusTask = responseToJson.status;
+    console.log(statusTask, 'load');
+};
+
+// async function loadData(path = "") {
+//     let response = await fetch(BASE_URL + path + ".json");
+//     let responseToJson = await response.json();
+//     console.log(responseToJson.status, "Full response from Firebase");
+//     return responseToJson;
+// }
+
 
 async function postData(path="", data={}){
     let response = await fetch(BASE_URL + path + ".json", {

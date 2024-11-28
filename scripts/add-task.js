@@ -39,6 +39,7 @@ async function addTaskSave() {
   };
 
   tasks.push(newTask);
+  console.log(statusTask);
   window.location.href = "../html/board.html";
   await save();
   renderTasks();
