@@ -42,7 +42,7 @@ async function renderTasks() {
     const taskElement = document.createElement('div');
     let subtaskCount = 0;
     let subtaskDone = 0;
-    if(task.subtasks) {
+    if (task.subtasks) {
       subtaskCount = task.subtasks.length;
       task.subtasks.forEach(element => {
         if (element.isDone == true) {
@@ -75,7 +75,13 @@ async function renderTasks() {
     html += /*html*/`<div class="avatar">`;
     if (task.members) {
       for (let i = 0; i < task.members.length; i++) {
-        html += /*html*/`<div class="contactAvatar">${getInitials(task.members[i])}</div>`;
+        const member = task.members[i];
+
+        // Finde den Kontakt im "contacts"-Array und hole die Farbe
+        const contact = contacts.find(contact => contact.name === member);
+        const avatarColor = contact ? contact.color : 'orange'; // Falls keine Farbe gefunden, Standardfarbe orange
+
+        html += /*html*/`<div class="contactAvatar" style="background-color: ${avatarColor}">${getInitials(member)}</div>`;
       }
     }
     html += /*html*/`</div>`;
