@@ -23,67 +23,67 @@ const contactColors = [
 
 let contacts = [
   {
-    'name' : 'Anna Horn',
-    'email' : 'ahorn@gmx.de',
-    'phone' : '+49123 456789',
-    'color' : contactColors[0],
-    'isUser' : false,
+    'name': 'Anna Horn',
+    'email': 'ahorn@gmx.de',
+    'phone': '+49123 456789',
+    'color': contactColors[0],
+    'isUser': false,
   },
   {
-    'name' : 'Anton Sippel',
-    'email' : 'sippel@gmx.de',
-    'phone' : '+49123 456789',
-    'color' : contactColors[1],
-    'isUser' : false,
+    'name': 'Anton Sippel',
+    'email': 'sippel@gmx.de',
+    'phone': '+49123 456789',
+    'color': contactColors[1],
+    'isUser': false,
   },
   {
-    'name' : 'Bruce Wayne',
-    'email' : 'the-bat@gmail.com',
-    'phone' : '+49123 456789',
-    'color' : contactColors[2],
-    'isUser' : false,
+    'name': 'Bruce Wayne',
+    'email': 'the-bat@gmail.com',
+    'phone': '+49123 456789',
+    'color': contactColors[2],
+    'isUser': false,
   },
   {
-    'name' : 'Daenerys Targaryen',
-    'email' : 'motherofdragons@gmail.com',
-    'phone' : '+49123 456789',
-    'color' : contactColors[3],
-    'isUser' : false,
+    'name': 'Daenerys Targaryen',
+    'email': 'motherofdragons@gmail.com',
+    'phone': '+49123 456789',
+    'color': contactColors[3],
+    'isUser': false,
   },
   {
-    'name' : 'Jutta Berger',
-    'email' : 'jber@gmx.de',
-    'phone' : '+49123 456789',
-    'color' : contactColors[4],
-    'isUser' : false,
+    'name': 'Jutta Berger',
+    'email': 'jber@gmx.de',
+    'phone': '+49123 456789',
+    'color': contactColors[4],
+    'isUser': false,
   },
   {
-    'name' : 'Josef Müller',
-    'email' : 'jmueller@gmx.de',
-    'phone' : '+49123 456789',
-    'color' : contactColors[5],
-    'isUser' : false,
+    'name': 'Josef Müller',
+    'email': 'jmueller@gmx.de',
+    'phone': '+49123 456789',
+    'color': contactColors[5],
+    'isUser': false,
   },
   {
-    'name' : 'Lisa Simpson',
-    'email' : 'l.simpson@gmail.com',
-    'phone' : '+49123 456789',
-    'color' : contactColors[6],
-    'isUser' : false,
+    'name': 'Lisa Simpson',
+    'email': 'l.simpson@gmail.com',
+    'phone': '+49123 456789',
+    'color': contactColors[6],
+    'isUser': false,
   },
   {
-    'name' : 'Saul Goodman',
-    'email' : 'mcgill@gmail.com',
-    'phone' : '+49123 456789',
-    'color' : contactColors[7],
-    'isUser' : false,
+    'name': 'Saul Goodman',
+    'email': 'mcgill@gmail.com',
+    'phone': '+49123 456789',
+    'color': contactColors[7],
+    'isUser': false,
   },
   {
-    'name' : 'Theo Meister',
-    'email' : 'tm@gmx.de',
-    'phone' : '+49123 456789',
-    'color' : contactColors[8],
-    'isUser' : false,
+    'name': 'Theo Meister',
+    'email': 'tm@gmx.de',
+    'phone': '+49123 456789',
+    'color': contactColors[8],
+    'isUser': false,
   }
 ];
 
@@ -149,7 +149,6 @@ function addContact() {
     contacts.sort((a, b) => a.name.localeCompare(b.name));
     renderContacts();
     hideForm();
-    // hideDetail();
   } else {
     alert("Bitte füllen Sie alle Felder aus.");
   }
@@ -174,10 +173,14 @@ function saveContact() {
     currentContact.phone = document.getElementById('editPhone').value.trim();
 
     contacts.sort((a, b) => a.name.localeCompare(b.name));
-    renderContacts();
+    updateContactNames()
     renderDetail(currentContact);
+
+    if (activeContactItem) {
+      activeContactItem.classList.add('active');
+    }
+
     hideEditForm();
-    // hideDetail();
   }
 }
 
@@ -188,6 +191,9 @@ function cancelEdit() {
 function hideEditForm() {
   document.getElementById('contactEditForm').style.display = 'none';
   document.getElementById('contactEditOverlay').style.display = 'none';
+  if (activeContactItem) {
+    activeContactItem.classList.add('active');
+  }
 }
 
 function cancelEdit() {
@@ -237,6 +243,30 @@ function renderContacts() {
     });
   });
 }
+
+function updateContactNames() {
+  const contactList = document.getElementById('contactList');
+  // Hole alle Kontakt-Elemente
+  const contactItems = contactList.getElementsByClassName('contact-item');
+  // Gehe alle Kontakt-Elemente durch und aktualisiere den Namen
+  Array.from(contactItems).forEach((contactItem, index) => {
+    const contact = contacts[index];
+    // Finde das Element, das den Namen enthält und aktualisiere es
+    const nameElement = contactItem.querySelector('.contact-list-name');
+    const emailElement = contactItem.querySelector('.contact-email');
+    const phoneElement = contactItem.querySelector('.contact-phone');
+    if (nameElement) {
+      nameElement.textContent = contact.name;
+    }
+    if (emailElement) {
+      emailElement.textContent = contact.email;
+    }
+    if (phoneElement) {
+      phoneElement.textContent = contact.phone;
+    }
+  });
+}
+
 
 // document.addEventListener('DOMContentLoaded', hideDetail);
 
