@@ -79,7 +79,7 @@
     min-width: 42px;
     height: 42px;
     color: white;
-    background-color: var(--salmon);
+    /* background-color: var(--salmon); */
     font-size: 12px;
     border: 2px solid #FFFFFF;
     border-radius: 50%;

@@ -1,58 +1,88 @@
-
+const contactColors = [
+  '#FF5733', // Leuchtendes Rot
+  '#1D8348', // Waldgrün
+  '#2980B9', // Sattes Blau
+  '#FFC300', // Goldgelb
+  '#512E5F', // Dunkelviolett
+  '#C70039', // Dunkles Rot
+  '#33FF57', // Sattes Grün
+  '#1F618D', // Mittelmeerblau
+  '#FF5EB3', // Pink
+  '#6C3483', // Lila
+  '#D35400', // Ziegelrot
+  '#28B463', // Dunkles Grün
+  '#154360', // Dunkelblau
+  '#D4A373', // Warmes Beige
+  '#581845', // Dunkles Lila
+  '#A04000', // Rostbraun
+  '#5d6e42', // Grau
+  '#2874A6', // Stahblau
+  '#A67C00', // Sattes Dunkelgelb
+  '#884EA0', // Dunkler Lavendel
+];
 
 let contacts = [
-  {
-    'name' : 'Jutta Berger',
-    'email' : 'jber@gmx.de',
-    'phone' : '+49123 456789',
-    'isUser' : false,
-  },
-  {
-    'name' : 'Josef Müller',
-    'email' : 'jmueller@gmx.de',
-    'phone' : '+49123 456789',
-    'isUser' : false,
-  },
   {
     'name' : 'Anna Horn',
     'email' : 'ahorn@gmx.de',
     'phone' : '+49123 456789',
+    'color' : contactColors[0],
     'isUser' : false,
   },
   {
     'name' : 'Anton Sippel',
     'email' : 'sippel@gmx.de',
     'phone' : '+49123 456789',
-    'isUser' : false,
-  },
-  {
-    'name' : 'Theo Meister',
-    'email' : 'tm@gmx.de',
-    'phone' : '+49123 456789',
+    'color' : contactColors[1],
     'isUser' : false,
   },
   {
     'name' : 'Bruce Wayne',
     'email' : 'the-bat@gmail.com',
     'phone' : '+49123 456789',
-    'isUser' : false,
-  },
-  {
-    'name' : 'Saul Goodman',
-    'email' : 'mcgill@gmail.com',
-    'phone' : '+49123 456789',
-    'isUser' : false,
-  },
-  {
-    'name' : 'Lisa Simpson',
-    'email' : 'l.simpson@gmail.com',
-    'phone' : '+49123 456789',
+    'color' : contactColors[2],
     'isUser' : false,
   },
   {
     'name' : 'Daenerys Targaryen',
     'email' : 'motherofdragons@gmail.com',
     'phone' : '+49123 456789',
+    'color' : contactColors[3],
+    'isUser' : false,
+  },
+  {
+    'name' : 'Jutta Berger',
+    'email' : 'jber@gmx.de',
+    'phone' : '+49123 456789',
+    'color' : contactColors[4],
+    'isUser' : false,
+  },
+  {
+    'name' : 'Josef Müller',
+    'email' : 'jmueller@gmx.de',
+    'phone' : '+49123 456789',
+    'color' : contactColors[5],
+    'isUser' : false,
+  },
+  {
+    'name' : 'Lisa Simpson',
+    'email' : 'l.simpson@gmail.com',
+    'phone' : '+49123 456789',
+    'color' : contactColors[6],
+    'isUser' : false,
+  },
+  {
+    'name' : 'Saul Goodman',
+    'email' : 'mcgill@gmail.com',
+    'phone' : '+49123 456789',
+    'color' : contactColors[7],
+    'isUser' : false,
+  },
+  {
+    'name' : 'Theo Meister',
+    'email' : 'tm@gmx.de',
+    'phone' : '+49123 456789',
+    'color' : contactColors[8],
     'isUser' : false,
   }
 ];
@@ -194,7 +224,7 @@ function renderContacts() {
     groupedContacts[letter].forEach(contact => {
       const contactItem = document.createElement('div');
       contactItem.className = 'contact-item pointer';
-      contactItem.innerHTML = `<div class="contact-list-avatar">${getInitials(contact.name)}</div>
+      contactItem.innerHTML = `<div class="contact-list-avatar" style="background-color: ${contact.color}">${getInitials(contact.name)}</div>
                                <div>
                                  <span class="contact-list-name">${contact.name}</span><br>
                                  <span class="contact-email">${contact.email}<span>
