@@ -1,6 +1,6 @@
 async function init() {
-      await load();  
-      await save();
+  await load();
+  await save();
 }
 
 
@@ -8,16 +8,18 @@ const BASE_URL = "https://join-f6aef-default-rtdb.europe-west1.firebasedatabase.
 
 
 async function save() {
-    await putData("/tasks", tasks);
-    await putData("/status", statusTask);
-    await putData("/users", users);
+  await putData("/contacts", contacts);
+  await putData("/tasks", tasks);
+  await putData("/status", statusTask);
+  await putData("/users", users);
 }
 
 
 async function load() {
-    await loadData("/tasks", tasks);
-    await loadData("/users", users);
-    await loadDataStatus();
+  await loadData("/contacts", contacts);
+  await loadData("/tasks", tasks);
+  await loadData("/users", users);
+  await loadDataStatus();
 }
 
 
