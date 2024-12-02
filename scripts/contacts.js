@@ -139,7 +139,7 @@ function hideDetail() {
   currentContact = null;
 }
 
-function addContact() {
+async function addContact() {
   const name = document.getElementById('contactListName').value.trim();
   const email = document.getElementById('contactListEmail').value.trim();
   const phone = document.getElementById('contactListPhone').value.trim();
@@ -155,6 +155,7 @@ function addContact() {
   if (name && email && phone) {
     contacts.push({ name, email, phone, 'color' : colorNr });
     contacts.sort((a, b) => a.name.localeCompare(b.name));
+    await save();
     renderContacts();
     hideForm();
   } else {
@@ -216,7 +217,8 @@ function deleteContact() {
   }
 }
 
-function renderContacts() {
+async function renderContacts() {
+  await load();
   const contactList = document.getElementById('contactList');
   contactList.innerHTML = '';
 
