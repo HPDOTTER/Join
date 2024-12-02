@@ -111,7 +111,7 @@
     min-width: 120px;
     min-height: 120px;
     color: #FFFFFF;
-    background-color: var(--salmon);
+    /* background-color: var(--salmon); */
     font-size: 47px;
     font-weight: 500;
     border: 3px solid #FFFFFF;

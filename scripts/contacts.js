@@ -114,6 +114,7 @@ function renderDetail(contact) {
   document.getElementById('detailEmail').textContent = contact.email;
   document.getElementById('detailPhone').textContent = contact.phone;
   document.getElementById('contactAvatar').textContent = getInitials(contact.name);
+  document.getElementById('contactAvatar').style.backgroundColor = contact.color;
 }
 
 function showDetailActive(contact, contactItem) {
@@ -161,6 +162,8 @@ function editContact() {
     document.getElementById('editName').value = currentContact.name;
     document.getElementById('editEmail').value = currentContact.email;
     document.getElementById('editPhone').value = currentContact.phone;
+    document.getElementById('contactEditAvatar').textContent = getInitials(currentContact.name);
+    document.getElementById('contactEditAvatar').style.backgroundColor = currentContact.color;
   }
 }
 
