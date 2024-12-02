@@ -1,38 +1,6 @@
-
-
 async function init() {
-  tasks = [
-    {
-      'titel': 'Kochwelt Page & Recipe Recommender',
-      'description': 'Build start page with recipe recommendation',
-      'categoryUser': true,
-      'date': new Date(2024, 10, 29),
-      'priority': 1,
-      'status': 2,
-      'progress': 0,
-      'members': ['Jutta Berger', 'Anna Horn'],
-      'subtasks': [
-        { 'subtitel': 'Design UI', 'isDone': false },
-        { 'subtitel': 'function b', 'isDone': true }
-      ]
-    },
-    {
-      'titel': 'CSS Architecture Planning',
-      'description': 'Define CSS naming conventions and structure',
-      'categoryUser': false,
-      'date': new Date(2024, 10, 28),
-      'priority': 3,
-      'status': 4,
-      'progress': 0,
-      'members': ['Josef Müller', 'Anton Sippel', 'Saul Goodman'],
-      'subtasks': [
-        { 'subtitel': 'menue design', 'isDone': true },
-        { 'subtitel': 'function a', 'isDone': true }
-      ]
-    }
-  ];
-  await save();
-  renderTasks();
+      await load();  
+      await save();
 }
 
 
@@ -40,18 +8,16 @@ const BASE_URL = "https://join-f6aef-default-rtdb.europe-west1.firebasedatabase.
 
 
 async function save() {
-  await putData("/contacts", contacts);
-  await putData("/tasks", tasks);
-  await putData("/status", statusTask);
-  // await putData("/user", );
+    await putData("/tasks", tasks);
+    await putData("/status", statusTask);
+    await putData("/users", users);
 }
 
 
 async function load() {
-  await loadData("/contacts", contacts);
-  await loadData("/tasks", tasks);
-  // await loadData("/user", );
-  await loadDataStatus();
+    await loadData("/tasks", tasks);
+    await loadData("/users", users);
+    await loadDataStatus();
 }
 
 

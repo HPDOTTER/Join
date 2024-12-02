@@ -12,11 +12,14 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../style/summary.css">
 
-    <script src="../script.js"></script>
+    <script src="../script.js" defer></script>
     <script src="/scripts/summary.js" defer></script>
+    <script src="../scripts/w3-include-html.js" defer></script>
+    <script src="../scripts/header.js" defer></script>
+    <script src="../scripts/dataStorage.js" defer></script>
 </head>
 
-<body onload="init(); currentUser()">
+<body onload="onLoadSummary(); init()">
     <header w3-include-html="header.html"></header>
     <div class="site-wrapper">
         <div class="site-body-wrapper">
@@ -34,7 +37,7 @@
                                 <div class="tile-flex-left">
                                     <div class="tile-upper-part">
                                         <img src="/assets/icons/summary/icon-summary-urgent.svg">
-                                        <p class="task-counter white-colored-text" id="tasksUrgent">1</p>
+                                        <p class="task-counter white-colored-text" id="tasksUrgent"></p>
                                     </div>
                                     <div class="tile-lower-part">
                                         <p class="white-colored-text">Task Urgent</p>
@@ -47,11 +50,11 @@
                                 </div>
                             </container>
                         </div>
-                        <div id="tasksAmount" class="tile">
+                        <div class="tile">
                             <container>
                                 <div class="tile-upper-part">
                                     <img src="/assets/icons/summary/icon-summary-total-tasks.svg">
-                                    <p class="task-counter">2</p>
+                                    <p class="task-counter" id="tasksAmount"></p>
                                 </div>
                                 <div class="tile-lower-part">
                                     <p>Task in<br> Board</p>
@@ -60,44 +63,44 @@
                         </div>
                     </div>
                     <div class="tile-area-lower" class="tile">
-                        <div id="tasksToDo" class="tile background-light">
+                        <div class="tile background-light">
                             <container>
                             <div class="tile-upper-part">
                                     <img src="/assets/icons/summary/icon-summary-to-do.svg">
-                                    <p class="task-counter">1</p>
+                                    <p class="task-counter" id="tasksToDo"></p>
                                 </div>
                                 <div class="tile-lower-part">
                                     <p>Task in<br>Progress</p>
                                 </div>
                             </container>
                         </div>
-                        <div id="tasksInProgress" class="tile">
+                        <div class="tile">
                             <container>
                                 <div class="tile-upper-part">
                                     <img src="/assets/icons/summary/icon-summary-done.svg">
-                                    <p class="task-counter">1</p>
+                                    <p class="task-counter" id="tasksInProgress"></p>
                                 </div>
                                 <div class="tile-lower-part">
                                     <p>Task in<br>Progress</p>
                                 </div>
                             </container>
                         </div>
-                        <div id="tasksAwaitingFeedback" class="tile">
+                        <div class="tile">
                             <container>
                                 <div class="tile-upper-part">
                                     <img src="/assets/icons/summary/icon-summary-awaiting-feedback.svg">
-                                    <p class="task-counter">1</p>
+                                    <p class="task-counter" id="tasksAwaitingFeedback"></p>
                                 </div>
                                 <div class="tile-lower-part">
                                     <p>Awaiting<br>Feedback</p>
                                 </div>
                             </container>
                         </div>
-                        <div id="tasksDone" class="tile">
+                        <div class="tile">
                             <container>
                                 <div class="tile-upper-part">
                                     <img src="/assets/icons/summary/icon-summary-done.svg">
-                                    <p class="task-counter">1</p>
+                                    <p class="task-counter" id="tasksDone"></p>
                                 </div>
                                 <div class="tile-lower-part">
                                     <p>Tasks<br>Done</p>
@@ -110,6 +113,4 @@
         </div>
     </div>
 </body>
-<script src="../scripts/w3-include-html.js"></script>
-
 </html>

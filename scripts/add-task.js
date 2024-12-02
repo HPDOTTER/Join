@@ -1,9 +1,6 @@
-
-
-let statusTask = 1;
 let members = [];
 let subtasks = [];
-
+let currentDraggedElement;
 
 async function addTask(status) {
   await load();

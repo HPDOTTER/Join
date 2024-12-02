@@ -24,13 +24,6 @@ if (msgBox) {
 
 const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null);
 
-let users = [
-  {
-    'name': 'John',
-    'email': 'john@test.de',
-    'password': 'password'
-  }
-];
 
 const guest = {
   name: 'Guest',
@@ -45,8 +38,8 @@ function addUser() {
       'email': emailInput.value,
       'password': passwordInput.value
     });
-    localStorage.setItem('users', JSON.stringify(users)); // Corrected method name
     smoothTransition('../html/login.html?msg=You have successfully signed up. Please log in.');
+    save()
   } else {
     getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
   }
@@ -80,7 +73,7 @@ function loginSuccess(user) {
   if (user === guest) {
     sessionStorage.setItem('guest', JSON.stringify(guest));
   } else {
-    sessionStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('user', JSON.stringify(user.name));
   }
 };
 

@@ -1,36 +1,3 @@
-let tasks = [
-  {
-    'titel': 'Kochwelt Page & Recipe Recommender',
-    'description': 'Build start page with recipe recommendation',
-    'categoryUser': true,
-    'date': new Date(2024, 10, 29),
-    'priority': 1,
-    'status': 2,
-    'progress': 0,
-    'members': ['Jutta Berger', 'Anna Horn'],
-    'subtasks': [
-      { 'subtitel': 'Design UI', 'isDone': false },
-      { 'subtitel': 'function b', 'isDone': true }
-    ]
-  },
-  {
-    'titel': 'CSS Architecture Planning',
-    'description': 'Define CSS naming conventions and structure',
-    'categoryUser': false,
-    'date': new Date(2024, 10, 28),
-    'priority': 3,
-    'status': 4,
-    'progress': 0,
-    'members': ['Josef Müller', 'Anton Sippel', 'Saul Goodman'],
-    'subtasks': [
-      { 'subtitel': 'menue design', 'isDone': true },
-      { 'subtitel': 'function a', 'isDone': true }
-    ]
-  }
-];
-
-let currentDraggedElement;
-
 
 async function renderTasks() {
   await load();
