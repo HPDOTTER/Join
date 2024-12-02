@@ -1,5 +1,6 @@
 let users = [];
 let tasks = [];
+let contacts = [];
 let statusTask = 1;
 
 function smoothTransition(url) {
