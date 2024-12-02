@@ -39,11 +39,14 @@ async function addTaskSave() {
     subtasks: subtasks
   };
 
-  tasks.push(newTask);
-  console.log(statusTask);
-  await save();
-  window.location.href = "../html/board.html";
-  await renderTasks();
+  if (title && date) {
+    tasks.push(newTask);
+    console.log(statusTask);
+    await save();
+    window.location.href = "../html/board.html";
+    await renderTasks();
+  }
+
 }
 
 
