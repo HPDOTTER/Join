@@ -143,9 +143,17 @@ function addContact() {
   const name = document.getElementById('contactListName').value.trim();
   const email = document.getElementById('contactListEmail').value.trim();
   const phone = document.getElementById('contactListPhone').value.trim();
-
+  let colorNr = contactColors[0];
+  if (contacts.length < contactColors.length) {
+    colorNr = contactColors[contacts.length];
+  } else if(contacts.length < (contactColors.length*2)) {
+    colorNr = contactColors[contacts.length - contactColors.length];
+  } else if(contacts.length < (contactColors.length*3)) {
+    colorNr = contactColors[contacts.length - (contactColors.length*2)];
+  }
+  
   if (name && email && phone) {
-    contacts.push({ name, email, phone });
+    contacts.push({ name, email, phone, 'color' : colorNr });
     contacts.sort((a, b) => a.name.localeCompare(b.name));
     renderContacts();
     hideForm();
@@ -246,12 +254,9 @@ function renderContacts() {
 
 function updateContactNames() {
   const contactList = document.getElementById('contactList');
-  // Hole alle Kontakt-Elemente
   const contactItems = contactList.getElementsByClassName('contact-item');
-  // Gehe alle Kontakt-Elemente durch und aktualisiere den Namen
   Array.from(contactItems).forEach((contactItem, index) => {
     const contact = contacts[index];
-    // Finde das Element, das den Namen enthält und aktualisiere es
     const nameElement = contactItem.querySelector('.contact-list-name');
     const emailElement = contactItem.querySelector('.contact-email');
     const phoneElement = contactItem.querySelector('.contact-phone');
