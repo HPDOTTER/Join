@@ -1,9 +1,3 @@
-async function init() {
-  await load();
-  await save();
-}
-
-
 const BASE_URL = "https://join-f6aef-default-rtdb.europe-west1.firebasedatabase.app/";
 
 
