@@ -147,10 +147,20 @@ function cancelEdit() {
 async function deleteContact() {
   if (currentContact) {
     contacts = contacts.filter(contact => contact !== currentContact);
+    cleanTaskMembers(tasks, contacts);
     await save();
     await renderContacts();
     hideDetail();
   }
+}
+
+function cleanTaskMembers(tasks, contacts) {
+  const contactNames = contacts.map(contact => contact.name);
+  tasks.forEach(task => {
+      if (Array.isArray(task.members)) {
+          task.members = task.members.filter(member => contactNames.includes(member));
+      }
+  });
 }
 
 async function renderContacts() {
