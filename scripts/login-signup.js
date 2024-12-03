@@ -12,6 +12,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
 const msgBox = document.getElementById('msgBox');
 
+let errors = [];
+
 if (msgBox) {
   if (msg) {
     msgBox.innerHTML = msg;
@@ -31,15 +33,19 @@ const guest = {
   password: 'guest'
 };
 
+function signUpSubmit() {
+  
+}
+
 function addUser() {
-  if (passwordInput.value === repeatPasswordInput.value) {
+  if (errors.length === 0) {
     users.push({
       'name': signUpNameInput.value,
       'email': emailInput.value,
       'password': passwordInput.value
     });
-    smoothTransition('../html/login.html?msg=You have successfully signed up. Please log in.');
     save()
+    smoothTransition('../html/login.html?msg=You have successfully signed up. Please log in.');
   } else {
     getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
   }
@@ -164,22 +170,9 @@ form.addEventListener('submit', (e) => {
     }
   })
 
-  function getSignupFormErrors(firstname, email, password, repeatPassword){
+  function getSignupFormErrors(password, repeatPassword){
     let errors = []
   
-    if(firstname === '' || firstname == null){
-      errors.push('Firstname is required')
-      signUpNameInput.parentElement.classList.add('incorrect')
-    }
-    if(email === '' || email == null){
-      errors.push('Email is required')
-      emailInput.parentElement.classList.add('incorrect')
-      console.log(errors);
-    }
-    if(password === '' || password == null){
-      errors.push('Password is required')
-      passwordInput.parentElement.classList.add('incorrect')
-    }
     if(password.length < 8){
       errors.push('Password must have at least 8 characters')
       passwordInput.parentElement.classList.add('incorrect')
@@ -193,7 +186,6 @@ form.addEventListener('submit', (e) => {
       passwordInput.parentElement.classList.add('incorrect')
       repeatPasswordInput.parentElement.classList.add('incorrect')
     }
-  
     return errors;
   }
 

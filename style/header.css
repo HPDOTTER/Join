@@ -66,6 +66,13 @@ header {
     z-index: 1;
 }
 
+.pop-up-button {
+    width: 130px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    justify-content: right; 
+}
+
 .white-background {
     background-color: #FFFFFF;
 }
