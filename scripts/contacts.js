@@ -81,14 +81,14 @@ async function addContact() {
   let colorNr = contactColors[0];
   if (contacts.length < contactColors.length) {
     colorNr = contactColors[contacts.length];
-  } else if(contacts.length < (contactColors.length*2)) {
+  } else if (contacts.length < (contactColors.length * 2)) {
     colorNr = contactColors[contacts.length - contactColors.length];
-  } else if(contacts.length < (contactColors.length*3)) {
-    colorNr = contactColors[contacts.length - (contactColors.length*2)];
+  } else if (contacts.length < (contactColors.length * 3)) {
+    colorNr = contactColors[contacts.length - (contactColors.length * 2)];
   }
-  
+
   if (name && email && phone) {
-    contacts.push({ name, email, phone, 'color' : colorNr });
+    contacts.push({ name, email, phone, 'color': colorNr });
     contacts.sort((a, b) => a.name.localeCompare(b.name));
     await save();
     renderContacts();
@@ -117,13 +117,14 @@ function saveContact() {
     currentContact.phone = document.getElementById('editPhone').value.trim();
 
     contacts.sort((a, b) => a.name.localeCompare(b.name));
-    updateContactNames()
+    cleanTaskMembers(tasks, contacts);
+    updateContactNames();
     renderDetail(currentContact);
 
     if (activeContactItem) {
       activeContactItem.classList.add('active');
     }
-
+    save();
     hideEditForm();
   }
 }
@@ -157,9 +158,9 @@ async function deleteContact() {
 function cleanTaskMembers(tasks, contacts) {
   const contactNames = contacts.map(contact => contact.name);
   tasks.forEach(task => {
-      if (Array.isArray(task.members)) {
-          task.members = task.members.filter(member => contactNames.includes(member));
-      }
+    if (Array.isArray(task.members)) {
+      task.members = task.members.filter(member => contactNames.includes(member));
+    }
   });
 }
 
