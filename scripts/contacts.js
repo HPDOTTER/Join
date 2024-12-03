@@ -144,10 +144,11 @@ function cancelEdit() {
   hideEditForm();
 }
 
-function deleteContact() {
+async function deleteContact() {
   if (currentContact) {
     contacts = contacts.filter(contact => contact !== currentContact);
-    renderContacts();
+    await save();
+    await renderContacts();
     hideDetail();
   }
 }
