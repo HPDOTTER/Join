@@ -48,55 +48,62 @@ async function addTaskSave() {
 
 
 const toggleDropdown = () => {
-    const dropdownMenu = document.getElementById("taskAssignedToMenu");
-    dropdownMenu.classList.toggle("active");
-  };
-  
-  const renderContactsWithCheckboxes = () => {
-    const dropdownMenu = document.getElementById("taskAssignedToMenu");
-  
-    contacts.forEach((contact, index) => {
-      const item = document.createElement("div");
-      item.className = "contact-item";
-  
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.className = "contact-checkbox";
-      checkbox.id = `contact-${index}`;
-      checkbox.checked = false; //tasks[0].members.includes(contact.name); // Vorab ausgewählte Kontakte
-      checkbox.addEventListener("change", (event) => handleCheckboxChange(event, contact));
-  
-      const label = document.createElement("label");
-      label.setAttribute("for", `contact-${index}`);
-      label.textContent = contact.name;
-  
-      item.appendChild(checkbox);
-      item.appendChild(label);
-      dropdownMenu.appendChild(item);
-    });
-  };
-  
+  const dropdownMenu = document.getElementById("taskAssignedToMenu");
+  dropdownMenu.classList.toggle("active");
+};
 
-  const handleCheckboxChange = (event, contact) => {
-    if (event.target.checked) {
-      if (!members.includes(contact.name)) {
-        members.push(contact.name);
-      }
-    } else {
-      members = members.filter((member) => member !== contact.name);
+const renderContactsWithCheckboxes = () => {
+  load();
+  const dropdownMenu = document.getElementById("taskAssignedToMenu");
+
+  contacts.forEach((contact, index) => {
+    const item = document.createElement("div");
+    item.className = "contact-item";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.className = "contact-checkbox";
+    checkbox.id = `contact-${index}`;
+    checkbox.checked = false; //tasks[0].members.includes(contact.name); // Vorab ausgewählte Kontakte
+    checkbox.addEventListener("change", (event) => handleCheckboxChange(event, contact));
+
+    const label = document.createElement("label");
+    label.setAttribute("for", `contact-${index}`);
+    label.textContent = contact.name;
+
+    item.appendChild(checkbox);
+    item.appendChild(label);
+    dropdownMenu.appendChild(item);
+  });
+};
+
+
+const handleCheckboxChange = (event, contact) => {
+  if (event.target.checked) {
+    if (!members.includes(contact.name)) {
+      members.push(contact.name);
     }
-  };
-  
-
-  function addSubtask() {
-    let inputfield = document.getElementById('subtaskInput').value;
-    let subtask = document.getElementById('taskAddSubtasksContent');
-    subtask.innerHTML += /*html*/`<div>${inputfield}</div>`;
-    subtasks.push({ 'subtitel': inputfield, 'isDone': false });
-    console.log(subtasks);
+  } else {
+    members = members.filter((member) => member !== contact.name);
   }
+};
 
-  
-  // Initialisierung
-  document.addEventListener("DOMContentLoaded", renderContactsWithCheckboxes);
+
+function addSubtask() {
+  let inputfield = document.getElementById('subtaskInput').value;
+  let subtask = document.getElementById('taskAddSubtasksContent');
+  subtask.innerHTML += /*html*/`<div>${inputfield}</div>`;
+  subtasks.push({ 'subtitel': inputfield, 'isDone': false });
+  console.log(subtasks);
+}
+
+
+// Initialisierung
+document.addEventListener("DOMContentLoaded", async () => {
+  await load(); // Sicherstellen, dass Kontakte geladen werden
+  renderContactsWithCheckboxes();
+});
+
+
+
 
