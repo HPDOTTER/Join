@@ -52,8 +52,8 @@ const toggleDropdown = () => {
   dropdownMenu.classList.toggle("active");
 };
 
-const renderContactsWithCheckboxes = () => {
-  load();
+async function renderContactsWithCheckboxes() {
+  await load();
   const dropdownMenu = document.getElementById("taskAssignedToMenu");
 
   contacts.forEach((contact, index) => {
@@ -96,14 +96,4 @@ function addSubtask() {
   subtasks.push({ 'subtitel': inputfield, 'isDone': false });
   console.log(subtasks);
 }
-
-
-// Initialisierung
-document.addEventListener("DOMContentLoaded", async () => {
-  await load(); // Sicherstellen, dass Kontakte geladen werden
-  renderContactsWithCheckboxes();
-});
-
-
-
 
