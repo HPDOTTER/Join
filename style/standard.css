@@ -3,6 +3,9 @@
     scroll-behavior: smooth;
     text-decoration: none;
     margin: 0;
+}
+
+a, button, img, input, label, span {
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
