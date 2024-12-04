@@ -9,13 +9,20 @@
 </head>
 
 <body>
-    <img src="../assets/img/logo/logo-white.png" alt="" class="header-logo">
-    <div class="header-right pointer">
-        <span class="color-white">Kanban Project Management Tool</span>
-        <a href="./help.html"><img src="../assets/icons/icon-help.png" alt="" class="icon-help"></a>
-        <div class="header-user-profile-outer-circle pointer">
-            <div class="header-user-profile" id="currentUserInitials"></div>
+    <header>
+        <img src="../assets/img/logo/logo-white.png" class="header-logo">
+        <div class="header-right">
+            <span class="color-white">Kanban Project Management Tool</span>
+            <a href="./help.html"><img src="../assets/icons/icon-help.png" class="icon-help"></a>
+            <span class="header-user-profile-outer-circle pointer">
+                <div onclick="openLogout()" class="header-user-profile" id="currentUserInitials"></div>
+            </span>
         </div>
+    </header>
+    <div class="logout-pop-up" id="logoutPopUp">
+        <a href="./legal-notice.html" class="menu-main-link pop-up-button">Legal Notice</a>
+        <a href="./privacy-policy.html"" class="menu-main-link pop-up-button">Privacy Policy</a>
+        <button class="menu-main-link white-background pop-up-button" onclick="logout()">Log out</button>
     </div>
 </body>
 

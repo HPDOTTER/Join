@@ -5,6 +5,14 @@
     margin: 0;
 }
 
+a, button, img, input, label, span {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 body {
     margin: 0;
 }

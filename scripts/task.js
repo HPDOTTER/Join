@@ -1,11 +1,17 @@
+let filteredTasks = []; // Array zum Speichern gefilterter Tasks
 
 async function renderTasks() {
   await load();
   const columns = document.querySelectorAll('.column .tasks');
+  const noTasksMessage = document.getElementById('noTasksMessage');
+  // noTasksMessage.style.display = 'none';
   columns.forEach(column => (column.innerHTML = ''));
-  console.log(tasks, 'render');
+  console.log(filteredTasks.length ? filteredTasks : tasks, 'render');
 
-  tasks.forEach((task, index) => {
+  // Entscheide, ob die Original-Tasks oder gefilterte Tasks gerendert werden sollen
+  const tasksToRender = filteredTasks.length ? filteredTasks : tasks;
+
+  tasksToRender.forEach((task, index) => {
     const taskElement = document.createElement('div');
     let subtaskCount = 0;
     let subtaskDone = 0;
@@ -71,27 +77,20 @@ async function renderTasks() {
   });
 }
 
-function startDrag(index) {
-  currentDraggedElement = index;
+function filter() {
+  let filterText = document.getElementById('searchTask').value.toLowerCase();
+  const noTasksMessage = document.getElementById('noTasksMessage');
+  if (filterText.length >= 3) {
+    filteredTasks = tasks.filter(task => task.titel.toLowerCase().includes(filterText));
+    if (filteredTasks.length === 0) {
+      noTasksMessage.style.display = 'block';
+    } else {
+      noTasksMessage.style.display = 'none';
+    }
+  } else {
+    filteredTasks = [];
+    noTasksMessage.style.display = 'none';
+  }
+  renderTasks();
 }
 
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-async function moveTo(status) {
-  tasks[currentDraggedElement]['status'] = status;
-  await save();
-  await renderTasks();
-  removeHighlight(status);
-}
-
-function highlight(status) {
-  const column = document.querySelector(`.column[data-status="${status}"]`);
-  column.classList.add('highlight');
-}
-
-function removeHighlight(status) {
-  const column = document.querySelector(`.column[data-status="${status}"]`);
-  column.classList.remove('highlight');
-}

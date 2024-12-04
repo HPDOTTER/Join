@@ -12,6 +12,10 @@ const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
 const msgBox = document.getElementById('msgBox');
 
+let guest = {
+  name: 'Guest',
+};
+
 if (msgBox) {
   if (msg) {
     msgBox.innerHTML = msg;
@@ -24,28 +28,54 @@ if (msgBox) {
 
 const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null);
 
+async function signUpSubmit(e) {
+  e.preventDefault(); 
+  const errors = await getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
+  if (errors.length === 0 || errors.length === null) {
+    addUser();
+  } else if (errors.length > 0) {
+    errorMessage.innerText = errors.join(". ");
+  }
+}
 
-const guest = {
-  name: 'Guest',
-  email: 'guest@example.com',
-  password: 'guest'
-};
+form.addEventListener('submit', (e) => {
+  e.preventDefault(); 
+  let errors = [];
+
+  if (signUpNameInput) { // If we have a firstname input then we are in the signup
+    errors = getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
+  } else { // If we don't have a firstname input then we are in the login
+    errors = getLoginFormErrors(emailInput.value, passwordInput.value);
+  }
+  if (errors.length > 0) {
+    errorMessage.innerText = errors.join(". ");
+  }
+});
 
 function addUser() {
-  if (passwordInput.value === repeatPasswordInput.value) {
+  if (errors.length === 0) {
     users.push({
       'name': signUpNameInput.value,
       'email': emailInput.value,
       'password': passwordInput.value
     });
+    save();
     smoothTransition('../html/login.html?msg=You have successfully signed up. Please log in.');
-    save()
-  } else {
-    getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
   }
 }
 
-function login() {
+async function signUpSubmit() {
+  const errors = await getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
+  if (errors.length === 0 || errors.length === null) {
+    addUser();
+  } else if (errors.length > 0) {
+    // If there are any errors
+    e.preventDefault();
+    errorMessage.innerText = errors.join(". ");
+  }
+}
+
+function loginSubmit() {
   let user = users.find(user => user.email === emailInput.value && user.password === passwordInput.value);
   if (user) {
     loginSuccess(user);
@@ -123,109 +153,93 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Check the password input value shortly after the page loads
+  setTimeout(() => {
+    if (passwordInput.value === "" || passwordInput.value === null) {
+      visibilityBtn.src = '../assets/icons/icon-lock.svg';
+    } else {
+      visibilityBtn.src = '../assets/icons/icon-visibility-off.svg';
+    }
+    if (repeatPasswordInput) {
+      if (repeatPasswordInput.value === "" || repeatPasswordInput.value === null) {
+        visibilityBtn1.src = '../assets/icons/icon-lock.svg';
+      } else {
+        visibilityBtn1.src = '../assets/icons/icon-visibility-off.svg';
+      }
+    }
+    
+  }, 500); // Adjust the timeout as needed
 });
 
-passwordInput.addEventListener('keyup', () => {
-  if(passwordInput.value === "" || passwordInput.value === null){
-    visibilityBtn.src = '../assets/icons/icon-lock.svg'
-  } else {
-    visibilityBtn.src = '../assets/icons/icon-visibility-off.svg'
-  }
-})
-
 function toggleVisibility(input, btn) {
-  if(input.value !== "" && input.value !== null) {
-    if(input.type === 'password') {
-      input.type = 'text'
-      btn.src = '../assets/icons/icon-visibility.svg'
+  if (input.value !== "" && input.value !== null) {
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.src = '../assets/icons/icon-visibility.svg';
     } else {
-      input.type = 'password'
-      btn.src = '../assets/icons/icon-visibility-off.svg'
+      input.type = 'password';
+      btn.src = '../assets/icons/icon-visibility-off.svg';
     }
   }
+};
+
+function getSignupFormErrors(name, email, password, repeatPassword) {
+  let errors = [];
+
+  if (name === '' || name == null) {
+    errors.push('Name is required');
+    signUpNameInput.parentElement.classList.add('incorrect');
+  }
+  if (email === '' || email == null) {
+    errors.push('Email is required');
+    emailInput.parentElement.classList.add('incorrect');
+  }
+  if (password.length < 8) {
+    errors.push('Password must have at least 8 characters');
+    passwordInput.parentElement.classList.add('incorrect');
+  }
+  if (!/[A-Z]/.test(password)) {
+    errors.push('Password must contain at least one uppercase letter');
+    passwordInput.parentElement.classList.add('incorrect');
+  }
+  if (password !== repeatPassword) {
+    errors.push('Password does not match repeated password');
+    passwordInput.parentElement.classList.add('incorrect');
+    repeatPasswordInput.parentElement.classList.add('incorrect');
+  }
+  return errors;
 }
 
-form.addEventListener('submit', (e) => {
-    let errors = []
-  
-    if(signUpNameInput){
-      // If we have a firstname input then we are in the signup
-      errors = getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value)
-    }
-    else{
-      // If we don't have a firstname input then we are in the login
-      errors = getLoginFormErrors(emailInput.value, passwordInput.value)
-    }
-  
-    if(errors.length > 0){
-      // If there are any errors
-      e.preventDefault()
-      errorMessage.innerText  = errors.join(". ")
-    }
-  })
+function getLoginFormErrors(email, password) {
+  let errors = [];
 
-  function getSignupFormErrors(firstname, email, password, repeatPassword){
-    let errors = []
-  
-    if(firstname === '' || firstname == null){
-      errors.push('Firstname is required')
-      signUpNameInput.parentElement.classList.add('incorrect')
-    }
-    if(email === '' || email == null){
-      errors.push('Email is required')
-      emailInput.parentElement.classList.add('incorrect')
-      console.log(errors);
-    }
-    if(password === '' || password == null){
-      errors.push('Password is required')
-      passwordInput.parentElement.classList.add('incorrect')
-    }
-    if(password.length < 8){
-      errors.push('Password must have at least 8 characters')
-      passwordInput.parentElement.classList.add('incorrect')
-    }
-    if(!/[A-Z]/.test(password)){
-      errors.push('Password must contain at least one uppercase letter')
-      passwordInput.parentElement.classList.add('incorrect')
-    }
-    if(password !== repeatPassword){
-      errors.push('Password does not match repeated password')
-      passwordInput.parentElement.classList.add('incorrect')
-      repeatPasswordInput.parentElement.classList.add('incorrect')
-    }
-  
-    return errors;
+  if (email === '' || email == null) {
+    errors.push('Email is required');
+    emailInput.parentElement.classList.add('incorrect');
+  }
+  if (password === '' || password == null) {
+    errors.push('Password is required');
+    passwordInput.parentElement.classList.add('incorrect');
   }
 
-  function getLoginFormErrors(email, password){
-    let errors = []
-  
-    if(email === '' || email == null){
-      errors.push('Email is required')
-      emailInput.parentElement.classList.add('incorrect')
-    }
-    if(password === '' || password == null){
-      errors.push('Password is required')
-      passwordInput.parentElement.classList.add('incorrect')
-    }
-  
-    return errors;
-  }
-  
-  allInputs.forEach(input => {
-    input.addEventListener('input', () => {
-      if(input.parentElement.classList.contains('incorrect')){
-        input.parentElement.classList.remove('incorrect')
-        errorMessage.innerText = ''
-      }
-    })
-  })
+  return errors;
+}
 
-  function enableSubmitButton(){
-    const submitButton = document.getElementById('submit-button')
-    if(submitButton.disabled === true){
-      submitButton.disabled = false
-    } else {
-      submitButton.disabled = true
+allInputs.forEach(input => {
+  input.addEventListener('input', () => {
+    if (input.parentElement.classList.contains('incorrect')) {
+      input.parentElement.classList.remove('incorrect');
+      errorMessage.innerText = '';
     }
+  });
+});
+
+function enableSubmitButton() {
+  const submitButton = document.getElementById('submit-button');
+  if (submitButton.disabled === true) {
+    submitButton.disabled = false;
+  } else {
+    submitButton.disabled = true;
   }
+}
