@@ -80,7 +80,6 @@ async function renderTasks() {
 function filter() {
   let filterText = document.getElementById('searchTask').value.toLowerCase();
   const noTasksMessage = document.getElementById('noTasksMessage');
-
   if (filterText.length >= 3) {
     filteredTasks = tasks.filter(task => task.titel.toLowerCase().includes(filterText));
     if (filteredTasks.length === 0) {
@@ -89,10 +88,9 @@ function filter() {
       noTasksMessage.style.display = 'none';
     }
   } else {
-    filteredTasks = []; // Keine Filterung anwenden, wenn weniger als 3 Zeichen eingegeben wurden
+    filteredTasks = [];
     noTasksMessage.style.display = 'none';
   }
-
-  renderTasks(); // Aufgaben neu rendern
-} // Aufgaben neu rendern
+  renderTasks();
+}
 
