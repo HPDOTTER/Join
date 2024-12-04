@@ -52,7 +52,7 @@
                     <p class="login-error-message"></p>
                 </div>
                 <div class="input-wrapper">
-                    <input type="password" placeholder="Password" class="input" id="login-password-input" name="password" autocomplete="on" required>
+                    <input type="password" placeholder="Password" class="input" id="login-password-input" name="password" autocomplete="off" required>
                     <label for="login-password-input">
                         <img src="../assets/icons/icon-lock.svg" alt="lock" id="login-password-icon">
                     </label>
@@ -61,7 +61,7 @@
                     <p class="login-error-message"></p>
                 </div>
                 <div class="input-wrapper">
-                    <input type="password" placeholder="Confirm password" class="input" id="repeat-password-input" name="confirm-password" autocomplete="on" required>
+                    <input type="password" placeholder="Confirm password" class="input" id="repeat-password-input" name="confirm-password" autocomplete="off" required>
                     <label for="repeat-password-input">
                         <img src="../assets/icons/icon-lock.svg" alt="lock" id="repeat-password-icon">
                     </label>
@@ -76,7 +76,9 @@
                 </div>
             </div>
             <div class="login-button-div">
-                <button class="button-primary" id="submit-button" type="submit" disabled>Sign up</button>
+                <label for="form">
+                    <button class="button-primary" id="submit-button" type="submit" disabled>Sign up</button>
+                </label>
             </div>
         </form>
         <div id="msgBox"></div>
