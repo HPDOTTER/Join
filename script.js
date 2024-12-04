@@ -71,3 +71,7 @@ function openLogout() {
   const logoutButton = document.getElementById('logoutPopUp');
   logoutButton.classList.toggle('d-block');
 }
+
+function navigateToUrl(url) {
+  window.location.href = url;
+}
