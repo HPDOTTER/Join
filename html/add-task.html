@@ -20,6 +20,7 @@
   <script src="../scripts/add-task.js"></script>
   <script src="../scripts/dataStorage.js"></script>
 </head>
+
 <body onload="init(); renderContactsWithCheckboxes()">
   <div class="site-wrapper">
     <header w3-include-html="header.html"></header>
@@ -65,54 +66,14 @@
 
           <div class="add-task-info-element">
             <label for="taskAssignedTo">Assigned to: <span>(optional)</span></label>
-            <button class="add-task-assigned-to-button">
+            <button class="add-task-assigned-to-button" onclick="toggleDropdown()">
               Select contacts to assign
               <img class="icon-add-task-assigned-to-button-arrow">
             </button>
-            <div class="dropdown">
-              <div class="dropdown-item">
-                <div class="dropdown-item-contact">
-                  <div class="dropdown-item-contact-avatar"></div>
-                  <div class="dropdown-item-contact-name">Kontakt 1</div>
-                </div>
-                <img class="dropdown-item-contact-checkbox">
-              </div>
-              <div class="dropdown-item">
-                <div class="dropdown-item-contact">
-                  <div class="dropdown-item-contact-avatar"></div>
-                  <div class="dropdown-item-contact-name">Kontakt 2</div>
-                </div>
-                <img class="dropdown-item-contact-checkbox">
-              </div>
-              <div class="dropdown-item">
-                <div class="dropdown-item-contact">
-                  <div class="dropdown-item-contact-avatar"></div>
-                  <div class="dropdown-item-contact-name">Kontakt 3</div>
-                </div>
-                <img class="dropdown-item-contact-checkbox">
-              </div>
-              <div class="dropdown-item">
-                <div class="dropdown-item-contact">
-                  <div class="dropdown-item-contact-avatar"></div>
-                  <div class="dropdown-item-contact-name">Kontakt 4</div>
-                </div>
-                <img class="dropdown-item-contact-checkbox">
-              </div>
+            <div id="taskAssignedToMenu" class="dropdown-menu">
+              <!-- Dynamisch generierte Kontakte mit Checkboxen -->
             </div>
           </div>
-
-          <!-- <div class="add-task-info-element">
-            <label for="taskAssignedTo">Assigned to:</label>
-            <div id="taskAssignedToDropdown" class="custom-dropdown">
-              <button class="dropdown-btn" onclick="toggleDropdown()">Select contacts</button>
-              <div id="taskAssignedToMenu" class="dropdown-menu">
-                 Dynamisch generierte Kontakte mit Checkboxen
-              </div>
-            </div>
-          </div> -->
-
-
-
 
 
 
