@@ -21,7 +21,7 @@
     <script src="../scripts/dataStorage.js" defer></script>
 </head>
 
-<body onload="renderTasks(); init()">
+<body onload="renderTasks(false); init()">
     <header w3-include-html="header.html"></header>
     <div class="site-body-wrapper">
         <div class="menu-bar-left">
@@ -37,6 +37,7 @@
                             <img src="../assets/icons/icon-search.svg" alt="">
                         </label>
                     </div>
+                    <div id="noTasksMessage" style="display: none; text-align: center; color: red;">Keine Aufgaben gefunden.</div>
                     <button class="button-primary button-add-task" id="addTaskButton" onclick="addTask(1)">Add Task +</button>
                 </div>
                 <div class="task-table-headers">

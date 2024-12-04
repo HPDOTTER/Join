@@ -3,6 +3,8 @@ let filteredTasks = []; // Array zum Speichern gefilterter Tasks
 async function renderTasks() {
   await load();
   const columns = document.querySelectorAll('.column .tasks');
+  const noTasksMessage = document.getElementById('noTasksMessage');
+  // noTasksMessage.style.display = 'none';
   columns.forEach(column => (column.innerHTML = ''));
   console.log(filteredTasks.length ? filteredTasks : tasks, 'render');
 
@@ -77,10 +79,20 @@ async function renderTasks() {
 
 function filter() {
   let filterText = document.getElementById('searchTask').value.toLowerCase();
+  const noTasksMessage = document.getElementById('noTasksMessage');
+
   if (filterText.length >= 3) {
     filteredTasks = tasks.filter(task => task.titel.toLowerCase().includes(filterText));
+    if (filteredTasks.length === 0) {
+      noTasksMessage.style.display = 'block';
+    } else {
+      noTasksMessage.style.display = 'none';
+    }
   } else {
     filteredTasks = []; // Keine Filterung anwenden, wenn weniger als 3 Zeichen eingegeben wurden
+    noTasksMessage.style.display = 'none';
   }
+
   renderTasks(); // Aufgaben neu rendern
-}
+} // Aufgaben neu rendern
+
