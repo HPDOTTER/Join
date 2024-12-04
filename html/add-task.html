@@ -79,13 +79,13 @@
 
           <div class="add-task-info-element">
             <label>Category:</label>
-            <button class="add-task-category-button">
+            <button class="add-task-category-button" onclick="toggleCategoryDropdown()">
               Select task category
               <img class="icon-add-task-category-button-arrow">
             </button>
-            <div class="dropdown">
-              <div class="dropdown-item">Technical Task</div>
-              <div class="dropdown-item">User Story</div>
+            <div id="categoryDropdown" class="dropdown">
+              <div class="dropdown-item" data-value="false" onclick="selectCategory(this)">Technical Task</div>
+              <div class="dropdown-item" data-value="true" onclick="selectCategory(this)">User Story</div>
             </div>
           </div>
 

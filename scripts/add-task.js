@@ -16,18 +16,43 @@ function addTaskCancel() {
 }
 
 
+let selectedCategory = null;
+
+const toggleCategoryDropdown = () => {
+  const dropdown = document.getElementById('categoryDropdown');
+  dropdown.classList.toggle('active');
+};
+
+const selectCategory = (element) => {
+  const dropdown = document.getElementById('categoryDropdown');
+  const button = document.querySelector('.add-task-category-button');
+
+  // Setze den ausgewählten Wert
+  selectedCategory = element.getAttribute('data-value') === 'true';
+
+  // Aktualisiere die Button-Anzeige
+  button.innerText = element.innerText;
+
+  // Schließe das Dropdown
+  dropdown.classList.remove('active');
+};
+
+// Beispiel: Zugriff auf den aktuellen Wert
+console.log(selectedCategory); // true für "User Story", false für "Technical Task"
+
+
 async function addTaskSave() {
   await load();
   const title = document.getElementById('taskTitle').value;
   const description = document.getElementById('taskDescription').value;
-  const category = document.getElementById('taskCategory').value === 'true';
+  // const category = document.getElementById('taskCategory').value === 'true';
   const date = document.getElementById('taskDate').value;
   const priority = parseInt(document.getElementById('taskPriority').value);
 
   let newTask = {
     titel: title,
     description: description,
-    categoryUser: category,
+    categoryUser: selectedCategory,
     date: new Date(date),
     priority,
     status: statusTask,
