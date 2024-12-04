@@ -114,10 +114,28 @@ button {
     content: url('../assets/icons/icon-cancel.png');
 }
 
+.icon-add-task-priority-urgent {
+    content: url('../assets/icons/priorities/priorities-big/icon-prioritiy-big-urgent.svg');
+}
+
+.icon-add-task-priority-medium {
+    content: url('../assets/icons/priorities/priorities-big/icon-prioritiy-big-medium.svg');
+}
+
+.icon-add-task-priority-low {
+    content: url('../assets/icons/priorities/priorities-big/icon-prioritiy-big-low.svg');
+}
+
+.icon-add-task-category-button-arrow,
+.icon-add-task-assigned-to-button-arrow {
+    content: url('../assets/icons/icon-arrow-down.svg');
+}
+
 .input-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     width: 100%;
     border-bottom: 1px solid #D1D1D1;
     padding: 12px 21px 12px 21px;
@@ -132,6 +150,7 @@ button {
     font-size: 19px;
     width: 100%;
     border: none;
+    cursor: pointer;
 }
 
 .input:focus {

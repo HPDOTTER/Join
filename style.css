@@ -165,3 +165,19 @@ p>a {
 {
     display: none;
 }
+
+.dropdown {
+    max-height: 160px;
+    padding: 0 8px;
+    overflow-y: auto;
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+  
+  .dropdown-item:hover {
+    background-color: var(--primary-highlight-color);
+    cursor: pointer;
+  }

@@ -1,75 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join</title>
-    <link rel="shortcut icon" href="../assets/icons/favicon/favicon.png" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join</title>
+  <link rel="shortcut icon" href="../assets/icons/favicon/favicon.png" type="image/x-icon">
 
-    <link rel="stylesheet" href="../style/standard.css">
-    <link rel="stylesheet" href="../style/fonts.css">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../style/task.css">
-    <link rel="stylesheet" href="../style/add-task.css">
+  <link rel="stylesheet" href="../style/standard.css">
+  <link rel="stylesheet" href="../style/fonts.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style/assets.css">
+  <link rel="stylesheet" href="../style/task.css">
+  <link rel="stylesheet" href="../style/add-task.css">
 
-    <script src="../script.js"></script>
-    <script src="../scripts/contacts.js"></script>
-    <script src="../scripts/task.js"></script>
-    <script src="../scripts/add-task.js"></script>
-    <script src="../scripts/dataStorage.js"></script>
+  <script src="../script.js"></script>
+  <script src="../scripts/contacts.js"></script>
+  <script src="../scripts/task.js"></script>
+  <script src="../scripts/add-task.js"></script>
+  <script src="../scripts/dataStorage.js"></script>
 </head>
+
 <body onload="init()">
+  <div class="site-wrapper">
     <header w3-include-html="header.html"></header>
-    <div class="menu-bar-left">
+    <div class="site-body-wrapper">
+      <div class="menu-bar-left">
         <div w3-include-html="menu-bar.html"></div>
-        <div>
-            <h1>Add Task</h1>
-            <div id="taskAdd" class="task-add">
-                <div class="task-add-content">
-                  <label for="taskTitle">Title:</label>
-                  <input type="text" id="taskTitle" placeholder="Enter title">
-                  
-                  <label for="taskDescription">Description:</label>
-                  <textarea id="taskDescription" placeholder="Enter description"></textarea>
-            
-                  <label for="taskCategory">Category:</label>
-                  <select id="taskCategory">
-                    <option value="true">User Story</option>
-                    <option value="false">Technical Task</option>
-                  </select>
+      </div>
+      <div class="content-wrapper">
+        <div id="taskAdd" class="add-task-area">
 
-                  <label for="taskAssignedTo">Assigned to:</label>
-                  <div id="taskAssignedToDropdown" class="custom-dropdown">
-                    <button class="dropdown-btn" onclick="toggleDropdown()">Select contacts</button>
-                    <div id="taskAssignedToMenu" class="dropdown-menu">
-                      <!-- Dynamisch generierte Kontakte mit Checkboxen -->
-                    </div>
-                  </div>
+          <div class="add-task-info-element">
+            <div class="input-wrapper">
+              <input type="text" placeholder="Enter a title" class="input add-task-input-title" id="taskTitle" required>
+            </div>
+          </div>
 
-                  <label for="taskDate">Due Date:</label>
-                  <input type="date" id="taskDate">
-            
-                  <label for="taskPriority">Priority:</label>
-                  <select id="taskPriority">
-                    <option value="2">Medium</option>
-                    <option value="1">Urgent</option>
-                    <option value="3">Low</option>
-                  </select>
+          <div class="add-task-info-element">
+            <label for="taskDescription">Description: <span>(optional)</span></label>
+            <textarea id="taskDescription" placeholder="Enter a description" class="add-task-textarea"></textarea>
+          </div>
 
-                  <div>
-                    Subtasks
-                    <input type="text" id="subtaskInput" placeholder="subtask">
-                    <button onclick="addSubtask()">+</button>
-                    <div id="taskAddSubtasksContent">
-                    </div>
-                  </div>
-            
-                  <button onclick="addTaskSave()">Save Task</button>
-                  <button onclick="addTaskCancel()">Cancel</button>
+          <div class="add-task-info-element">
+
+            <label for="taskDate">Due date:</label>
+            <div class="input-wrapper">
+              <input type="date" placeholder="dd/mm/yyyy" class="input" id="taskDate" required>
+              <img src="../assets/icons/icon-calender.jpg" class="add-task-input-date-icon">
+            </div>
+          </div>
+
+          <div class="add-task-info-element">
+            <label for="taskPriority">Priority:</label>
+            <div id="taskPriority" class="add-task-priority-area">
+              <img class="icon-add-task-priority-urgent pointer">
+              <img class="icon-add-task-priority-medium pointer">
+              <img class="icon-add-task-priority-low pointer">
+            </div>
+          </div>
+
+
+
+
+
+          <div class="add-task-info-element">
+            <label for="taskAssignedTo">Assigned to: <span>(optional)</span></label>
+            <button class="add-task-assigned-to-button">
+              Select contacts to assign
+              <img class="icon-add-task-assigned-to-button-arrow">
+            </button>
+            <div class="dropdown">
+              <div class="dropdown-item">
+                <div class="dropdown-item-contact">
+                  <div class="dropdown-item-contact-avatar"></div>
+                  <div class="dropdown-item-contact-name">Kontakt 1</div>
                 </div>
+                <img class="dropdown-item-contact-checkbox">
               </div>
+              <div class="dropdown-item">
+                <div class="dropdown-item-contact">
+                  <div class="dropdown-item-contact-avatar"></div>
+                  <div class="dropdown-item-contact-name">Kontakt 2</div>
+                </div>
+                <img class="dropdown-item-contact-checkbox">
+              </div>
+              <div class="dropdown-item">
+                <div class="dropdown-item-contact">
+                  <div class="dropdown-item-contact-avatar"></div>
+                  <div class="dropdown-item-contact-name">Kontakt 3</div>
+                </div>
+                <img class="dropdown-item-contact-checkbox">
+              </div>
+              <div class="dropdown-item">
+                <div class="dropdown-item-contact">
+                  <div class="dropdown-item-contact-avatar"></div>
+                  <div class="dropdown-item-contact-name">Kontakt 4</div>
+                </div>
+                <img class="dropdown-item-contact-checkbox">
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="add-task-info-element">
+            <label for="taskAssignedTo">Assigned to:</label>
+            <div id="taskAssignedToDropdown" class="custom-dropdown">
+              <button class="dropdown-btn" onclick="toggleDropdown()">Select contacts</button>
+              <div id="taskAssignedToMenu" class="dropdown-menu">
+                 Dynamisch generierte Kontakte mit Checkboxen
+              </div>
+            </div>
+          </div> -->
+
+
+
+
+
+
+          <div class="add-task-info-element">
+            <label>Category:</label>
+            <button class="add-task-category-button">
+              Select task category
+              <img class="icon-add-task-category-button-arrow">
+            </button>
+            <div class="dropdown">
+              <div class="dropdown-item">Technical Task</div>
+              <div class="dropdown-item">User Story</div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+          <div class="add-task-info-element">
+            Subtasks <span>(optional)</span>
+            <input type="text" id="subtaskInput" placeholder="subtask">
+            <button onclick="addSubtask()">+</button>
+            <div id="taskAddSubtasksContent">
+            </div>
+          </div>
+
+
         </div>
+        <div class="add-task-button-area">
+          <button onclick="addTaskSave()">Save Task</button>
+          <button onclick="addTaskCancel()">Cancel</button>
+        </div>
+      </div>
     </div>
+  </div>
 </body>
 <script src="../scripts/w3-include-html.js"></script>
+
 </html>
