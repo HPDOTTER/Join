@@ -45,13 +45,14 @@ h1 {
 }
 
 h2 {
+    margin: 24px 0;
     color: var(--primary-color);
     font-size: 33px;
     font-weight: 700;
 }
 
 h3 {
-    margin: 0;
+    margin-top: 24px;
     color: var(--secondary-color);
     font-size: 19px;
     font-weight: 700;
@@ -90,7 +91,7 @@ p>a {
 .site-wrapper {
     position: relative;
     width: 100%;
-    height: calc(100vh - 96px);
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -110,6 +111,8 @@ p>a {
 }
 
 .text-content {
+    display: flex;
+    flex-direction: column;
     padding: 50px 100px 20px;
     overflow-y: scroll;
 }
@@ -123,10 +126,12 @@ p>a {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 50px;
 }
 
 .help-step-wrapper {
     display: flex;
+    margin-top: 18px;
 }
 
 .help-step-number {
@@ -134,6 +139,10 @@ p>a {
     color: var(--secondary-color);
     font-size: 33px;
     font-weight: 700;
+}
+
+.help-step-headline {
+    margin: 0;
 }
 
 ::-webkit-scrollbar {
