@@ -106,8 +106,14 @@
 
         </div>
         <div class="add-task-button-area">
-          <button onclick="addTaskSave()">Save Task</button>
-          <button onclick="addTaskCancel()">Cancel</button>
+          <button class="button-secondary add-task-button-clear" onclick="addTaskCancel()">
+            Clear
+            <img class="icon-cancel">
+          </button>
+          <button class="button-primary add-task-button-create-task" onclick="addTaskSave()">
+            Create Task
+            <img class="icon-check">
+          </button>
         </div>
       </div>
     </div>

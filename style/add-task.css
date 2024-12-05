@@ -159,3 +159,29 @@
 .dropdown.active {
   display: block;
 }
+
+.add-task-button-area {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex: 1;
+  gap: 32px;
+  padding: 60px;
+}
+
+.add-task-button-create-task,
+.add-task-button-clear {
+  height: 60px;
+}
+
+.add-task-button-create-task:active .icon-check {
+  content: url('../assets/icons/icon-check-active.png');
+}
+
+.add-task-button-clear:hover .icon-cancel {
+  content: url('../assets/icons/icon-cancel-hover.png');
+}
+
+.add-task-button-clear:active .icon-cancel {
+  content: url('../assets/icons/icon-cancel-active.png');
+}
