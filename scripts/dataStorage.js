@@ -21,7 +21,7 @@ async function loadData(path = "", data = {}) {
   let response = await fetch(BASE_URL + path + ".json");
   let responseToJson = await response.json();
   Object.assign(data, responseToJson);
-  console.log(data, 'load');
+  //console.log(data, 'load');
 };
 
 
@@ -29,7 +29,7 @@ async function loadDataStatus() {
   let response = await fetch(BASE_URL + ".json");
   let responseToJson = await response.json();
   statusTask = responseToJson.status;
-  console.log(statusTask, 'load');
+  //console.log(statusTask, 'load');
 };
 
 
@@ -42,6 +42,6 @@ async function putData(path = "", data = {}) {
     body: JSON.stringify(data)
   });
   let responseToJson = await response.json();
-  console.log(responseToJson, 'save');
+  //console.log(responseToJson, 'save');
 };
 

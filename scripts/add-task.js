@@ -38,7 +38,7 @@ const selectCategory = (element) => {
 };
 
 // Beispiel: Zugriff auf den aktuellen Wert
-console.log(selectedCategory); // true für "User Story", false für "Technical Task"
+//console.log(selectedCategory); // true für "User Story", false für "Technical Task"
 
 
 async function addTaskSave() {

@@ -6,7 +6,6 @@ async function renderTasks() {
   const noTasksMessage = document.getElementById('noTasksMessage');
   // noTasksMessage.style.display = 'none';
   columns.forEach(column => (column.innerHTML = ''));
-  console.log(filteredTasks.length ? filteredTasks : tasks, 'render');
 
   // Entscheide, ob die Original-Tasks oder gefilterte Tasks gerendert werden sollen
   const tasksToRender = filteredTasks.length ? filteredTasks : tasks;
@@ -60,11 +59,11 @@ async function renderTasks() {
     }
     html += /*html*/`</div>`;
     if (task.priority == 1) {
-      html += /*html*/`<div class="prio13 priodiv"><img src="../assets/img/prio1.png" alt=""></div>`
+      html += /*html*/`<div class="prio13 priodiv"><img src="../assets/img/prioUrgent.svg" alt=""></div>`
     } else if (task.priority == 2) {
-      html += /*html*/`<div class="prio2 priodiv"><img src="../assets/img/prio2.png" alt=""></div>`
+      html += /*html*/`<div class="prio2 priodiv"><img src="../assets/img/prioMedium.svg" alt=""></div>`
     } else if (task.priority == 3) {
-      html += /*html*/`<div class="prio13 priodiv"><img src="../assets/img/prio3.png" alt=""></div>`
+      html += /*html*/`<div class="prio13 priodiv"><img src="../assets/img/prioLow.svg" alt=""></div>`
     }
     html += /*html*/`</section>`;
     taskElement.innerHTML += html;
@@ -90,26 +89,74 @@ function openTaskOverlay(index) {
         ${taskDescription(task)}
         ${taskDate(task.date)}
         ${taskPriority(task)}
-        ${taskAssignedTo(task)}
-        <section class="members-prio">
-          <div class="avatar">
-            ${renderMembers(task)}
-          </div>
-        </section>
+        ${ifTaskMembers(task)}
+        ${ifSubtasks(task)}
+        <span class="overlay-edit-footer">
+          <div class="task-overlay-editors" onclick=""><img src="../assets/icons/icon-delete.png"><p>Delete</p></img></div>
+          <div class="task-overlay-devider"></div>
+          <div class="task-overlay-editors" onclick=""><img src="../assets/icons/icon-edit.png"><p>Edit</p></img></div>
+        </span>
       </div>
   `;
   showOverlay();
 }
 
-function taskAssignedTo(task) {
-  if (task.members && task.members.length > 0) {
-    task.members.forEach(element => {
-      return '<div class="overlay-tasks-assigned-to"></div>'
-    });
-    return `<p>Assigned to: <br>${task.members}</p>`;
+//onclick definieren !!!
+
+function ifSubtasks(task) {
+  if (task.subtasks && task.subtasks.length > 0) {
+    return `<div class="overlay-subtasks">
+              <p>Subtasks:</p>
+              ${overlaySubTasks(task)}
+            </div>`;
   } else {
     return '';
   }
+}
+
+function overlaySubTasks(task) {
+  return task.subtasks.map(subtask => {
+    return `<div class="overlay-subtask">
+              <input type="checkbox" ${subtask.isDone ? 'checked' : ''}>
+              <p>${subtask.subtitel}</p>
+            </div>`;
+  }
+  ).join('');
+}
+
+function ifTaskMembers(task) {
+  if (task.members && task.members.length > 0) {
+    return `<div class="overlay-tasks-assigned-to">
+              <p>Assigned to: </p>
+              ${taskAssignedTo(task)}
+            </div>`;
+  } else { 
+    return '';
+  }
+}
+
+function taskAssignedTo(task) {
+    return task.members.map(member => {
+      const contact = contacts.find(contact => contact.name === member);
+      const avatarColor = contact ? contact.color : 'orange';
+      return `<div class="overlay-avatar">
+                <div class="contactAvatar margin-right-10" style="background-color: ${avatarColor}">
+                  ${getInitials(member)}
+                </div>
+                  ${member}
+              </div>`;
+    }).join('');
+}
+
+function renderMembers(task) {
+  if (task.members && task.members.length > 0) {
+    return task.members.map(member => {
+      const contact = contacts.find(contact => contact.name === member);
+      const avatarColor = contact ? contact.color : 'orange';
+      return `<div class="contactAvatar" style="background-color: ${avatarColor}">${getInitials(member)}</div>`;
+    }).join('');
+  }   
+  return '';
 }
 
 function taskPriority(task) {
@@ -144,17 +191,6 @@ function taskDate(dateString) {
   } else {
     return '';
   }
-}
-
-function renderMembers(task) {
-  if (task.members && task.members.length > 0) {
-    return task.members.map(member => {
-      const contact = contacts.find(contact => contact.name === member);
-      const avatarColor = contact ? contact.color : 'orange';
-      return `<div class="contactAvatar" style="background-color: ${avatarColor}">${getInitials(member)}</div>`;
-    }).join('');
-  }   
-  return '';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
