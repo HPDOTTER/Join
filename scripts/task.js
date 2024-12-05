@@ -27,7 +27,8 @@ async function renderTasks() {
 
     taskElement.classList.add('task');
     taskElement.setAttribute('draggable', 'true');
-    taskElement.setAttribute('ondragstart', `startDrag(${index})`);
+    taskElement.setAttribute('ondragstart', `startDrag(${index})`);webkitURL
+    taskElement.setAttribute('onclick', `openTaskOverlay(${index})`);
     taskElement.innerHTML = `
       <span class="category ${task.categoryUser ? 'user' : 'technical'}">
         ${task.categoryUser ? 'User Story' : 'Technical Task'}
@@ -75,6 +76,105 @@ async function renderTasks() {
       console.error(`No column found for status ${task.status}`);
     }
   });
+}
+
+function openTaskOverlay(index) {
+  const task = tasks[index];
+  const overlay = document.getElementById('taskOverlay');
+  overlay.innerHTML = `
+      <div class="task-overlay-content">
+        <span class="category ${task.categoryUser ? 'user' : 'technical'}">
+          ${task.categoryUser ? 'User Story' : 'Technical Task'}
+        </span>
+        <h1>${task.titel}</h1>
+        ${taskDescription(task)}
+        ${taskDate(task.date)}
+        ${taskPriority(task)}
+        ${taskAssignedTo(task)}
+        <section class="members-prio">
+          <div class="avatar">
+            ${renderMembers(task)}
+          </div>
+        </section>
+      </div>
+  `;
+  showOverlay();
+}
+
+function taskAssignedTo(task) {
+  if (task.members && task.members.length > 0) {
+    task.members.forEach(element => {
+      return '<div class="overlay-tasks-assigned-to"></div>'
+    });
+    return `<p>Assigned to: <br>${task.members}</p>`;
+  } else {
+    return '';
+  }
+}
+
+function taskPriority(task) {
+  if (task.priority) {
+    if (task.priority == 1) {
+      return `<div class="overlay-priority-div"><p>Priority: Urgent</p><div class="prio13 priodiv"><img src="../assets/img/prioUrgent.svg"></div></div>`
+    } else if (task.priority == 2) {
+      return `<div class="overlay-priority-div"><p>Priority: Medium</p><div class="prio13 priodiv"><img src="../assets/img/prioMedium.svg"></div></div>`
+    } else if (task.priority == 3) {
+      return `<div class="overlay-priority-div"><p>Priority: Low</p><div class="prio13 priodiv"><img src="../assets/img/prioLow.svg"></div></div>`
+    }
+  } else {
+    return '';
+  }
+}
+
+function taskDescription(task) {
+  if (task.description) {
+    return `<p>${task.description}</p>`;
+  } else {
+    return '';
+  }
+}
+
+function taskDate(dateString) {
+  if (dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `<p>Due date: ${day}/${month}/${year}</p>`;
+  } else {
+    return '';
+  }
+}
+
+function renderMembers(task) {
+  if (task.members && task.members.length > 0) {
+    return task.members.map(member => {
+      const contact = contacts.find(contact => contact.name === member);
+      const avatarColor = contact ? contact.color : 'orange';
+      return `<div class="contactAvatar" style="background-color: ${avatarColor}">${getInitials(member)}</div>`;
+    }).join('');
+  }   
+  return '';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.getElementById('taskOverlay');
+  // Add event listener to the overlay
+  overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) {
+          hideOverlay();
+      }
+  });
+});
+
+function showOverlay() {
+    const overlay = document.getElementById('taskOverlay');
+    overlay.classList.add('show');
+}
+
+function hideOverlay() {
+    const overlay = document.getElementById('taskOverlay');
+    overlay.classList.remove('show');
 }
 
 function filter() {
