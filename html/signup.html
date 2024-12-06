@@ -26,7 +26,7 @@
         </div>
     </header>
     <main class="login-main">
-        <form onsubmit="signUpSubmit(); return false;" class="login-form sign-up-form" id="form" action="#">
+        <form onsubmit="showToastMessage('You Signed Up successfully', ''); signUpSubmit(); return false;" class="login-form sign-up-form" id="form" action="#">
             <a href="../html/login.html" alt="" class="arrow-left-line-icon"></a>
             <div class="login-h1-div">
                 <h1 class="login-h1">Sign Up</h1>
@@ -83,10 +83,12 @@
         </form>
         <div id="msgBox"></div>
     </main>
+    <div w3-include-html="toast-message.html"></div>
     
     <footer class="login-footer">
         <a class="sign-up-footer-a" href="./privacy-policy.html" target="_blank">Privacy Policy</a>
         <a class="sign-up-footer-a" href="./legal-notice.html" target="_blank">Legal notice</a>
     </footer>
 </body>
+<script src="../scripts/w3-include-html.js"></script>
 </html>

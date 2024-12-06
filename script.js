@@ -77,6 +77,7 @@ function navigateToUrl(url) {
 }
 
 function showToastMessage(text, fileName) {
+  console.log('Test');
   toastMsg = document.getElementById('toastMessage');
   toastMsg.innerHTML = getToastMessage(text, fileName);
   toastMsg.classList.remove('d-none');

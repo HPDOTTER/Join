@@ -168,4 +168,10 @@ button {
     background-color: var(--primary-color);
     border-radius: 20px;
     z-index: 1100;
+    animation: slideFromBottom 200ms ease-in-out;
+}
+
+@keyframes slideFromBottom {
+    0%{transform: translateY(1000%)}
+    100%{}
 }
