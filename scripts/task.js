@@ -269,3 +269,28 @@ function filter() {
   }
   renderTasks();
 }
+
+function startDrag(index) {
+  currentDraggedElement = index;
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+async function moveTo(status) {
+  tasks[currentDraggedElement]['status'] = status;
+  await save();
+  await renderTasks();
+  removeHighlight(status);
+}
+
+function highlight(status) {
+  const column = document.querySelector(`.column[data-status="${status}"]`);
+  column.classList.add('highlight');
+}
+
+function removeHighlight(status) {
+  const column = document.querySelector(`.column[data-status="${status}"]`);
+  column.classList.remove('highlight');
+}
