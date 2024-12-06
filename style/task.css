@@ -142,6 +142,10 @@ body {
   margin-bottom: 10px;
 }
 
+.task h3 {
+  margin-top: 5px;
+}
+
 .user {
   background-color: #ff9100;
   color: white;
@@ -168,7 +172,7 @@ body {
 
 .progress-section {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row;
 }
@@ -229,7 +233,7 @@ body {
 
 .prio2 img{
   width: 24px;
-  height: 8px;
+  height: 10px;
 }
 
 .prio13 img{
@@ -245,25 +249,62 @@ body {
   border-radius: 24px;
 }
 
+.task-overlay-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0px !important;
+}
+
+.task-overlay-head img {
+  cursor: pointer;
+  width: 17px;
+  height: 17px;
+}
+
+.task-overlay-head div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+.task-overlay-head div:hover {
+  background-color: var(--hover-slight-blue);
+  border-radius: 50%;
+  transform: scale(1.1);
+}
+
 .task-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background: rgba(245, 244, 244, 0.7); /* Semi-transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000; /* Ensure it is on top of other elements */
     visibility: hidden; /* Initially hidden */
     opacity: 0; /* Initially transparent */
-    transition: visibility 0s, opacity 0.5s ease;
+}
+
+@keyframes slideFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .task-overlay.show {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .task-overlay-content {
@@ -274,7 +315,8 @@ body {
   width: 528px;
   padding: 38px 30px;
   gap: 15px;
-  border-radius: 30px ;
+  border-radius: 30px;
+  animation: slideFromBottom 0.5s forwards; /* Animation to slide in from the bottom */
 }
 
 .task-overlay-content > * {
@@ -404,4 +446,8 @@ body {
   height: 24px;
   cursor: pointer;
   content: url(../assets/icons/checkbox-default.svg);
+}
+
+.close-overlay {
+  color: var(--secondary-color);
 }

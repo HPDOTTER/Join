@@ -82,7 +82,12 @@ function openTaskOverlay(index) {
   const overlay = document.getElementById('taskOverlay');
   overlay.innerHTML = `
       <div class="task-overlay-content">
-        ${taskCategory(task)}
+        <div class="task-overlay-head">
+          ${taskCategory(task)}
+          <div>
+            <img src="../assets/icons/close.svg" class="close-overlay" onclick="hideOverlay()">
+          </div>
+        </div>
         ${taskTitle(task)}
         ${taskDescription(task)}
         ${taskDate(task.date)}
@@ -90,7 +95,7 @@ function openTaskOverlay(index) {
         ${ifTaskMembers(task)}
         ${ifSubtasks(task, index)}
         <span class="overlay-edit-footer">
-          <div class="task-overlay-editors" onclick=""><img src="../assets/icons/icon-delete.png"><p>Delete</p></img></div>
+          <div class="task-overlay-editors" onclick="deleteTask(${index})"><img src="../assets/icons/icon-delete.png"><p>Delete</p></img></div>
           <div class="task-overlay-devider"></div>
           <div class="task-overlay-editors" onclick=""><img src="../assets/icons/icon-edit.png"><p>Edit</p></img></div>
         </span>
@@ -98,6 +103,14 @@ function openTaskOverlay(index) {
   `;
   showOverlay();
 }
+
+async function deleteTask(index) {
+  tasks.splice(index, 1);
+  await save();
+  await renderTasks();
+  hideOverlay();
+}
+// definiere onlcick line 100 !!!
 
 function taskTitle(task) {
   if (task.titel) {
@@ -126,8 +139,9 @@ function ifSubtasks(task, taskIndex) {
 
 function overlaySubTasks(task, taskIndex) {
   return task.subtasks.map((subtask, subtaskIndex) => {
+    const checkboxId = `subtask-${taskIndex}-${subtaskIndex}`;
     return `<div class="overlay-subtask">
-              <input type="checkbox" ${subtask.isDone ? 'checked' : ''}>
+              <input type="checkbox" id="${checkboxId}" ${subtask.isDone ? 'checked' : ''}>
               <label onclick="overlaySubtaskCheckbox(${taskIndex}, ${subtaskIndex})"></label>
               <p>${subtask.subtitel}</p>
             </div>`;
@@ -135,24 +149,20 @@ function overlaySubTasks(task, taskIndex) {
   ).join('');
 }
 
-function overlaySubtaskCheckbox(taskIndex, subtaskIndex) {
-  console.log('Task Index:', taskIndex, 'Subtask Index:', subtaskIndex);
+async function overlaySubtaskCheckbox(taskIndex, subtaskIndex) {
   const task = tasks[taskIndex];
   const subtask = task.subtasks[subtaskIndex];
+  const checkboxId = `subtask-${taskIndex}-${subtaskIndex}`;
   if (subtask.isDone) {
     subtask.isDone = false;
-    
-    // change checkbox to unchecked state
-
+    document.getElementById(checkboxId).checked = false;
   } else {
     subtask.isDone = true;
+    document.getElementById(checkboxId).checked = true;
   }
-  //subtask.isDone = !subtask.isDone; // Toggle the isDone status
-  save(); // Save the changes
-  renderTasks(false); // Re-render the tasks to reflect the changes
+  await save();
+  await renderTasks(); 
 }
-
-// <input type="checkbox" id="rememberMe" class="login-remember-checkbox value=" "="">
 
 function ifTaskMembers(task) {
   if (task.members && task.members.length > 0) {
