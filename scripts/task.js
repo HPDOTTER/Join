@@ -26,7 +26,7 @@ async function renderTasks() {
 
     taskElement.classList.add('task');
     taskElement.setAttribute('draggable', 'true');
-    taskElement.setAttribute('ondragstart', `startDrag(${index})`);webkitURL
+    taskElement.setAttribute('ondragstart', `startDrag(${index})`);
     taskElement.setAttribute('onclick', `openTaskOverlay(${index})`);
     taskElement.innerHTML = `
       <span class="category ${task.categoryUser ? 'user' : 'technical'}">
@@ -272,6 +272,8 @@ function filter() {
 
 function startDrag(index) {
   currentDraggedElement = index;
+  //const taskElement = document.querySelector(`.task[data-index="${index}"]`);
+  //taskElement.classList.add('dragging');
 }
 
 function allowDrop(ev) {
@@ -279,6 +281,8 @@ function allowDrop(ev) {
 }
 
 async function moveTo(status) {
+  //const taskElement = document.querySelector(`.task[data-index="${index}"]`);
+  //taskElement.classList.remove('dragging');
   tasks[currentDraggedElement]['status'] = status;
   await save();
   await renderTasks();

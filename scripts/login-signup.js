@@ -60,7 +60,10 @@ function addUser() {
       'password': passwordInput.value
     });
     save();
-    smoothTransition('../html/login.html?msg=You have successfully signed up. Please log in.');
+    showToastMessage('You Signed Up successfully', '')
+    setTimeout(() => {
+      smoothTransition('../html/login.html?msg=You have successfully signed up. Please log in.');
+    }, 1200);
   }
 }
 
