@@ -448,6 +448,6 @@ body {
   content: url(../assets/icons/checkbox-default.svg);
 }
 
-.close-overlay {
-  color: var(--secondary-color);
+.task.dragging {
+  transform: rotate(5deg);
 }

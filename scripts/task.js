@@ -272,8 +272,8 @@ function filter() {
 
 function startDrag(index) {
   currentDraggedElement = index;
-  //const taskElement = document.querySelector(`.task[data-index="${index}"]`);
-  //taskElement.classList.add('dragging');
+  const taskElement = document.querySelector(`.task[ondragstart="startDrag(${index})"]`);
+  taskElement.classList.add('dragging');
 }
 
 function allowDrop(ev) {
@@ -281,8 +281,6 @@ function allowDrop(ev) {
 }
 
 async function moveTo(status) {
-  //const taskElement = document.querySelector(`.task[data-index="${index}"]`);
-  //taskElement.classList.remove('dragging');
   tasks[currentDraggedElement]['status'] = status;
   await save();
   await renderTasks();
