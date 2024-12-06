@@ -134,20 +134,20 @@ body {
   cursor: pointer;
 }
 
-.task .category {
+.category {
   font-size: 12px;
-  padding: 5px;
+  padding: 5px 10px; 
   border-radius: 8px;
   display: inline-block;
   margin-bottom: 10px;
 }
 
-.task .category.user {
+.user {
   background-color: #ff9100;
   color: white;
 }
 
-.task .category.technical {
+.technical {
   background-color: #007bff;
   color: white;
 }
@@ -267,7 +267,7 @@ body {
 }
 
 .task-overlay-content {
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   background: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -275,24 +275,42 @@ body {
   padding: 38px 30px;
   gap: 15px;
   border-radius: 30px ;
-
 }
+
+.task-overlay-content > * {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
 
 .task-overlay-content h1 {
   margin: 0;
   font-size: 54px;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.2; /* Adjust the line-height to change the space between lines */
 }
 
 .overlay-priority-div {
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+.overlay-priority-div p {
+  word-spacing: 20px;
+}
+
+.overlay-date-gap {
+  word-spacing: 10px;
 }
 
 .overlay-tasks-assigned-to {
     display: flex;
     flex-direction: column;
+}
+
+.overlay-tasks-assigned-to b {
+  margin-bottom: 10px;
 }
 
 .overlay-tasks-members {
@@ -302,6 +320,17 @@ body {
 
 .margin-right-10 {
   margin-right: 20px;
+}
+
+.overlay-inline-elements {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-overlay-content b {
+  font-size: 17px;
+  font-weight: 700;
 }
 
 .overlay-avatar {
@@ -326,8 +355,9 @@ body {
   justify-content: end;
   align-items: center;
   flex-direction: row;
-  padding: 16px 16px;
+  padding-top: 16px;
   gap: 3px;
+  margin: 0px;
 }
 
 .overlay-edit-footer p {
@@ -353,4 +383,25 @@ body {
   width: 1px;
   height: 21px;
   margin-right: 10px;
+}
+
+.task-overlay-content input[type="checkbox"] {
+  display: none;
+}
+
+.login-remember-checkbox {
+  height: 24px;
+  width: 24px;
+}
+
+.task-overlay-content input[type="checkbox"]:checked + label {
+  content: url(../assets/icons/checkbox-checked.svg);
+}
+
+.task-overlay-content input[type="checkbox"] + label {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  content: url(../assets/icons/checkbox-default.svg);
 }

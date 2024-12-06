@@ -82,15 +82,13 @@ function openTaskOverlay(index) {
   const overlay = document.getElementById('taskOverlay');
   overlay.innerHTML = `
       <div class="task-overlay-content">
-        <span class="category ${task.categoryUser ? 'user' : 'technical'}">
-          ${task.categoryUser ? 'User Story' : 'Technical Task'}
-        </span>
-        <h1>${task.titel}</h1>
+        ${taskCategory(task)}
+        ${taskTitle(task)}
         ${taskDescription(task)}
         ${taskDate(task.date)}
         ${taskPriority(task)}
         ${ifTaskMembers(task)}
-        ${ifSubtasks(task)}
+        ${ifSubtasks(task, index)}
         <span class="overlay-edit-footer">
           <div class="task-overlay-editors" onclick=""><img src="../assets/icons/icon-delete.png"><p>Delete</p></img></div>
           <div class="task-overlay-devider"></div>
@@ -101,33 +99,65 @@ function openTaskOverlay(index) {
   showOverlay();
 }
 
-//onclick definieren !!!
+function taskTitle(task) {
+  if (task.titel) {
+    return `<h1>${task.titel}</h1>`;
+  } else {
+    return '';
+  }
+}
 
-function ifSubtasks(task) {
+function taskCategory(task) {
+  return `<span class="category ${task.categoryUser ? 'user' : 'technical'}">
+          ${task.categoryUser ? 'User Story' : 'Technical Task'}
+        </span>`;
+}
+
+function ifSubtasks(task, taskIndex) {
   if (task.subtasks && task.subtasks.length > 0) {
     return `<div class="overlay-subtasks">
-              <p>Subtasks:</p>
-              ${overlaySubTasks(task)}
+              <b>Subtasks:</b>
+              ${overlaySubTasks(task, taskIndex)}
             </div>`;
   } else {
     return '';
   }
 }
 
-function overlaySubTasks(task) {
-  return task.subtasks.map(subtask => {
+function overlaySubTasks(task, taskIndex) {
+  return task.subtasks.map((subtask, subtaskIndex) => {
     return `<div class="overlay-subtask">
               <input type="checkbox" ${subtask.isDone ? 'checked' : ''}>
+              <label onclick="overlaySubtaskCheckbox(${taskIndex}, ${subtaskIndex})"></label>
               <p>${subtask.subtitel}</p>
             </div>`;
   }
   ).join('');
 }
 
+function overlaySubtaskCheckbox(taskIndex, subtaskIndex) {
+  console.log('Task Index:', taskIndex, 'Subtask Index:', subtaskIndex);
+  const task = tasks[taskIndex];
+  const subtask = task.subtasks[subtaskIndex];
+  if (subtask.isDone) {
+    subtask.isDone = false;
+    
+    // change checkbox to unchecked state
+
+  } else {
+    subtask.isDone = true;
+  }
+  //subtask.isDone = !subtask.isDone; // Toggle the isDone status
+  save(); // Save the changes
+  renderTasks(false); // Re-render the tasks to reflect the changes
+}
+
+// <input type="checkbox" id="rememberMe" class="login-remember-checkbox value=" "="">
+
 function ifTaskMembers(task) {
   if (task.members && task.members.length > 0) {
     return `<div class="overlay-tasks-assigned-to">
-              <p>Assigned to: </p>
+              <b>Assigned to:</b>
               ${taskAssignedTo(task)}
             </div>`;
   } else { 
@@ -162,11 +192,11 @@ function renderMembers(task) {
 function taskPriority(task) {
   if (task.priority) {
     if (task.priority == 1) {
-      return `<div class="overlay-priority-div"><p>Priority: Urgent</p><div class="prio13 priodiv"><img src="../assets/img/prioUrgent.svg"></div></div>`
+      return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Urgent</p> <div class="prio13 priodiv"><img src="../assets/img/prioUrgent.svg"></div></div>`
     } else if (task.priority == 2) {
-      return `<div class="overlay-priority-div"><p>Priority: Medium</p><div class="prio13 priodiv"><img src="../assets/img/prioMedium.svg"></div></div>`
+      return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Medium</p> <div class="prio13 priodiv"><img src="../assets/img/prioMedium.svg"></div></div>`
     } else if (task.priority == 3) {
-      return `<div class="overlay-priority-div"><p>Priority: Low</p><div class="prio13 priodiv"><img src="../assets/img/prioLow.svg"></div></div>`
+      return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Low</p> <div class="prio13 priodiv"><img src="../assets/img/prioLow.svg"></div></div>`
     }
   } else {
     return '';
@@ -187,7 +217,7 @@ function taskDate(dateString) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-    return `<p>Due date: ${day}/${month}/${year}</p>`;
+    return `<div class="overlay-inline-elements"><b>Due date:</b> <p>${day}/${month}/${year}</p></div>`;
   } else {
     return '';
   }
@@ -229,4 +259,3 @@ function filter() {
   }
   renderTasks();
 }
-
