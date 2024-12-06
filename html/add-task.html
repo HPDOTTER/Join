@@ -110,13 +110,14 @@
             Clear
             <img class="icon-cancel">
           </button>
-          <button class="button-primary add-task-button-create-task" onclick="addTaskSave()">
+          <button class="button-primary add-task-button-create-task" onclick="addTaskSave(); showToastMessage('Task added to board', '../assets/icons/icon-toast-message-task-added.svg')">
             Create Task
             <img class="icon-check">
           </button>
         </div>
       </div>
     </div>
+    <div w3-include-html="toast-message.html"></div>
   </div>
 </body>
 <script src="../scripts/w3-include-html.js"></script>

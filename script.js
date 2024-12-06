@@ -12,19 +12,19 @@ async function init() {
 }
 
 function smoothTransition(url) {
-    document.body.classList.add('fade-out');
-    setTimeout(() => {
-      window.location.href = url;
-    }, 500); // Match the duration of the CSS transition
+  document.body.classList.add('fade-out');
+  setTimeout(() => {
+    window.location.href = url;
+  }, 500); // Match the duration of the CSS transition
 }
 
 function setCurrentUserInitials() {
   const currentUserInitials = document.getElementById('currentUserInitials');
   if (user) {
-      const initials = user.split(' ').map(word => word[0]).join('').toUpperCase();
-      currentUserInitials.innerHTML = initials;
+    const initials = user.split(' ').map(word => word[0]).join('').toUpperCase();
+    currentUserInitials.innerHTML = initials;
   } else {
-      currentUserInitials.innerHTML = 'G';
+    currentUserInitials.innerHTML = 'G';
   }
 }
 
@@ -33,12 +33,12 @@ function currentUser() {
   const user = sessionStorage.getItem('user');
   const guest = sessionStorage.getItem('guest');
   if (user || guest) {
-      return {
-          user: user ? JSON.parse(user) : null,
-          guest: guest ? JSON.parse(guest) : null
-      };
+    return {
+      user: user ? JSON.parse(user) : null,
+      guest: guest ? JSON.parse(guest) : null
+    };
   } else {
-      smoothTransition('../html/login.html?msg=You are not logged in.');
+    smoothTransition('../html/login.html?msg=You are not logged in.');
   }
 }
 
@@ -51,19 +51,19 @@ function logout() {
 function waitForElement(selector, callback) {
   const element = document.querySelector(selector);
   if (element) {
-      callback();
+    callback();
   } else {
-      const observer = new MutationObserver((mutations, me) => {
-          const element = document.querySelector(selector);
-          if (element) {
-              callback();
-              me.disconnect(); // Stop observing
-          }
-      });
-      observer.observe(document, {
-          childList: true,
-          subtree: true
-      });
+    const observer = new MutationObserver((mutations, me) => {
+      const element = document.querySelector(selector);
+      if (element) {
+        callback();
+        me.disconnect(); // Stop observing
+      }
+    });
+    observer.observe(document, {
+      childList: true,
+      subtree: true
+    });
   }
 }
 
@@ -74,4 +74,22 @@ function openLogout() {
 
 function navigateToUrl(url) {
   window.location.href = url;
+}
+
+function showToastMessage(text, fileName) {
+  toastMsg = document.getElementById('toastMessage');
+  toastMsg.innerHTML = getToastMessage(text, fileName);
+  toastMsg.classList.remove('d-none');
+  setTimeout(() => {
+    toastMsg.classList.add('d-none');
+  }, 1200);
+}
+
+function getToastMessage(text, fileName) {
+  let toastMessage = '';
+  toastMessage += text;
+  if (fileName.length > 0) {
+    toastMessage += `<img src="${fileName}" class="icon-toast-message">`
+  }
+  return toastMessage;
 }

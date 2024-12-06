@@ -98,7 +98,7 @@ p>a {
 .site-body-wrapper {
     display: flex;
     height: calc(100vh - 96px);
-    width: 100%;
+    max-width: 1920px;
 }
 
 .content-wrapper {
@@ -189,4 +189,8 @@ p>a {
   .dropdown-item:hover {
     background-color: var(--primary-highlight-color);
     cursor: pointer;
+  }
+
+  .d-none {
+    display: none !important;
   }

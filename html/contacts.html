@@ -136,13 +136,14 @@
             Cancel
             <img class="icon-cancel">
           </button>
-          <button class="button-primary contact-add-form-button-create-contact scale-on-hover" onclick="addContact()">
+          <button class="button-primary contact-add-form-button-create-contact scale-on-hover" onclick="addContact(); showToastMessage('Contact succesfully added', '')">
             Create contact
             <img class="icon-check">
           </button>
         </div>
       </div>
     </div>
+    <div w3-include-html="toast-message.html"></div>
   </div>
 
 
