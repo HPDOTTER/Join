@@ -451,3 +451,14 @@ body {
 .task.dragging {
   transform: rotate(5deg);
 }
+
+.dummy {
+  color: #c0c0c0;
+  text-align: center;
+  border: 1px dashed #A8A8A8;
+  border-radius: 10px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  background-color:#E7E7E7;
+  padding: 10px;
+}

@@ -75,6 +75,7 @@ async function renderTasks() {
       console.error(`No column found for status ${task.status}`);
     }
   });
+  showDummydiv();
 }
 
 function openTaskOverlay(index) {
@@ -296,3 +297,26 @@ function removeHighlight(status) {
   const column = document.querySelector(`.column[data-status="${status}"]`);
   column.classList.remove('highlight');
 }
+
+function showDummydiv() {
+  for (let i = 1; i <= 4; i++) {
+    const column = document.querySelector(`.column[data-status='${i}'] .tasks`);
+    if (column && column.children.length === 0) {
+      const dummyDiv = document.createElement('div');
+      dummyDiv.classList.add('dummy');
+      if (i === 1) {
+        dummyDiv.innerText = 'No tasks to do';
+      } else if (i === 2) {
+        dummyDiv.innerText = 'No tasks in progress';
+      } else if (i === 3) {
+        dummyDiv.innerText = 'No tasks awaiting Feedback';
+      } else if (i === 4) {
+        dummyDiv.innerText = 'No tasks done';
+      }
+      column.appendChild(dummyDiv);
+    }
+  }
+}
+  // wenn ein von Status von 1-4 nicht vergebne ist, 
+  //dann wird in der dazugehörigen column mit dem passenden data-status, 
+  //der dummy angezeigt 
