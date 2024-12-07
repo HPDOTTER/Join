@@ -236,12 +236,13 @@ function taskDate(dateString) {
 
 document.addEventListener('DOMContentLoaded', () => {
   const overlay = document.getElementById('taskOverlay');
-  // Add event listener to the overlay
-  overlay.addEventListener('click', (event) => {
+  if (overlay) {
+    overlay.addEventListener('click', (event) => {
       if (event.target === overlay) {
-          hideOverlay();
+        hideOverlay();
       }
-  });
+    });
+  }
 });
 
 function showOverlay() {

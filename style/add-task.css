@@ -182,7 +182,7 @@
 
 .add-task-button-create-task,
 .add-task-button-clear {
-  height: 60px;
+  height: 45px;
 }
 
 .add-task-button-create-task:active .icon-check {

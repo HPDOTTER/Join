@@ -17,7 +17,7 @@ button {
     padding: 16px 10px;
     color: #FFFFFF;
     background-color: var(--primary-color);
-    font-size: 23px;
+    font-size: 19px;
     border: none;
     border-radius: 8px;
 }
@@ -35,7 +35,7 @@ button {
 
 .button-primary:disabled {
     background-color: var(--primary-color);
-    font-size: 23px;
+    font-size: 19px;
     box-shadow: none;
     pointer-events: none;
 }

@@ -127,19 +127,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  passwordInput.addEventListener('keyup', () => {
+    if (passwordInput.value === "" || passwordInput.value === null) {
+      visibilityBtn.src = '../assets/icons/icon-lock.svg';
+    } else {
+      visibilityBtn.src = '../assets/icons/icon-visibility-off.svg';
+    }
+  });
+
   const logoOverlay = document.getElementById('logo-overlay');
   const logoOverlayImg = document.querySelector('.logo-overlay-img');
   const overlayShown = sessionStorage.getItem('overlayShown');
-
   if (!overlayShown) {
     setTimeout(() => {
       logoOverlay.classList.add('hidden');
-    }, 100); // Adjust the timeout as needed
-
+    }, 100);
     logoOverlayImg.addEventListener('animationend', () => {
       logoOverlay.style.display = 'none';
     });
-
     sessionStorage.setItem('overlayShown', 'true');
   } else {
     logoOverlay.style.display = 'none';
@@ -155,9 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
         visibilityBtn1.src = '../assets/icons/icon-visibility-off.svg';
       }
     });
+    
   }
-
-  // Check the password input value shortly after the page loads
   setTimeout(() => {
     if (passwordInput.value === "" || passwordInput.value === null) {
       visibilityBtn.src = '../assets/icons/icon-lock.svg';
