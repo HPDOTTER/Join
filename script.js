@@ -77,13 +77,12 @@ function navigateToUrl(url) {
 }
 
 function showToastMessage(text, fileName) {
-  console.log('Test');
   toastMsg = document.getElementById('toastMessage');
   toastMsg.innerHTML = getToastMessage(text, fileName);
   toastMsg.classList.remove('d-none');
   setTimeout(() => {
     toastMsg.classList.add('d-none');
-  }, 1200);
+  }, 1500);
 }
 
 function getToastMessage(text, fileName) {

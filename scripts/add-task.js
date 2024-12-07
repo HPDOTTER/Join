@@ -83,7 +83,7 @@ async function renderContactsWithCheckboxes() {
 
   contacts.forEach((contact, index) => {
     const item = document.createElement("div");
-    item.className = "contact-item";
+    item.className = "dropdown-item";
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
