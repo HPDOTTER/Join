@@ -93,3 +93,7 @@ function getToastMessage(text, fileName) {
   }
   return toastMessage;
 }
+
+function goBack() {
+  window.history.back();
+}

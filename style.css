@@ -180,6 +180,12 @@ p>a {
     display: none !important;
 }
 
+.hover-slight-blue:hover {
+    background-color: var(--hover-slight-blue);
+    border-radius: 50%;
+    transform: scale(1.1);
+}
+
 @media (max-width: 1200px){
     .site-body-wrapper {
         display: flex;
