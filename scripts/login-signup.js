@@ -7,7 +7,6 @@ const emailInput = document.getElementById('login-email-input');
 const repeatPasswordInput = document.getElementById('repeat-password-input');
 const signUpNameInput = document.getElementById('sign-up-name-input');
 const rememberMeCheckbox = document.getElementById('rememberMe');
-
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
 const msgBox = document.getElementById('msgBox');
@@ -83,18 +82,26 @@ function loginSubmit() {
   if (user) {
     loginSuccess(user);
     if (rememberMeCheckbox && rememberMeCheckbox.checked) {
-      localStorage.setItem('rememberMe', 'true');
-      localStorage.setItem('email', emailInput.value);
-      localStorage.setItem('password', passwordInput.value);
+      setLocalStorageLogin();
     } else {
-      localStorage.removeItem('rememberMe');
-      localStorage.removeItem('email');
-      localStorage.removeItem('password');
+      removeLocalStorageLogin()
     }
     smoothTransition('../html/summary.html?msg=You have successfully logged in.');
   } else {
     errorMessage.innerText = 'Email or password is incorrect';
   }
+}
+
+function removeLocalStorageLogin() {
+  localStorage.removeItem('rememberMe');
+  localStorage.removeItem('email');
+  localStorage.removeItem('password');
+}
+
+function setLocalStorageLogin() {
+  localStorage.setItem('rememberMe', 'true');
+  localStorage.setItem('email', emailInput.value);
+  localStorage.setItem('password', passwordInput.value);
 }
 
 function loginAsGuest() {
@@ -110,9 +117,7 @@ function loginSuccess(user) {
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.classList.add('fade-in');
-
+function rememberAutoFillIn() {
   if (localStorage.getItem('rememberMe') === 'true') {
     emailInput.value = localStorage.getItem('email');
     passwordInput.value = localStorage.getItem('password');
@@ -120,21 +125,19 @@ document.addEventListener('DOMContentLoaded', () => {
       rememberMeCheckbox.checked = true;
     }
   }
-
-  if (visibilityBtn) {
-    visibilityBtn.addEventListener('click', () => toggleVisibility(passwordInput, visibilityBtn));
-  }
-});
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-  passwordInput.addEventListener('keyup', () => {
-    if (passwordInput.value === "" || passwordInput.value === null) {
-      visibilityBtn.src = '../assets/icons/icon-lock.svg';
-    } else {
-      visibilityBtn.src = '../assets/icons/icon-visibility-off.svg';
-    }
-  });
+  document.body.classList.add('fade-in');
+  rememberAutoFillIn();
+  welcomeAnimation();
+  checkVisibilityIcons()
+  setTimeout(() => {
+    checkInputAfterLoad();
+  }, 500); // Adjust the timeout as needed
+});
 
+function welcomeAnimation() {
   const logoOverlay = document.getElementById('logo-overlay');
   const logoOverlayImg = document.querySelector('.logo-overlay-img');
   const overlayShown = sessionStorage.getItem('overlayShown');
@@ -149,6 +152,38 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     logoOverlay.style.display = 'none';
   }
+}
+
+function checkInputAfterLoad() {
+  if (passwordInput.value === "" || passwordInput.value === null) {
+    visibilityBtn.src = '../assets/icons/icon-lock.svg';
+  } else {
+    visibilityBtn.src = '../assets/icons/icon-visibility-off.svg';
+  }
+  if (repeatPasswordInput) {
+    if (repeatPasswordInput.value === "" || repeatPasswordInput.value === null) {
+      visibilityBtn1.src = '../assets/icons/icon-lock.svg';
+    } else {
+      visibilityBtn1.src = '../assets/icons/icon-visibility-off.svg';
+    }
+  }
+}
+
+function checkVisibilityIcons() {
+  if (visibilityBtn) {
+    visibilityBtn.addEventListener('click', () => toggleVisibility(passwordInput, visibilityBtn));
+  }
+  passwordInput.addEventListener('keyup', () => {
+    if (passwordInput.value === "" || passwordInput.value === null) {
+      visibilityBtn.src = '../assets/icons/icon-lock.svg';
+    } else {
+      visibilityBtn.src = '../assets/icons/icon-visibility-off.svg';
+    }
+  });
+  checkIfRepeatPasswordIsVisible();
+}
+
+function checkIfRepeatPasswordIsVisible() {
   if (visibilityBtn1) {
     visibilityBtn1.addEventListener('click', () => toggleVisibility(repeatPasswordInput, visibilityBtn1));
   }
@@ -160,24 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
         visibilityBtn1.src = '../assets/icons/icon-visibility-off.svg';
       }
     });
-    
   }
-  setTimeout(() => {
-    if (passwordInput.value === "" || passwordInput.value === null) {
-      visibilityBtn.src = '../assets/icons/icon-lock.svg';
-    } else {
-      visibilityBtn.src = '../assets/icons/icon-visibility-off.svg';
-    }
-    if (repeatPasswordInput) {
-      if (repeatPasswordInput.value === "" || repeatPasswordInput.value === null) {
-        visibilityBtn1.src = '../assets/icons/icon-lock.svg';
-      } else {
-        visibilityBtn1.src = '../assets/icons/icon-visibility-off.svg';
-      }
-    }
-    
-  }, 500); // Adjust the timeout as needed
-});
+}
 
 function toggleVisibility(input, btn) {
   if (input.value !== "" && input.value !== null) {
@@ -193,7 +212,6 @@ function toggleVisibility(input, btn) {
 
 function getSignupFormErrors(name, email, password, repeatPassword) {
   let errors = [];
-
   if (name === '' || name == null) {
     errors.push('Name is required');
     signUpNameInput.parentElement.classList.add('incorrect');
