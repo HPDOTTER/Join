@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
   checkVisibilityIcons()
   setTimeout(() => {
     checkInputAfterLoad();
-  }, 500); // Adjust the timeout as needed
+  }, 500);
 });
 
 function welcomeAnimation() {
