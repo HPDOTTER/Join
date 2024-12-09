@@ -71,7 +71,6 @@ async function signUpSubmit() {
   if (errors.length === 0 || errors.length === null) {
     addUser();
   } else if (errors.length > 0) {
-    // If there are any errors
     e.preventDefault();
     errorMessage.innerText = errors.join(". ");
   }
@@ -212,14 +211,25 @@ function toggleVisibility(input, btn) {
 
 function getSignupFormErrors(name, email, password, repeatPassword) {
   let errors = [];
-  if (name === '' || name == null) {
-    errors.push('Name is required');
-    signUpNameInput.parentElement.classList.add('incorrect');
+  validateField(name, 'Name is required', signUpNameInput, errors);
+  validateField(email, 'Email is required', emailInput, errors);
+  validatePassword(password, errors);
+  if (password !== repeatPassword) {
+    errors.push('Password does not match repeated password');
+    passwordInput.parentElement.classList.add('incorrect');
+    repeatPasswordInput.parentElement.classList.add('incorrect');
   }
-  if (email === '' || email == null) {
-    errors.push('Email is required');
-    emailInput.parentElement.classList.add('incorrect');
+  return errors;
+}
+
+function validateField(value, errorMessage, inputElement, errors) {
+  if (value === '' || value == null) {
+    errors.push(errorMessage);
+    inputElement.parentElement.classList.add('incorrect');
   }
+}
+
+function validatePassword(password, errors) {
   if (password.length < 8) {
     errors.push('Password must have at least 8 characters');
     passwordInput.parentElement.classList.add('incorrect');
@@ -228,12 +238,6 @@ function getSignupFormErrors(name, email, password, repeatPassword) {
     errors.push('Password must contain at least one uppercase letter');
     passwordInput.parentElement.classList.add('incorrect');
   }
-  if (password !== repeatPassword) {
-    errors.push('Password does not match repeated password');
-    passwordInput.parentElement.classList.add('incorrect');
-    repeatPasswordInput.parentElement.classList.add('incorrect');
-  }
-  return errors;
 }
 
 function getLoginFormErrors(email, password) {
