@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     width: 456px;
-    height: calc(100vh - 96px);
+    height: 100%;
     box-shadow: 4px 0px 6px 0px #00000014;
     overflow-y: scroll;
 }

@@ -179,3 +179,11 @@ p>a {
 .d-none {
     display: none !important;
 }
+
+@media (max-width: 1200px){
+    .site-body-wrapper {
+        display: flex;
+        height: calc(100vh - 96px - 90px);
+        max-width: 1920px;
+    }
+}
