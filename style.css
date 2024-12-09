@@ -187,3 +187,17 @@ p>a {
         max-width: 1920px;
     }
 }
+
+@media (max-width: 630px){
+    .text-content {
+        padding: 20px 30px;
+    }
+
+    .text-content-headline-area {
+        margin-bottom: 20px;
+    }
+    
+    .text-content-headline-area > h1{
+        font-size: 40px;
+    }
+}
