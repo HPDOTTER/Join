@@ -81,27 +81,7 @@ async function renderTasks() {
 function openTaskOverlay(index) {
   const task = tasks[index];
   const overlay = document.getElementById('taskOverlay');
-  overlay.innerHTML = `
-      <div class="task-overlay-content">
-        <div class="task-overlay-head">
-          ${taskCategory(task)}
-          <div>
-            <img src="../assets/icons/close.svg" class="close-overlay" onclick="hideOverlay()">
-          </div>
-        </div>
-        ${taskTitle(task)}
-        ${taskDescription(task)}
-        ${taskDate(task.date)}
-        ${taskPriority(task)}
-        ${ifTaskMembers(task)}
-        ${ifSubtasks(task, index)}
-        <span class="overlay-edit-footer">
-          <div class="task-overlay-editors" onclick="deleteTask(${index})"><img src="../assets/icons/icon-delete.png"><p>Delete</p></img></div>
-          <div class="task-overlay-devider"></div>
-          <div class="task-overlay-editors" onclick=""><img src="../assets/icons/icon-edit.png"><p>Edit</p></img></div>
-        </span>
-      </div>
-  `;
+  overlay.innerHTML = getOpenTaskOverlayTemplate(task, index);
   showOverlay();
 }
 
@@ -111,7 +91,6 @@ async function deleteTask(index) {
   await renderTasks();
   hideOverlay();
 }
-// definiere onlcick line 100 !!!
 
 function taskTitle(task) {
   if (task.titel) {
@@ -121,11 +100,6 @@ function taskTitle(task) {
   }
 }
 
-function taskCategory(task) {
-  return `<span class="category ${task.categoryUser ? 'user' : 'technical'}">
-          ${task.categoryUser ? 'User Story' : 'Technical Task'}
-        </span>`;
-}
 
 function ifSubtasks(task, taskIndex) {
   if (task.subtasks && task.subtasks.length > 0) {
@@ -141,13 +115,8 @@ function ifSubtasks(task, taskIndex) {
 function overlaySubTasks(task, taskIndex) {
   return task.subtasks.map((subtask, subtaskIndex) => {
     const checkboxId = `subtask-${taskIndex}-${subtaskIndex}`;
-    return `<div class="overlay-subtask">
-              <input type="checkbox" id="${checkboxId}" ${subtask.isDone ? 'checked' : ''}>
-              <label onclick="overlaySubtaskCheckbox(${taskIndex}, ${subtaskIndex})"></label>
-              <p>${subtask.subtitel}</p>
-            </div>`;
-  }
-  ).join('');
+    return getOverlaySubtaskHtml(subtask, taskIndex, subtaskIndex, checkboxId);
+  }).join('');
 }
 
 async function overlaySubtaskCheckbox(taskIndex, subtaskIndex) {
@@ -165,28 +134,12 @@ async function overlaySubtaskCheckbox(taskIndex, subtaskIndex) {
   await renderTasks(); 
 }
 
-function ifTaskMembers(task) {
-  if (task.members && task.members.length > 0) {
-    return `<div class="overlay-tasks-assigned-to">
-              <b>Assigned to:</b>
-              ${taskAssignedTo(task)}
-            </div>`;
-  } else { 
-    return '';
-  }
-}
-
 function taskAssignedTo(task) {
-    return task.members.map(member => {
-      const contact = contacts.find(contact => contact.name === member);
-      const avatarColor = contact ? contact.color : 'orange';
-      return `<div class="overlay-avatar">
-                <div class="contactAvatar margin-right-10" style="background-color: ${avatarColor}">
-                  ${getInitials(member)}
-                </div>
-                  ${member}
-              </div>`;
-    }).join('');
+  return task.members.map(member => {
+    const contact = contacts.find(contact => contact.name === member);
+    const avatarColor = contact ? contact.color : 'orange';
+    return getTaskAssignedToTemplate(member, avatarColor);
+  }).join('');
 }
 
 function renderMembers(task) {
@@ -299,25 +252,21 @@ function removeHighlight(status) {
   column.classList.remove('highlight');
 }
 
+const dummyMessages = [
+  'No tasks to do',
+  'No tasks in progress',
+  'No tasks awaiting Feedback',
+  'No tasks done'
+];
+
 function showDummydiv() {
   for (let i = 1; i <= 4; i++) {
     const column = document.querySelector(`.column[data-status='${i}'] .tasks`);
     if (column && column.children.length === 0) {
       const dummyDiv = document.createElement('div');
       dummyDiv.classList.add('dummy');
-      if (i === 1) {
-        dummyDiv.innerText = 'No tasks to do';
-      } else if (i === 2) {
-        dummyDiv.innerText = 'No tasks in progress';
-      } else if (i === 3) {
-        dummyDiv.innerText = 'No tasks awaiting Feedback';
-      } else if (i === 4) {
-        dummyDiv.innerText = 'No tasks done';
-      }
+      dummyDiv.innerText = dummyMessages[i - 1];
       column.appendChild(dummyDiv);
     }
   }
 }
-  // wenn ein von Status von 1-4 nicht vergebne ist, 
-  //dann wird in der dazugehörigen column mit dem passenden data-status, 
-  //der dummy angezeigt 
