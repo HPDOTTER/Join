@@ -80,3 +80,13 @@ header {
 .d-block {
     display: block;
 }
+
+@media (max-width: 630px){
+    header {
+        padding: 20px 20px;
+    }
+
+    .color-white {
+        display: none;
+    }
+}
