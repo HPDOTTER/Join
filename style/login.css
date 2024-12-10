@@ -149,8 +149,8 @@
     position: absolute;
     height: 37px;
     width: 37px;
-    top: 60px;
-    left: 40px;
+    top: 70px;
+    left: 100px;
     cursor: pointer;
     content: url('../assets/icons/icon-arrow-back.png');
 }
@@ -201,6 +201,7 @@
 .login-button-div {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
     gap: 35px;
 }
@@ -290,4 +291,8 @@ input[type="checkbox"][id="acceptPrivacyPolicy"]:hover + label {
     color: var(--secondary-color);
     font-weight: 700;
     margin-bottom: 40px;
+}
+
+.mediaSignUpDiv {
+    display: none;
 }

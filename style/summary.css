@@ -179,3 +179,7 @@
 .white-colored-text {
     color: #FFFFFF !important;
 }
+
+#urgentDate {
+    margin: 0px;
+}
