@@ -1,3 +1,29 @@
+function taskTemplate(task, index) {
+  return `<div class="task" draggable="true" ondragstart="startDrag(${index})" onclick="openTaskOverlay(${index})">
+        <span class="category ${task.categoryUser ? 'user' : 'technical'}">
+            ${task.categoryUser ? 'User Story' : 'Technical Task'}
+        </span>
+        <h3>${task.titel}</h3>
+        ${taskDescription(task)}
+        ${rendersubtaskCount(task)}
+        ${renderMembersPrio(task)}
+    </div>`;
+}
+
+function rendersubtaskCount(task) {
+  if (task.subtasks) {
+    const { subtaskDone, subtaskCount } = calculateSubtaskCount(task);
+    return `<section class="progress-section">
+        <div class="progress-bar">
+          <div class="progress" style="width: ${task.progress * 100}%;"></div>
+        </div>
+        <div>${subtaskDone}/${subtaskCount} Subtasks</div>
+      </section>`;
+  } else {
+    return '';
+  }
+}
+
 function getOpenTaskOverlayTemplate(task, index) {
     return `
     <div class="task-overlay-content">
