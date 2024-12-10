@@ -221,6 +221,11 @@ function updateContactNames() {
   });
 }
 
+function toggleResponsiveMenu(){
+  let menu = document.getElementById('contactDetailResponsiveMenu');
+  menu.classList.toggle('d-none');
+}
+
 
 // document.addEventListener('DOMContentLoaded', hideDetail);
 

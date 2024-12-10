@@ -32,7 +32,7 @@
         <div class="contact-list-section">
           <div class="contact-list-button-container">
             <button class="button-primary scale-on-hover contact-list-button" onclick="showForm()">
-              Add new contact
+              <span class="contact-list-button-text">Add new contact</span>
               <img class="icon-user">
             </button>
           </div>
@@ -40,6 +40,10 @@
         </div>
         <div id="contactDetailSection" class="contact-detail-section">
           <div id="contactDetail" class="contact-detail">
+            <div class="contact-detail-responsive-head">
+              Contact Information
+              <img src="../assets/icons/icon-arrow-back.png" class="contact-detail-responsive-head-arrow" onclick="hideDetail()">
+            </div>
             <div class="contact-detail-head">
               <div id="contactAvatar" class="contact-detail-avatar"></div>
               <div class="contact-detail-name-section">
@@ -63,6 +67,19 @@
               <strong>Phone:</strong>
               <span id="detailPhone"></span>
             </div>
+          </div>
+          <button class="contact-detail-responsive-menu-button button-primary" onclick="toggleResponsiveMenu()">
+            <img src="../assets/icons/icon-menu-dots.svg" alt="">
+          </button>
+          <div id="contactDetailResponsiveMenu" class="contact-detail-responsive-menu d-none">
+            <button class="button-edit" onclick="editContact(); toggleResponsiveMenu()">
+              <img class="icon-edit">
+              Edit
+            </button>
+            <button class="button-delete" onclick="deleteContact(); toggleResponsiveMenu()">
+              <img class="icon-delete">
+              Delete
+            </button>
           </div>
         </div>
       </div>
