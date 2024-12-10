@@ -68,7 +68,7 @@
           <div class="add-task-info-element">
             <label for="taskAssignedTo">Assigned to: <span>(optional)</span></label>
             <button class="add-task-assigned-to-button" onclick="toggleDropdown()">
-              Select contacts to assign
+              <p id="addTaskAssignedToValue">Select contacts to assign</p>
               <img class="icon-add-task-assigned-to-button-arrow">
             </button>
             <div id="taskAssignedToMenu" class="dropdown-menu">
@@ -95,12 +95,12 @@
           <div class="add-task-info-element">
             <label>Category:</label>
             <button class="add-task-category-button" onclick="toggleCategoryDropdown()">
-              Select task category
+              <p id="addTaskCategoryValue">Select task category</p>
               <img class="icon-add-task-category-button-arrow">
             </button>
             <div id="categoryDropdown" class="dropdown-menu">
-              <div class="dropdown-item" data-value="false" onclick="selectCategory(this)">Technical Task</div>
-              <div class="dropdown-item" data-value="true" onclick="selectCategory(this)">User Story</div>
+              <div class="dropdown-category-item" data-value="false" onclick="selectCategory(this)">Technical Task</div>
+              <div class="dropdown-category-item" data-value="true" onclick="selectCategory(this)">User Story</div>
             </div>
           </div>
 
@@ -138,3 +138,5 @@
 <script src="../scripts/w3-include-html.js"></script>
 
 </html>
+
+

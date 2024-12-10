@@ -159,7 +159,19 @@
   border-radius: 6px;
 }
 
+.dropdown-category-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
 
+.dropdown-category-item:hover {
+  cursor: pointer;
+  background-color: var(--hover-bright-blue);
+}
 
 .item-avatar {
   display: flex;

@@ -25,7 +25,7 @@ const toggleCategoryDropdown = () => {
 
 const selectCategory = (element) => {
   const dropdown = document.getElementById('categoryDropdown');
-  const button = document.querySelector('.add-task-category-button');
+  const button = document.getElementById('addTaskCategoryValue');
   // Setze den ausgewählten Wert
   selectedCategory = element.getAttribute('data-value') === 'true';
   // Aktualisiere die Button-Anzeige
@@ -70,8 +70,10 @@ function createNewTask() {
 
 
 const toggleDropdown = () => {
+  const button = document.getElementById("addTaskAssignedToValue");
   const dropdownMenu = document.getElementById("taskAssignedToMenu");
   dropdownMenu.classList.toggle("active");
+
 };
 
 async function renderContactsWithCheckboxes() {
