@@ -25,12 +25,24 @@
 .add-task-textarea {
   height: 100px;
   padding: 10px;
+  margin-top: 10px;
   border: 1px solid var(--divider-color);
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   outline: none;
   resize: none;
+}
+
+.custom-resize-handle {
+  width: 20px;
+  height: 20px;
+  content: url('../assets/icons/resize-handle.svg');
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  cursor: se-resize;
+  border-radius: 3px;
 }
 
 .add-task-textarea:focus {
@@ -50,7 +62,7 @@
   align-items: flex-start;
   gap: 8px;
   height: 55px;
-  /* padding: 8px; */
+  margin-top: 10px;
 }
 
 .add-task-priority-area>img {
@@ -73,6 +85,7 @@
 .add-task-assigned-to-button {
   display: flex;
   justify-content: space-between;
+  margin-top: 8px;
   padding: 4px;
   font-weight: 400;
   border-bottom: 1px solid var(--divider-color);
@@ -110,7 +123,6 @@
   /* width: 100%; */
   max-height: 160px;
   background-color: white;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   overflow-y: auto;
   z-index: 1000;
@@ -147,9 +159,19 @@
   border-radius: 6px;
 }
 
-.dropdown-item:hover {
-  background-color: var(--primary-highlight-color);
-  cursor: pointer;
+
+
+.item-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: white;
+  background-color: var(--salmon);
+  font-size: 12px;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
 }
 
 .dropdown-item-avatar {

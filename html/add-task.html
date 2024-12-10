@@ -40,6 +40,7 @@
           <div class="add-task-info-element">
             <label for="taskDescription">Description: <span>(optional)</span></label>
             <textarea id="taskDescription" placeholder="Enter a description" class="add-task-textarea"></textarea>
+            <div class="custom-resize-handle"></div>
           </div>
 
           <div class="add-task-info-element">
@@ -74,10 +75,17 @@
               <!-- Dynamisch generierte Kontakte mit Checkboxen -->
             </div>
             <div class="dropdown-menu active">
-              <div class="dropdown-item">
-                <div class="dropdown-item-avatar">TK</div>
-                <div class="dropdown-item-contact-name">Testkontakt</div>
-                <img class="icon-dropdown-item-checkbox">
+              <div class="dropdown-item" id="dropdown-item">
+                <div class="item-avatar">TK</div>
+                <!--
+                <div class="dropdown-menu active">
+                  <div class="dropdown-item">
+                  <div class="dropdown-item-avatar">TK</div>
+                  <div class="dropdown-item-contact-name">Testkontakt</div>
+                  <img class="icon-dropdown-item-checkbox">
+                  </div>
+                 </div>
+                -->
               </div>
              </div>
           </div>
