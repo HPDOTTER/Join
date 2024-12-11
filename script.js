@@ -97,3 +97,14 @@ function getToastMessage(text, fileName) {
 function goBack() {
   window.history.back();
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  w3.includeHTML(() => {
+    const pageId = document.body.getAttribute('data-page');
+    const avatar = document.getElementById('headerAvatar');
+    const hideAvatarPages = ['legal-notice', 'privacy-policy'];
+    if(avatar && hideAvatarPages.includes(pageId)) {
+      avatar.style.display = 'none';
+    }
+  });
+})
