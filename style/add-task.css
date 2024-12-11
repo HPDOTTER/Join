@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 24px;
   width: 500px;
+  /* height: calc(100vh - 96px); */
   padding: 64px 24px;
   overflow-y: scroll;
 }
@@ -327,3 +328,9 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
   background-color: var(--hover-slight-blue);
   border-radius: 50%;
 }
+
+/* @media (max-width: 1200px) {
+  .add-task-area {
+    height: calc(100vh - 96px - 90px);
+  }
+} */

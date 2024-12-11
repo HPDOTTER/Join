@@ -98,7 +98,7 @@ p>a {
 .site-body-wrapper {
     display: flex;
     position: relative;
-    height: calc(100vh - 96px);
+    max-height: calc(100vh - 96px);
     max-width: 1920px;
 }
 

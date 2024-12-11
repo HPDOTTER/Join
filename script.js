@@ -128,3 +128,26 @@ function handleMainMenuVisibility() {
     }
   }
 }
+
+function handleMenuBarVisibility() {
+  const guest = sessionStorage.getItem('guest');
+  if (!(user || guest)) {
+    if (window.innerWidth < 1200) {
+      hideMenuBar();
+    } else {
+      showMenuBar();
+    }
+  }
+}
+
+function hideMenuBar() {
+  let menuBar = document.getElementById('menuBarContainer');
+  let siteBodyWrapper = document.getElementById('siteBodyWrapper');
+  menuBar.style.display = 'none';
+  siteBodyWrapper.style.height = 'calc(100vh - 96px)';
+}
+
+function showMenuBar() {
+  menuBar = document.getElementById('menuBarContainer');
+  menuBar.style.display = 'flex';
+}

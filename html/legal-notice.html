@@ -16,11 +16,11 @@
     <script src="../scripts/dataStorage.js"></script>
 </head>
 
-<body data-page="legal-notice" onload="init()">
+<body data-page="legal-notice" onload="init(); handleMenuBarVisibility()" onresize="handleMenuBarVisibility()">
     <div class="site-wrapper">
         <header w3-include-html="header.html"></header>
-        <div class="site-body-wrapper">
-            <div class="menu-bar-left">
+        <div id="siteBodyWrapper" class="site-body-wrapper">
+            <div id="menuBarContainer" class="menu-bar-left">
                 <div w3-include-html="menu-bar.html"></div>
             </div>
             <div class="content-wrapper text-content">
