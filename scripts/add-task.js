@@ -73,8 +73,14 @@ const toggleDropdown = () => {
   const button = document.getElementById("addTaskAssignedToValue");
   const dropdownMenu = document.getElementById("taskAssignedToMenu");
   dropdownMenu.classList.toggle("active");
-
+  if (dropdownMenu.classList.contains("active")) {
+    button.innerHTML = "";
+  } else {
+    button.innerHTML = "Select contacts to assign";
+  }
 };
+
+
 
 async function renderContactsWithCheckboxes() {
   await load();
@@ -88,18 +94,48 @@ async function renderContactsWithCheckboxes() {
 function createDropdownItem(contact, index) {
   const item = document.createElement("div");
   item.className = "dropdown-item";
-  const checkbox = createCheckbox(contact, index);
-  const label = createLabel(contact, index);
-  item.appendChild(checkbox);
-  item.appendChild(label);
+  item.appendChild(showContactAvatar(contact));
+  item.appendChild(showContactName(contact));
+  item.appendChild(createCheckbox(contact, index));
+  item.appendChild(createLabel(contact, index));
   return item;
+}
+
+function showContactAvatar(contact) {
+  const avatarColor = contact ? contact.color : 'orange';
+  const avatar = document.createElement("div");
+  avatar.className = "dropdown-item-avatar";
+  avatar.innerHTML = getInitials(contact.name);
+  avatar.style.backgroundColor = avatarColor;
+  return avatar;
+}
+
+
+function showContactName(contact) {
+  const name = document.createElement("p");
+  name.innerHTML = contact.name;
+  return name;
+}
+
+function taskMembers(members) {
+  const membersHtml = document.getElementById("taskMembers");
+  membersHtml.innerHTML = "";
+  members.forEach((member) => {
+    const memberHtml = document.createElement("div");
+    memberHtml.className = "dropdown-item-avatar";
+    memberHtml.innerHTML = getInitials(member);
+    const contact = contacts.find(contact => contact.name === member);
+    const avatarColor = contact ? contact.color : 'orange';
+    memberHtml.style.backgroundColor = avatarColor;
+    membersHtml.appendChild(memberHtml);
+  });
 }
 
 function createCheckbox(contact, index) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.className = "contact-checkbox";
-  checkbox.id = `contact-${index}`;
+  checkbox.id = `contact.${index}`;
   checkbox.checked = false;
   checkbox.addEventListener("change", (event) => handleCheckboxChange(event, contact));
   return checkbox;
@@ -107,8 +143,9 @@ function createCheckbox(contact, index) {
 
 function createLabel(contact, index) {
   const label = document.createElement("label");
-  label.setAttribute("for", `contact-${index}`);
+  label.setAttribute("for", `contact.${index}`);
   label.textContent = contact.name;
+  label.className = "contact-label";
   return label;
 }
 
@@ -120,6 +157,7 @@ const handleCheckboxChange = (event, contact) => {
   } else {
     members = members.filter((member) => member !== contact.name);
   }
+  taskMembers(members, contact);
 };
 
 

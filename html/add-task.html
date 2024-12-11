@@ -62,10 +62,6 @@
             </div>
           </div>
 
-
-
-
-
           <div class="add-task-info-element">
             <label for="taskAssignedTo">Assigned to: <span>(optional)</span></label>
             <button class="add-task-assigned-to-button" onclick="toggleDropdown()">
@@ -75,23 +71,12 @@
             <div id="taskAssignedToMenu" class="dropdown-menu">
               <!-- Dynamisch generierte Kontakte mit Checkboxen -->
             </div>
-            <div class="dropdown-menu active">
-              <div class="dropdown-item" id="dropdown-item">
-                <div class="item-avatar">TK</div>
-                <!--
-                <div class="dropdown-menu active">
-                  <div class="dropdown-item">
-                  <div class="dropdown-item-avatar">TK</div>
-                  <div class="dropdown-item-contact-name">Testkontakt</div>
-                  <img class="icon-dropdown-item-checkbox">
-                  </div>
-                 </div>
-                -->
+            <div class="dropdown-menu">
+              <div class="dropdown-item active" id="dropdown-item">
               </div>
              </div>
           </div>
-
-
+          <div id="taskMembers"></div>
 
           <div class="add-task-info-element">
             <label>Category:</label>
@@ -105,12 +90,6 @@
             </div>
           </div>
 
-
-
-
-
-
-
           <div class="add-task-info-element">
             Subtasks <span>(optional)</span>
             <input type="text" id="subtaskInput" placeholder="subtask">
@@ -118,7 +97,6 @@
             <div id="taskAddSubtasksContent">
             </div>
           </div>
-
 
         </div>
         <div class="add-task-button-area">

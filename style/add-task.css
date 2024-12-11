@@ -120,35 +120,42 @@
 
 .dropdown-menu {
   display: none;
-  /* width: 100%; */
-  max-height: 160px;
   background-color: white;
   border-radius: 4px;
-  overflow-y: auto;
   z-index: 1000;
 }
 
 .dropdown-menu.active {
   display: block;
+  height: 100%;
 }
-
-/* .contact-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-} */
 
 .contact-item:last-child {
   margin-bottom: 0;
 }
 
-.contact-checkbox {
-  margin-right: 10px;
+input[type="checkbox"][class="contact-checkbox"] {
+  display: none;
 }
 
-/* .dropdown.active {
-  display: block;
-} */
+input[type="checkbox"][class="contact-checkbox"] + label {
+  display: inline-block;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    content: url('../assets/icons/checkbox-default.svg');
+}
+
+input[type="checkbox"][class="contact-checkbox"]:checked + label {
+	content: url('../assets/icons/checkbox-checked.svg');
+}
+
+input[type="checkbox"][class="contact-checkbox"]:hover + label {
+    background-color:  var( --hover-slight-blue);
+    box-shadow: 0px 0px 20px 1px var(--hover-slight-blue);
+    border-radius: 40%;
+}
+
 
 .dropdown-item {
   display: flex;
@@ -174,7 +181,7 @@
 }
 
 .item-avatar {
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   width: 30px;
@@ -184,6 +191,11 @@
   font-size: 12px;
   border: 2px solid #FFFFFF;
   border-radius: 50%;
+}
+
+#taskMembers {
+  display: flex;
+  gap: 8px;
 }
 
 .dropdown-item-avatar {
@@ -229,4 +241,11 @@
 
 .add-task-button-clear:active .icon-cancel {
   content: url('../assets/icons/icon-cancel-active.png');
+}
+
+.contact-label {
+  margin-left: auto; 
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
