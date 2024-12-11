@@ -6,7 +6,6 @@ async function save() {
   await putData("/tasks", tasks);
   await putData("/status", statusTask);
   await putData("/users", users);
-  await putData("/isLoggedIn", isLoggedIn)
 }
 
 
@@ -14,7 +13,6 @@ async function load() {
   await loadData("/contacts", contacts);
   await loadData("/tasks", tasks);
   await loadData("/users", users);
-  await loadLogInStatus();
   await loadDataStatus();
 }
 
@@ -33,13 +31,6 @@ async function loadDataStatus() {
   statusTask = responseToJson.status;
   //console.log(statusTask, 'load');
 };
-
-async function loadLogInStatus() {
-  let response = await fetch(BASE_URL + ".json");
-  let responseToJson = await response.json();
-  isLoggedIn = responseToJson.isLoggedIn;
-}
-
 
 async function putData(path = "", data = {}) {
   let response = await fetch(BASE_URL + path + ".json", {

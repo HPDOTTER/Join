@@ -3,14 +3,13 @@ let tasks = [];
 let contacts = [];
 let statusTask = 1;
 let errors = [];
-let isLoggedIn = false;
 const user = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
 
 async function init() {
+  handleMainMenuVisibility();
   await load();
   await save();
   waitForElement('#currentUserInitials', setCurrentUserInitials);
-  handleMainMenuVisibility();
 }
 
 function smoothTransition(url) {
@@ -44,11 +43,9 @@ function currentUser() {
   }
 }
 
-async function logout() {
+function logout() {
   sessionStorage.removeItem('user');
   sessionStorage.removeItem('guest');
-  isLoggedIn = false;
-  await save();
   smoothTransition('../html/login.html?msg=You have successfully logged out.');
 }
 
@@ -102,16 +99,16 @@ function goBack() {
   window.history.back();
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   w3.includeHTML(() => {
     const pageId = document.body.getAttribute('data-page');
     const avatar = document.getElementById('headerAvatar');
     const help = document.getElementById('headerHelpIcon');
     const hidePages = ['legal-notice', 'privacy-policy'];
-    if(avatar && hidePages.includes(pageId)) {
+    if (avatar && hidePages.includes(pageId)) {
       avatar.style.display = 'none';
     }
-    if(help && hidePages.includes(pageId)) {
+    if (help && hidePages.includes(pageId)) {
       help.style.display = 'none';
     }
   });
@@ -120,11 +117,14 @@ document.addEventListener("DOMContentLoaded", function() {
 function handleMainMenuVisibility() {
   const menuMain = document.getElementById('menuMain');
   const menuBar = document.getElementById('menuBar');
-  if(isLoggedIn) {
-    menuMain.style.display = 'flex';
-    menuBar.style.justifyContent = 'space-between';
-  } else {
-    menuMain.style.display = 'none';
-    menuBar.style.justifyContent = 'flex-end';
+  const guest = sessionStorage.getItem('guest');
+  if (menuMain && menuBar) {
+    if (user || guest) {
+      menuMain.style.display = 'flex';
+      menuBar.style.justifyContent = 'space-between';
+    } else {
+      menuMain.style.display = 'none';
+      menuBar.style.justifyContent = 'flex-end';
+    }
   }
 }
