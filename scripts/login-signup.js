@@ -76,7 +76,7 @@ async function signUpSubmit() {
   }
 }
 
-function loginSubmit() {
+async function loginSubmit() {
   let user = users.find(user => user.email === emailInput.value && user.password === passwordInput.value);
   if (user) {
     loginSuccess(user);
@@ -89,6 +89,8 @@ function loginSubmit() {
   } else {
     errorMessage.innerText = 'Email or password is incorrect';
   }
+  isLoggedIn = true;
+  await save();
 }
 
 function removeLocalStorageLogin() {

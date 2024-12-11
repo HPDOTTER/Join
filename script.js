@@ -3,12 +3,14 @@ let tasks = [];
 let contacts = [];
 let statusTask = 1;
 let errors = [];
+let isLoggedIn = false;
 const user = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
 
 async function init() {
   await load();
   await save();
   waitForElement('#currentUserInitials', setCurrentUserInitials);
+  handleMainMenuVisibility();
 }
 
 function smoothTransition(url) {
@@ -42,9 +44,11 @@ function currentUser() {
   }
 }
 
-function logout() {
+async function logout() {
   sessionStorage.removeItem('user');
   sessionStorage.removeItem('guest');
+  isLoggedIn = false;
+  await save();
   smoothTransition('../html/login.html?msg=You have successfully logged out.');
 }
 
@@ -102,9 +106,25 @@ document.addEventListener("DOMContentLoaded", function() {
   w3.includeHTML(() => {
     const pageId = document.body.getAttribute('data-page');
     const avatar = document.getElementById('headerAvatar');
-    const hideAvatarPages = ['legal-notice', 'privacy-policy'];
-    if(avatar && hideAvatarPages.includes(pageId)) {
+    const help = document.getElementById('headerHelpIcon');
+    const hidePages = ['legal-notice', 'privacy-policy'];
+    if(avatar && hidePages.includes(pageId)) {
       avatar.style.display = 'none';
     }
+    if(help && hidePages.includes(pageId)) {
+      help.style.display = 'none';
+    }
   });
-})
+});
+
+function handleMainMenuVisibility() {
+  const menuMain = document.getElementById('menuMain');
+  const menuBar = document.getElementById('menuBar');
+  if(isLoggedIn) {
+    menuMain.style.display = 'flex';
+    menuBar.style.justifyContent = 'space-between';
+  } else {
+    menuMain.style.display = 'none';
+    menuBar.style.justifyContent = 'flex-end';
+  }
+}
