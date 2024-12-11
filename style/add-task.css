@@ -92,7 +92,9 @@
 }
 
 .add-task-category-button:hover,
-.add-task-assigned-to-button:hover {
+.add-task-assigned-to-button:hover,
+.add-task-category-button:focus-within,
+.add-task-assigned-to-button:focus-within {
   border-bottom: 1px solid var(--primary-color);
 }
 
@@ -248,4 +250,80 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.add-task-info-element-header {
+  font-weight: 700;
+}
+
+.icon-add-subtask-button-plus {
+  content: url('../assets/icons/SubtaskPlus.svg');
+  display: flex;
+  align-items: center;
+}
+
+.icon-add-subtask-button-plus:hover {
+  background-color: var(--hover-slight-blue);
+  border-radius: 50%;
+}
+
+.add-task-category-button input {
+  border: none;
+  outline: none;
+}
+
+#subtaskInput {
+  width: 100%;
+}
+
+#taskAddSubtasksContent {
+  margin-top: 10px;
+}
+.listitems {
+  padding: 6px;
+  font-size: 15px;
+}
+
+.ifSubtaskvalue {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.subtaskDevider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15px;
+  width: 2px;
+  border: 1px solid grey; 
+}
+
+.clearSubtask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+}
+
+.clearSubtask img {
+  height: 13px;
+  width: 13px;
+  cursor: pointer;
+}
+
+.clearSubtask:hover {
+  background-color: var(--hover-slight-blue);
+  border-radius: 50%;
+}
+
+.addSubtask {
+  display: flex;
+  align-items: center;
+}
+
+.addSubtask:hover {
+  background-color: var(--hover-slight-blue);
+  border-radius: 50%;
 }

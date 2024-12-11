@@ -9,12 +9,10 @@ async function addTask(status) {
   window.location.href = "../html/add-task.html";
 }
 
-
 function addTaskCancel() {
   window.location.href = "../html/board.html";
   renderTasks();
 }
-
 
 let selectedCategory = null;
 
@@ -53,19 +51,45 @@ function createNewTask() {
   const title = document.getElementById('taskTitle').value;
   const description = document.getElementById('taskDescription').value;
   const date = document.getElementById('taskDate').value;
-  const priority = parseInt(document.getElementById('taskPriority').value);
 
   return {
     titel: title,
     description: description,
     categoryUser: selectedCategory,
     date: new Date(date),
-    priority,
+    priority: selectedPriority,
     status: statusTask,
     progress: 0,
     members: members,
     subtasks: subtasks
   };
+}
+
+selectedPriority = null;
+
+const priorityImgactive = {
+  '1': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-urgent-active.svg',
+  '2': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-medium-active.svg',
+  '3': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-low-active.svg'
+};
+
+const priorityImgPrimal = {
+  '1': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-urgent.svg',
+  '2': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-medium.svg',
+  '3': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-low.svg'
+};
+
+
+function taskPriority(priority) {
+  const priorities = ['1', '2', '3'];
+  // Reset the background color of all priority elements
+  priorities.forEach(p => {
+    document.getElementById(p).style.content = `url(${priorityImgPrimal[p]})`;
+  });
+  // Set the background color of the selected priority element
+  document.getElementById(priority).style.content = `url(${priorityImgactive[priority]})`;
+  // Store the selected priority
+  selectedPriority = priority;
 }
 
 
@@ -164,11 +188,27 @@ const handleCheckboxChange = (event, contact) => {
 function addSubtask() {
   let inputfield = document.getElementById('subtaskInput').value;
   let subtask = document.getElementById('taskAddSubtasksContent');
-  subtask.innerHTML += /*html*/`<div>${inputfield}</div>`;
+  subtask.innerHTML += `<li class="listitems">${inputfield}</li>`;
   subtasks.push({ 'subtitel': inputfield, 'isDone': false });
-  console.log(subtasks);
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const subTaskValue = document.getElementById('subtaskInput');
+  const ifSubtaskValue = document.getElementById('ifSubtaskvalue');
+  const addSubtaskPlus = document.getElementById('addSubtaskPlus');
+
+  if (subTaskValue) {
+    subTaskValue.addEventListener('keyup', () => {
+      const hasValue = subTaskValue.value.length > 0;
+      ifSubtaskValue.style.display = hasValue ? 'flex' : 'none';
+      addSubtaskPlus.style.display = hasValue ? 'none' : 'flex';
+    });
+  } else {
+    console.error('Subtask input element not found');
+  }
+});
+
+//custom resize textarea
 document.addEventListener('DOMContentLoaded', () => {
   const textarea = document.querySelector('.add-task-textarea');
   const resizeHandle = document.querySelector('.custom-resize-handle');
@@ -194,3 +234,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }, false);
   }
 });
+
+

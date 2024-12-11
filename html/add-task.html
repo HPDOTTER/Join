@@ -39,14 +39,14 @@
           </div>
 
           <div class="add-task-info-element">
-            <label for="taskDescription">Description: <span>(optional)</span></label>
+            <label for="taskDescription">Description <span>(optional)</span></label>
             <textarea id="taskDescription" placeholder="Enter a description" class="add-task-textarea"></textarea>
             <div class="custom-resize-handle"></div>
           </div>
 
           <div class="add-task-info-element">
 
-            <label for="taskDate">Due date:</label>
+            <label for="taskDate">Due date</label>
             <div class="input-wrapper">
               <input type="date" placeholder="dd/mm/yyyy" class="input" id="taskDate" required>
               <img src="../assets/icons/icon-calender.jpg" class="add-task-input-date-icon">
@@ -54,16 +54,16 @@
           </div>
 
           <div class="add-task-info-element">
-            <label for="taskPriority">Priority:</label>
+            <label for="taskPriority">Priority</label>
             <div id="taskPriority" class="add-task-priority-area">
-              <img class="icon-add-task-priority-urgent pointer">
-              <img class="icon-add-task-priority-medium pointer">
-              <img class="icon-add-task-priority-low pointer">
+              <img class="icon-add-task-priority-urgent pointer" id="1" onclick="taskPriority('1')">
+              <img class="icon-add-task-priority-medium pointer" id="2" onclick="taskPriority('2')">
+              <img class="icon-add-task-priority-low pointer" id="3" onclick="taskPriority('3')">
             </div>
           </div>
-
+        
           <div class="add-task-info-element">
-            <label for="taskAssignedTo">Assigned to: <span>(optional)</span></label>
+            <label for="taskAssignedTo">Assigned to <span>(optional)</span></label>
             <button class="add-task-assigned-to-button" onclick="toggleDropdown()">
               <p id="addTaskAssignedToValue">Select contacts to assign</p>
               <img class="icon-add-task-assigned-to-button-arrow">
@@ -79,8 +79,8 @@
           <div id="taskMembers"></div>
 
           <div class="add-task-info-element">
-            <label>Category:</label>
-            <button class="add-task-category-button" onclick="toggleCategoryDropdown()">
+            <label>Category</label>
+            <button class="add-task-category-button" id="add-task-category-button" onclick="toggleCategoryDropdown()">
               <p id="addTaskCategoryValue">Select task category</p>
               <img class="icon-add-task-category-button-arrow">
             </button>
@@ -91,11 +91,18 @@
           </div>
 
           <div class="add-task-info-element">
-            Subtasks <span>(optional)</span>
-            <input type="text" id="subtaskInput" placeholder="subtask">
-            <button onclick="addSubtask()">+</button>
-            <div id="taskAddSubtasksContent">
+            <div class="add-task-info-element-header">Subtasks <span>(optional)</span></div>
+            <div class="add-task-category-button">
+              <input type="text" id="subtaskInput" placeholder="Add new subtask">
+              <div class="ifSubtaskvalue" id="ifSubtaskvalue">
+                <button onclick="clearSubtask()" class="clearSubtask"><img src="../assets/icons/close.svg"></button>
+                <div class="subtaskDevider"></div>
+                <button onclick="addSubtask()" class="addSubtask"><img src="../assets/icons/icon-check-active.png" ></button>
+              </div>
+              <label for="subtaskInput" id="addSubtaskPlus"><img class="icon-add-subtask-button-plus"></label>
             </div>
+            <ul id="taskAddSubtasksContent">
+            </ul>
           </div>
 
         </div>
