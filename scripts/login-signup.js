@@ -60,7 +60,7 @@ function addUser() {
     });
     contacts.push({
       'name': signUpNameInput.value,
-      'color': contactColors[Math.floor(Math.random() * 15)]
+      'color': contactColors[Math.floor(Math.random() * 14)]
     });
     save();
     showToastMessage('You Signed Up successfully', '')

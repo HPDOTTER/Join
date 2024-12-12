@@ -26,7 +26,7 @@ function rendersubtaskCount(task) {
 
 function getOpenTaskOverlayTemplate(task, index) {
     return `
-    <div class="task-overlay-content">
+    <div class="task-overlay-content animation-slide-from-bottom" id="task-overlay-content">
         <div class="task-overlay-head">
           ${taskCategory(task)}
           <div>
@@ -42,7 +42,7 @@ function getOpenTaskOverlayTemplate(task, index) {
         <span class="overlay-edit-footer">
           <div class="task-overlay-editors" onclick="deleteTask(${index})"><img src="../assets/icons/icon-delete.png"><p>Delete</p></div>
           <div class="task-overlay-devider"></div>
-          <div class="task-overlay-editors" onclick=""><img src="../assets/icons/icon-edit.png"><p>Edit</p></div>
+          <div class="task-overlay-editors" onclick="openEditTaskOverlay(${task, index})"><img src="../assets/icons/icon-edit.png"><p>Edit</p></div>
         </span>
       </div>` 
 }

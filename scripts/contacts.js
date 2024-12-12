@@ -69,7 +69,7 @@ async function addContact() {
   const name = document.getElementById('contactListName').value.trim();
   const email = document.getElementById('contactListEmail').value.trim();
   const phone = document.getElementById('contactListPhone').value.trim();
-  let colorNr = contactColors[Math.floor(Math.random() * 15)];
+  let colorNr = contactColors[Math.floor(Math.random() * 14)];
 
   if (name && email && phone) {
     contacts.push({ name, email, phone, 'color': colorNr });
@@ -77,8 +77,6 @@ async function addContact() {
     await save();
     renderContacts();
     hideForm();
-  } else {
-    alert("Bitte füllen Sie alle Felder aus.");
   }
 }
 
@@ -152,56 +150,51 @@ async function renderContacts() {
   await load();
   const contactList = document.getElementById('contactList');
   contactList.innerHTML = '';
-
-  const groupedContacts = {};
-
-  contacts.forEach(contact => {
-    const firstLetter = contact.name[0].toUpperCase();
-    if (!groupedContacts[firstLetter]) {
-      groupedContacts[firstLetter] = [];
-    }
-    groupedContacts[firstLetter].push(contact);
-  });
-
-  const sortedLetters = Object.keys(groupedContacts).sort();
-
-  sortedLetters.forEach(letter => {
-    const letterHeader = document.createElement('div');
-    letterHeader.className = 'contact-list-letter-header';
-    letterHeader.textContent = letter;
-    contactList.appendChild(letterHeader);
-
+  const groupedContacts = groupContactsByFirstLetter(contacts);
+  Object.keys(groupedContacts).sort().forEach(letter => {
+    contactList.appendChild(createLetterHeader(letter));
     groupedContacts[letter].forEach(contact => {
-      const contactItem = document.createElement('div');
-      contactItem.className = 'contact-item pointer';
-      contactItem.innerHTML = `<div class="contact-list-avatar" style="background-color: ${contact.color}">${getInitials(contact.name)}</div>
-                               <div>
-                                 <span class="contact-list-name">${contact.name}</span><br>
-                                 <span class="contact-email">${contact.email}<span>
-                               </div>`;
-      contactItem.onclick = () => showDetail(contact, contactItem);
-      contactList.appendChild(contactItem);
+      contactList.appendChild(createContactItem(contact));
     });
   });
 }
 
+function groupContactsByFirstLetter(contacts) {
+  return contacts.reduce((groups, contact) => {
+    const letter = contact.name[0].toUpperCase();
+    groups[letter] = groups[letter] || [];
+    groups[letter].push(contact);
+    return groups;
+  }, {});
+}
+
+function createLetterHeader(letter) {
+  const header = document.createElement('div');
+  header.className = 'contact-list-letter-header';
+  header.textContent = letter;
+  return header;
+}
+
+function createContactItem(contact) {
+  const item = document.createElement('div');
+  item.className = 'contact-item pointer';
+  item.innerHTML = `<div class="contact-list-avatar" style="background-color: ${contact.color}">${getInitials(contact.name)}</div>
+                    <div>
+                      <span class="contact-list-name">${contact.name}</span><br>
+                      <span class="contact-email">${contact.email}</span>
+                    </div>`;
+  item.onclick = () => showDetail(contact, item);
+  return item;
+}
+
 function updateContactNames() {
-  const contactList = document.getElementById('contactList');
-  const contactItems = contactList.getElementsByClassName('contact-item');
-  Array.from(contactItems).forEach((contactItem, index) => {
+  const contactItems = document.querySelectorAll('#contactList .contact-item');
+  contactItems.forEach((contactItem, index) => {
     const contact = contacts[index];
-    const nameElement = contactItem.querySelector('.contact-list-name');
-    const emailElement = contactItem.querySelector('.contact-email');
+    contactItem.querySelector('.contact-list-name').textContent = contact.name;
+    contactItem.querySelector('.contact-email').textContent = contact.email;
     const phoneElement = contactItem.querySelector('.contact-phone');
-    if (nameElement) {
-      nameElement.textContent = contact.name;
-    }
-    if (emailElement) {
-      emailElement.textContent = contact.email;
-    }
-    if (phoneElement) {
-      phoneElement.textContent = contact.phone;
-    }
+    if (phoneElement) phoneElement.textContent = contact.phone;
   });
 }
 

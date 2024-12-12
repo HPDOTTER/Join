@@ -1,3 +1,17 @@
+.task-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(245, 244, 244, 0.7); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it is on top of other elements */
+  visibility: hidden; /* Initially hidden */
+  opacity: 0; /* Initially transparent */
+}
 
 .task-overlay-content {
     display: inline-block;
@@ -8,11 +22,44 @@
     padding: 38px 30px;
     gap: 15px;
     border-radius: 30px;
+    visibility: 0;
   }
 
   .animation-slide-from-bottom {
     animation: slideFromBottom 0.5s forwards;
   }
+
+  .animation-slide-from-top {
+    animation: slideFromTop 0.5s forwards;
+  }
+
+  @keyframes slideFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideFromTop {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+  }
+
+  .task-overlay.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  
   
   .task-overlay-content > * {
     margin-top: 12px;
@@ -126,36 +173,6 @@
     display: none;
   }
 
-  .task-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(245, 244, 244, 0.7); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Ensure it is on top of other elements */
-    visibility: hidden; /* Initially hidden */
-    opacity: 0; /* Initially transparent */
-}
-
-@keyframes slideFromBottom {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.task-overlay.show {
-  visibility: visible;
-  opacity: 1;
-}
 
 .task-overlay-head {
     display: flex;
