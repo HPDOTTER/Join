@@ -152,7 +152,7 @@ function taskPriority(task) {
 
 function taskDescription(task) {
   if (task.description) {
-    return `<p>${task.description}</p>`;
+    return `<p class="taskDescriptionBoard">${task.description}</p>`;
   } else {
     return '';
   }

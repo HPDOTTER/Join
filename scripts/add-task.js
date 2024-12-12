@@ -10,7 +10,7 @@ async function addTask(status) {
 }
 
 function addTaskCancel() {
-  window.location.href = "../html/board.html";
+  window.location.href = "../html/add-task.html";
   renderTasks();
 }
 
@@ -192,6 +192,10 @@ function addSubtask() {
   subtasks.push({ 'subtitel': inputfield, 'isDone': false });
 }
 
+function clearSubtask() {
+  document.getElementById('subtaskInput').value = '';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const subTaskValue = document.getElementById('subtaskInput');
   const ifSubtaskValue = document.getElementById('ifSubtaskvalue');
@@ -204,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
       addSubtaskPlus.style.display = hasValue ? 'none' : 'flex';
     });
   } else {
-    console.error('Subtask input element not found');
+    return;
   }
 });
 

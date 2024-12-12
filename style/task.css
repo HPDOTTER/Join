@@ -196,6 +196,7 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  margin-top: 10px;
 }
 
 .avatar {
@@ -276,4 +277,8 @@ body {
   opacity: 0px;
   background-color:#E7E7E7;
   padding: 10px;
+}
+
+.taskDescriptionBoard {
+  margin-top: 10px;
 }
