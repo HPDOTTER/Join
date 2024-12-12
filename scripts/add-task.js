@@ -82,11 +82,11 @@ const priorityImgPrimal = {
 
 function taskPriority(priority) {
   const priorities = ['1', '2', '3'];
-  // Reset the background color of all priority elements
+  // Reset the Images of all priority elements
   priorities.forEach(p => {
     document.getElementById(p).style.content = `url(${priorityImgPrimal[p]})`;
   });
-  // Set the background color of the selected priority element
+  // Set the Image of the selected priority element
   document.getElementById(priority).style.content = `url(${priorityImgactive[priority]})`;
   // Store the selected priority
   selectedPriority = priority;
@@ -137,7 +137,11 @@ function showContactAvatar(contact) {
 
 function showContactName(contact) {
   const name = document.createElement("p");
-  name.innerHTML = contact.name;
+  if (contact.name === user) {
+    name.innerHTML = `${contact.name} (You)`;
+  } else {
+    name.innerHTML = contact.name;
+  }
   return name;
 }
 

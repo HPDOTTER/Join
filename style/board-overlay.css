@@ -8,7 +8,10 @@
     padding: 38px 30px;
     gap: 15px;
     border-radius: 30px;
-    animation: slideFromBottom 0.5s forwards; /* Animation to slide in from the bottom */
+  }
+
+  .animation-slide-from-bottom {
+    animation: slideFromBottom 0.5s forwards;
   }
   
   .task-overlay-content > * {
@@ -198,3 +201,4 @@
     cursor: pointer;
     content: url(../assets/icons/checkbox-default.svg);
   }
+

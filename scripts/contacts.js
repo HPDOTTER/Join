@@ -56,10 +56,6 @@ function showDetailActive(contact, contactItem) {
   currentContact = contact;
 }
 
-function getInitials(name) {
-  return name.split(' ').map(word => word[0]).join('').toUpperCase();
-}
-
 function hideDetail() {
   document.getElementById('contactDetailSection').style.display = 'none';
   if (activeContactItem) {
@@ -73,14 +69,7 @@ async function addContact() {
   const name = document.getElementById('contactListName').value.trim();
   const email = document.getElementById('contactListEmail').value.trim();
   const phone = document.getElementById('contactListPhone').value.trim();
-  let colorNr = contactColors[0];
-  if (contacts.length < contactColors.length) {
-    colorNr = contactColors[contacts.length];
-  } else if (contacts.length < (contactColors.length * 2)) {
-    colorNr = contactColors[contacts.length - contactColors.length];
-  } else if (contacts.length < (contactColors.length * 3)) {
-    colorNr = contactColors[contacts.length - (contactColors.length * 2)];
-  }
+  let colorNr = contactColors[Math.floor(Math.random() * 15)];
 
   if (name && email && phone) {
     contacts.push({ name, email, phone, 'color': colorNr });

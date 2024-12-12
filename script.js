@@ -8,6 +8,7 @@ const user = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem(
 async function init() {
   handleMainMenuVisibility();
   await load();
+  contacts = contacts.filter(contact => contact && contact.name);
   await save();
   waitForElement('#currentUserInitials', setCurrentUserInitials);
 }
@@ -110,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if (help && hidePages.includes(pageId)) {
       help.style.display = 'none';
-    }
+    } 
   });
 });
 
@@ -150,4 +151,16 @@ function hideMenuBar() {
 function showMenuBar() {
   menuBar = document.getElementById('menuBarContainer');
   menuBar.style.display = 'flex';
+}
+
+function getInitials(name) {
+  if (!name) return '';
+  const nameParts = name.split(' ');
+  if (nameParts.length === 1) {
+    // If the name is a single word, return the first two characters
+    return nameParts[0].substring(0, 2).toUpperCase();
+  } else {
+    // If the name has multiple words, return the first character of the first two words
+    return nameParts[0][0].toUpperCase() + nameParts[1][0].toUpperCase();
+  }
 }

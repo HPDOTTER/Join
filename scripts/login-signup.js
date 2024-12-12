@@ -28,21 +28,21 @@ if (msgBox) {
 const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null);
 
 async function signUpSubmit(e) {
-  e.preventDefault(); 
   const errors = await getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
   if (errors.length === 0 || errors.length === null) {
     addUser();
   } else if (errors.length > 0) {
+    e.preventDefault();
     errorMessage.innerText = errors.join(". ");
   }
 }
 
 form.addEventListener('submit', (e) => {
-  e.preventDefault(); 
   let errors = [];
-
+  e.preventDefault(); // Prevent the form from submitting
   if (signUpNameInput) { // If we have a firstname input then we are in the signup
     errors = getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
+    signUpSubmit(e);
   } else { // If we don't have a firstname input then we are in the login
     errors = getLoginFormErrors(emailInput.value, passwordInput.value);
   }
@@ -58,21 +58,15 @@ function addUser() {
       'email': emailInput.value,
       'password': passwordInput.value
     });
+    contacts.push({
+      'name': signUpNameInput.value,
+      'color': contactColors[Math.floor(Math.random() * 15)]
+    });
     save();
     showToastMessage('You Signed Up successfully', '')
     setTimeout(() => {
       smoothTransition('../html/login.html?msg=You have successfully signed up. Please log in.');
     }, 1200);
-  }
-}
-
-async function signUpSubmit() {
-  const errors = await getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
-  if (errors.length === 0 || errors.length === null) {
-    addUser();
-  } else if (errors.length > 0) {
-    e.preventDefault();
-    errorMessage.innerText = errors.join(". ");
   }
 }
 
@@ -218,6 +212,14 @@ function getSignupFormErrors(name, email, password, repeatPassword) {
     errors.push('Password does not match repeated password');
     passwordInput.parentElement.classList.add('incorrect');
     repeatPasswordInput.parentElement.classList.add('incorrect');
+  }
+  if (users.find(user => user.email === email)) {
+    errors.push('Email is already in use');
+    emailInput.parentElement.classList.add('incorrect');
+  }
+  if (users.find(user => user.name === name)) {
+    errors.push('Name is already in use');
+    signUpNameInput.parentElement.classList.add('incorrect');
   }
   return errors;
 }
