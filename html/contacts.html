@@ -43,7 +43,8 @@
           <div id="contactDetail" class="contact-detail">
             <div class="contact-detail-responsive-head">
               Contact Information
-              <img src="../assets/icons/icon-arrow-back.png" class="contact-detail-responsive-head-arrow" onclick="hideDetail()">
+              <img src="../assets/icons/icon-arrow-back.png" class="contact-detail-responsive-head-arrow"
+                onclick="hideDetail()">
             </div>
             <div class="contact-detail-head">
               <div id="contactAvatar" class="contact-detail-avatar"></div>
@@ -94,32 +95,34 @@
       </div>
       <div class="contact-edit-form-body">
         <div class="contact-detail-avatar" id="contactEditAvatar"></div>
-        <div class="input-wrapper">
-          <input type="text" placeholder="Name" class="input" id="editName" required>
-          <label for="editName">
-            <img src="../assets/icons/icon-person.svg" alt="person">
-          </label>
-        </div>
-        <div class="input-wrapper">
-          <input type="mail" placeholder="Email" class="input" id="editEmail" required>
-          <label for="editEmail">
-            <img src="../assets/icons/icon-mail.svg" alt="mail">
-          </label>
-        </div>
-        <div class="input-wrapper">
-          <input type="text" placeholder="Phone" class="input" id="editPhone" required>
-          <label for="editPhone">
-            <img src="../assets/icons/icon-phone.svg" alt="phone">
-          </label>
-        </div>
-        <div class="contact-edit-form-button-section">
-          <button class="button-secondary contact-edit-form-button-delete scale-on-hover"
-            onclick="deleteContact(), hideEditForm()">Delete</button>
-          <button class="button-primary contact-edit-form-button-save scale-on-hover" onclick="saveContact()">
-            Save
-            <img class="icon-check">
-          </button>
-        </div>
+        <form class="contact-add-form-input-section" onsubmit="saveContact(); return false">
+          <div class="input-wrapper">
+            <input type="text" placeholder="Name" class="input" id="editName" required>
+            <label for="editName">
+              <img src="../assets/icons/icon-person.svg" alt="person">
+            </label>
+          </div>
+          <div class="input-wrapper">
+            <input type="email" placeholder="Email" class="input" id="editEmail" required>
+            <label for="editEmail">
+              <img src="../assets/icons/icon-mail.svg" alt="mail">
+            </label>
+          </div>
+          <div class="input-wrapper">
+            <input type="tel" placeholder="Phone" class="input" id="editPhone" required>
+            <label for="editPhone">
+              <img src="../assets/icons/icon-phone.svg" alt="phone">
+            </label>
+          </div>
+          <div class="contact-edit-form-button-section">
+            <button class="button-secondary contact-edit-form-button-delete scale-on-hover"
+              onclick="deleteContact(), hideEditForm()">Delete</button>
+            <button type="submit" class="button-primary contact-edit-form-button-save scale-on-hover">
+              Save
+              <img class="icon-check">
+            </button>
+          </div>
+        </form>
       </div>
     </div>
     <div id="contactFormOverlay" class="form-overlay" onclick="hideForm()"></div>
@@ -132,34 +135,37 @@
       </div>
       <div class="contact-add-form-body">
         <div class="contact-detail-avatar"></div>
-        <div class="input-wrapper">
-          <input type="text" placeholder="Name" class="input" id="contactListName" required>
-          <label for="contactListName">
-            <img src="../assets/icons/icon-person.svg" alt="person">
-          </label>
-        </div>
-        <div class="input-wrapper">
-          <input type="mail" placeholder="Email" class="input" id="contactListEmail" required>
-          <label for="contactListEmail">
-            <img src="../assets/icons/icon-mail.svg" alt="mail">
-          </label>
-        </div>
-        <div class="input-wrapper">
-          <input type="text" placeholder="Phone" class="input" id="contactListPhone" required>
-          <label for="contactListPhone">
-            <img src="../assets/icons/icon-phone.svg" alt="phone">
-          </label>
-        </div>
-        <div class="contact-add-form-button-section">
-          <button class="button-secondary contact-add-form-button-cancel scale-on-hover" onclick="hideForm()">
-            Cancel
-            <img class="icon-cancel">
-          </button>
-          <button class="button-primary contact-add-form-button-create-contact scale-on-hover" onclick="addContact(); showToastMessage('Contact succesfully created', '')">
-            Create contact
-            <img class="icon-check">
-          </button>
-        </div>
+        <form class="contact-add-form-input-section"
+          onsubmit="addContact(); showToastMessage('Contact succesfully created', ''); return false">
+          <div class="input-wrapper">
+            <input type="text" placeholder="Name" class="input" id="contactListName" required>
+            <label for="contactListName">
+              <img src="../assets/icons/icon-person.svg" alt="person">
+            </label>
+          </div>
+          <div class="input-wrapper">
+            <input type="email" placeholder="Email" class="input" id="contactListEmail" required>
+            <label for="contactListEmail">
+              <img src="../assets/icons/icon-mail.svg" alt="mail">
+            </label>
+          </div>
+          <div class="input-wrapper">
+            <input type="tel" placeholder="Phone" class="input" id="contactListPhone" required>
+            <label for="contactListPhone">
+              <img src="../assets/icons/icon-phone.svg" alt="phone">
+            </label>
+          </div>
+          <div class="contact-add-form-button-section">
+            <button class="button-secondary contact-add-form-button-cancel scale-on-hover" onclick="hideForm()">
+              Cancel
+              <img class="icon-cancel">
+            </button>
+            <button type="submit" class="button-primary contact-add-form-button-create-contact scale-on-hover">
+              Create contact
+              <img class="icon-check">
+            </button>
+          </div>
+        </form>
       </div>
     </div>
     <div w3-include-html="toast-message.html"></div>
@@ -169,4 +175,5 @@
 
 
 </body>
+
 </html>

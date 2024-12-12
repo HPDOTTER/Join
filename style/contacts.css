@@ -285,6 +285,15 @@
     padding: 0 80px;
 }
 
+.contact-add-form-input-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+}
+
 .contact-edit-form-button-section,
 .contact-add-form-button-section {
     display: flex;
@@ -444,10 +453,8 @@
         right: 24px;
     } */
 
-    .contact-edit-form-body,
-    .contact-add-form-body {
+    .contact-add-form-input-section {
         gap: 16px;
-        padding: 0 30px;
     }
 
     .contact-edit-form-button-section,
@@ -489,6 +496,11 @@
     .contact-item {
         padding: 8px;
         gap: 10px;
+    }
+
+    .contact-edit-form-body,
+    .contact-add-form-body {
+        padding: 0 30px;
     }
 }
 
