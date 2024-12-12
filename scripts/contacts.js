@@ -1,24 +1,19 @@
 const contactColors = [
-  '#FF5733', // Leuchtendes Rot
-  '#1D8348', // Waldgrün
-  '#2980B9', // Sattes Blau
-  '#FFC300', // Goldgelb
-  '#512E5F', // Dunkelviolett
-  '#C70039', // Dunkles Rot
-  '#33FF57', // Sattes Grün
-  '#1F618D', // Mittelmeerblau
+  '#FF7A00;', // Orange
   '#FF5EB3', // Pink
-  '#6C3483', // Lila
-  '#D35400', // Ziegelrot
-  '#28B463', // Dunkles Grün
-  '#154360', // Dunkelblau
-  '#D4A373', // Warmes Beige
-  '#581845', // Dunkles Lila
-  '#A04000', // Rostbraun
-  '#5d6e42', // Grau
-  '#2874A6', // Stahblau
-  '#A67C00', // Sattes Dunkelgelb
-  '#884EA0', // Dunkler Lavendel
+  '#6E52FF', // Violet
+  '#9327FF', // Purple
+  '#00BEE8', // Turquoise
+  '#1FD7C1', // Aqua
+  '#FF745E', // Salmon
+  '#FFA35E', // Pastel Orange
+  '#FC71FF', // Fuchsia
+  '#FFC701', // Pastelgold
+  '#0038FF', // Blue
+  '#C3FF2B', // Lime
+  '#FFE62B', // Yellow
+  '#FF4646', // Coral
+  'FFBB2B', // Gold
 ];
 
 
