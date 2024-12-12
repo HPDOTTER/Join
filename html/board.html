@@ -34,28 +34,34 @@
         <div class="boardmain">
             <div class="boardheader">
                 <div class="boardheader-search">
-                    <div class="task-search-bar">
-                        <input class="task-search-input" type="text" id="searchTask" placeholder="Find Task" onchange="filter()">
-                        <div class="task-search-devider"></div>
-                        <label for="searchTask">
-                            <img src="../assets/icons/icon-search.svg" alt="">
-                        </label>
+                    <div class="searchbar-section">
+                        <div class="task-search-bar">
+                            <input class="task-search-input" type="text" id="searchTask" placeholder="Find Task"
+                                oninput="filter()">
+                            <div class="task-search-devider"></div>
+                            <label for="searchTask">
+                                <img src="../assets/icons/icon-search.svg" alt="">
+                            </label>
+                        </div>
+                        <div id="noTasksMessage" class="no-task-message">No tasks found</div>
                     </div>
-                    <div id="noTasksMessage" style="display: none; text-align: center; color: red;">Keine Aufgaben gefunden.</div>
                     <button class="button-primary button-add-task" id="addTaskButton" onclick="addTask(1)">Add Task +</button>
                 </div>
                 <div class="task-table-headers">
                     <div class="task-table-header-element">
                         <h4>To do</h4>
-                        <button class="add-column" onclick="addTask(1)"><img src="../assets/icons/icon-plus-button.svg"></button>
+                        <button class="add-column" onclick="addTask(1)"><img
+                                src="../assets/icons/icon-plus-button.svg"></button>
                     </div>
                     <div class="task-table-header-element">
                         <h4>In Progress</h4>
-                        <button class="add-column" onclick="addTask(2)"><img src="../assets/icons/icon-plus-button.svg"></button>
+                        <button class="add-column" onclick="addTask(2)"><img
+                                src="../assets/icons/icon-plus-button.svg"></button>
                     </div>
                     <div class="task-table-header-element">
                         <h4>Await Feedback</h4>
-                        <button class="add-column" onclick="addTask(3)"><img src="../assets/icons/icon-plus-button.svg"></button>
+                        <button class="add-column" onclick="addTask(3)"><img
+                                src="../assets/icons/icon-plus-button.svg"></button>
                     </div>
                     <div class="task-table-header-element">
                         <h4>Done</h4>
@@ -64,35 +70,40 @@
             </div>
             <main id="kanbanBoard" class="task-kanban-board">
                 <div class="column" data-status="1">
-                    <div class="tasks" id="toDoDrag" ondrop="moveTo(1)" ondragover="allowDrop(event); highlight(1)" ondragleave="removeHighlight(1)"></div>
+                    <div class="tasks" id="toDoDrag" ondrop="moveTo(1)" ondragover="allowDrop(event); highlight(1)"
+                        ondragleave="removeHighlight(1)"></div>
                 </div>
                 <div class="column" data-status="2">
-                    <div class="tasks" id="inProgressDrag" ondrop="moveTo(2)" ondragover="allowDrop(event); highlight(2)" ondragleave="removeHighlight(2)"></div>
+                    <div class="tasks" id="inProgressDrag" ondrop="moveTo(2)"
+                        ondragover="allowDrop(event); highlight(2)" ondragleave="removeHighlight(2)"></div>
                 </div>
                 <div class="column" data-status="3">
-                    <div class="tasks" id="awaitFeedbackDrag" ondrop="moveTo(3)" ondragover="allowDrop(event); highlight(3)" ondragleave="removeHighlight(3)"></div>
+                    <div class="tasks" id="awaitFeedbackDrag" ondrop="moveTo(3)"
+                        ondragover="allowDrop(event); highlight(3)" ondragleave="removeHighlight(3)"></div>
                 </div>
                 <div class="column" data-status="4">
-                    <div class="tasks" id="doneDrag" ondrop="moveTo(4)" ondragover="allowDrop(event); highlight(4)" ondragleave="removeHighlight(4)"></div>
+                    <div class="tasks" id="doneDrag" ondrop="moveTo(4)" ondragover="allowDrop(event); highlight(4)"
+                        ondragleave="removeHighlight(4)"></div>
                 </div>
             </main>
         </div>
-      </div>
-      <main id="kanbanBoard" class="task-kanban-board">
+    </div>
+    <main id="kanbanBoard" class="task-kanban-board">
         <div class="column" data-status="1">
-          <div class="tasks"></div>
+            <div class="tasks"></div>
         </div>
         <div class="column" data-status="2">
-          <div class="tasks"></div>
+            <div class="tasks"></div>
         </div>
         <div class="column" data-status="3">
-          <div class="tasks"></div>
+            <div class="tasks"></div>
         </div>
         <div class="column" data-status="4">
-          <div class="tasks"></div>
+            <div class="tasks"></div>
         </div>
-      </main>
+    </main>
     </div>
-  <div id="taskOverlay" class="task-overlay"></div>
+    <div id="taskOverlay" class="task-overlay"></div>
 </body>
+
 </html>

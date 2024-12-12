@@ -72,6 +72,12 @@ body {
   height: 31px;
 }
 
+.no-task-message {
+  display: none;
+  padding: 0 8px;
+  color: #df0000;
+}
+
 .task-table-headers {
   position: absolute;
   display: flex;
