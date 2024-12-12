@@ -20,7 +20,7 @@
     <script src="../scripts/dataStorage.js" defer></script>
 </head>
 
-<body onload="onLoadSummary(); init()">
+<body onload="init(); onLoadSummary()">
     <div class="site-wrapper">
         <header w3-include-html="header.html"></header>
         <div class="site-body-wrapper">
@@ -29,7 +29,7 @@
             </div>
             <div class="content-wrapper summary-content">
                 <div class="summary-head">
-                    <h1 class="summary-headline">Good morning<span id="welcomeName"></span></h1>
+                    <h1 id="summaryWelcomeText" class="summary-headline"><span id="welcomeName"></span></h1>
                 </div>
                 <div class="tile-area">
                     <div class="tile-area-upper">

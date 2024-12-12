@@ -5,6 +5,7 @@ const tasksInProgress = document.getElementById('tasksInProgress');
 const tasksAwaitingFeedback = document.getElementById('tasksAwaitingFeedback');
 const tasksDone = document.getElementById('tasksDone');
 const welcomeName = document.getElementById('welcomeName');
+const summaryWelcomeText = document.getElementById('summaryWelcomeText');
 const urgentDate = document.getElementById('urgentDate');
 
 function onLoadSummary() {
@@ -13,13 +14,29 @@ function onLoadSummary() {
 }
 
 function welcomeUser() {
-    welcomeName.innerHTML = '';
+    const greetingFormula = getGreetingFormula();
     if (user) {
         const userName = user.split(' ')[0];
-        welcomeName.parentElement.innerHTML += `, <span id="welcomeName">${userName}</span>`;
+        summaryWelcomeText.innerHTML = `${greetingFormula}, <span id="welcomeName">${userName}</span>`;
     } else {
-        return;
+        summaryWelcomeText.innerHTML = greetingFormula;
     }                                                                       
+}
+
+function getGreetingFormula() {
+    const now = new Date();
+    const hours = now.getHours();
+    let greetingFormula = '';
+    if (hours >= 18) {
+        greetingFormula = 'Good evening';
+    } else if (hours >= 12) {
+        greetingFormula = 'Good afternoon';
+    } else if (hours >= 5) {
+        greetingFormula = 'Good morning';
+    } else {
+        greetingFormula = 'Hello';
+    }
+    return greetingFormula;
 }
 
 async function updateSummaryBoard() {
