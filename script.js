@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if (help && hidePages.includes(pageId)) {
       help.style.display = 'none';
-    } 
+    }
   });
 });
 
@@ -164,3 +164,17 @@ function getInitials(name) {
     return nameParts[0][0].toUpperCase() + nameParts[1][0].toUpperCase();
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const currentPath = window.location.pathname; // Aktueller Seitenpfad
+  let menuLink1 = document.getElementById('summaryLink');
+  console.log(currentPath);
+  console.log(menuLink1);
+  // if (currentPath === '/html/summary.html') {
+  //   menuLink1.classList.add('menu-main-link-activated');
+  //   console.log('ja');
+  // } else {
+  //   menuLink1.classList.remove('menu-main-link-activated');
+  //   console.log('nein');
+  // }
+});
