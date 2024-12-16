@@ -5,7 +5,7 @@ async function renderTasks() {
   await load();
   const columns = document.querySelectorAll('.column .tasks');
   columns.forEach(column => (column.innerHTML = ''));
-  tasksCurrentlyRendering(tasks);
+  tasksCurrentlyRendering(tasks); 
 }
 
 function tasksCurrentlyRendering(tasks) {
@@ -144,12 +144,12 @@ async function moveTo(status) {
 }
 
 function highlight(status) {
-  const column = document.querySelector(`.column[data-status="${status}"]`);
+  const column = document.querySelector(`.column[data-status="${status}"] .tasks`);
   column.classList.add('highlight');
 }
 
 function removeHighlight(status) {
-  const column = document.querySelector(`.column[data-status="${status}"]`);
+  const column = document.querySelector(`.column[data-status="${status}"] .tasks`);
   column.classList.remove('highlight');
 }
 

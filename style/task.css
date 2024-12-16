@@ -17,14 +17,14 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 180px;
+  /* height: 180px; */
   max-width: 1920px;
 }
 
 .boardheader-search {
   display: flex;
   gap: 35px;
-  padding: 62px 34px 16px 34px;
+  padding: 60px 34px 16px;
 }
 
 .task-search-bar {
@@ -37,6 +37,7 @@ body {
   border-radius: 10px;
   border: 1px solid #ccc;
 }
+
 .task-search-bar:focus-within {
   border: 1px solid var(--secondary-color);
 }
@@ -49,7 +50,7 @@ body {
 }
 
 .task-search-bar label img:hover {
-  background-color: var( --hover-slight-blue);
+  background-color: var(--hover-slight-blue);
   border-radius: 50%;
   opacity: 0.8;
 }
@@ -78,42 +79,28 @@ body {
   color: #df0000;
 }
 
-.task-table-headers {
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 28px;
-  gap: 24px;
-  padding-left: 34px;
-  padding-right: 34px;
-  bottom: 10px;
-}
-
 .task-kanban-board {
   display: flex;
   justify-content: space-between;
   width: 100%;
   gap: 24px;
-  padding-left: 34px;
-  padding-right: 34px;
+  padding: 0 34px;
   height: calc(100vh - 96px - 180px);
   margin-top: 10px;
   max-width: 1920px;
-}
-
-.task-table-headers h4 {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 700;
 }
 
 .task-table-header-element {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 7px;
-  width: 23%;
+  width: 100%;
+  padding: 10px 2px 20px;
+}
+
+.task-table-header-element h4 {
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .add-column {
@@ -136,6 +123,7 @@ body {
 
 .tasks {
   height: 100%;
+  padding: 2px;
   overflow-y: auto;
 }
 
@@ -150,7 +138,7 @@ body {
 
 .category {
   font-size: 12px;
-  padding: 5px 10px; 
+  padding: 5px 10px;
   border-radius: 8px;
   display: inline-block;
   margin-bottom: 10px;
@@ -239,6 +227,7 @@ body {
   border-radius: 5px;
   width: 400px;
 }
+
 .priodiv {
   height: 32px;
   width: 32px;
@@ -247,12 +236,12 @@ body {
   justify-content: center;
 }
 
-.prio2 img{
+.prio2 img {
   width: 24px;
   height: 10px;
 }
 
-.prio13 img{
+.prio13 img {
   width: 22px;
 }
 
@@ -276,10 +265,91 @@ body {
   border-radius: 10px;
   border: 1px 0px 0px 0px;
   opacity: 0px;
-  background-color:#E7E7E7;
+  background-color: #E7E7E7;
   padding: 10px;
 }
 
 .taskDescriptionBoard {
   margin-top: 10px;
+}
+
+@media (max-width: 1200px) {
+  .boardmain {
+    width: 100%;
+    max-width: calc(1920px - 232px);
+  }
+
+  .task-kanban-board {
+    height: calc(100vh - 96px - 180px - 90px);
+  }
+
+  .task-table-header-element h4 {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 900px) {
+  .task-kanban-board {
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    width: 100%;
+    gap: 24px;
+    height: calc(100vh - 96px - 124px - 90px);
+    overflow-y: auto;
+  }
+
+  .column {
+    width: 100%;
+    height: 70%;
+  }
+
+  /* .column h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  } */
+
+  .tasks {
+    display: flex;
+    gap: 10px;
+    height: auto;
+    overflow-y: unset;
+    overflow-x: auto;
+  }
+
+  .task {
+    min-width: 300px;
+    margin-bottom: 0;
+  }
+}
+
+@media(max-width: 630px) {
+  .boardheader-search {
+    display: flex;
+    gap: 35px;
+    padding: 30px 20px
+  }
+
+  .button-add-task {
+    display: none;
+  }
+
+  .searchbar-section {
+    width: 100%;
+  }
+
+  .task-search-bar {
+    width: 100%;
+  }
+
+  .task-kanban-board {
+    gap: 10px;
+    margin-top: 0;
+    padding: 0 10px;
+  }
+
+  .task {
+    min-width: 200px;
+  }
 }
