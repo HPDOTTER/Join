@@ -97,7 +97,7 @@ body {
   gap: 24px;
   padding-left: 34px;
   padding-right: 34px;
-  height: 100%;
+  height: calc(100vh - 96px - 180px);
   margin-top: 10px;
   max-width: 1920px;
 }
@@ -136,6 +136,7 @@ body {
 
 .tasks {
   height: 100%;
+  overflow-y: auto;
 }
 
 .task {
