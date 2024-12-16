@@ -42,7 +42,7 @@ function getOpenTaskOverlayTemplate(task, index) {
         <span class="overlay-edit-footer">
           <div class="task-overlay-editors" onclick="deleteTask(${index})"><img src="../assets/icons/icon-delete.png"><p>Delete</p></div>
           <div class="task-overlay-devider"></div>
-          <div class="task-overlay-editors" onclick="openEditTaskOverlay(${task, index})"><img src="../assets/icons/icon-edit.png"><p>Edit</p></div>
+          <div class="task-overlay-editors" onclick="openEditTaskOverlay(${index})"><img src="../assets/icons/icon-edit.png"><p>Edit</p></div>
         </span>
       </div>` 
 }

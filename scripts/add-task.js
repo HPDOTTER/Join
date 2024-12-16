@@ -145,6 +145,7 @@ function showContactName(contact) {
   return name;
 }
 
+
 function taskMembers(members) {
   const membersHtml = document.getElementById("taskMembers");
   membersHtml.innerHTML = "";
@@ -159,24 +160,6 @@ function taskMembers(members) {
   });
 }
 
-function createCheckbox(contact, index) {
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.className = "contact-checkbox";
-  checkbox.id = `contact.${index}`;
-  checkbox.checked = false;
-  checkbox.addEventListener("change", (event) => handleCheckboxChange(event, contact));
-  return checkbox;
-}
-
-function createLabel(contact, index) {
-  const label = document.createElement("label");
-  label.setAttribute("for", `contact.${index}`);
-  label.textContent = contact.name;
-  label.className = "contact-label";
-  return label;
-}
-
 const handleCheckboxChange = (event, contact) => {
   if (event.target.checked) {
     if (!members.includes(contact.name)) {
@@ -188,6 +171,28 @@ const handleCheckboxChange = (event, contact) => {
   taskMembers(members, contact);
 };
 
+
+function createCheckbox(contact, index) {
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.className = "contact-checkbox";
+  checkbox.id = `contact.${index}`;
+  if (tasks[currentTask].members) {
+    checkbox.checked = tasks[currentTask].members.includes(contact.name);
+  } else {
+    checkbox.checked = false;
+  }
+  checkbox.addEventListener("change", (event) => handleCheckboxChange(event, contact));
+  return checkbox;
+}
+
+function createLabel(contact, index) {
+  const label = document.createElement("label");
+  label.setAttribute("for", `contact.${index}`);
+  label.textContent = contact.name;
+  label.className = "contact-label";
+  return label;
+}
 
 function addSubtask() {
   let inputfield = document.getElementById('subtaskInput').value;
