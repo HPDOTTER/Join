@@ -10,23 +10,28 @@ function openTaskOverlay(index) {
     if (overlay) {
       overlay.addEventListener('click', (event) => {
         if (event.target === overlay) {
-          hideOverlay();
+          const taskOverlayContent = document.getElementById('task-overlay-content');
+          hideOverlay(taskOverlayContent);
         }
       });
     }
   });
 
-const taskOverlayContent = getElementById('task-overlay-content');
+
 
 function showOverlay() {
     overlay.classList.add('show');
   }
   
-function hideOverlay() {
-    taskOverlayContent.classList.add('animation-slide-from-top')
-    setTimeout(() => {
-        overlay.classList.remove('show');
-    }, 500);
+function hideOverlay(taskOverlayContent) {
+  taskOverlayContent.classList.remove('animation-slide-from-bottom');
+  taskOverlayContent.classList.add('animation-slide-from-top');
+  setTimeout(() => {
+      overlay.classList.remove('show');
+      taskOverlayContent.classList.remove('animation-slide-from-top');
+      taskOverlayContent.classList.add('animation-slide-from-bottom');
+  }, 500);
+  
   }
 
 async function deleteTask(index) {

@@ -5,7 +5,7 @@ async function renderTasks() {
   await load();
   const columns = document.querySelectorAll('.column .tasks');
   columns.forEach(column => (column.innerHTML = ''));
-  tasksCurrentlyRendering(tasks);
+  tasksCurrentlyRendering(tasks); 
 }
 
 function tasksCurrentlyRendering(tasks) {
