@@ -228,20 +228,7 @@
     font-size: 24px;
   }
 
-  .overlay-avatar {
-    padding: 4px 10px;
-  }
-
-  .contactAvatar {
-    width: 28px;
-    height: 28px;
-    font-size: 10px;
-  }
-
-  .overlay-edit-footer {
-    padding-top: 0;
-  }
-}  .editOverlaylistitems:hover {
+  .editOverlaylistitems:hover {
     background-color: var(--hover-slight-blue);
     border-radius: 10px;
   }
@@ -305,4 +292,3 @@
   .overlaySubtaskEdit:hover {
     background-color: transparent;
   }
->>>>>>> Stashed changes
