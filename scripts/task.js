@@ -5,7 +5,7 @@ async function renderTasks() {
   await load();
   const columns = document.querySelectorAll('.column .tasks');
   columns.forEach(column => (column.innerHTML = ''));
-  tasksCurrentlyRendering(tasks); 
+  tasksCurrentlyRendering(tasks);
 }
 
 function tasksCurrentlyRendering(tasks) {
@@ -14,8 +14,8 @@ function tasksCurrentlyRendering(tasks) {
     taskTemplate(task, index);
     const column = document.querySelector(`.column[data-status="${task.status}"] .tasks`);
     column.innerHTML += taskTemplate(task, index);
-    });
-    showDummydiv();
+  });
+  showDummydiv();
 }
 
 function calculateSubtaskCount(task) {
@@ -43,10 +43,10 @@ function renderMembersPrio(task) {
 function renderMembers(task) {
   return task.members && task.members.length > 0
     ? task.members.map(member => {
-        const contact = contacts.find(contact => contact.name === member);
-        const avatarColor = contact ? contact.color : 'orange';
-        return `<div class="contactAvatar" style="background-color: ${avatarColor}">${getInitials(member)}</div>`;
-      }).join('')
+      const contact = contacts.find(contact => contact.name === member);
+      const avatarColor = contact ? contact.color : 'orange';
+      return `<div class="contactAvatar" style="background-color: ${avatarColor}">${getInitials(member)}</div>`;
+    }).join('')
     : '';
 }
 
@@ -84,7 +84,7 @@ function renderMembers(task) {
       const avatarColor = contact ? contact.color : 'orange';
       return `<div class="contactAvatar" style="background-color: ${avatarColor}">${getInitials(member)}</div>`;
     }).join('');
-  }   
+  }
   return '';
 }
 
@@ -132,6 +132,22 @@ function startDrag(index) {
   taskElement.classList.add('dragging');
 }
 
+// function startTouchDrag(e, index) {
+//   console.log(e);
+//   console.log(index);
+//   let startX = e.changedTouches[0].clientX;
+//   let startY = e.changedTouches[0].clientY;
+//   currentDraggedElement = document.querySelector(`.task[ontouchstart="startTouchDrag(event, ${index})"]`);
+//   // console.log(currentDraggedTask);
+
+//   currentDraggedElement.addEventListener("touchmove", eve=>{
+//     let nextX = eve.changedTouches[0].clientX;
+//     let nextY = eve.changedTouches[0].clientY;
+//     currentDraggedElement.style.left = nextX - startX + "px";
+//     currentDraggedElement.style.top = nextY - startY + "px";
+//   });
+// }
+
 function allowDrop(ev) {
   ev.preventDefault();
 }
@@ -172,6 +188,25 @@ function showDummydiv() {
   }
 }
 
+function toggleTaskStatusSelectionMenu(event, index) {
+  let menu = document.getElementById(`taskStatusSelectionMenu${index}`);
+  menu.classList.toggle('d-none');
+  event.stopPropagation();
+}
+
+async function setTaskStatus(event, taskStatus, index) {
+  toggleTaskStatusSelectionMenu(event, index);
+  tasks[index]['status'] = taskStatus;
+  await save();
+  await renderTasks();
+}
+
+// async function moveTo(status) {
+//   tasks[currentDraggedElement]['status'] = status;
+//   await save();
+//   await renderTasks();
+//   removeHighlight(status);
+// }
 
 
 
@@ -194,7 +229,7 @@ function showDummydiv() {
 //        task.progress = subtaskDone / subtaskCount;
 //      });
 //    }
-//    
+//
 //
 //    const taskElement = document.createElement('div');
 //    taskElement.classList.add('task');
@@ -208,7 +243,7 @@ function showDummydiv() {
 //
 //      <h3>${task.titel}</h3>
 //      <p>${task.description}</p>
-//      
+//
 //      <section class="progress-section">
 //        <div class="progress-bar">
 //          <div class="progress" style="width: ${task.progress * 100}%;"></div>

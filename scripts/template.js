@@ -1,8 +1,17 @@
 function taskTemplate(task, index) {
-  return `<div class="task" draggable="true" ondragstart="startDrag(${index})" onclick="openTaskOverlay(${index})">
+  return `<div id="task${index}" class="task" draggable="true" ondragstart="startDrag(${index})" onclick="openTaskOverlay(${index})">
+        <div class="task-top-section">
         <span class="category ${task.categoryUser ? 'user' : 'technical'}">
             ${task.categoryUser ? 'User Story' : 'Technical Task'}
         </span>
+        <img class="task-status-selection-arrow" src="../assets/icons/icon-arrow-down.svg" onclick="toggleTaskStatusSelectionMenu(event, ${index})">
+        <div id="taskStatusSelectionMenu${index}" class="task-status-selection-menu d-none">
+          <div class="task-status-selection-menu-item" onclick="setTaskStatus(event, 1, ${index})">To do</div>
+          <div class="task-status-selection-menu-item" onclick="setTaskStatus(event, 2, ${index})">In Progress</div>
+          <div class="task-status-selection-menu-item" onclick="setTaskStatus(event, 3, ${index})">Await Feedback</div>
+          <div class="task-status-selection-menu-item" onclick="setTaskStatus(event, 4, ${index})">Done</div>
+        </div>
+        </div>
         <h3>${task.titel}</h3>
         ${taskDescription(task)}
         ${rendersubtaskCount(task)}
@@ -25,7 +34,7 @@ function rendersubtaskCount(task) {
 }
 
 function getOpenTaskOverlayTemplate(task, index) {
-    return `
+  return `
     <div class="task-overlay-content animation-slide-from-bottom" id="task-overlay-content">
         <div class="task-overlay-head">
           ${taskCategory(task)}
@@ -44,39 +53,39 @@ function getOpenTaskOverlayTemplate(task, index) {
           <div class="task-overlay-devider"></div>
           <div class="task-overlay-editors" onclick="openEditTaskOverlay(${index})"><img src="../assets/icons/icon-edit.png"><p>Edit</p></div>
         </span>
-      </div>` 
+      </div>`
 }
 
 function getOverlaySubtaskHtml(subtask, taskIndex, subtaskIndex, checkboxId) {
-    return `<div class="overlay-subtask">
+  return `<div class="overlay-subtask">
               <input type="checkbox" id="${checkboxId}" ${subtask.isDone ? 'checked' : ''}>
               <label onclick="overlaySubtaskCheckbox(${taskIndex}, ${subtaskIndex})"></label>
               <p>${subtask.subtitel}</p>
             </div>`;
-  }
+}
 
-  function taskCategory(task) {
-    return `<span class="category ${task.categoryUser ? 'user' : 'technical'}">
+function taskCategory(task) {
+  return `<span class="category ${task.categoryUser ? 'user' : 'technical'}">
             ${task.categoryUser ? 'User Story' : 'Technical Task'}
           </span>`;
-  }
-  
-  function ifTaskMembers(task) {
-    if (task.members && task.members.length > 0) {
-      return `<div class="overlay-tasks-assigned-to">
+}
+
+function ifTaskMembers(task) {
+  if (task.members && task.members.length > 0) {
+    return `<div class="overlay-tasks-assigned-to">
                 <b>Assigned to:</b>
                 ${taskAssignedTo(task)}
               </div>`;
-    } else { 
-      return '';
-    }
+  } else {
+    return '';
   }
-  
-  function getTaskAssignedToTemplate(member, avatarColor) {
-    return `<div class="overlay-avatar">
+}
+
+function getTaskAssignedToTemplate(member, avatarColor) {
+  return `<div class="overlay-avatar">
               <div class="contactAvatar margin-right-10" style="background-color: ${avatarColor}">
                 ${getInitials(member)}
               </div>
               ${member}
             </div>`;
-  }
+}
