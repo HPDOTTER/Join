@@ -80,7 +80,7 @@ const priorityImgPrimal = {
 };
 
 
-function taskPriority(priority) {
+function setOverlayTaskPriority(priority) {
   const priorities = ['1', '2', '3'];
   // Reset the Images of all priority elements
   priorities.forEach(p => {
@@ -197,12 +197,27 @@ function createLabel(contact, index) {
 function addSubtask() {
   let inputfield = document.getElementById('subtaskInput').value;
   let subtask = document.getElementById('taskAddSubtasksContent');
-  subtask.innerHTML += `<li class="listitems">${inputfield}</li>`;
+  if (window.location.href.includes('add-task.html')) {
+    subtask.innerHTML += `<li class="listitems">• ${inputfield}</li>`;
+  } else if (window.location.href.includes('board.html')) {
+    subtask.innerHTML += `<li class="listitems editOverlaylistitems">• ${subtask.subtitel}<div class="subtaskbuttons"><button onclick="editsubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-edit.png"></button><div class="subtaskDevider"></div><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button></div></li>`;
+  }
   subtasks.push({ 'subtitel': inputfield, 'isDone': false });
 }
 
 function clearSubtask() {
   document.getElementById('subtaskInput').value = '';
+}
+
+function showSubtasks(index) {
+  let subtaskHtml = document.getElementById('taskAddSubtasksContent');
+  let subtasks = tasks[index].subtasks;
+  subtaskHtml.innerHTML = '';
+  if (subtasks) {
+    subtasks.forEach((subtask) => {
+      subtaskHtml.innerHTML += `<li class="listitems editOverlaylistitems" data-subtask-name="${subtask.subtitel}">• ${subtask.subtitel}<div class="subtaskbuttons"><button onclick="editsubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-edit.png"></button><div class="subtaskDevider"></div><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button></div></li>`;
+    });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -216,10 +231,22 @@ document.addEventListener('DOMContentLoaded', () => {
       ifSubtaskValue.style.display = hasValue ? 'flex' : 'none';
       addSubtaskPlus.style.display = hasValue ? 'none' : 'flex';
     });
-  } else {
-    return;
   }
 });
+
+function attachSubtaskEventListeners() {
+  const subTaskValue = document.getElementById('subtaskInput');
+  const ifSubtaskValue = document.getElementById('ifSubtaskvalue');
+  const addSubtaskPlus = document.getElementById('addSubtaskPlus');
+
+  if (subTaskValue) {
+    subTaskValue.addEventListener('keyup', () => {
+      const hasValue = subTaskValue.value.length > 0;
+      ifSubtaskValue.style.display = hasValue ? 'flex' : 'none';
+      addSubtaskPlus.style.display = hasValue ? 'none' : 'flex';
+    });
+  }
+}
 
 //custom resize textarea
 document.addEventListener('DOMContentLoaded', () => {
@@ -247,5 +274,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }, false);
   }
 });
+
+function attachCustomResizeHandle() {
+  const textarea = document.querySelector('.add-task-textarea');
+  const resizeHandle = document.querySelector('.custom-resize-handle');
+
+  if (resizeHandle) {
+    resizeHandle.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+
+      const startY = e.clientY;
+      const startHeight = parseInt(document.defaultView.getComputedStyle(textarea).height, 10);
+
+      function doDrag(e) {
+        textarea.style.height = (startHeight + e.clientY - startY) + 'px';
+      }
+
+      function stopDrag() {
+        document.documentElement.removeEventListener('mousemove', doDrag, false);
+        document.documentElement.removeEventListener('mouseup', stopDrag, false);
+      }
+
+      document.documentElement.addEventListener('mousemove', doDrag, false);
+      document.documentElement.addEventListener('mouseup', stopDrag, false);
+    }, false);
+  }
+};
 
 

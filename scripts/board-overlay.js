@@ -96,6 +96,9 @@ function openEditTaskOverlay(index) {
   overlay.innerHTML = getEditTaskOverlayTemplate(index, etask);
   renderContactsWithCheckboxes();
   taskMembers(etask.members); // Call taskMembers after the element is added to the DOM
+  attachSubtaskEventListeners();
+  attachCustomResizeHandle();
+  showSubtasks(index);
 }
 
 function formatDate(dateString) {
@@ -109,6 +112,23 @@ function formatDate(dateString) {
 function taskCategory(etask) {
   return etask.categoryUser ? 'User Story' : 'Technical Task';
 }
+
+function editsubtask(name) {
+  const task = tasks[currentTask];
+  const subtask = task.subtasks.find(subtask => subtask.subtitel === name);
+  const listItem = document.querySelector(`li[data-subtask-name="${name}"]`);
+  listItem.innerHTML = subtaskHTML(subtask, name);
+  listItem.classList.add('overlaySubtaskEdit');
+  listItem.classList.remove('editOverlaylistitems');
+}
+
+function subtaskHTML(subtask, name) {
+  return `<input class="overlayEditSubtask" type="text" value="${subtask.subtitel}" onblur="saveSubtaskName(this, '${name}')">
+  <div class="subtaskbuttons"><button onclick="editsubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button>
+  <div class="subtaskDevider"></div>
+  <button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-check-active.png"></button></div>`;
+}
+
 
 function getEditTaskOverlayTemplate(index, etask) {
   const formattedDates = formatDate(etask.date);
@@ -144,9 +164,9 @@ function getEditTaskOverlayTemplate(index, etask) {
         <div class="add-task-info-element">
           <label for="taskPriority">Priority</label>
           <div id="editTaskPriority" class="add-task-priority-area">
-            <img class="icon-add-task-priority-urgent pointer" id="1" onclick="taskPriority('1')">
-            <img class="icon-add-task-priority-medium pointer" id="2" onclick="taskPriority('2')">
-            <img class="icon-add-task-priority-low pointer" id="3" onclick="taskPriority('3')">
+            <img class="icon-add-task-priority-urgent pointer" id="1" onclick="setOverlayTaskPriority('1')">
+            <img class="icon-add-task-priority-medium pointer" id="2" onclick="setOverlayTaskPriority('2')">
+            <img class="icon-add-task-priority-low pointer" id="3" onclick="setOverlayTaskPriority('3')">
           </div>
         </div>
       

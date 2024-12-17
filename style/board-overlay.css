@@ -241,4 +241,68 @@
   .overlay-edit-footer {
     padding-top: 0;
   }
-}
+}  .editOverlaylistitems:hover {
+    background-color: var(--hover-slight-blue);
+    border-radius: 10px;
+  }
+
+  .subtaskbuttons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .subtaskbuttons button:hover{
+    background-color: var(--hover-bright-blue);
+  }
+
+  .overlayEditSubtask {
+    border: none;
+    outline: none;
+  }
+
+  .subtaskDevider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+    width: 1px;
+    border: 1px solid grey; 
+  }
+  
+  .clearSubtask {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+  }
+  
+  .clearSubtask img {
+    height: 13px;
+    width: 13px;
+    cursor: pointer;
+  }
+  
+  .clearSubtask:hover {
+    background-color: var(--hover-slight-blue);
+    border-radius: 50%;
+  }
+  
+  .addSubtask {
+    display: flex;
+    align-items: center;
+  }
+  
+  .addSubtask:hover {
+    background-color: var(--hover-slight-blue);
+    border-radius: 50%;
+  }
+  
+  .overlaySubtaskEdit {
+    border-bottom: 1px solid var(--primary-color);
+  }
+  .overlaySubtaskEdit:hover {
+    background-color: transparent;
+  }
+>>>>>>> Stashed changes

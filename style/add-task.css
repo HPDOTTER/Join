@@ -283,6 +283,9 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
 .listitems {
   padding: 6px;
   font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .ifSubtaskvalue {
@@ -291,43 +294,7 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
   gap: 4px;
 }
 
-.subtaskDevider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 15px;
-  width: 2px;
-  border: 1px solid grey; 
-}
 
-.clearSubtask {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 24px;
-  width: 24px;
-}
-
-.clearSubtask img {
-  height: 13px;
-  width: 13px;
-  cursor: pointer;
-}
-
-.clearSubtask:hover {
-  background-color: var(--hover-slight-blue);
-  border-radius: 50%;
-}
-
-.addSubtask {
-  display: flex;
-  align-items: center;
-}
-
-.addSubtask:hover {
-  background-color: var(--hover-slight-blue);
-  border-radius: 50%;
-}
 
 /* @media (max-width: 1200px) {
   .add-task-area {
