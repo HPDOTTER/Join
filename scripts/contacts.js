@@ -131,6 +131,10 @@ async function deleteContact() {
   if (currentContact) {
     contacts = contacts.filter(contact => contact !== currentContact);
     cleanTaskMembers(tasks, contacts);
+    if (currentContact.user) {
+      cleanUserMembers(currentContact);
+      logout();
+    }
     await save();
     await renderContacts();
     hideDetail();
@@ -144,6 +148,10 @@ function cleanTaskMembers(tasks, contacts) {
       task.members = task.members.filter(member => contactNames.includes(member));
     }
   });
+}
+
+function cleanUserMembers(currentContact) {
+  users = users.filter(users => users.name !== currentContact.name);
 }
 
 async function renderContacts() {
