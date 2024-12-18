@@ -176,14 +176,19 @@ const menuLinks = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    menuLinks.forEach(link => {
-      const element = document.getElementById(link.id);
-      if (link.path === currentPath) {
-        element.classList.add('menu-main-link-activated');
-      } else {
-        element.classList.remove('menu-main-link-activated');
-      }
-    });
-  }, 500);
+  const checkLinks = setInterval(() => {
+    const menuLink = document.getElementById('summaryLink');
+    if (menuLink) {
+      clearInterval(checkLinks);
+      menuLinks.forEach(link => {
+        const element = document.getElementById(link.id);
+        if (link.path === currentPath) {
+          element.classList.add('menu-main-link-activated');
+        } else {
+          element.classList.remove('menu-main-link-activated');
+        }
+      })
+    }
+    console.log('Schleife');
+  }, 10);
 });
