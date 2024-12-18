@@ -165,16 +165,25 @@ function getInitials(name) {
   }
 }
 
+const currentPath = window.location.pathname;
+const menuLinks = [
+  { id: 'summaryLink', path: '/html/summary.html' },
+  { id: 'addTaskLink', path: '/html/add-task.html' },
+  { id: 'boardLink', path: '/html/board.html' },
+  { id: 'contactsLink', path: '/html/contacts.html' },
+  { id: 'privacyPolicyLink', path: '/html/privacy-policy.html' },
+  { id: 'legalNoticeLink', path: '/html/legal-notice.html' },
+];
+
 document.addEventListener("DOMContentLoaded", () => {
-  const currentPath = window.location.pathname; // Aktueller Seitenpfad
-  let menuLink1 = document.getElementById('summaryLink');
-  console.log(currentPath);
-  console.log(menuLink1);
-  // if (currentPath === '/html/summary.html') {
-  //   menuLink1.classList.add('menu-main-link-activated');
-  //   console.log('ja');
-  // } else {
-  //   menuLink1.classList.remove('menu-main-link-activated');
-  //   console.log('nein');
-  // }
+  setTimeout(() => {
+    menuLinks.forEach(link => {
+      const element = document.getElementById(link.id);
+      if (link.path === currentPath) {
+        element.classList.add('menu-main-link-activated');
+      } else {
+        element.classList.remove('menu-main-link-activated');
+      }
+    });
+  }, 500);
 });
