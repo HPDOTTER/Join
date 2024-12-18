@@ -20,6 +20,7 @@
   <script src="../scripts/task.js"></script>
   <script src="../scripts/add-task.js"></script>
   <script src="../scripts/dataStorage.js"></script>
+  <script src="../scripts/board-overlay.js"></script>
 </head>
 
 <body onload="init(); renderContactsWithCheckboxes()">
@@ -95,9 +96,9 @@
             <div class="add-task-category-button">
               <input type="text" id="subtaskInput" placeholder="Add new subtask">
               <div class="ifSubtaskvalue" id="ifSubtaskvalue">
-                <button onclick="clearSubtask()" class="clearSubtask"><img src="../assets/icons/close.svg"></button>
+                <button onclick="clearSubtask()" class="iconSubtask"><img src="../assets/icons/icon-cancel-active.png"></button>
                 <div class="subtaskDevider"></div>
-                <button onclick="addSubtask()" class="addSubtask"><img src="../assets/icons/icon-check-active.png" ></button>
+                <button onclick="addSubtask()" class="iconSubtask"><img src="../assets/icons/icon-check-active.png" ></button>
               </div>
               <label for="subtaskInput" id="addSubtaskPlus"><img class="icon-add-subtask-button-plus"></label>
             </div>

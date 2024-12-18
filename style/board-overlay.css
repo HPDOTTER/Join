@@ -218,11 +218,13 @@
     content: url(../assets/icons/checkbox-default.svg);
   }
 
+
 @media (max-width: 630px) {
   .task-overlay-content {
     width: 80%;
     padding: 12px;
   }
+}
 
   .task-overlay-content h1 {
     font-size: 24px;
@@ -291,4 +293,9 @@
   }
   .overlaySubtaskEdit:hover {
     background-color: transparent;
+  }
+
+  .overlayTaskCategory {
+    padding: 6px;
+    border-radius: 10px;
   }

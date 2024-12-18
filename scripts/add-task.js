@@ -80,7 +80,7 @@ const priorityImgPrimal = {
 };
 
 
-function setOverlayTaskPriority(priority) {
+async function setOverlayTaskPriority(priority) {
   const priorities = ['1', '2', '3'];
   // Reset the Images of all priority elements
   priorities.forEach(p => {
@@ -90,6 +90,10 @@ function setOverlayTaskPriority(priority) {
   document.getElementById(priority).style.content = `url(${priorityImgactive[priority]})`;
   // Store the selected priority
   selectedPriority = priority;
+  if (currentTask) {
+    tasks[currentTask].priority = priority;
+    await setEditOverlayTaskPriority(priority);
+  }
 }
 
 
@@ -158,17 +162,25 @@ function taskMembers(members) {
     memberHtml.style.backgroundColor = avatarColor;
     membersHtml.appendChild(memberHtml);
   });
+  ifCurrentTaskPushMembers(members);
 }
 
 const handleCheckboxChange = (event, contact) => {
   if (event.target.checked) {
     if (!members.includes(contact.name)) {
       members.push(contact.name);
+      if (currentTask) {
+        tasks[currentTask].members.forEach((member) => {
+        if (!members.includes(member)) {
+          members.push(member);
+        }
+      });
     }
+      }
   } else {
     members = members.filter((member) => member !== contact.name);
   }
-  taskMembers(members, contact);
+  taskMembers(members);
 };
 
 
@@ -177,7 +189,7 @@ function createCheckbox(contact, index) {
   checkbox.type = "checkbox";
   checkbox.className = "contact-checkbox";
   checkbox.id = `contact.${index}`;
-  if (tasks[currentTask].members) {
+  if (tasks[currentTask]) {
     checkbox.checked = tasks[currentTask].members.includes(contact.name);
   } else {
     checkbox.checked = false;
@@ -200,22 +212,24 @@ function addSubtask() {
   if (window.location.href.includes('add-task.html')) {
     subtask.innerHTML += `<li class="listitems">• ${inputfield}</li>`;
   } else if (window.location.href.includes('board.html')) {
-    subtask.innerHTML += `<li class="listitems editOverlaylistitems">• ${subtask.subtitel}<div class="subtaskbuttons"><button onclick="editsubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-edit.png"></button><div class="subtaskDevider"></div><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button></div></li>`;
+    subtask.innerHTML += `<li class="listitems editOverlaylistitems">• ${subtask.subtitel}<div class="subtaskbuttons"><button onclick="overlayEditSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-edit.png"></button><div class="subtaskDevider"></div><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button></div></li>`;
   }
   subtasks.push({ 'subtitel': inputfield, 'isDone': false });
+  clearSubtask();
 }
 
 function clearSubtask() {
   document.getElementById('subtaskInput').value = '';
 }
 
-function showSubtasks(index) {
+async function showSubtasks(index) {
+  await load();
   let subtaskHtml = document.getElementById('taskAddSubtasksContent');
   let subtasks = tasks[index].subtasks;
   subtaskHtml.innerHTML = '';
   if (subtasks) {
     subtasks.forEach((subtask) => {
-      subtaskHtml.innerHTML += `<li class="listitems editOverlaylistitems" data-subtask-name="${subtask.subtitel}">• ${subtask.subtitel}<div class="subtaskbuttons"><button onclick="editsubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-edit.png"></button><div class="subtaskDevider"></div><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button></div></li>`;
+      subtaskHtml.innerHTML += `<li class="listitems editOverlaylistitems" data-subtask-name="${subtask.subtitel}">• ${subtask.subtitel}<div class="subtaskbuttons"><button onclick="overlayEditSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-edit.png"></button><div class="subtaskDevider"></div><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button></div></li>`;
     });
   }
 }
@@ -226,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const addSubtaskPlus = document.getElementById('addSubtaskPlus');
 
   if (subTaskValue) {
-    subTaskValue.addEventListener('keyup', () => {
+    subTaskValue.addEventListener('onchange', () => {
       const hasValue = subTaskValue.value.length > 0;
       ifSubtaskValue.style.display = hasValue ? 'flex' : 'none';
       addSubtaskPlus.style.display = hasValue ? 'none' : 'flex';
