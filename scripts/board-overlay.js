@@ -92,14 +92,21 @@ function taskPriority(task) {
 
 
 function openEditTaskOverlay(index) {
-  const etask = tasks[index];
-  overlay.innerHTML = getEditTaskOverlayTemplate(index, etask);
+  const task = tasks[index];
+  overlay.innerHTML = getEditTaskOverlayTemplate(index, task);
+  getTaskPriority(task);
   renderContactsWithCheckboxes();
-  taskMembers(etask.members); // Call taskMembers after the element is added to the DOM
+  taskMembers(task.members); // Call taskMembers after the element is added to the DOM
   attachSubtaskEventListeners();
   attachCustomResizeHandle();
   showSubtasks(index);
 }
+
+function getTaskPriority(task) {
+  const priority = task.priority;
+  document.getElementById(priority).style.content = `url(${priorityImgactive[priority]})`;
+}
+
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -109,11 +116,20 @@ function formatDate(dateString) {
   return `${year}-${month}-${day}`;
 }
 
-function taskCategory(etask) {
-  return etask.categoryUser ? 'User Story' : 'Technical Task';
+function overlayTaskCategory(task) {
+  return task.categoryUser ? 'User Story' : 'Technical Task';
 }
 
-function editsubtask(name) {
+
+
+function subtaskHTML(subtask, name) {
+  return `<input class="overlayEditSubtask" type="text" value="${subtask.subtitel}">
+          <div class="subtaskbuttons"><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button>
+          <div class="subtaskDevider"></div>
+          <button onclick="overlayAcceptChangedSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-check-active.png"></button></div>`;
+}
+
+function overlayEditSubtask(name) {
   const task = tasks[currentTask];
   const subtask = task.subtasks.find(subtask => subtask.subtitel === name);
   const listItem = document.querySelector(`li[data-subtask-name="${name}"]`);
@@ -122,16 +138,80 @@ function editsubtask(name) {
   listItem.classList.remove('editOverlaylistitems');
 }
 
-function subtaskHTML(subtask, name) {
-  return `<input class="overlayEditSubtask" type="text" value="${subtask.subtitel}" onblur="saveSubtaskName(this, '${name}')">
-  <div class="subtaskbuttons"><button onclick="editsubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button>
-  <div class="subtaskDevider"></div>
-  <button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-check-active.png"></button></div>`;
+async function overlayDeleteSubtask(subtaskSubtitel) {
+  const task = tasks[currentTask];
+  const subtaskIndex = task.subtasks.findIndex(subtask => subtask.subtitel === subtaskSubtitel);
+  task.subtasks.splice(subtaskIndex, 1);
+  await SaveLoadRender();
+  showSubtasks(currentTask);
+}
+
+async function overlayAcceptChangedSubtask(subtaskSubtitel) {
+  const task = tasks[currentTask];
+  const subtask = task.subtasks.find(subtask => subtask.subtitel === subtaskSubtitel);
+  const listItem = document.querySelector(`li[data-subtask-name="${subtaskSubtitel}"]`);
+  const input = listItem.querySelector('input');
+  subtask.subtitel = input.value;
+  listItem.classList.remove('overlaySubtaskEdit');
+  listItem.classList.add('editOverlaylistitems');
+  await SaveLoadRender();
+  await showSubtasks(currentTask);
+}
+
+async function editTaskTitle() {
+  const task = tasks[currentTask];
+  const input = document.getElementById('editTaskTitle');
+  task.titel = input.value;
+  await SaveLoadRender();
 }
 
 
-function getEditTaskOverlayTemplate(index, etask) {
-  const formattedDates = formatDate(etask.date);
+async function overlayEditTaskDescription() {
+  const task = tasks[currentTask];
+  const input = document.getElementById('editTaskDescription');
+  task.description = input.value;
+  await SaveLoadRender();
+}
+
+async function overlayEditDate() {
+  const task = tasks[currentTask];
+  const input = document.getElementById('editTaskDate');
+  task.date = input.value;
+  await SaveLoadRender();
+}
+
+async function setEditOverlayTaskPriority(priority) {
+  const task = tasks[currentTask];
+  task.priority = priority;
+  await SaveLoadRender();
+}
+
+async function ifCurrentTaskPushMembers(members) {
+  if (currentTask) {
+    const task = tasks[currentTask];
+    task.members = members;
+    await SaveLoadRender();
+  }
+}
+
+async function overlayAddSubtask() {
+  const task = tasks[currentTask];
+  const input = document.getElementById('subtaskInput');
+  task.subtasks.push({ subtitel: input.value, isDone: false });
+  input.value = '';
+  await SaveLoadRender();
+  showSubtasks(currentTask);
+} 
+
+async function SaveLoadRender() {
+  await save();
+  await load();
+  renderTasks();
+}
+
+
+function getEditTaskOverlayTemplate(index, task) {
+  const formattedDates = formatDate(task.date);
   const taskMembersHtml = `
     <div class="task-overlay-content" id="task-overlay-content">
       <div class="task-overlay-head">
@@ -143,20 +223,20 @@ function getEditTaskOverlayTemplate(index, etask) {
       <div id="taskAdd" class="add-task-area">
         <div class="add-task-info-element">
           <div class="input-wrapper">
-            <input type="text" class="input add-task-input-title" id="editTaskTitle" value="${etask.titel}">
+            <input type="text" class="input add-task-input-title" id="editTaskTitle" value="${task.titel}" onkeyup="editTaskTitle()">
           </div>
         </div>
 
         <div class="add-task-info-element">
           <label for="taskDescription">Description</label>
-          <textarea id="editTaskDescription" class="add-task-textarea">${etask.description}</textarea>
+          <textarea id="editTaskDescription" class="add-task-textarea" onkeyup="overlayEditTaskDescription()">${task.description}</textarea>
           <div class="custom-resize-handle"></div>
         </div>
 
         <div class="add-task-info-element">
           <label for="taskDate">Due date</label>
           <div class="input-wrapper">
-            <input type="date" placeholder="dd/mm/yyyy" class="input" id="editTaskDate" value="${formattedDates}">
+            <input type="date" placeholder="dd/mm/yyyy" class="input" id="editTaskDate" onchange="overlayEditDate()" value="${formattedDates}">
             <img src="../assets/icons/icon-calender.jpg" class="add-task-input-date-icon">
           </div>
         </div>
@@ -190,7 +270,7 @@ function getEditTaskOverlayTemplate(index, etask) {
         <div class="add-task-info-element">
           <label>Category</label>
           <button class="add-task-category-button" id="add-task-category-button" onclick="toggleCategoryDropdown()">
-            <p id="addTaskCategoryValue">${taskCategory(etask)}</p>
+            <p id="addTaskCategoryValue">${overlayTaskCategory(task)}</p>
             <img class="icon-add-task-category-button-arrow">
           </button>
           <div id="categoryDropdown" class="dropdown-menu">
@@ -206,7 +286,7 @@ function getEditTaskOverlayTemplate(index, etask) {
             <div class="ifSubtaskvalue" id="ifSubtaskvalue">
               <button onclick="clearSubtask()" class="clearSubtask"><img src="../assets/icons/close.svg"></button>
               <div class="subtaskDevider"></div>
-              <button onclick="addSubtask()" class="addSubtask"><img src="../assets/icons/icon-check-active.png"></button>
+              <button onclick="overlayAddSubtask()" class="addSubtask"><img src="../assets/icons/icon-check-active.png"></button>
             </div>
             <label for="subtaskInput" id="addSubtaskPlus"><img class="icon-add-subtask-button-plus"></label>
           </div>

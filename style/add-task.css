@@ -280,6 +280,31 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
 #taskAddSubtasksContent {
   margin-top: 10px;
 }
+
+.iconSubtask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+}
+
+.iconSubtask img {
+  height: 24px;
+  width: 24px;
+}
+
+.subtaskDevider {
+  border: 1px solid #ccc;
+  width: 1px;
+  height: 24px;
+}
+
+.iconSubtask:hover {
+  background-color: var(--hover-slight-blue);
+  border-radius: 50%;
+}
+
 .listitems {
   padding: 6px;
   font-size: 15px;
