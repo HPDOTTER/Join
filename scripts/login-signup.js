@@ -15,6 +15,9 @@ let guest = {
   name: 'Guest',
 };
 
+const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null);
+
+
 if (msgBox) {
   if (msg) {
     msgBox.innerHTML = msg;
@@ -25,7 +28,6 @@ if (msgBox) {
   console.error('Message box element not found');
 }
 
-const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null);
 
 async function signUpSubmit(e) {
   const errors = await getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
@@ -36,6 +38,7 @@ async function signUpSubmit(e) {
     errorMessage.innerText = errors.join(". ");
   }
 }
+
 
 form.addEventListener('submit', (e) => {
   let errors = [];
@@ -51,20 +54,10 @@ form.addEventListener('submit', (e) => {
   }
 });
 
+
 function addUser() {
   if (errors.length === 0) {
-    users.push({
-      'name': signUpNameInput.value,
-      'email': emailInput.value,
-      'password': passwordInput.value
-    });
-    contacts.push({
-      'name': signUpNameInput.value,
-      'email': emailInput.value,
-      'phone': '',
-      'color': contactColors[Math.floor(Math.random() * 14)],
-      'user': true,
-    });
+    addUserPushArray();
     save();
     showToastMessage('You Signed Up successfully', '')
     setTimeout(() => {
@@ -72,6 +65,23 @@ function addUser() {
     }, 1200);
   }
 }
+
+
+function addUserPushArray() {
+  users.push({
+    'name': signUpNameInput.value,
+    'email': emailInput.value,
+    'password': passwordInput.value
+  });
+  contacts.push({
+    'name': signUpNameInput.value,
+    'email': emailInput.value,
+    'phone': '',
+    'color': contactColors[Math.floor(Math.random() * 14)],
+    'user': true,
+  });
+}
+
 
 function loginSubmit() {
   let user = users.find(user => user.email === emailInput.value && user.password === passwordInput.value);
@@ -88,11 +98,13 @@ function loginSubmit() {
   }
 }
 
+
 function removeLocalStorageLogin() {
   localStorage.removeItem('rememberMe');
   localStorage.removeItem('email');
   localStorage.removeItem('password');
 }
+
 
 function setLocalStorageLogin() {
   localStorage.setItem('rememberMe', 'true');
@@ -100,10 +112,12 @@ function setLocalStorageLogin() {
   localStorage.setItem('password', passwordInput.value);
 }
 
+
 function loginAsGuest() {
   loginSuccess(guest);
   smoothTransition('../html/summary.html?msg=You have successfully logged in as a guest.');
 }
+
 
 function loginSuccess(user) {
   if (user === guest) {
@@ -112,6 +126,7 @@ function loginSuccess(user) {
     sessionStorage.setItem('user', JSON.stringify(user.name));
   }
 };
+
 
 function rememberAutoFillIn() {
   if (localStorage.getItem('rememberMe') === 'true') {
@@ -123,6 +138,7 @@ function rememberAutoFillIn() {
   }
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('fade-in');
   rememberAutoFillIn();
@@ -132,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkInputAfterLoad();
   }, 500);
 });
+
 
 function welcomeAnimation() {
   const logoOverlay = document.getElementById('logo-overlay');
@@ -150,6 +167,7 @@ function welcomeAnimation() {
   }
 }
 
+
 function checkInputAfterLoad() {
   if (passwordInput.value === "" || passwordInput.value === null) {
     visibilityBtn.src = '../assets/icons/icon-lock.svg';
@@ -165,6 +183,7 @@ function checkInputAfterLoad() {
   }
 }
 
+
 function checkVisibilityIcons() {
   if (visibilityBtn) {
     visibilityBtn.addEventListener('click', () => toggleVisibility(passwordInput, visibilityBtn));
@@ -178,6 +197,7 @@ function checkVisibilityIcons() {
   });
   checkIfRepeatPasswordIsVisible();
 }
+
 
 function checkIfRepeatPasswordIsVisible() {
   if (visibilityBtn1) {
@@ -194,6 +214,7 @@ function checkIfRepeatPasswordIsVisible() {
   }
 }
 
+
 function toggleVisibility(input, btn) {
   if (input.value !== "" && input.value !== null) {
     if (input.type === 'password') {
@@ -206,11 +227,38 @@ function toggleVisibility(input, btn) {
   }
 };
 
+
 function getSignupFormErrors(name, email, password, repeatPassword) {
   let errors = [];
   validateField(name, 'Name is required', signUpNameInput, errors);
   validateField(email, 'Email is required', emailInput, errors);
   validatePassword(password, errors);
+  validatePasswordUser (name, email, password, repeatPassword);
+  return errors;
+}
+
+
+function validateField(value, errorMessage, inputElement, errors) {
+  if (value === '' || value == null) {
+    errors.push(errorMessage);
+    inputElement.parentElement.classList.add('incorrect');
+  }
+}
+
+
+function validatePassword(password, errors) {
+  if (password.length < 8) {
+    errors.push('Password must have at least 8 characters');
+    passwordInput.parentElement.classList.add('incorrect');
+  }
+  if (!/[A-Z]/.test(password)) {
+    errors.push('Password must contain at least one uppercase letter');
+    passwordInput.parentElement.classList.add('incorrect');
+  }
+}
+
+
+function validatePasswordUser (name, email, password, repeatPassword) {
   if (password !== repeatPassword) {
     errors.push('Password does not match repeated password');
     passwordInput.parentElement.classList.add('incorrect');
@@ -224,30 +272,11 @@ function getSignupFormErrors(name, email, password, repeatPassword) {
     errors.push('Name is already in use');
     signUpNameInput.parentElement.classList.add('incorrect');
   }
-  return errors;
 }
 
-function validateField(value, errorMessage, inputElement, errors) {
-  if (value === '' || value == null) {
-    errors.push(errorMessage);
-    inputElement.parentElement.classList.add('incorrect');
-  }
-}
-
-function validatePassword(password, errors) {
-  if (password.length < 8) {
-    errors.push('Password must have at least 8 characters');
-    passwordInput.parentElement.classList.add('incorrect');
-  }
-  if (!/[A-Z]/.test(password)) {
-    errors.push('Password must contain at least one uppercase letter');
-    passwordInput.parentElement.classList.add('incorrect');
-  }
-}
 
 function getLoginFormErrors(email, password) {
   let errors = [];
-
   if (email === '' || email == null) {
     errors.push('Email is required');
     emailInput.parentElement.classList.add('incorrect');
@@ -256,9 +285,9 @@ function getLoginFormErrors(email, password) {
     errors.push('Password is required');
     passwordInput.parentElement.classList.add('incorrect');
   }
-
   return errors;
 }
+
 
 allInputs.forEach(input => {
   input.addEventListener('input', () => {
@@ -268,6 +297,7 @@ allInputs.forEach(input => {
     }
   });
 });
+
 
 function enableSubmitButton() {
   const submitButton = document.getElementById('submit-button');
