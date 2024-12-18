@@ -299,3 +299,39 @@
     padding: 6px;
     border-radius: 10px;
   }
+
+  .overlay-add-task-area {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 24px;
+    overflow-y: scroll;
+  }
+
+  .overlay-done-button {
+    padding: 8px 10px;
+    gap: 0px;
+  }
+
+  #taskAddSubtasksContent {
+    padding-left: 10px;
+  }
+
+  .create-new-task-overlay {
+    width: unset !important;
+  }
+
+  .create-new-task-overlay h1 {
+    margin: 5px;
+    font-size: 36px;
+  }
+
+  .create-new-task-overlay .add-task-area {
+    padding: 24px 24px;
+  }
+
+  .create-task-button {
+    width: 150px;
+    padding: 8px 10px;
+    gap: 0px;
+  }

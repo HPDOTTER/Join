@@ -113,6 +113,12 @@ const toggleDropdown = () => {
 async function renderContactsWithCheckboxes() {
   await load();
   const dropdownMenu = document.getElementById("taskAssignedToMenu");
+  if (!dropdownMenu) {
+    return;
+  }
+  if (!contacts || contacts.length === 0) {
+    return;
+  }
   contacts.forEach((contact, index) => {
     const item = createDropdownItem(contact, index);
     dropdownMenu.appendChild(item);
@@ -153,15 +159,17 @@ function showContactName(contact) {
 function taskMembers(members) {
   const membersHtml = document.getElementById("taskMembers");
   membersHtml.innerHTML = "";
-  members.forEach((member) => {
-    const memberHtml = document.createElement("div");
-    memberHtml.className = "dropdown-item-avatar";
-    memberHtml.innerHTML = getInitials(member);
-    const contact = contacts.find(contact => contact.name === member);
-    const avatarColor = contact ? contact.color : 'orange';
-    memberHtml.style.backgroundColor = avatarColor;
-    membersHtml.appendChild(memberHtml);
-  });
+  if (members && members.length > 0) {
+    members.forEach((member) => {
+      const memberHtml = document.createElement("div");
+      memberHtml.className = "dropdown-item-avatar";
+      memberHtml.innerHTML = getInitials(member);
+      const contact = contacts.find(contact => contact.name === member);
+      const avatarColor = contact ? contact.color : 'orange';
+      memberHtml.style.backgroundColor = avatarColor;
+      membersHtml.appendChild(memberHtml);
+    });
+  }
   ifCurrentTaskPushMembers(members);
 }
 
@@ -169,7 +177,7 @@ const handleCheckboxChange = (event, contact) => {
   if (event.target.checked) {
     if (!members.includes(contact.name)) {
       members.push(contact.name);
-      if (currentTask) {
+      if (tasks[currentTask] && tasks[currentTask].members) {
         tasks[currentTask].members.forEach((member) => {
         if (!members.includes(member)) {
           members.push(member);
@@ -189,7 +197,7 @@ function createCheckbox(contact, index) {
   checkbox.type = "checkbox";
   checkbox.className = "contact-checkbox";
   checkbox.id = `contact.${index}`;
-  if (tasks[currentTask]) {
+  if (tasks[currentTask] && tasks[currentTask].members) {
     checkbox.checked = tasks[currentTask].members.includes(contact.name);
   } else {
     checkbox.checked = false;
