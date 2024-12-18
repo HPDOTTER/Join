@@ -209,6 +209,10 @@ async function SaveLoadRender() {
   renderTasks();
 }
 
+function getOverlayHtml(index) {
+  const task = tasks[index];
+  overlay.innerHTML = getOpenTaskOverlayTemplate(task, index);
+}
 
 function getEditTaskOverlayTemplate(index, task) {
   const formattedDates = formatDate(task.date);
@@ -220,7 +224,6 @@ function getEditTaskOverlayTemplate(index, task) {
           <img src="../assets/icons/close.svg" class="close-overlay" onclick="hideOverlay()">
         </div>
       </div>
-      <div id="taskAdd" class="add-task-area">
         <div class="add-task-info-element">
           <div class="input-wrapper">
             <input type="text" class="input add-task-input-title" id="editTaskTitle" value="${task.titel}" onkeyup="editTaskTitle()">
@@ -293,12 +296,15 @@ function getEditTaskOverlayTemplate(index, task) {
           <ul id="taskAddSubtasksContent">
           </ul>
         </div>
-
-      </div>
       <span class="overlay-edit-footer">
-        <button class="button-primary" onclick="editTask(${index})">Done</button>
+        <button class="button-primary overlay-done-button" onclick="getOverlayHtml(${index})">Ok <img src="../assets/icons/icon-whitecheck.svg"></button>
       </span>
     </div>
   `;
   return taskMembersHtml;
+}
+
+function openNewTaskOverlay(status) {
+  const newTaskOverlay = document.getElementById('new-task-overlay');
+  newTaskOverlay.style.display = 'block';
 }
