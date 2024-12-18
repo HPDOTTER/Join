@@ -1,3 +1,10 @@
+/**
+ * Generates the HTML template for a task.
+ * @function
+ * @param {Object} task - The task object.
+ * @param {number} index - The index of the task.
+ * @returns {string} HTML string representing the task.
+ */
 function taskTemplate(task, index) {
   return `<div id="task${index}" class="task" draggable="true" ondragstart="startDrag(${index})" onclick="openTaskOverlay(${index})">
         <div class="task-top-section">
@@ -19,6 +26,12 @@ function taskTemplate(task, index) {
     </div>`;
 }
 
+/**
+ * Renders the subtask progress and count for a task.
+ * @function
+ * @param {Object} task - The task object.
+ * @returns {string} HTML string for subtask progress and count.
+ */
 function rendersubtaskCount(task) {
   if (task.subtasks) {
     const { subtaskDone, subtaskCount } = calculateSubtaskCount(task);
@@ -33,6 +46,13 @@ function rendersubtaskCount(task) {
   }
 }
 
+/**
+ * Generates the HTML template for the task overlay.
+ * @function
+ * @param {Object} task - The task object.
+ * @param {number} index - The index of the task.
+ * @returns {string} HTML string for the task overlay.
+ */
 function getOpenTaskOverlayTemplate(task, index) {
   return `
     <div class="task-overlay-content animation-slide-from-bottom" id="task-overlay-content">
@@ -53,9 +73,18 @@ function getOpenTaskOverlayTemplate(task, index) {
           <div class="task-overlay-devider"></div>
           <div class="task-overlay-editors" onclick="openEditTaskOverlay(${index})"><img src="../assets/icons/icon-edit.png"><p>Edit</p></div>
         </span>
-      </div>`
+      </div>`;
 }
 
+/**
+ * Generates the HTML for a subtask in the overlay.
+ * @function
+ * @param {Object} subtask - The subtask object.
+ * @param {number} taskIndex - The index of the parent task.
+ * @param {number} subtaskIndex - The index of the subtask.
+ * @param {string} checkboxId - The ID of the checkbox element.
+ * @returns {string} HTML string for the subtask.
+ */
 function getOverlaySubtaskHtml(subtask, taskIndex, subtaskIndex, checkboxId) {
   return `<div class="overlay-subtask">
               <input type="checkbox" id="${checkboxId}" ${subtask.isDone ? 'checked' : ''}>
@@ -64,12 +93,24 @@ function getOverlaySubtaskHtml(subtask, taskIndex, subtaskIndex, checkboxId) {
             </div>`;
 }
 
+/**
+ * Generates the HTML for the task category.
+ * @function
+ * @param {Object} task - The task object.
+ * @returns {string} HTML string for the task category.
+ */
 function taskCategory(task) {
   return `<span class="category ${task.categoryUser ? 'user' : 'technical'}">
             ${task.categoryUser ? 'User Story' : 'Technical Task'}
           </span>`;
 }
 
+/**
+ * Generates the HTML for assigned task members if any.
+ * @function
+ * @param {Object} task - The task object.
+ * @returns {string} HTML string for the assigned members or empty string if none.
+ */
 function ifTaskMembers(task) {
   if (task.members && task.members.length > 0) {
     return `<div class="overlay-tasks-assigned-to">
@@ -81,6 +122,13 @@ function ifTaskMembers(task) {
   }
 }
 
+/**
+ * Generates the HTML template for a task member's avatar and name.
+ * @function
+ * @param {string} member - The member's name.
+ * @param {string} avatarColor - The background color for the avatar.
+ * @returns {string} HTML string for the task member.
+ */
 function getTaskAssignedToTemplate(member, avatarColor) {
   return `<div class="overlay-avatar">
               <div class="contactAvatar margin-right-10" style="background-color: ${avatarColor}">
@@ -89,3 +137,4 @@ function getTaskAssignedToTemplate(member, avatarColor) {
               ${member}
             </div>`;
 }
+
