@@ -33,6 +33,9 @@ async function addTask(status) {
   await load();
 }
 
+/**
+ * Cancels the task addition process and navigates to the add-task page.
+ */
 async function addTaskCancel() {
   window.location.href = "../html/add-task.html";
   await renderTasks();
@@ -69,6 +72,7 @@ async function addTaskSave() {
     window.location.href = "../html/board.html";
     await load();
     await renderTasks();
+    showToastMessage('Task added to board', '../assets/icons/icon-toast-message-task-added.svg');
   }
 }
 
@@ -286,7 +290,8 @@ function createLabel(contact, index) {
 function addSubtask() {
   let inputfield = document.getElementById('subtaskInput').value;
   let subtask = document.getElementById('taskAddSubtasksContent');
-  if (window.location.href.includes('add-task.html')) {
+  let addTaskBoard = document.getElementById('taskAdd')
+  if (window.location.href.includes('add-task.html') || addTaskBoard) {
     subtask.innerHTML += `<li class="listitems">• ${inputfield}</li>`;
   } else if (window.location.href.includes('board.html')) {
     subtask.innerHTML += `<li class="listitems editOverlaylistitems">• ${subtask.subtitel}<div class="subtaskbuttons"><button onclick="overlayEditSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-edit.png"></button><div class="subtaskDevider"></div><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button></div></li>`;
@@ -399,24 +404,23 @@ function startResize(e) {
  */
 
 
-// alt:
-// function attachCustomResizeHandle() {
-//   const textarea = document.querySelector('.add-task-textarea');
-//   const resizeHandle = document.querySelector('.custom-resize-handle');
-//   if (resizeHandle) {
-//     resizeHandle.addEventListener('mousedown', function(e) {
-//       e.preventDefault();
-//       const startY = e.clientY;
-//       const startHeight = parseInt(document.defaultView.getComputedStyle(textarea).height, 10);
-//       function doDrag(e) {
-//         textarea.style.height = (startHeight + e.clientY - startY) + 'px';
-//       }
-//       function stopDrag() {
-//         document.documentElement.removeEventListener('mousemove', doDrag, false);
-//         document.documentElement.removeEventListener('mouseup', stopDrag, false);
-//       }
-//       document.documentElement.addEventListener('mousemove', doDrag, false);
-//       document.documentElement.addEventListener('mouseup', stopDrag, false);
-//     }, false);
-//   }
-// }
+function attachCustomResizeHandle() {
+  const textarea = document.querySelector('.add-task-textarea');
+  const resizeHandle = document.querySelector('.custom-resize-handle');
+  if (resizeHandle) {
+    resizeHandle.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      const startY = e.clientY;
+      const startHeight = parseInt(document.defaultView.getComputedStyle(textarea).height, 10);
+      function doDrag(e) {
+        textarea.style.height = (startHeight + e.clientY - startY) + 'px';
+      }
+      function stopDrag() {
+        document.documentElement.removeEventListener('mousemove', doDrag, false);
+        document.documentElement.removeEventListener('mouseup', stopDrag, false);
+      }
+      document.documentElement.addEventListener('mousemove', doDrag, false);
+      document.documentElement.addEventListener('mouseup', stopDrag, false);
+    }, false);
+  }
+}

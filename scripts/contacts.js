@@ -81,9 +81,9 @@ function renderDetail(contact) {
  */
 function showDetailActive(contact, contactItem) {
   if (activeContactItem) {
-    activeContactItem.classList.remove('active');
+    activeContactItem.classList.remove('activeC');
   }
-  contactItem.classList.add('active');
+  contactItem.classList.add('activeC');
   activeContactItem = contactItem;
   currentContact = contact;
 }
@@ -94,7 +94,7 @@ function showDetailActive(contact, contactItem) {
 function hideDetail() {
   document.getElementById('contactDetailSection').style.display = 'none';
   if (activeContactItem) {
-    activeContactItem.classList.remove('active');
+    activeContactItem.classList.remove('activeC');
     activeContactItem = null;
   }
   currentContact = null;
@@ -146,7 +146,7 @@ function saveContact() {
     updateContactNames();
     renderDetail(currentContact);
     if (activeContactItem) {
-      activeContactItem.classList.add('active');
+      activeContactItem.classList.add('activeC');
     }
     save();
     hideEditForm();
@@ -167,7 +167,7 @@ function hideEditForm() {
   document.getElementById('contactEditForm').style.display = 'none';
   document.getElementById('contactEditOverlay').style.display = 'none';
   if (activeContactItem) {
-    activeContactItem.classList.add('active');
+    activeContactItem.classList.add('activeC');
   }
 }
 

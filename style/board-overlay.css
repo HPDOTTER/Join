@@ -335,3 +335,30 @@
     padding: 8px 10px;
     gap: 0px;
   }
+
+  .new-task-button-div {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .new-task-overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0px !important;
+  }
+
+.new-task-overlay-header button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+}
+
+  .new-task-overlay-header button:hover {
+    cursor: pointer;
+    background-color: var(--hover-slight-blue);
+    border-radius: 50%;
+  }

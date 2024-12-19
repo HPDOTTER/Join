@@ -326,12 +326,23 @@ function openNewTaskOverlay() {
   const newTaskOverlay = document.getElementById('new-task-overlay');
   newTaskOverlay.style.display = 'block';
   newTaskOverlay.innerHTML = getNewTaskOverlayTemplate();
+  renderContactsWithCheckboxes();
+  attachSubtaskEventListeners();
+  currentTask = null;
+}
+
+function closeNewTaskOverlay() {
+  const newTaskOverlay = document.getElementById('new-task-overlay');
+  newTaskOverlay.style.display = 'none';  
 }
 
  function getNewTaskOverlayTemplate() {
   const newTaskOverlayHtml = `
       <div id="taskAdd" class="add-task-area">
-          <div><h1>Add Task</h1></div>  
+          <div class="new-task-overlay-header">
+            <h1>Add Task</h1>
+            <button onclick="closeNewTaskOverlay()"><img src="../assets/icons/close.svg" class="close-overlay"></button>
+          </div>  
             <div class="add-task-info-element">
               <div class="input-wrapper">
                 <input type="text" placeholder="Enter a title" class="input add-task-input-title" id="taskTitle" required="">
@@ -404,7 +415,7 @@ function openNewTaskOverlay() {
               <ul id="taskAddSubtasksContent">
               </ul>
             </div>
-            <button class="button-primary create-task-button" onclick="addTaskSave(); showToastMessage('Task added to board', '../assets/icons/icon-toast-message-task-added.svg')">Create Task<img src="../assets/icons/icon-whitecheck.svg" alt=""></button>
+            <div class="new-task-button-div"><button class="button-primary create-task-button" onclick="addTaskSave() ">Create Task<img src="../assets/icons/icon-whitecheck.svg" alt=""></button></div>
           </div>
     `; 
     return newTaskOverlayHtml;
