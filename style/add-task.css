@@ -226,7 +226,8 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
   align-items: flex-end;
   flex: 1;
   gap: 32px;
-  padding: 60px;
+  padding-right: 60px;
+  padding-bottom: 60px;
 }
 
 .add-task-button-create-task,
@@ -317,6 +318,45 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
   display: none;
   align-items: center;
   gap: 4px;
+}
+
+@media (max-width: 900px) {
+  .add-task-area {
+    /* gap: 24px; */
+    width: 100%;
+    padding: 0  20%;
+    /* height: calc(100vh - 96px); */
+    overflow-y: scroll;
+  }
+
+  .add-task-priority-area {
+    /* height: 105px; */
+    /* display: flex; */
+  }
+
+  .icon-add-task-priority-urgent,
+  .icon-add-task-priority-medium,
+  .icon-add-task-priority-low {
+    height: 54px;
+  }
+
+  .add-task-button-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 630px) {
+  .add-task-area {
+    gap: 10px;
+    width: 100%;
+    padding: 0 5%;
+    /* height: calc(100vh - 96px); */
+    overflow-y: scroll;
+  }
 }
 
 
