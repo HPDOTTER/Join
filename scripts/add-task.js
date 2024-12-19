@@ -27,18 +27,22 @@ let selectedCategory = null;
  * @param {string} status - The status of the task to be added.
  */
 async function addTask(status) {
-  await load();
+  openNewTaskOverlay();
   statusTask = status;
   await save();
-  window.location.href = "../html/add-task.html";
+  await load();
 }
 
+<<<<<<< Updated upstream
 /**
  * Cancels the task addition process and navigates to the add-task page.
  */
 function addTaskCancel() {
+=======
+async function addTaskCancel() {
+>>>>>>> Stashed changes
   window.location.href = "../html/add-task.html";
-  renderTasks();
+  await renderTasks();
 }
 
 /**
@@ -65,12 +69,12 @@ const selectCategory = (element) => {
  * Saves the newly created task and navigates to the board page.
  */
 async function addTaskSave() {
-  await load();
   const newTask = createNewTask();
   if (newTask.titel && newTask.date) {
     tasks.push(newTask);
     await save();
     window.location.href = "../html/board.html";
+    await load();
     await renderTasks();
   }
 }
