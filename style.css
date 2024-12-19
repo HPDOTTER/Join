@@ -196,6 +196,10 @@ p>a {
 }
 
 @media (max-width: 630px){
+    .site-body-wrapper {
+        height: calc(100vh - 96px - 80px);
+    }
+
     .text-content {
         padding: 20px 30px;
     }

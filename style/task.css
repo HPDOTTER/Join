@@ -392,6 +392,7 @@ body {
   .task-kanban-board {
     gap: 10px;
     margin-top: 0;
+    height: calc(100vh - 96px - 108px - 80px);
     padding: 0 10px;
   }
 
