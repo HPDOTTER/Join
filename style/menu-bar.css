@@ -68,8 +68,8 @@
 }
 
 .menu-main-link-activated {
-    background-color: var(--primary-color);
-    color: #FFFFFF;
+    background-color: var(--third-highlight-color);
+    color: #000000;
     font-weight: 600;
 }
 

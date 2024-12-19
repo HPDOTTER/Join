@@ -188,9 +188,14 @@ document.addEventListener("DOMContentLoaded", () => {
       menuLinks.forEach(link => {
         const element = document.getElementById(link.id);
         if (link.path === currentPath) {
-          element.classList.add('menu-main-link-activated');
+          if (link.id === 'privacyPolicyLink' || link.id === 'legalNoticeLink') {
+            element.classList.add('menu-legal-section-link-activated');
+          } else {
+            element.classList.add('menu-main-link-activated');
+          }
         } else {
           element.classList.remove('menu-main-link-activated');
+          element.classList.remove('menu-legal-section-link-activated');
         }
       })
     }
