@@ -322,16 +322,9 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
 
 @media (max-width: 900px) {
   .add-task-area {
-    /* gap: 24px; */
     width: 100%;
     padding: 0  20%;
-    /* height: calc(100vh - 96px); */
     overflow-y: scroll;
-  }
-
-  .add-task-priority-area {
-    /* height: 105px; */
-    /* display: flex; */
   }
 
   .icon-add-task-priority-urgent,
@@ -354,15 +347,6 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
     gap: 10px;
     width: 100%;
     padding: 0 5%;
-    /* height: calc(100vh - 96px); */
     overflow-y: scroll;
   }
 }
-
-
-
-/* @media (max-width: 1200px) {
-  .add-task-area {
-    height: calc(100vh - 96px - 90px);
-  }
-} */
