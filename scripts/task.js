@@ -97,11 +97,11 @@ function renderMembers(task) {
  */
 function setTaskPriority(task, html) {
   if (task.priority == 1) {
-    html += `<div class="prio13 priodiv"><img src="../assets/img/prioUrgent.svg" alt=""></div>`
+    html += `<div class="prio13 priodiv"><img src="../assets/img/PrioUrgent.svg" alt=""></div>`
   } else if (task.priority == 2) {
-    html += `<div class="prio2 priodiv"><img src="../assets/img/prioMedium.svg" alt=""></div>`
+    html += `<div class="prio2 priodiv"><img src="../assets/img/PrioMedium.svg" alt=""></div>`
   } else if (task.priority == 3) {
-    html += `<div class="prio13 priodiv"><img src="../assets/img/prioLow.svg" alt=""></div>`
+    html += `<div class="prio13 priodiv"><img src="../assets/img/PrioLow.svg" alt=""></div>`
   }
   return html;
 }
