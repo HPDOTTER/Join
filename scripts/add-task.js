@@ -376,33 +376,9 @@ function startResize(e) {
   document.documentElement.addEventListener('mouseup', onStopDrag);
 }
 
-
-// alt:
-// document.addEventListener('DOMContentLoaded', () => {
-//   const textarea = document.querySelector('.add-task-textarea');
-//   const resizeHandle = document.querySelector('.custom-resize-handle');
-//   if (resizeHandle) {
-//     resizeHandle.addEventListener('mousedown', function(e) {
-//       e.preventDefault();
-//       const startY = e.clientY;
-//       const startHeight = parseInt(document.defaultView.getComputedStyle(textarea).height, 10);
-//       function doDrag(e) {
-//         textarea.style.height = (startHeight + e.clientY - startY) + 'px';
-//       }
-//       function stopDrag() {
-//         document.documentElement.removeEventListener('mousemove', doDrag, false);
-//         document.documentElement.removeEventListener('mouseup', stopDrag, false);
-//       }
-//       document.documentElement.addEventListener('mousemove', doDrag, false);
-//       document.documentElement.addEventListener('mouseup', stopDrag, false);
-//     }, false);
-//   }
-// });
-
 /**
  * Attaches a resize handle for a textarea to allow custom resizing.
  */
-
 
 function attachCustomResizeHandle() {
   const textarea = document.querySelector('.add-task-textarea');

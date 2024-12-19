@@ -22,11 +22,14 @@ function smoothTransition(url) {
 
 function setCurrentUserInitials() {
   const currentUserInitials = document.getElementById('currentUserInitials');
+  const guest = sessionStorage.getItem('guest');
   if (user) {
     const initials = user.split(' ').map(word => word[0]).join('').toUpperCase();
     currentUserInitials.innerHTML = initials;
-  } else {
+  } else if (guest) {
     currentUserInitials.innerHTML = 'G';
+  } else {
+    currentUser();
   }
 }
 
