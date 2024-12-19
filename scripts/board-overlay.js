@@ -78,11 +78,11 @@ async function overlaySubtaskCheckbox(taskIndex, subtaskIndex) {
 function taskPriority(task) {
     if (task.priority) {
       if (task.priority == 1) {
-        return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Urgent</p> <div class="prio13 priodiv"><img src="../assets/img/prioUrgent.svg"></div></div>`
+        return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Urgent</p> <div class="prio13 priodiv"><img src="../assets/img/PrioUrgent.svg"></div></div>`
       } else if (task.priority == 2) {
-        return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Medium</p> <div class="prio13 priodiv"><img src="../assets/img/prioMedium.svg"></div></div>`
+        return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Medium</p> <div class="prio13 priodiv"><img src="../assets/img/PrioMedium.svg"></div></div>`
       } else if (task.priority == 3) {
-        return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Low</p> <div class="prio13 priodiv"><img src="../assets/img/prioLow.svg"></div></div>`
+        return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Low</p> <div class="prio13 priodiv"><img src="../assets/img/PrioLow.svg"></div></div>`
       }
     } else {
       return '';
