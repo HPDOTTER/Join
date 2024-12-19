@@ -282,6 +282,12 @@ function updateContactNames() {
     contactItem.querySelector('.contact-email').textContent = contact.email;
     const phoneElement = contactItem.querySelector('.contact-phone');
     if (phoneElement) phoneElement.textContent = contact.phone;
+    if (contact.user === true) {
+      const user = users.find(u => u.name === contact.name);
+      if (user) {
+        user.email = contact.email;
+      }
+    }
   });
 }
 
