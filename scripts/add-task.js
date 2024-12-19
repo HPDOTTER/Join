@@ -338,49 +338,88 @@ function attachSubtaskEventListeners() {
 }
 
 /**
- * Enables custom resize functionality for a textarea.
+ * Adds event listeners for starting the resize action when the DOM is fully loaded.
  */
 document.addEventListener('DOMContentLoaded', () => {
   const textarea = document.querySelector('.add-task-textarea');
   const resizeHandle = document.querySelector('.custom-resize-handle');
   if (resizeHandle) {
-    resizeHandle.addEventListener('mousedown', function(e) {
-      e.preventDefault();
-      const startY = e.clientY;
-      const startHeight = parseInt(document.defaultView.getComputedStyle(textarea).height, 10);
-      function doDrag(e) {
-        textarea.style.height = (startHeight + e.clientY - startY) + 'px';
-      }
-      function stopDrag() {
-        document.documentElement.removeEventListener('mousemove', doDrag, false);
-        document.documentElement.removeEventListener('mouseup', stopDrag, false);
-      }
-      document.documentElement.addEventListener('mousemove', doDrag, false);
-      document.documentElement.addEventListener('mouseup', stopDrag, false);
-    }, false);
+    resizeHandle.addEventListener('mousedown', startResize);
   }
 });
 
 /**
+ * Starts the resize process when the mouse is pressed on the resize handle.
+ * @param {MouseEvent} e - The mouse event triggered when the mouse button is pressed.
+ */
+function startResize(e) {
+  e.preventDefault();
+  const textarea = document.querySelector('.add-task-textarea');
+  const startY = e.clientY, startHeight = parseInt(window.getComputedStyle(textarea).height, 10);
+
+  /**
+   * Updates the textarea height while dragging.
+   * @param {MouseEvent} e - The mouse event triggered during the drag.
+   */
+  const onDrag = (e) => textarea.style.height = `${startHeight + e.clientY - startY}px`;
+
+  /**
+   * Stops the resize process when the mouse button is released.
+   */
+  const onStopDrag = () => {
+    document.documentElement.removeEventListener('mousemove', onDrag);
+    document.documentElement.removeEventListener('mouseup', onStopDrag);
+  };
+  document.documentElement.addEventListener('mousemove', onDrag);
+  document.documentElement.addEventListener('mouseup', onStopDrag);
+}
+
+
+// alt:
+// document.addEventListener('DOMContentLoaded', () => {
+//   const textarea = document.querySelector('.add-task-textarea');
+//   const resizeHandle = document.querySelector('.custom-resize-handle');
+//   if (resizeHandle) {
+//     resizeHandle.addEventListener('mousedown', function(e) {
+//       e.preventDefault();
+//       const startY = e.clientY;
+//       const startHeight = parseInt(document.defaultView.getComputedStyle(textarea).height, 10);
+//       function doDrag(e) {
+//         textarea.style.height = (startHeight + e.clientY - startY) + 'px';
+//       }
+//       function stopDrag() {
+//         document.documentElement.removeEventListener('mousemove', doDrag, false);
+//         document.documentElement.removeEventListener('mouseup', stopDrag, false);
+//       }
+//       document.documentElement.addEventListener('mousemove', doDrag, false);
+//       document.documentElement.addEventListener('mouseup', stopDrag, false);
+//     }, false);
+//   }
+// });
+
+/**
  * Attaches a resize handle for a textarea to allow custom resizing.
  */
-function attachCustomResizeHandle() {
-  const textarea = document.querySelector('.add-task-textarea');
-  const resizeHandle = document.querySelector('.custom-resize-handle');
-  if (resizeHandle) {
-    resizeHandle.addEventListener('mousedown', function(e) {
-      e.preventDefault();
-      const startY = e.clientY;
-      const startHeight = parseInt(document.defaultView.getComputedStyle(textarea).height, 10);
-      function doDrag(e) {
-        textarea.style.height = (startHeight + e.clientY - startY) + 'px';
-      }
-      function stopDrag() {
-        document.documentElement.removeEventListener('mousemove', doDrag, false);
-        document.documentElement.removeEventListener('mouseup', stopDrag, false);
-      }
-      document.documentElement.addEventListener('mousemove', doDrag, false);
-      document.documentElement.addEventListener('mouseup', stopDrag, false);
-    }, false);
-  }
-}
+
+
+// alt:
+// function attachCustomResizeHandle() {
+//   const textarea = document.querySelector('.add-task-textarea');
+//   const resizeHandle = document.querySelector('.custom-resize-handle');
+//   if (resizeHandle) {
+//     resizeHandle.addEventListener('mousedown', function(e) {
+//       e.preventDefault();
+//       const startY = e.clientY;
+//       const startHeight = parseInt(document.defaultView.getComputedStyle(textarea).height, 10);
+//       function doDrag(e) {
+//         textarea.style.height = (startHeight + e.clientY - startY) + 'px';
+//       }
+//       function stopDrag() {
+//         document.documentElement.removeEventListener('mousemove', doDrag, false);
+//         document.documentElement.removeEventListener('mouseup', stopDrag, false);
+//       }
+//       document.documentElement.addEventListener('mousemove', doDrag, false);
+//       document.documentElement.addEventListener('mouseup', stopDrag, false);
+//     }, false);
+//   }
+// }
