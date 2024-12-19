@@ -54,7 +54,7 @@ button {
 
 .button-secondary:hover {
     color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
     box-shadow: 0px 4px 8px 0px #00000033;
     transition: ease-in-out 0.1s;
 }

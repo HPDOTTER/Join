@@ -28,6 +28,8 @@ function setCurrentUserInitials() {
     currentUserInitials.innerHTML = initials;
   } else if (guest) {
     currentUserInitials.innerHTML = 'G';
+  } else if (window.location.pathname.includes('/html/privacy-policy.html') || window.location.pathname.includes('/html/legal-notice.html')) {
+    currentUserInitials.innerHTML = 'G';
   } else {
     currentUser();
   }

@@ -336,6 +336,16 @@ function closeNewTaskOverlay() {
   newTaskOverlay.style.display = 'none';  
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  if (overlay) {
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) {
+        hideOverlay();
+      }
+    });
+  }
+});
+
  function getNewTaskOverlayTemplate() {
   const newTaskOverlayHtml = `
       <div id="taskAdd" class="add-task-area">
