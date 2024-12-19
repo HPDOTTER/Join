@@ -1,7 +1,31 @@
+/**
+ * Array to hold members assigned to a task.
+ * @type {Array}
+ */
 let members = [];
+
+/**
+ * Array to hold subtasks of a task.
+ * @type {Array}
+ */
 let subtasks = [];
+
+/**
+ * Currently dragged element in a drag-and-drop interaction.
+ * @type {HTMLElement | null}
+ */
 let currentDraggedElement;
 
+/**
+ * Selected category for the task.
+ * @type {boolean | null}
+ */
+let selectedCategory = null;
+
+/**
+ * Adds a new task and navigates to the add-task page.
+ * @param {string} status - The status of the task to be added.
+ */
 async function addTask(status) {
   await load();
   statusTask = status;
@@ -9,33 +33,37 @@ async function addTask(status) {
   window.location.href = "../html/add-task.html";
 }
 
+/**
+ * Cancels the task addition process and navigates to the add-task page.
+ */
 function addTaskCancel() {
   window.location.href = "../html/add-task.html";
   renderTasks();
 }
 
-let selectedCategory = null;
-
+/**
+ * Toggles the visibility of the category dropdown.
+ */
 const toggleCategoryDropdown = () => {
   const dropdown = document.getElementById('categoryDropdown');
   dropdown.classList.toggle('active');
 };
 
+/**
+ * Selects a category from the dropdown.
+ * @param {HTMLElement} element - The dropdown item element.
+ */
 const selectCategory = (element) => {
   const dropdown = document.getElementById('categoryDropdown');
   const button = document.getElementById('addTaskCategoryValue');
-  // Setze den ausgewählten Wert
   selectedCategory = element.getAttribute('data-value') === 'true';
-  // Aktualisiere die Button-Anzeige
   button.innerText = element.innerText;
-  // Schließe das Dropdown
   dropdown.classList.remove('active');
 };
 
-// Beispiel: Zugriff auf den aktuellen Wert
-//console.log(selectedCategory); // true für "User Story", false für "Technical Task"
-
-
+/**
+ * Saves the newly created task and navigates to the board page.
+ */
 async function addTaskSave() {
   await load();
   const newTask = createNewTask();
@@ -47,11 +75,14 @@ async function addTaskSave() {
   }
 }
 
+/**
+ * Creates a new task object based on form inputs.
+ * @returns {Object} - The newly created task object.
+ */
 function createNewTask() {
   const title = document.getElementById('taskTitle').value;
   const description = document.getElementById('taskDescription').value;
   const date = document.getElementById('taskDate').value;
-
   return {
     titel: title,
     description: description,
@@ -65,30 +96,42 @@ function createNewTask() {
   };
 }
 
+/**
+ * Selected priority for the task.
+ * @type {string | null}
+ */
 selectedPriority = null;
 
+/**
+ * Image paths for active priority states.
+ * @type {Object}
+ */
 const priorityImgactive = {
   '1': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-urgent-active.svg',
   '2': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-medium-active.svg',
   '3': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-low-active.svg'
 };
 
+/**
+ * Image paths for default priority states.
+ * @type {Object}
+ */
 const priorityImgPrimal = {
   '1': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-urgent.svg',
   '2': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-medium.svg',
   '3': '../assets/icons/priorities/priorities-big/icon-prioritiy-big-low.svg'
 };
 
-
+/**
+ * Sets the priority of a task visually and updates its state.
+ * @param {string} priority - The selected priority level.
+ */
 async function setOverlayTaskPriority(priority) {
   const priorities = ['1', '2', '3'];
-  // Reset the Images of all priority elements
   priorities.forEach(p => {
     document.getElementById(p).style.content = `url(${priorityImgPrimal[p]})`;
   });
-  // Set the Image of the selected priority element
   document.getElementById(priority).style.content = `url(${priorityImgactive[priority]})`;
-  // Store the selected priority
   selectedPriority = priority;
   if (currentTask) {
     tasks[currentTask].priority = priority;
@@ -96,27 +139,23 @@ async function setOverlayTaskPriority(priority) {
   }
 }
 
-
+/**
+ * Toggles the visibility of the "Assigned To" dropdown menu.
+ */
 const toggleDropdown = () => {
   const button = document.getElementById("addTaskAssignedToValue");
   const dropdownMenu = document.getElementById("taskAssignedToMenu");
   dropdownMenu.classList.toggle("active");
-  if (dropdownMenu.classList.contains("active")) {
-    button.innerHTML = "";
-  } else {
-    button.innerHTML = "Select contacts to assign";
-  }
+  button.innerHTML = dropdownMenu.classList.contains("active") ? "" : "Select contacts to assign";
 };
 
-
-
+/**
+ * Renders contacts as dropdown items with checkboxes for selection.
+ */
 async function renderContactsWithCheckboxes() {
   await load();
   const dropdownMenu = document.getElementById("taskAssignedToMenu");
-  if (!dropdownMenu) {
-    return;
-  }
-  if (!contacts || contacts.length === 0) {
+  if (!dropdownMenu || !contacts || contacts.length === 0) {
     return;
   }
   contacts.forEach((contact, index) => {
@@ -125,6 +164,12 @@ async function renderContactsWithCheckboxes() {
   });
 }
 
+/**
+ * Creates a dropdown item for a contact.
+ * @param {Object} contact - The contact object.
+ * @param {number} index - The index of the contact in the list.
+ * @returns {HTMLElement} - The created dropdown item element.
+ */
 function createDropdownItem(contact, index) {
   const item = document.createElement("div");
   item.className = "dropdown-item";
@@ -135,6 +180,11 @@ function createDropdownItem(contact, index) {
   return item;
 }
 
+/**
+ * Creates an avatar element for a contact.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLElement} - The avatar element.
+ */
 function showContactAvatar(contact) {
   const avatarColor = contact ? contact.color : 'orange';
   const avatar = document.createElement("div");
@@ -144,18 +194,21 @@ function showContactAvatar(contact) {
   return avatar;
 }
 
-
+/**
+ * Creates a name element for a contact.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLElement} - The name element.
+ */
 function showContactName(contact) {
   const name = document.createElement("p");
-  if (contact.name === user) {
-    name.innerHTML = `${contact.name} (You)`;
-  } else {
-    name.innerHTML = contact.name;
-  }
+  name.innerHTML = contact.name === user ? `${contact.name} (You)` : contact.name;
   return name;
 }
 
-
+/**
+ * Updates the displayed task members based on the provided list.
+ * @param {string[]} members - Array of member names to be displayed.
+ */
 function taskMembers(members) {
   const membersHtml = document.getElementById("taskMembers");
   membersHtml.innerHTML = "";
@@ -173,25 +226,35 @@ function taskMembers(members) {
   ifCurrentTaskPushMembers(members);
 }
 
+/**
+ * Handles changes to a member's checkbox selection.
+ * @param {Event} event - The change event triggered by the checkbox.
+ * @param {Object} contact - The contact object associated with the checkbox.
+ */
 const handleCheckboxChange = (event, contact) => {
   if (event.target.checked) {
     if (!members.includes(contact.name)) {
       members.push(contact.name);
       if (tasks[currentTask] && tasks[currentTask].members) {
         tasks[currentTask].members.forEach((member) => {
-        if (!members.includes(member)) {
-          members.push(member);
-        }
-      });
-    }
+          if (!members.includes(member)) {
+            members.push(member);
+          }
+        });
       }
+    }
   } else {
     members = members.filter((member) => member !== contact.name);
   }
   taskMembers(members);
 };
 
-
+/**
+ * Creates a checkbox element for a contact.
+ * @param {Object} contact - The contact object for which the checkbox is created.
+ * @param {number} index - The index of the contact.
+ * @returns {HTMLElement} The created checkbox element.
+ */
 function createCheckbox(contact, index) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -206,6 +269,12 @@ function createCheckbox(contact, index) {
   return checkbox;
 }
 
+/**
+ * Creates a label element for a contact's checkbox.
+ * @param {Object} contact - The contact object for which the label is created.
+ * @param {number} index - The index of the contact.
+ * @returns {HTMLElement} The created label element.
+ */
 function createLabel(contact, index) {
   const label = document.createElement("label");
   label.setAttribute("for", `contact.${index}`);
@@ -214,6 +283,9 @@ function createLabel(contact, index) {
   return label;
 }
 
+/**
+ * Adds a new subtask to the current task.
+ */
 function addSubtask() {
   let inputfield = document.getElementById('subtaskInput').value;
   let subtask = document.getElementById('taskAddSubtasksContent');
@@ -226,10 +298,17 @@ function addSubtask() {
   clearSubtask();
 }
 
+/**
+ * Clears the subtask input field.
+ */
 function clearSubtask() {
   document.getElementById('subtaskInput').value = '';
 }
 
+/**
+ * Displays the subtasks for a given task index.
+ * @param {number} index - The index of the task.
+ */
 async function showSubtasks(index) {
   await load();
   let subtaskHtml = document.getElementById('taskAddSubtasksContent');
@@ -242,25 +321,13 @@ async function showSubtasks(index) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const subTaskValue = document.getElementById('subtaskInput');
-  const ifSubtaskValue = document.getElementById('ifSubtaskvalue');
-  const addSubtaskPlus = document.getElementById('addSubtaskPlus');
-
-  if (subTaskValue) {
-    subTaskValue.addEventListener('onchange', () => {
-      const hasValue = subTaskValue.value.length > 0;
-      ifSubtaskValue.style.display = hasValue ? 'flex' : 'none';
-      addSubtaskPlus.style.display = hasValue ? 'none' : 'flex';
-    });
-  }
-});
-
+/**
+ * Attaches event listeners to subtask input and controls.
+ */
 function attachSubtaskEventListeners() {
   const subTaskValue = document.getElementById('subtaskInput');
   const ifSubtaskValue = document.getElementById('ifSubtaskvalue');
   const addSubtaskPlus = document.getElementById('addSubtaskPlus');
-
   if (subTaskValue) {
     subTaskValue.addEventListener('keyup', () => {
       const hasValue = subTaskValue.value.length > 0;
@@ -270,57 +337,50 @@ function attachSubtaskEventListeners() {
   }
 }
 
-//custom resize textarea
+/**
+ * Enables custom resize functionality for a textarea.
+ */
 document.addEventListener('DOMContentLoaded', () => {
   const textarea = document.querySelector('.add-task-textarea');
   const resizeHandle = document.querySelector('.custom-resize-handle');
-
   if (resizeHandle) {
     resizeHandle.addEventListener('mousedown', function(e) {
       e.preventDefault();
-
       const startY = e.clientY;
       const startHeight = parseInt(document.defaultView.getComputedStyle(textarea).height, 10);
-
       function doDrag(e) {
         textarea.style.height = (startHeight + e.clientY - startY) + 'px';
       }
-
       function stopDrag() {
         document.documentElement.removeEventListener('mousemove', doDrag, false);
         document.documentElement.removeEventListener('mouseup', stopDrag, false);
       }
-
       document.documentElement.addEventListener('mousemove', doDrag, false);
       document.documentElement.addEventListener('mouseup', stopDrag, false);
     }, false);
   }
 });
 
+/**
+ * Attaches a resize handle for a textarea to allow custom resizing.
+ */
 function attachCustomResizeHandle() {
   const textarea = document.querySelector('.add-task-textarea');
   const resizeHandle = document.querySelector('.custom-resize-handle');
-
   if (resizeHandle) {
     resizeHandle.addEventListener('mousedown', function(e) {
       e.preventDefault();
-
       const startY = e.clientY;
       const startHeight = parseInt(document.defaultView.getComputedStyle(textarea).height, 10);
-
       function doDrag(e) {
         textarea.style.height = (startHeight + e.clientY - startY) + 'px';
       }
-
       function stopDrag() {
         document.documentElement.removeEventListener('mousemove', doDrag, false);
         document.documentElement.removeEventListener('mouseup', stopDrag, false);
       }
-
       document.documentElement.addEventListener('mousemove', doDrag, false);
       document.documentElement.addEventListener('mouseup', stopDrag, false);
     }, false);
   }
-};
-
-
+}
