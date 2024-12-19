@@ -33,14 +33,7 @@ async function addTask(status) {
   await load();
 }
 
-<<<<<<< Updated upstream
-/**
- * Cancels the task addition process and navigates to the add-task page.
- */
-function addTaskCancel() {
-=======
 async function addTaskCancel() {
->>>>>>> Stashed changes
   window.location.href = "../html/add-task.html";
   await renderTasks();
 }
