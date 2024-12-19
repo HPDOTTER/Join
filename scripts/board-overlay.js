@@ -1,94 +1,100 @@
 const overlay = document.getElementById('taskOverlay');
 let currentTask = null;
 
-function openTaskOverlay(index) {
-    const task = tasks[index];
-    overlay.innerHTML = getOpenTaskOverlayTemplate(task, index);
-    showOverlay();
-    currentTask = index;
-  }
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    if (overlay) {
-      overlay.addEventListener('click', (event) => {
-        if (event.target === overlay) {
-          hideOverlay();
-        }
-      });
-    }
-  });
 
+function openTaskOverlay(index) {
+  const task = tasks[index];
+  overlay.innerHTML = getOpenTaskOverlayTemplate(task, index);
+  showOverlay();
+  currentTask = index;
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (overlay) {
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) {
+        hideOverlay();
+      }
+    });
+  }
+});
 
 
 function showOverlay() {
-    overlay.classList.add('show');
-  }
-  
+  overlay.classList.add('show');
+}
+
+
 function hideOverlay() {
   const taskOverlayContent = document.getElementById('task-overlay-content');
   taskOverlayContent.classList.remove('animation-slide-from-bottom');
   taskOverlayContent.classList.add('animation-slide-from-top');
   setTimeout(() => {
-      overlay.classList.remove('show');
-      taskOverlayContent.classList.remove('animation-slide-from-top');
-      taskOverlayContent.classList.add('animation-slide-from-bottom');
+    overlay.classList.remove('show');
+    taskOverlayContent.classList.remove('animation-slide-from-top');
+    taskOverlayContent.classList.add('animation-slide-from-bottom');
   }, 500);
-  }
+}
+
 
 async function deleteTask(index) {
-    tasks.splice(index, 1);
-    await save();
-    await renderTasks();
-    hideOverlay();
-  }
+  tasks.splice(index, 1);
+  await save();
+  await renderTasks();
+  hideOverlay();
+}
+
 
 function ifSubtasks(task, taskIndex) {
-    if (task.subtasks && task.subtasks.length > 0) {
-      return `<div class="overlay-subtasks">
+  if (task.subtasks && task.subtasks.length > 0) {
+    return `<div class="overlay-subtasks">
                 <b>Subtasks:</b>
                 ${overlaySubTasks(task, taskIndex)}
               </div>`;
-    } else {
-      return '';
-    }
+  } else {
+    return '';
   }
-  
+}
+
+
 function overlaySubTasks(task, taskIndex) {
-    return task.subtasks.map((subtask, subtaskIndex) => {
-      const checkboxId = `subtask-${taskIndex}-${subtaskIndex}`;
-      return getOverlaySubtaskHtml(subtask, taskIndex, subtaskIndex, checkboxId);
-    }).join('');
-  }
-  
-async function overlaySubtaskCheckbox(taskIndex, subtaskIndex) {
-    const task = tasks[taskIndex];
-    const subtask = task.subtasks[subtaskIndex];
+  return task.subtasks.map((subtask, subtaskIndex) => {
     const checkboxId = `subtask-${taskIndex}-${subtaskIndex}`;
-    if (subtask.isDone) {
-      subtask.isDone = false;
-      document.getElementById(checkboxId).checked = false;
-    } else {
-      subtask.isDone = true;
-      document.getElementById(checkboxId).checked = true;
-    }
-    await save();
-    await renderTasks(); 
+    return getOverlaySubtaskHtml(subtask, taskIndex, subtaskIndex, checkboxId);
+  }).join('');
+}
+
+
+async function overlaySubtaskCheckbox(taskIndex, subtaskIndex) {
+  const task = tasks[taskIndex];
+  const subtask = task.subtasks[subtaskIndex];
+  const checkboxId = `subtask-${taskIndex}-${subtaskIndex}`;
+  if (subtask.isDone) {
+    subtask.isDone = false;
+    document.getElementById(checkboxId).checked = false;
+  } else {
+    subtask.isDone = true;
+    document.getElementById(checkboxId).checked = true;
   }
+  await save();
+  await renderTasks();
+}
+
 
 function taskPriority(task) {
-    if (task.priority) {
-      if (task.priority == 1) {
-        return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Urgent</p> <div class="prio13 priodiv"><img src="../assets/img/PrioUrgent.svg"></div></div>`
-      } else if (task.priority == 2) {
-        return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Medium</p> <div class="prio13 priodiv"><img src="../assets/img/PrioMedium.svg"></div></div>`
-      } else if (task.priority == 3) {
-        return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Low</p> <div class="prio13 priodiv"><img src="../assets/img/PrioLow.svg"></div></div>`
-      }
-    } else {
-      return '';
+  if (task.priority) {
+    if (task.priority == 1) {
+      return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Urgent</p> <div class="prio13 priodiv"><img src="../assets/img/PrioUrgent.svg"></div></div>`
+    } else if (task.priority == 2) {
+      return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Medium</p> <div class="prio13 priodiv"><img src="../assets/img/PrioMedium.svg"></div></div>`
+    } else if (task.priority == 3) {
+      return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Low</p> <div class="prio13 priodiv"><img src="../assets/img/PrioLow.svg"></div></div>`
     }
+  } else {
+    return '';
   }
-
+}
 
 
 function openEditTaskOverlay(index) {
@@ -101,6 +107,7 @@ function openEditTaskOverlay(index) {
   attachCustomResizeHandle();
   showSubtasks(index);
 }
+
 
 function getTaskPriority(task) {
   const priority = task.priority;
@@ -116,10 +123,10 @@ function formatDate(dateString) {
   return `${year}-${month}-${day}`;
 }
 
+
 function overlayTaskCategory(task) {
   return task.categoryUser ? 'User Story' : 'Technical Task';
 }
-
 
 
 function subtaskHTML(subtask, name) {
@@ -128,6 +135,7 @@ function subtaskHTML(subtask, name) {
           <div class="subtaskDevider"></div>
           <button onclick="overlayAcceptChangedSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-check-active.png"></button></div>`;
 }
+
 
 function overlayEditSubtask(name) {
   const task = tasks[currentTask];
@@ -138,6 +146,7 @@ function overlayEditSubtask(name) {
   listItem.classList.remove('editOverlaylistitems');
 }
 
+
 async function overlayDeleteSubtask(subtaskSubtitel) {
   const task = tasks[currentTask];
   const subtaskIndex = task.subtasks.findIndex(subtask => subtask.subtitel === subtaskSubtitel);
@@ -145,6 +154,7 @@ async function overlayDeleteSubtask(subtaskSubtitel) {
   await SaveLoadRender();
   showSubtasks(currentTask);
 }
+
 
 async function overlayAcceptChangedSubtask(subtaskSubtitel) {
   const task = tasks[currentTask];
@@ -157,6 +167,7 @@ async function overlayAcceptChangedSubtask(subtaskSubtitel) {
   await SaveLoadRender();
   await showSubtasks(currentTask);
 }
+
 
 async function editTaskTitle() {
   const task = tasks[currentTask];
@@ -173,6 +184,7 @@ async function overlayEditTaskDescription() {
   await SaveLoadRender();
 }
 
+
 async function overlayEditDate() {
   const task = tasks[currentTask];
   const input = document.getElementById('editTaskDate');
@@ -180,11 +192,13 @@ async function overlayEditDate() {
   await SaveLoadRender();
 }
 
+
 async function setEditOverlayTaskPriority(priority) {
   const task = tasks[currentTask];
   task.priority = priority;
   await SaveLoadRender();
 }
+
 
 async function ifCurrentTaskPushMembers(members) {
   if (currentTask) {
@@ -194,6 +208,7 @@ async function ifCurrentTaskPushMembers(members) {
   }
 }
 
+
 async function overlayAddSubtask() {
   const task = tasks[currentTask];
   const input = document.getElementById('subtaskInput');
@@ -201,7 +216,8 @@ async function overlayAddSubtask() {
   input.value = '';
   await SaveLoadRender();
   showSubtasks(currentTask);
-} 
+}
+
 
 async function SaveLoadRender() {
   await save();
@@ -209,10 +225,12 @@ async function SaveLoadRender() {
   renderTasks();
 }
 
+
 function getOverlayHtml(index) {
   const task = tasks[index];
   overlay.innerHTML = getOpenTaskOverlayTemplate(task, index);
 }
+
 
 function getEditTaskOverlayTemplate(index, task) {
   const formattedDates = formatDate(task.date);
@@ -303,6 +321,7 @@ function getEditTaskOverlayTemplate(index, task) {
   `;
   return taskMembersHtml;
 }
+
 
 function openNewTaskOverlay(status) {
   const newTaskOverlay = document.getElementById('new-task-overlay');
