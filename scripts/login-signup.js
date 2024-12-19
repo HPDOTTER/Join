@@ -1,22 +1,62 @@
+/**
+ * Handles the visibility toggle for the password input fields and their associated icons.
+ */
 const visibilityBtn = document.getElementById('login-password-icon');
 const visibilityBtn1 = document.getElementById('repeat-password-icon');
+
+/**
+ * References the form element for signup or login.
+ */
 const form = document.getElementById('form');
+
+/**
+ * Displays error messages during form submission.
+ */
 const errorMessage = document.getElementById('login-error-message');
+
+/**
+ * References the password input field.
+ */
 const passwordInput = document.getElementById('login-password-input');
+
+/**
+ * References the email input field.
+ */
 const emailInput = document.getElementById('login-email-input');
+
+/**
+ * References the repeat password input field (signup form only).
+ */
 const repeatPasswordInput = document.getElementById('repeat-password-input');
+
+/**
+ * References the signup name input field (signup form only).
+ */
 const signUpNameInput = document.getElementById('sign-up-name-input');
+
+/**
+ * References the "Remember Me" checkbox.
+ */
 const rememberMeCheckbox = document.getElementById('rememberMe');
+
+/**
+ * Parses URL parameters for messages.
+ */
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
 const msgBox = document.getElementById('msgBox');
 
+/**
+ * Represents a guest user.
+ */
 let guest = {
   name: 'Guest',
 };
 
+/**
+ * Collects all input fields used in the form.
+ */
 const allInputs = [signUpNameInput, emailInput, passwordInput, repeatPasswordInput].filter(input => input != null);
-
 
 if (msgBox) {
   if (msg) {
@@ -28,7 +68,10 @@ if (msgBox) {
   console.error('Message box element not found');
 }
 
-
+/**
+ * Handles the submission of the signup form.
+ * @param {Event} e - The form submit event.
+ */
 async function signUpSubmit(e) {
   const errors = await getSignupFormErrors(signUpNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
   if (errors.length === 0 || errors.length === null) {
@@ -39,7 +82,16 @@ async function signUpSubmit(e) {
   }
 }
 
-
+/**
+ * Handles the form submission event.
+ *
+ * Prevents the default form submission behavior, validates the input fields,
+ * and displays error messages if any validation errors are found.
+ * Differentiates between login and signup forms based on the presence
+ * of the `signUpNameInput` field.
+ *
+ * @param {Event} e - The form submission event.
+ */
 form.addEventListener('submit', (e) => {
   let errors = [];
   e.preventDefault(); // Prevent the form from submitting
@@ -54,7 +106,9 @@ form.addEventListener('submit', (e) => {
   }
 });
 
-
+/**
+ * Adds a new user to the user and contacts arrays.
+ */
 function addUser() {
   if (errors.length === 0) {
     addUserPushArray();
@@ -66,7 +120,9 @@ function addUser() {
   }
 }
 
-
+/**
+ * Pushes a new user into the users and contacts arrays.
+ */
 function addUserPushArray() {
   users.push({
     'name': signUpNameInput.value,
@@ -82,7 +138,9 @@ function addUserPushArray() {
   });
 }
 
-
+/**
+ * Handles the login process for existing users.
+ */
 function loginSubmit() {
   let user = users.find(user => user.email === emailInput.value && user.password === passwordInput.value);
   if (user) {
@@ -98,27 +156,36 @@ function loginSubmit() {
   }
 }
 
-
+/**
+ * Removes login data from local storage.
+ */
 function removeLocalStorageLogin() {
   localStorage.removeItem('rememberMe');
   localStorage.removeItem('email');
   localStorage.removeItem('password');
 }
 
-
+/**
+ * Sets login data in local storage for the "Remember Me" feature.
+ */
 function setLocalStorageLogin() {
   localStorage.setItem('rememberMe', 'true');
   localStorage.setItem('email', emailInput.value);
   localStorage.setItem('password', passwordInput.value);
 }
 
-
+/**
+ * Handles the login process for guest users.
+ */
 function loginAsGuest() {
   loginSuccess(guest);
   smoothTransition('../html/summary.html?msg=You have successfully logged in as a guest.');
 }
 
-
+/**
+ * Handles successful login.
+ * @param {Object} user - The user object representing the logged-in user.
+ */
 function loginSuccess(user) {
   if (user === guest) {
     sessionStorage.setItem('guest', JSON.stringify(guest));
@@ -127,7 +194,9 @@ function loginSuccess(user) {
   }
 };
 
-
+/**
+ * Automatically fills in login data if "Remember Me" is enabled.
+ */
 function rememberAutoFillIn() {
   if (localStorage.getItem('rememberMe') === 'true') {
     emailInput.value = localStorage.getItem('email');
@@ -138,18 +207,25 @@ function rememberAutoFillIn() {
   }
 }
 
-
+/**
+ * Initializes event listeners and animations when the DOM content is fully loaded.
+ *
+ * Adds a fade-in effect to the body, automatically fills in login credentials
+ * if "remember me" is checked, and initializes visibility toggles and input checks.
+ */
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('fade-in');
   rememberAutoFillIn();
   welcomeAnimation();
-  checkVisibilityIcons()
+  checkVisibilityIcons();
   setTimeout(() => {
     checkInputAfterLoad();
   }, 500);
 });
 
-
+/**
+ * Animates the welcome overlay.
+ */
 function welcomeAnimation() {
   const logoOverlay = document.getElementById('logo-overlay');
   const logoOverlayImg = document.querySelector('.logo-overlay-img');
@@ -167,7 +243,9 @@ function welcomeAnimation() {
   }
 }
 
-
+/**
+ * Updates the visibility icons based on input values after loading.
+ */
 function checkInputAfterLoad() {
   if (passwordInput.value === "" || passwordInput.value === null) {
     visibilityBtn.src = '../assets/icons/icon-lock.svg';
@@ -183,7 +261,9 @@ function checkInputAfterLoad() {
   }
 }
 
-
+/**
+ * Sets up visibility toggle functionality for input fields.
+ */
 function checkVisibilityIcons() {
   if (visibilityBtn) {
     visibilityBtn.addEventListener('click', () => toggleVisibility(passwordInput, visibilityBtn));
@@ -198,7 +278,9 @@ function checkVisibilityIcons() {
   checkIfRepeatPasswordIsVisible();
 }
 
-
+/**
+ * Adds an event listener to toggle password visibility for the repeat password field.
+ */
 function checkIfRepeatPasswordIsVisible() {
   if (visibilityBtn1) {
     visibilityBtn1.addEventListener('click', () => toggleVisibility(repeatPasswordInput, visibilityBtn1));
@@ -214,7 +296,12 @@ function checkIfRepeatPasswordIsVisible() {
   }
 }
 
-
+/**
+ * Toggles the visibility of a password input field.
+ *
+ * @param {HTMLInputElement} input - The input field to toggle.
+ * @param {HTMLImageElement} btn - The button element controlling visibility.
+ */
 function toggleVisibility(input, btn) {
   if (input.value !== "" && input.value !== null) {
     if (input.type === 'password') {
@@ -227,17 +314,32 @@ function toggleVisibility(input, btn) {
   }
 };
 
-
+/**
+ * Validates the signup form fields and returns a list of error messages.
+ *
+ * @param {string} name - The user's name.
+ * @param {string} email - The user's email.
+ * @param {string} password - The user's password.
+ * @param {string} repeatPassword - The repeated password.
+ * @returns {string[]} An array of error messages.
+ */
 function getSignupFormErrors(name, email, password, repeatPassword) {
   let errors = [];
   validateField(name, 'Name is required', signUpNameInput, errors);
   validateField(email, 'Email is required', emailInput, errors);
   validatePassword(password, errors);
-  validatePasswordUser (name, email, password, repeatPassword);
+  validatePasswordUser(name, email, password, repeatPassword);
   return errors;
 }
 
-
+/**
+ * Validates a single form field.
+ *
+ * @param {string} value - The value of the field to validate.
+ * @param {string} errorMessage - The error message to display if validation fails.
+ * @param {HTMLElement} inputElement - The input element being validated.
+ * @param {string[]} errors - The array to store error messages.
+ */
 function validateField(value, errorMessage, inputElement, errors) {
   if (value === '' || value == null) {
     errors.push(errorMessage);
@@ -245,7 +347,12 @@ function validateField(value, errorMessage, inputElement, errors) {
   }
 }
 
-
+/**
+ * Validates the password field for specific criteria.
+ *
+ * @param {string} password - The password to validate.
+ * @param {string[]} errors - The array to store error messages.
+ */
 function validatePassword(password, errors) {
   if (password.length < 8) {
     errors.push('Password must have at least 8 characters');
@@ -257,8 +364,15 @@ function validatePassword(password, errors) {
   }
 }
 
-
-function validatePasswordUser (name, email, password, repeatPassword) {
+/**
+ * Validates password-related criteria including matching passwords and unique user information.
+ *
+ * @param {string} name - The user's name.
+ * @param {string} email - The user's email.
+ * @param {string} password - The user's password.
+ * @param {string} repeatPassword - The repeated password.
+ */
+function validatePasswordUser(name, email, password, repeatPassword) {
   if (password !== repeatPassword) {
     errors.push('Password does not match repeated password');
     passwordInput.parentElement.classList.add('incorrect');
@@ -274,7 +388,13 @@ function validatePasswordUser (name, email, password, repeatPassword) {
   }
 }
 
-
+/**
+ * Validates the login form fields and returns a list of error messages.
+ *
+ * @param {string} email - The user's email.
+ * @param {string} password - The user's password.
+ * @returns {string[]} An array of error messages.
+ */
 function getLoginFormErrors(email, password) {
   let errors = [];
   if (email === '' || email == null) {
@@ -288,7 +408,9 @@ function getLoginFormErrors(email, password) {
   return errors;
 }
 
-
+/**
+ * Adds event listeners to all input fields to remove error styles when corrected.
+ */
 allInputs.forEach(input => {
   input.addEventListener('input', () => {
     if (input.parentElement.classList.contains('incorrect')) {
@@ -298,7 +420,9 @@ allInputs.forEach(input => {
   });
 });
 
-
+/**
+ * Toggles the enabled/disabled state of the submit button.
+ */
 function enableSubmitButton() {
   const submitButton = document.getElementById('submit-button');
   if (submitButton.disabled === true) {
@@ -307,3 +431,4 @@ function enableSubmitButton() {
     submitButton.disabled = true;
   }
 }
+
