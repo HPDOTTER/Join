@@ -225,10 +225,20 @@
     animation: slideFromLeft 200ms ease-in-out;
 }
 
+.contact-edit-form.hidden {
+    animation: slideOutToLeft 200ms ease-in-out;
+    pointer-events: none; /* Prevent interactions while animating out */
+}
+
 .contact-add-form {
     right: 0;
     border-top-left-radius: 30px;
     animation: slideFromRight 200ms ease-in-out;
+}
+
+.contact-add-form.hidden {
+    animation: slideOutToRight 200ms ease-in-out;
+    pointer-events: none; /* Prevent interactions while animating out */
 }
 
 .contact-edit-form-head,
@@ -340,12 +350,30 @@
     100% {}
 }
 
+@keyframes slideOutToLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
 @keyframes slideFromRight {
     0% {
         transform: translateX(100%)
     }
 
     100% {}
+}
+
+@keyframes slideOutToRight {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 @media(max-width: 1000px) {

@@ -36,7 +36,9 @@ let currentContact = null;
  * Displays the contact form for adding a new contact.
  */
 function showForm() {
-  document.getElementById('contactForm').style.display = 'block';
+  const contactForm = document.getElementById('contactForm');
+  contactForm.style.display = 'block';
+  contactForm.classList.remove('hidden');
   document.getElementById('contactFormOverlay').style.display = 'block';
   document.getElementById('contactListName').value = '';
   document.getElementById('contactListEmail').value = '';
@@ -47,7 +49,11 @@ function showForm() {
  * Hides the contact form.
  */
 function hideForm() {
-  document.getElementById('contactForm').style.display = 'none';
+  const contactForm = document.getElementById('contactForm');
+  contactForm.classList.add('hidden');
+  setTimeout(() => {
+    contactForm.style.display = 'none'; // Or any other logic to completely hide it
+  }, 190); // Match the duration of the animation
   document.getElementById('contactFormOverlay').style.display = 'none';
 }
 
@@ -123,7 +129,9 @@ async function addContact() {
  */
 function editContact() {
   if (currentContact) {
-    document.getElementById('contactEditForm').style.display = 'block';
+    const editForm = document.getElementById('contactEditForm');
+    editForm.style.display = 'block';
+    editForm.classList.remove('hidden');
     document.getElementById('contactEditOverlay').style.display = 'block';
     document.getElementById('editName').value = currentContact.name;
     document.getElementById('editEmail').value = currentContact.email;
@@ -164,7 +172,11 @@ function cancelEdit() {
  * Hides the edit contact form.
  */
 function hideEditForm() {
-  document.getElementById('contactEditForm').style.display = 'none';
+  const editForm = document.getElementById('contactEditForm');
+  editForm.classList.add('hidden');
+  setTimeout(() => {
+    editForm.style.display = 'none'; // Or any other logic to completely hide it
+  }, 190);
   document.getElementById('contactEditOverlay').style.display = 'none';
   if (activeContactItem) {
     activeContactItem.classList.add('activeC');
