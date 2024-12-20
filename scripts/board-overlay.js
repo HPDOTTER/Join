@@ -419,8 +419,8 @@ function openNewTaskOverlay() {
   renderContactsWithCheckboxes();
   attachSubtaskEventListeners();
   selectDefaultCategory();
-  setOverlayTaskPriority('2');
   currentTask = null;
+  setOverlayTaskPriority('2');
 }
 
 /**
