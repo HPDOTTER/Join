@@ -1,7 +1,20 @@
+
+javascript
+Code kopieren
+/**
+ * @type {HTMLElement} overlay - The task overlay element.
+ */
 const overlay = document.getElementById('taskOverlay');
+
+/**
+ * @type {number|null} currentTask - The index of the currently opened task in the task list.
+ */
 let currentTask = null;
 
-
+/**
+ * Opens the task overlay for the given task index.
+ * @param {number} index - The index of the task to open.
+ */
 function openTaskOverlay(index) {
   const task = tasks[index];
   overlay.innerHTML = getOpenTaskOverlayTemplate(task, index);
@@ -9,7 +22,7 @@ function openTaskOverlay(index) {
   currentTask = index;
 }
 
-
+// Event listener for closing the overlay when clicking outside.
 document.addEventListener('DOMContentLoaded', () => {
   if (overlay) {
     overlay.addEventListener('click', (event) => {
@@ -20,12 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-
+/**
+ * Displays the overlay by adding a class.
+ */
 function showOverlay() {
   overlay.classList.add('show');
 }
 
-
+/**
+ * Hides the overlay with an animation effect.
+ */
 function hideOverlay() {
   const taskOverlayContent = document.getElementById('task-overlay-content');
   taskOverlayContent.classList.remove('animation-slide-from-bottom');
@@ -37,7 +54,10 @@ function hideOverlay() {
   }, 500);
 }
 
-
+/**
+ * Deletes the task at the specified index and updates the tasks list.
+ * @param {number} index - The index of the task to delete.
+ */
 async function deleteTask(index) {
   tasks.splice(index, 1);
   await save();
@@ -45,7 +65,12 @@ async function deleteTask(index) {
   hideOverlay();
 }
 
-
+/**
+ * Returns the HTML for subtasks if they exist for the task.
+ * @param {Object} task - The task object.
+ * @param {number} taskIndex - The index of the task.
+ * @returns {string} - HTML string for subtasks.
+ */
 function ifSubtasks(task, taskIndex) {
   if (task.subtasks && task.subtasks.length > 0) {
     return `<div class="overlay-subtasks">
@@ -57,7 +82,12 @@ function ifSubtasks(task, taskIndex) {
   }
 }
 
-
+/**
+ * Generates the HTML for subtasks within the overlay.
+ * @param {Object} task - The task object.
+ * @param {number} taskIndex - The index of the task.
+ * @returns {string} - HTML string for subtasks.
+ */
 function overlaySubTasks(task, taskIndex) {
   return task.subtasks.map((subtask, subtaskIndex) => {
     const checkboxId = `subtask-${taskIndex}-${subtaskIndex}`;
@@ -65,56 +95,71 @@ function overlaySubTasks(task, taskIndex) {
   }).join('');
 }
 
-
+/**
+ * Toggles the "done" state of a subtask and updates the UI.
+ * @param {number} taskIndex - The index of the task.
+ * @param {number} subtaskIndex - The index of the subtask.
+ */
 async function overlaySubtaskCheckbox(taskIndex, subtaskIndex) {
   const task = tasks[taskIndex];
   const subtask = task.subtasks[subtaskIndex];
   const checkboxId = `subtask-${taskIndex}-${subtaskIndex}`;
-  if (subtask.isDone) {
-    subtask.isDone = false;
-    document.getElementById(checkboxId).checked = false;
-  } else {
-    subtask.isDone = true;
-    document.getElementById(checkboxId).checked = true;
-  }
+  subtask.isDone = !subtask.isDone;
+  document.getElementById(checkboxId).checked = subtask.isDone;
   await save();
   await renderTasks();
 }
 
-
+/**
+ * Returns the priority HTML for the task based on its priority level.
+ * @param {Object} task - The task object.
+ * @returns {string} - HTML string for the priority section.
+ */
 function taskPriority(task) {
   if (task.priority) {
-    if (task.priority == 1) {
-      return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Urgent</p> <div class="prio13 priodiv"><img src="../assets/img/PrioUrgent.svg"></div></div>`
-    } else if (task.priority == 2) {
-      return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Medium</p> <div class="prio13 priodiv"><img src="../assets/img/PrioMedium.svg"></div></div>`
-    } else if (task.priority == 3) {
-      return `<div class="overlay-priority-div"> <b>Priority:</b> <p>Low</p> <div class="prio13 priodiv"><img src="../assets/img/PrioLow.svg"></div></div>`
-    }
+    const priorityLabels = ['Urgent', 'Medium', 'Low'];
+    const priorityIcons = ['PrioUrgent', 'PrioMedium', 'PrioLow'];
+    return `<div class="overlay-priority-div">
+              <b>Priority:</b>
+              <p>${priorityLabels[task.priority - 1]}</p>
+              <div class="prio13 priodiv">
+                <img src="../assets/img/${priorityIcons[task.priority - 1]}.svg">
+              </div>
+            </div>`;
   } else {
     return '';
   }
 }
 
-
+/**
+ * Opens the edit task overlay for the specified task index.
+ * @param {number} index - The index of the task to edit.
+ */
 function openEditTaskOverlay(index) {
   const task = tasks[index];
   overlay.innerHTML = getEditTaskOverlayTemplate(index, task);
   getTaskPriority(task);
   renderContactsWithCheckboxes();
-  taskMembers(task.members); // Call taskMembers after the element is added to the DOM
+  taskMembers(task.members);
   attachSubtaskEventListeners();
   attachCustomResizeHandle();
   showSubtasks(index);
 }
 
-
+/**
+ * Updates the task priority icon based on the given task's priority level.
+ * @param {Object} task - The task object containing the priority level.
+ */
 function getTaskPriority(task) {
   const priority = task.priority;
   document.getElementById(priority).style.content = `url(${priorityImgactive[priority]})`;
 }
 
-
+/**
+ * Formats a date string into the format "YYYY-MM-DD".
+ * @param {string} dateString - The date string to format.
+ * @returns {string} - The formatted date.
+ */
 function formatDate(dateString) {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -123,20 +168,38 @@ function formatDate(dateString) {
   return `${year}-${month}-${day}`;
 }
 
-
+/**
+ * Returns the category of the task as a string.
+ * @param {Object} task - The task object.
+ * @returns {string} - "User Story" if the task is a user story, otherwise "Technical Task".
+ */
 function overlayTaskCategory(task) {
   return task.categoryUser ? 'User Story' : 'Technical Task';
 }
 
-
+/**
+ * Generates the HTML for a subtask, including its edit buttons.
+ * @param {Object} subtask - The subtask object.
+ * @param {string} name - The name of the subtask.
+ * @returns {string} - HTML string for the subtask.
+ */
 function subtaskHTML(subtask, name) {
   return `<input class="overlayEditSubtask" type="text" value="${subtask.subtitel}">
-          <div class="subtaskbuttons"><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button>
-          <div class="subtaskDevider"></div>
-          <button onclick="overlayAcceptChangedSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-check-active.png"></button></div>`;
+          <div class="subtaskbuttons">
+            <button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask">
+              <img src="../assets/icons/icon-delete.png">
+            </button>
+            <div class="subtaskDevider"></div>
+            <button onclick="overlayAcceptChangedSubtask('${subtask.subtitel}')" class="addSubtask">
+              <img src="../assets/icons/icon-check-active.png">
+            </button>
+          </div>`;
 }
 
-
+/**
+ * Enables editing mode for a specific subtask.
+ * @param {string} name - The name of the subtask to edit.
+ */
 function overlayEditSubtask(name) {
   const task = tasks[currentTask];
   const subtask = task.subtasks.find(subtask => subtask.subtitel === name);
@@ -146,7 +209,10 @@ function overlayEditSubtask(name) {
   listItem.classList.remove('editOverlaylistitems');
 }
 
-
+/**
+ * Deletes a subtask from the current task.
+ * @param {string} subtaskSubtitel - The name of the subtask to delete.
+ */
 async function overlayDeleteSubtask(subtaskSubtitel) {
   const task = tasks[currentTask];
   const subtaskIndex = task.subtasks.findIndex(subtask => subtask.subtitel === subtaskSubtitel);
@@ -155,7 +221,10 @@ async function overlayDeleteSubtask(subtaskSubtitel) {
   showSubtasks(currentTask);
 }
 
-
+/**
+ * Accepts and saves changes to a subtask.
+ * @param {string} subtaskSubtitel - The name of the subtask to save changes for.
+ */
 async function overlayAcceptChangedSubtask(subtaskSubtitel) {
   const task = tasks[currentTask];
   const subtask = task.subtasks.find(subtask => subtask.subtitel === subtaskSubtitel);
@@ -168,7 +237,9 @@ async function overlayAcceptChangedSubtask(subtaskSubtitel) {
   await showSubtasks(currentTask);
 }
 
-
+/**
+ * Updates the task title for the current task.
+ */
 async function editTaskTitle() {
   const task = tasks[currentTask];
   const input = document.getElementById('editTaskTitle');
@@ -176,7 +247,9 @@ async function editTaskTitle() {
   await SaveLoadRender();
 }
 
-
+/**
+ * Updates the task description for the current task.
+ */
 async function overlayEditTaskDescription() {
   const task = tasks[currentTask];
   const input = document.getElementById('editTaskDescription');
@@ -184,7 +257,9 @@ async function overlayEditTaskDescription() {
   await SaveLoadRender();
 }
 
-
+/**
+ * Updates the task date for the current task.
+ */
 async function overlayEditDate() {
   const task = tasks[currentTask];
   const input = document.getElementById('editTaskDate');
@@ -192,14 +267,20 @@ async function overlayEditDate() {
   await SaveLoadRender();
 }
 
-
+/**
+ * Sets the priority for the current task in the overlay.
+ * @param {number} priority - The priority level to set (1 = Urgent, 2 = Medium, 3 = Low).
+ */
 async function setEditOverlayTaskPriority(priority) {
   const task = tasks[currentTask];
   task.priority = priority;
   await SaveLoadRender();
 }
 
-
+/**
+ * Updates the members of the current task.
+ * @param {string[]} members - Array of member names to assign to the task.
+ */
 async function ifCurrentTaskPushMembers(members) {
   if (currentTask) {
     const task = tasks[currentTask];
@@ -208,7 +289,9 @@ async function ifCurrentTaskPushMembers(members) {
   }
 }
 
-
+/**
+ * Adds a new subtask to the current task.
+ */
 async function overlayAddSubtask() {
   const task = tasks[currentTask];
   const input = document.getElementById('subtaskInput');
@@ -218,20 +301,30 @@ async function overlayAddSubtask() {
   showSubtasks(currentTask);
 }
 
-
+/**
+ * Saves, reloads, and re-renders the tasks list.
+ */
 async function SaveLoadRender() {
   await save();
   await load();
   renderTasks();
 }
 
-
+/**
+ * Updates the overlay with the HTML content for the specified task index.
+ * @param {number} index - The index of the task to display in the overlay.
+ */
 function getOverlayHtml(index) {
   const task = tasks[index];
   overlay.innerHTML = getOpenTaskOverlayTemplate(task, index);
 }
 
-
+/**
+ * Generates the HTML template for editing a task in the overlay.
+ * @param {number} index - The index of the task in the tasks array.
+ * @param {Object} task - The task object to be edited.
+ * @returns {string} - The HTML string for the edit task overlay.
+ */
 function getEditTaskOverlayTemplate(index, task) {
   const formattedDates = formatDate(task.date);
   const taskMembersHtml = `
@@ -247,13 +340,11 @@ function getEditTaskOverlayTemplate(index, task) {
             <input type="text" class="input add-task-input-title" id="editTaskTitle" value="${task.titel}" onkeyup="editTaskTitle()">
           </div>
         </div>
-
         <div class="add-task-info-element">
           <label for="taskDescription">Description</label>
           <textarea id="editTaskDescription" class="add-task-textarea" onkeyup="overlayEditTaskDescription()">${task.description}</textarea>
           <div class="custom-resize-handle"></div>
         </div>
-
         <div class="add-task-info-element">
           <label for="taskDate">Due date</label>
           <div class="input-wrapper">
@@ -261,7 +352,6 @@ function getEditTaskOverlayTemplate(index, task) {
             <img src="../assets/icons/icon-calender.jpg" class="add-task-input-date-icon">
           </div>
         </div>
-
         <div class="add-task-info-element">
           <label for="taskPriority">Priority</label>
           <div id="editTaskPriority" class="add-task-priority-area">
@@ -270,7 +360,6 @@ function getEditTaskOverlayTemplate(index, task) {
             <img class="icon-add-task-priority-low pointer" id="3" onclick="setOverlayTaskPriority('3')">
           </div>
         </div>
-      
         <div class="add-task-info-element">
           <label for="taskAssignedTo">Assigned to</label>
           <button class="add-task-assigned-to-button" onclick="toggleDropdown()">
@@ -287,7 +376,6 @@ function getEditTaskOverlayTemplate(index, task) {
           </div>
         </div>
         <div id="taskMembers"></div>
-
         <div class="add-task-info-element">
           <label>Category</label>
           <button class="add-task-category-button" id="add-task-category-button" onclick="toggleCategoryDropdown()">
@@ -299,7 +387,6 @@ function getEditTaskOverlayTemplate(index, task) {
             <div class="dropdown-category-item" data-value="true" onclick="selectCategory(this)">User Story</div>
           </div>
         </div>
-
         <div class="add-task-info-element">
           <div class="add-task-info-element-header">Subtasks</span></div>
           <div class="add-task-category-button">
@@ -322,6 +409,9 @@ function getEditTaskOverlayTemplate(index, task) {
   return taskMembersHtml;
 }
 
+/**
+ * Opens the new task overlay and sets up its content.
+ */
 function openNewTaskOverlay() {
   const newTaskOverlay = document.getElementById('new-task-overlay');
   newTaskOverlay.style.display = 'block';
@@ -331,11 +421,17 @@ function openNewTaskOverlay() {
   currentTask = null;
 }
 
+/**
+ * Closes the new task overlay by hiding it.
+ */
 function closeNewTaskOverlay() {
   const newTaskOverlay = document.getElementById('new-task-overlay');
-  newTaskOverlay.style.display = 'none';  
+  newTaskOverlay.style.display = 'none';
 }
 
+/**
+ * Initializes event listeners for closing the overlay when clicking outside of it.
+ */
 document.addEventListener('DOMContentLoaded', () => {
   if (overlay) {
     overlay.addEventListener('click', (event) => {
@@ -346,7 +442,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
- function getNewTaskOverlayTemplate() {
+/**
+ * Generates the HTML template for creating a new task in the overlay.
+ * @returns {string} - The HTML string for the new task overlay.
+ */
+function getNewTaskOverlayTemplate() {
   const newTaskOverlayHtml = `
       <div id="taskAdd" class="add-task-area">
           <div class="new-task-overlay-header">
@@ -358,22 +458,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 <input type="text" placeholder="Enter a title" class="input add-task-input-title" id="taskTitle" required="">
               </div>
             </div>
-  
             <div class="add-task-info-element">
               <label for="taskDescription">Description <span>(optional)</span></label>
               <textarea id="taskDescription" placeholder="Enter a description" class="add-task-textarea"></textarea>
               <div class="custom-resize-handle"></div>
             </div>
-  
             <div class="add-task-info-element">
-  
               <label for="taskDate">Due date</label>
               <div class="input-wrapper">
                 <input type="date" placeholder="dd/mm/yyyy" class="input" id="taskDate" required="">
                 <img src="../assets/icons/icon-calender.jpg" class="add-task-input-date-icon">
               </div>
             </div>
-  
             <div class="add-task-info-element">
               <label for="taskPriority">Priority</label>
               <div id="taskPriority" class="add-task-priority-area">
@@ -382,7 +478,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <img class="icon-add-task-priority-low pointer" id="3" onclick="setOverlayTaskPriority('3')">
               </div>
             </div>
-          
             <div class="add-task-info-element">
               <label for="taskAssignedTo">Assigned to <span>(optional)</span></label>
               <button class="add-task-assigned-to-button" onclick="toggleDropdown()">
@@ -398,7 +493,6 @@ document.addEventListener('DOMContentLoaded', () => {
                </div>
             </div>
             <div id="taskMembers"></div>
-  
             <div class="add-task-info-element">
               <label>Category</label>
               <button class="add-task-category-button" id="add-task-category-button" onclick="toggleCategoryDropdown()">
@@ -410,7 +504,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="dropdown-category-item" data-value="true" onclick="selectCategory(this)">User Story</div>
               </div>
             </div>
-  
             <div class="add-task-info-element">
               <div class="add-task-info-element-header">Subtasks <span>(optional)</span></div>
               <div class="add-task-category-button">
@@ -427,6 +520,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="new-task-button-div"><button class="button-primary create-task-button" onclick="addTaskSave() ">Create Task<img src="../assets/icons/icon-whitecheck.svg" alt=""></button></div>
           </div>
-    `; 
-    return newTaskOverlayHtml;
+    `;
+  return newTaskOverlayHtml;
 }

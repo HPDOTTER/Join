@@ -379,7 +379,6 @@ function startResize(e) {
 /**
  * Attaches a resize handle for a textarea to allow custom resizing.
  */
-
 function attachCustomResizeHandle() {
   const textarea = document.querySelector('.add-task-textarea');
   const resizeHandle = document.querySelector('.custom-resize-handle');
