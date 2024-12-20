@@ -377,17 +377,6 @@ function getEditTaskOverlayTemplate(index, task) {
         </div>
         <div id="taskMembers"></div>
         <div class="add-task-info-element">
-          <label>Category</label>
-          <button class="add-task-category-button" id="add-task-category-button" onclick="toggleCategoryDropdown()">
-            <p id="addTaskCategoryValue">${overlayTaskCategory(task)}</p>
-            <img class="icon-add-task-category-button-arrow">
-          </button>
-          <div id="categoryDropdown" class="dropdown-menu">
-            <div class="dropdown-category-item" data-value="false" onclick="selectCategory(this)">Technical Task</div>
-            <div class="dropdown-category-item" data-value="true" onclick="selectCategory(this)">User Story</div>
-          </div>
-        </div>
-        <div class="add-task-info-element">
           <div class="add-task-info-element-header">Subtasks</span></div>
           <div class="add-task-category-button">
             <input type="text" id="subtaskInput" placeholder="Add new subtask">
