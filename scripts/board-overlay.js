@@ -401,7 +401,7 @@ function getEditTaskOverlayTemplate(index, task) {
 /**
  * Opens the new task overlay and sets up its content.
  */
-function openNewTaskOverlay() {
+function openNewTaskOverlay(status) {
   const newTaskOverlay = document.getElementById('new-task-overlay');
   newTaskOverlay.style.display = 'block';
   newTaskOverlay.classList.remove('hidden');
@@ -410,6 +410,7 @@ function openNewTaskOverlay() {
   attachSubtaskEventListeners();
   selectDefaultCategory();
   currentTask = null;
+  statusTask = status;
   setOverlayTaskPriority('2');
 }
 

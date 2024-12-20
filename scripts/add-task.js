@@ -27,7 +27,7 @@ let selectedCategory = null;
  * @param {string} status - The status of the task to be added.
  */
 async function addTask(status) {
-  openNewTaskOverlay();
+  openNewTaskOverlay(status);
   statusTask = status;
   await save();
   await load();
