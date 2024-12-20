@@ -249,7 +249,12 @@ const menuLinks = [
 document.addEventListener("DOMContentLoaded", () => {
   const checkLinks = setInterval(() => {
     const menuLink = document.getElementById('summaryLink');
-    if (menuLink) {
+    const menuLink1 = document.getElementById('addTaskLink');
+    const menuLink2 = document.getElementById('boardLink');
+    const menuLink3 = document.getElementById('contactsLink');
+    const menuLink4 = document.getElementById('privacyPolicyLink');
+    const menuLink5 = document.getElementById('legalNoticeLink');
+    if (menuLink && menuLink1 && menuLink2 && menuLink3 && menuLink4 && menuLink5) {
       clearInterval(checkLinks);
       menuLinks.forEach(link => {
         const element = document.getElementById(link.id);
