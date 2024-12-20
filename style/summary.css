@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .summary-headline {
     font-size: 48px;
     font-weight: 400;
@@ -41,7 +42,6 @@
     width: 100%;
     gap: 30px;
 }
-
 
 .tile {
     display: flex;
@@ -91,7 +91,6 @@
 .tile-flex-hover:hover span {
     border: 2px solid var(--primary-color);
 }
-
 
 .tile-flex p {
     color: #FFFFFF;
@@ -157,6 +156,7 @@
     justify-content: center;
     flex-direction: column;
 }
+
 .tile-lower-part p {
     font-size: 23px;
 }
@@ -172,6 +172,7 @@
     border: 2px solid #FFFFFF;
     border-radius: 30px;
 }
+
 .tile container div p {
     color: var(--primary-color);
 }

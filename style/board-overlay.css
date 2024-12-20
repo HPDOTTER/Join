@@ -4,231 +4,228 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(245, 244, 244, 0.7); /* Semi-transparent background */
+  background: rgba(245, 244, 244, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensure it is on top of other elements */
-  visibility: hidden; /* Initially hidden */
-  opacity: 0; /* Initially transparent */
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .task-overlay-content {
-    display: inline-block;
-    flex-direction: column;
-    max-height: 95%;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 528px;
-    padding: 38px 30px;
-    border-radius: 30px;
-    visibility: 0;
-    overflow-y: auto;
+  display: inline-block;
+  flex-direction: column;
+  max-height: 95%;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 528px;
+  padding: 38px 30px;
+  border-radius: 30px;
+  visibility: 0;
+  overflow-y: auto;
+}
+
+.task-overlay-content::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.new-task-overlay.hidden {
+  animation: slideOutToRight 200ms ease-in-out;
+  pointer-events: none;
+}
+
+.animation-slide-from-bottom {
+  animation: slideFromBottom 0.5s forwards;
+}
+
+.animation-slide-from-top {
+  animation: slideFromTop 0.5s forwards;
+}
+
+@keyframes slideFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
   }
 
-  .task-overlay-content::-webkit-scrollbar{
-    background-color: transparent;
-  }
-
-  .new-task-overlay.hidden {
-    animation: slideOutToRight 200ms ease-in-out;
-    pointer-events: none; /* Prevent interactions while animating out */
-  }
-
-  .animation-slide-from-bottom {
-    animation: slideFromBottom 0.5s forwards;
-  }
-
-  .animation-slide-from-top {
-    animation: slideFromTop 0.5s forwards;
-  }
-
-  @keyframes slideFromBottom {
-    from {
-      opacity: 0;
-      transform: translateY(100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes slideFromTop {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(100%);
-    }
-  }
-
-  .task-overlay.show {
-    visibility: visible;
+  to {
     opacity: 1;
+    transform: translateY(0);
   }
-  
-  
-  .task-overlay-content > * {
-    margin-top: 12px;
-    margin-bottom: 12px;
-  }
-  
-  
-  .task-overlay-content h1 {
-    margin: 0;
-    font-size: 54px;
-    font-weight: 700;
-    line-height: 1.2; /* Adjust the line-height to change the space between lines */
-  }
-  
-  .overlay-priority-div {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-  }
-  
-  .overlay-priority-div p {
-    word-spacing: 20px;
-  }
-  
-  .overlay-date-gap {
-    word-spacing: 10px;
-  }
-  
-  .overlay-tasks-assigned-to {
-      display: flex;
-      flex-direction: column;
-  }
-  
-  .overlay-tasks-assigned-to b {
-    margin-bottom: 10px;
-  }
-  
-  .overlay-tasks-members {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .margin-right-10 {
-    margin-right: 20px;
-  }
-  
-  .overlay-inline-elements {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .task-overlay-content b {
-    font-size: 17px;
-    font-weight: 700;
-  }
-  
-  .overlay-avatar {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-direction: row;
-    padding: 10px 16px;
-  }
-  
-  .overlay-subtask {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-direction: row;
-    padding: 6px 16px;
-    gap: 16px;
-  }
-  
-  .overlay-edit-footer {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    flex-direction: row;
-    padding-top: 16px;
-    gap: 3px;
-    margin: 0px;
-  }
-  
-  .overlay-edit-footer p {
-    margin-right: 10px;
-  }
-  
-  .task-overlay-editors {
-    display: flex;
-  }
-  
-  .task-overlay-editors:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: transform 0.5s ease;
-  }
-  
-  .task-overlay-editors p:hover {
-    color: var(--secondary-color);
-  }
-  
-  .task-overlay-devider {
-    border: 1px solid #ccc;
-    width: 1px;
-    height: 21px;
-    margin-right: 10px;
-  }
-  
-  .task-overlay-content input[type="checkbox"] {
-    display: none;
+}
+
+@keyframes slideFromTop {
+  from {
+    opacity: 1;
+    transform: translateY(0);
   }
 
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+.task-overlay.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.task-overlay-content>* {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.task-overlay-content h1 {
+  margin: 0;
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.overlay-priority-div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.overlay-priority-div p {
+  word-spacing: 20px;
+}
+
+.overlay-date-gap {
+  word-spacing: 10px;
+}
+
+.overlay-tasks-assigned-to {
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay-tasks-assigned-to b {
+  margin-bottom: 10px;
+}
+
+.overlay-tasks-members {
+  display: flex;
+  gap: 10px;
+}
+
+.margin-right-10 {
+  margin-right: 20px;
+}
+
+.overlay-inline-elements {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-overlay-content b {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.overlay-avatar {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px 16px;
+}
+
+.overlay-subtask {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  padding: 6px 16px;
+  gap: 16px;
+}
+
+.overlay-edit-footer {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex-direction: row;
+  padding-top: 16px;
+  gap: 3px;
+  margin: 0px;
+}
+
+.overlay-edit-footer p {
+  margin-right: 10px;
+}
+
+.task-overlay-editors {
+  display: flex;
+}
+
+.task-overlay-editors:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 0.5s ease;
+}
+
+.task-overlay-editors p:hover {
+  color: var(--secondary-color);
+}
+
+.task-overlay-devider {
+  border: 1px solid #ccc;
+  width: 1px;
+  height: 21px;
+  margin-right: 10px;
+}
+
+.task-overlay-content input[type="checkbox"] {
+  display: none;
+}
 
 .task-overlay-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0px !important;
-  }
-  
-  .task-overlay-head img {
-    cursor: pointer;
-    width: 17px;
-    height: 17px;
-  }
-  
-  .task-overlay-head div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-  }
-  
-  .task-overlay-head div:hover {
-    background-color: var(--hover-slight-blue);
-    border-radius: 50%;
-    transform: scale(1.1);
-  }
-  
-  
-  .login-remember-checkbox {
-    height: 24px;
-    width: 24px;
-  }
-  
-  .task-overlay-content input[type="checkbox"]:checked + label {
-    content: url(../assets/icons/checkbox-checked.svg);
-  }
-  
-  .task-overlay-content input[type="checkbox"] + label {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    content: url(../assets/icons/checkbox-default.svg);
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0px !important;
+}
 
+.task-overlay-head img {
+  cursor: pointer;
+  width: 17px;
+  height: 17px;
+}
+
+.task-overlay-head div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+.task-overlay-head div:hover {
+  background-color: var(--hover-slight-blue);
+  border-radius: 50%;
+  transform: scale(1.1);
+}
+
+.login-remember-checkbox {
+  height: 24px;
+  width: 24px;
+}
+
+.task-overlay-content input[type="checkbox"]:checked+label {
+  content: url(../assets/icons/checkbox-checked.svg);
+}
+
+.task-overlay-content input[type="checkbox"]+label {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  content: url(../assets/icons/checkbox-default.svg);
+}
 
 @media (max-width: 630px) {
   .task-overlay-content {
@@ -237,138 +234,139 @@
   }
 }
 
-  .task-overlay-content h1 {
-    font-size: 24px;
-  }
+.task-overlay-content h1 {
+  font-size: 24px;
+}
 
-  .editOverlaylistitems:hover {
-    background-color: var(--hover-slight-blue);
-    border-radius: 10px;
-  }
+.editOverlaylistitems:hover {
+  background-color: var(--hover-slight-blue);
+  border-radius: 10px;
+}
 
-  .subtaskbuttons {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+.subtaskbuttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
-  .subtaskbuttons button:hover{
-    background-color: var(--hover-bright-blue);
-  }
+.subtaskbuttons button:hover {
+  background-color: var(--hover-bright-blue);
+}
 
-  .overlayEditSubtask {
-    border: none;
-    outline: none;
-  }
+.overlayEditSubtask {
+  border: none;
+  outline: none;
+}
 
-  .subtaskDevider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 15px;
-    width: 1px;
-    border: 1px solid grey; 
-  }
-  
-  .clearSubtask {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 24px;
-    width: 24px;
-  }
-  
-  .clearSubtask img {
-    height: 13px;
-    width: 13px;
-    cursor: pointer;
-  }
-  
-  .clearSubtask:hover {
-    background-color: var(--hover-slight-blue);
-    border-radius: 50%;
-  }
-  
-  .addSubtask {
-    display: flex;
-    align-items: center;
-  }
-  
-  .addSubtask:hover {
-    background-color: var(--hover-slight-blue);
-    border-radius: 50%;
-  }
-  
-  .overlaySubtaskEdit {
-    border-bottom: 1px solid var(--primary-color);
-  }
-  .overlaySubtaskEdit:hover {
-    background-color: transparent;
-  }
+.subtaskDevider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15px;
+  width: 1px;
+  border: 1px solid grey;
+}
 
-  .overlayTaskCategory {
-    padding: 6px;
-    border-radius: 10px;
-  }
+.clearSubtask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+}
 
-  .overlay-add-task-area {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 24px 24px;
-    overflow-y: scroll;
-  }
+.clearSubtask img {
+  height: 13px;
+  width: 13px;
+  cursor: pointer;
+}
 
-  .overlay-done-button {
-    padding: 8px 10px;
-    gap: 0px;
-  }
+.clearSubtask:hover {
+  background-color: var(--hover-slight-blue);
+  border-radius: 50%;
+}
 
-  #taskAddSubtasksContent {
-    padding-left: 10px;
-  }
+.addSubtask {
+  display: flex;
+  align-items: center;
+}
 
-  .create-new-task-overlay {
-    width: unset !important;
-  }
+.addSubtask:hover {
+  background-color: var(--hover-slight-blue);
+  border-radius: 50%;
+}
 
-  .create-new-task-overlay h1 {
-    margin: 5px;
-    font-size: 36px;
-  }
+.overlaySubtaskEdit {
+  border-bottom: 1px solid var(--primary-color);
+}
 
-  .create-new-task-overlay .add-task-area {
-    padding: 24px 24px;
-  }
+.overlaySubtaskEdit:hover {
+  background-color: transparent;
+}
 
-  .add-task-area {
-    overflow-y: auto;
-  }
+.overlayTaskCategory {
+  padding: 6px;
+  border-radius: 10px;
+}
 
-  .board-add-task-area {
-    height: 100%;
-    gap: 20px;
-    overflow-y: auto;
-  }
+.overlay-add-task-area {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 24px;
+  overflow-y: scroll;
+}
 
-  .create-task-button {
-    width: 150px;
-    padding: 8px 10px;
-    gap: 0px;
-  }
+.overlay-done-button {
+  padding: 8px 10px;
+  gap: 0px;
+}
 
-  .new-task-button-div {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-  }
+#taskAddSubtasksContent {
+  padding-left: 10px;
+}
 
-  .new-task-overlay-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0px !important;
-  }
+.create-new-task-overlay {
+  width: unset !important;
+}
+
+.create-new-task-overlay h1 {
+  margin: 5px;
+  font-size: 36px;
+}
+
+.create-new-task-overlay .add-task-area {
+  padding: 24px 24px;
+}
+
+.add-task-area {
+  overflow-y: auto;
+}
+
+.board-add-task-area {
+  height: 100%;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.create-task-button {
+  width: 150px;
+  padding: 8px 10px;
+  gap: 0px;
+}
+
+.new-task-button-div {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.new-task-overlay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0px !important;
+}
 
 .new-task-overlay-header button {
   display: flex;
@@ -378,15 +376,15 @@
   width: 30px;
 }
 
-  .new-task-overlay-header button:hover {
-    cursor: pointer;
-    background-color: var(--hover-slight-blue);
-    border-radius: 50%;
-  }
+.new-task-overlay-header button:hover {
+  cursor: pointer;
+  background-color: var(--hover-slight-blue);
+  border-radius: 50%;
+}
 
-  @media (max-width: 860px) {
-    .create-new-task-overlay {
-      width: 80% !important;
-      padding: 9px;
-    }
+@media (max-width: 860px) {
+  .create-new-task-overlay {
+    width: 80% !important;
+    padding: 9px;
   }
+}

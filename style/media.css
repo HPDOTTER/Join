@@ -3,50 +3,63 @@
         width: 100%;
         padding: 30px 24px;
     }
+
     .login-button-div {
         display: flex;
         flex-direction: column;
         gap: 15px;
         width: 170px;
     }
+
     .login-check-box {
         display: none;
     }
+
     .login-body {
         padding: 10px 10px;
     }
+
     .login-header {
         padding-top: 10px;
         padding-left: 10px;
     }
+
     .login-header-icon {
         height: 70px;
     }
+
     .login-header-icon-div {
         height: 70px;
     }
+
     .login-header-right {
         display: none;
     }
+
     .login-form {
         gap: 20px;
         padding: 10px 10px 20px;
     }
+
     .login-h1-div {
         gap: 6px;
     }
     .login-h1 {
         font-size: 45px !important;
     }
+
     .login-error-message-div {
         height: 20px;
     }
+
     #msgBox {
        display: none;
     }
+
     .login-footer {
         height: 30px;
     }
+
     .mediaSignUpDiv {
         display: flex;
         width: 270px;
@@ -55,22 +68,27 @@
         margin-top: 30px;
         align-items: center;
     }
+
     .button-primary {
         height: 40px;
         padding: 16px 20px;
     }
+
     .signup-header-icon {
         height: 70px;
         width: 60px;
     }
+
     .sign-up-form {
         gap: 20px !important;
         padding: 10px 10px 20px !important;
     }
+
     .arrow-left-line-icon {
         top: 25px;
         left: 30px;
     }
+
     .sign-up-check-box {
         display: flex;
     }
@@ -82,38 +100,48 @@
         width: 100%;
         gap: 20px;
     }
+
     .tile-flex {
         width: 100%;
     }
+
     .summary-content {
         margin: 10px;
         width: 100%;
     }
+
     .tile-area {
         width: 100%;
     }
+
     .tile-flex container {
         padding: 10px;
         gap: 15px;
     }
+
     .summary-head {
         display: none;
     }
+
     .tile-area-upper .tile {
         width: 100%;
     }
+
     .tile-area-upper .tile container {
         display: flex;
         justify-content: center;
         gap: 30px;
         width: 100%;
     }
+
     .tile-area-upper .tile container br {
         display: none;
     }
+
     .media-tile-backrground {
         background-color: #D2E2FF;
     }
+
     .tile {
         height: unset;
         padding: 10px;
@@ -122,11 +150,13 @@
     .tile:hover {
         transform: unset;
     }
+
     .tile-area-lower {
         flex-direction: row;
         gap: 20px;
         flex-wrap: wrap;
     }
+
     .tile-area-lower .tile {
         width: calc(50% - 10px);
     }
@@ -143,29 +173,37 @@
     p {
         font-size: 16px !important;
     }
+
     .task-counter {
         font-size: 38px !important;
     }
+
     .tile-upper-part {
         gap: 10px;
         height: unset;
     }
+
     .tile-upper-part img {
         height: 50px;
         width: 50px;
     }
+
     .tile-area-lower {
         gap: 10px;
     }
+
     .tile-area-upper {
         gap: 10px;
     }
+
     .tile-area {
         gap: 10px;
     }
+
     .white-devider {
         height: 100px;
     }
+    
     #urgentDate {
         font-size: 24px;
     }
