@@ -61,6 +61,14 @@ const selectCategory = (element) => {
   dropdown.classList.remove('active');
 };
 
+document.addEventListener('DOMContentLoaded', () => {
+  // Select the category item element
+  const categoryItem = document.querySelector('.dropdown-category-item[data-value="true"]');
+  
+  // Execute the selectCategory function with the selected element
+  selectCategory(categoryItem);
+});
+
 /**
  * Saves the newly created task and navigates to the board page.
  */
