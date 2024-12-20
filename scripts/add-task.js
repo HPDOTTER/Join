@@ -61,7 +61,6 @@ const selectCategory = (element) => {
   dropdown.classList.remove('active');
 };
 
-
 /**
  * Selects the default category when the DOM is fully loaded.
  */
