@@ -1,6 +1,3 @@
-
-javascript
-Code kopieren
 /**
  * @type {HTMLElement} overlay - The task overlay element.
  */
@@ -448,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function getNewTaskOverlayTemplate() {
   const newTaskOverlayHtml = `
-      <div id="taskAdd" class="add-task-area">
+      <div id="taskAdd" class="add-task-area board-add-task-area">
           <div class="new-task-overlay-header">
             <h1>Add Task</h1>
             <button onclick="closeNewTaskOverlay()"><img src="../assets/icons/close.svg" class="close-overlay"></button>

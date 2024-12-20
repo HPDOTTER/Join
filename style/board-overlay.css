@@ -330,6 +330,16 @@
     padding: 24px 24px;
   }
 
+  .add-task-area {
+    overflow-y: auto;
+  }
+
+  .board-add-task-area {
+    height: 100%;
+    gap: 20px;
+    overflow-y: auto;
+  }
+
   .create-task-button {
     width: 150px;
     padding: 8px 10px;
@@ -361,4 +371,11 @@
     cursor: pointer;
     background-color: var(--hover-slight-blue);
     border-radius: 50%;
+  }
+
+  @media (max-width: 860px) {
+    .create-new-task-overlay {
+      width: 80% !important;
+      padding: 9px;
+    }
   }
