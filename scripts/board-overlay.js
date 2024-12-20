@@ -332,6 +332,8 @@ function getOverlayHtml(index) {
  */
 function openNewTaskOverlay(status) {
   const newTaskOverlay = document.getElementById('new-task-overlay');
+  const taskOverlayWrapper = document.getElementById('taskOverlayWrapper');
+  taskOverlayWrapper.style.setProperty('display', 'block', 'important');
   newTaskOverlay.style.display = 'block';
   newTaskOverlay.classList.remove('hidden');
   newTaskOverlay.innerHTML = getNewTaskOverlayTemplate();
@@ -348,6 +350,8 @@ function openNewTaskOverlay(status) {
  */
 function closeNewTaskOverlay() {
   const newTaskOverlay = document.getElementById('new-task-overlay');
+  const taskOverlayWrapper = document.getElementById('taskOverlayWrapper');
+  taskOverlayWrapper.style.setProperty('display', 'none', 'important');
   newTaskOverlay.classList.add('hidden');
   setTimeout(() => {
     newTaskOverlay.style.display = 'none';
@@ -358,10 +362,11 @@ function closeNewTaskOverlay() {
  * Initializes event listeners for closing the overlay when clicking outside of it.
  */
 document.addEventListener('DOMContentLoaded', () => {
-  if (overlay) {
-    overlay.addEventListener('click', (event) => {
-      if (event.target === overlay) {
-        hideOverlay();
+  const addTaskOverlay = document.getElementById('taskOverlayWrapper');
+  if (addTaskOverlay) {
+    addTaskOverlay.addEventListener('click', (event) => {
+      if (event.target === addTaskOverlay) {
+        closeNewTaskOverlay();
       }
     });
   }

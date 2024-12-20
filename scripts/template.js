@@ -215,6 +215,8 @@ function getEditTaskOverlayTemplate(index, task) {
  * Generates the HTML template for creating a new task in the overlay.
  * @returns {string} - The HTML string for the new task overlay.
  */
+
+
 function getNewTaskOverlayTemplate() {
   const newTaskOverlayHtml = `
       <form onsubmit="addTaskSave(event)" id="taskAdd" class="add-task-area board-add-task-area">
@@ -289,6 +291,7 @@ function getNewTaskOverlayTemplate() {
             </div>
             <div class="new-task-button-div"><button class="button-primary create-task-button" type="submit" ">Create Task<img src="../assets/icons/icon-whitecheck.svg" alt=""></button></div>
           </form>
+      </div>
     `;
   return newTaskOverlayHtml;
 }
