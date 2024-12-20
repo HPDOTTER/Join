@@ -113,6 +113,7 @@ function createNewTask() {
   const title = document.getElementById('taskTitle').value;
   const description = document.getElementById('taskDescription').value;
   const date = document.getElementById('taskDate').value;
+  if (currentPath === '/html/add-task.html') { statusTask = 1; }
   return {
     titel: title,
     description: description,
