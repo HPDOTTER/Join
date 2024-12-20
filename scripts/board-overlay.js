@@ -291,7 +291,7 @@ async function ifCurrentTaskPushMembers(members) {
  */
 async function overlayAddSubtask() {
   const task = tasks[currentTask];
-  const input = document.getElementById('subtaskInput'); 
+  const input = document.getElementById('subtaskInput');
   if (!task.subtasks) {
     task.subtasks = [];
   }
@@ -415,6 +415,7 @@ function getEditTaskOverlayTemplate(index, task) {
 function openNewTaskOverlay() {
   const newTaskOverlay = document.getElementById('new-task-overlay');
   newTaskOverlay.style.display = 'block';
+  newTaskOverlay.classList.remove('hidden');
   newTaskOverlay.innerHTML = getNewTaskOverlayTemplate();
   renderContactsWithCheckboxes();
   attachSubtaskEventListeners();
@@ -428,7 +429,10 @@ function openNewTaskOverlay() {
  */
 function closeNewTaskOverlay() {
   const newTaskOverlay = document.getElementById('new-task-overlay');
-  newTaskOverlay.style.display = 'none';
+  newTaskOverlay.classList.add('hidden');
+  setTimeout(() => {
+    newTaskOverlay.style.display = 'none'; // Or any other logic to completely hide it
+  }, 190); // Match the duration of the animation
 }
 
 /**

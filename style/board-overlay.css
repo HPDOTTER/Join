@@ -30,6 +30,11 @@
     background-color: transparent;
   }
 
+  .new-task-overlay.hidden {
+    animation: slideOutToRight 200ms ease-in-out;
+    pointer-events: none; /* Prevent interactions while animating out */
+  }
+
   .animation-slide-from-bottom {
     animation: slideFromBottom 0.5s forwards;
   }
