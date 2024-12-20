@@ -62,12 +62,21 @@ const selectCategory = (element) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (!window.location.href.includes('board.html')) {
+    selectDefaultCategory();
+  }
+});
+
+/**
+ * Selects the default category when the DOM is fully loaded.
+ */
+function selectDefaultCategory() {
   // Select the category item element
   const categoryItem = document.querySelector('.dropdown-category-item[data-value="true"]');
   
   // Execute the selectCategory function with the selected element
   selectCategory(categoryItem);
-});
+}
 
 /**
  * Saves the newly created task and navigates to the board page.

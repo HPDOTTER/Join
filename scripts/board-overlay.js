@@ -337,7 +337,7 @@ function getEditTaskOverlayTemplate(index, task) {
       </div>
         <div class="add-task-info-element">
           <div class="input-wrapper">
-            <input type="text" class="input add-task-input-title" id="editTaskTitle" value="${task.titel}" onkeyup="editTaskTitle()">
+            <input type="text" class="input add-task-input-title" id="editTaskTitle" value="${task.titel}" onkeyup="editTaskTitle()" required>
           </div>
         </div>
         <div class="add-task-info-element">
@@ -348,7 +348,7 @@ function getEditTaskOverlayTemplate(index, task) {
         <div class="add-task-info-element">
           <label for="taskDate">Due date</label>
           <div class="input-wrapper">
-            <input type="date" placeholder="dd/mm/yyyy" class="input" id="editTaskDate" onchange="overlayEditDate()" value="${formattedDates}">
+            <input type="date" placeholder="dd/mm/yyyy" class="input" id="editTaskDate" onchange="overlayEditDate()" value="${formattedDates}" required>
             <img src="../assets/icons/icon-calender.jpg" class="add-task-input-date-icon">
           </div>
         </div>
@@ -418,6 +418,8 @@ function openNewTaskOverlay() {
   newTaskOverlay.innerHTML = getNewTaskOverlayTemplate();
   renderContactsWithCheckboxes();
   attachSubtaskEventListeners();
+  selectDefaultCategory();
+  setOverlayTaskPriority('2');
   currentTask = null;
 }
 
@@ -448,10 +450,10 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function getNewTaskOverlayTemplate() {
   const newTaskOverlayHtml = `
-      <div id="taskAdd" class="add-task-area board-add-task-area">
+      <form onsubmit="addTaskSave(event)" id="taskAdd" class="add-task-area board-add-task-area">
           <div class="new-task-overlay-header">
             <h1>Add Task</h1>
-            <button onclick="closeNewTaskOverlay()"><img src="../assets/icons/close.svg" class="close-overlay"></button>
+            <button type="button" onclick="closeNewTaskOverlay()"><img src="../assets/icons/close.svg" class="close-overlay"></button>
           </div>  
             <div class="add-task-info-element">
               <div class="input-wrapper">
@@ -480,7 +482,7 @@ function getNewTaskOverlayTemplate() {
             </div>
             <div class="add-task-info-element">
               <label for="taskAssignedTo">Assigned to <span>(optional)</span></label>
-              <button class="add-task-assigned-to-button" onclick="toggleDropdown()">
+              <button type="button" class="add-task-assigned-to-button" onclick="toggleDropdown()">
                 <p id="addTaskAssignedToValue">Select contacts to assign</p>
                 <img class="icon-add-task-assigned-to-button-arrow">
               </button>
@@ -495,7 +497,7 @@ function getNewTaskOverlayTemplate() {
             <div id="taskMembers"></div>
             <div class="add-task-info-element">
               <label>Category</label>
-              <button class="add-task-category-button" id="add-task-category-button" onclick="toggleCategoryDropdown()">
+              <button type="button" class="add-task-category-button" id="add-task-category-button" onclick="toggleCategoryDropdown()">
                 <p id="addTaskCategoryValue">Select task category</p>
                 <img class="icon-add-task-category-button-arrow">
               </button>
@@ -509,17 +511,17 @@ function getNewTaskOverlayTemplate() {
               <div class="add-task-category-button">
                 <input type="text" id="subtaskInput" placeholder="Add new subtask">
                 <div class="ifSubtaskvalue" id="ifSubtaskvalue">
-                  <button onclick="clearSubtask()" class="iconSubtask"><img src="../assets/icons/icon-cancel-active.png"></button>
+                  <button type="button" onclick="clearSubtask()" class="iconSubtask"><img src="../assets/icons/icon-cancel-active.png"></button>
                   <div class="subtaskDevider"></div>
-                  <button onclick="addSubtask()" class="iconSubtask"><img src="../assets/icons/icon-check-active.png"></button>
+                  <button type="button" onclick="addSubtask()" class="iconSubtask"><img src="../assets/icons/icon-check-active.png"></button>
                 </div>
                 <label for="subtaskInput" id="addSubtaskPlus"><img class="icon-add-subtask-button-plus"></label>
               </div>
               <ul id="taskAddSubtasksContent">
               </ul>
             </div>
-            <div class="new-task-button-div"><button class="button-primary create-task-button" onclick="addTaskSave() ">Create Task<img src="../assets/icons/icon-whitecheck.svg" alt=""></button></div>
-          </div>
+            <div class="new-task-button-div"><button class="button-primary create-task-button" type="submit" ">Create Task<img src="../assets/icons/icon-whitecheck.svg" alt=""></button></div>
+          </form>
     `;
   return newTaskOverlayHtml;
 }
