@@ -1,3 +1,6 @@
+/**
+ * Global variables to manage users, tasks, contacts, and status.
+ */
 let users = [];
 let tasks = [];
 let contacts = [];
@@ -5,6 +8,10 @@ let statusTask = 1;
 let errors = [];
 const user = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
 
+/**
+ * Initializes the application by handling the main menu visibility,
+ * loading data, filtering contacts, and setting user initials.
+ */
 async function init() {
   handleMainMenuVisibility();
   await load();
@@ -13,6 +20,10 @@ async function init() {
   waitForElement('#currentUserInitials', setCurrentUserInitials);
 }
 
+/**
+ * Navigates to a new URL with a smooth fade-out transition.
+ * @param {string} url - The URL to navigate to.
+ */
 function smoothTransition(url) {
   document.body.classList.add('fade-out');
   setTimeout(() => {
@@ -20,6 +31,9 @@ function smoothTransition(url) {
   }, 500); // Match the duration of the CSS transition
 }
 
+/**
+ * Sets the initials of the current user or guest in the UI.
+ */
 function setCurrentUserInitials() {
   const currentUserInitials = document.getElementById('currentUserInitials');
   const guest = sessionStorage.getItem('guest');
@@ -35,7 +49,10 @@ function setCurrentUserInitials() {
   }
 }
 
-
+/**
+ * Retrieves the current user or guest information from session storage.
+ * @returns {Object} The user or guest object.
+ */
 function currentUser() {
   const user = sessionStorage.getItem('user');
   const guest = sessionStorage.getItem('guest');
@@ -49,12 +66,20 @@ function currentUser() {
   }
 }
 
+/**
+ * Logs out the current user or guest and redirects to the login page.
+ */
 function logout() {
   sessionStorage.removeItem('user');
   sessionStorage.removeItem('guest');
   smoothTransition('../html/login.html?msg=You have successfully logged out.');
 }
 
+/**
+ * Waits for an element to be added to the DOM and executes a callback.
+ * @param {string} selector - The CSS selector for the element.
+ * @param {Function} callback - The callback function to execute when the element is found.
+ */
 function waitForElement(selector, callback) {
   const element = document.querySelector(selector);
   if (element) {
@@ -74,17 +99,29 @@ function waitForElement(selector, callback) {
   }
 }
 
+/**
+ * Toggles the visibility of the logout popup.
+ */
 function openLogout() {
   const logoutButton = document.getElementById('logoutPopUp');
   logoutButton.classList.toggle('d-block');
 }
 
+/**
+ * Navigates to a specified URL.
+ * @param {string} url - The URL to navigate to.
+ */
 function navigateToUrl(url) {
   window.location.href = url;
 }
 
+/**
+ * Displays a toast message with optional image.
+ * @param {string} text - The text of the toast message.
+ * @param {string} fileName - The file name of the image to display.
+ */
 function showToastMessage(text, fileName) {
-  toastMsg = document.getElementById('toastMessage');
+  const toastMsg = document.getElementById('toastMessage');
   toastMsg.innerHTML = getToastMessage(text, fileName);
   toastMsg.classList.remove('d-none');
   setTimeout(() => {
@@ -92,19 +129,31 @@ function showToastMessage(text, fileName) {
   }, 1500);
 }
 
+/**
+ * Generates the HTML content for a toast message.
+ * @param {string} text - The text of the toast message.
+ * @param {string} fileName - The file name of the image to display.
+ * @returns {string} The HTML content for the toast message.
+ */
 function getToastMessage(text, fileName) {
   let toastMessage = '';
   toastMessage += text;
   if (fileName.length > 0) {
-    toastMessage += `<img src="${fileName}" class="icon-toast-message">`
+    toastMessage += `<img src="${fileName}" class="icon-toast-message">`;
   }
   return toastMessage;
 }
 
+/**
+ * Navigates back to the previous page in the browser history.
+ */
 function goBack() {
   window.history.back();
 }
 
+/**
+ * Initializes the page after the DOM content is loaded.
+ */
 document.addEventListener("DOMContentLoaded", function () {
   w3.includeHTML(() => {
     const pageId = document.body.getAttribute('data-page');
@@ -120,6 +169,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+/**
+ * Handles the visibility of the main menu based on user or guest status.
+ */
 function handleMainMenuVisibility() {
   const menuMain = document.getElementById('menuMain');
   const menuBar = document.getElementById('menuBar');
@@ -135,6 +187,9 @@ function handleMainMenuVisibility() {
   }
 }
 
+/**
+ * Handles the visibility of the menu bar based on the screen width and user/guest status.
+ */
 function handleMenuBarVisibility() {
   const guest = sessionStorage.getItem('guest');
   if (!(user || guest)) {
@@ -146,40 +201,42 @@ function handleMenuBarVisibility() {
   }
 }
 
+/**
+ * Hides the menu bar and adjusts the site body wrapper height.
+ */
 function hideMenuBar() {
-  let menuBar = document.getElementById('menuBarContainer');
-  let siteBodyWrapper = document.getElementById('siteBodyWrapper');
+  const menuBar = document.getElementById('menuBarContainer');
+  const siteBodyWrapper = document.getElementById('siteBodyWrapper');
   menuBar.style.display = 'none';
   siteBodyWrapper.style.height = 'calc(100vh - 96px)';
 }
 
+/**
+ * Shows the menu bar.
+ */
 function showMenuBar() {
-  menuBar = document.getElementById('menuBarContainer');
+  const menuBar = document.getElementById('menuBarContainer');
   menuBar.style.display = 'flex';
 }
 
+/**
+ * Gets the initials of a given name.
+ * @param {string} name - The full name to extract initials from.
+ * @returns {string} The initials of the name.
+ */
 function getInitials(name) {
   if (!name) return '';
   const nameParts = name.split(' ');
   if (nameParts.length === 1) {
-    // If the name is a single word, return the first two characters
     return nameParts[0].substring(0, 2).toUpperCase();
   } else {
-    // If the name has multiple words, return the first character of the first two words
     return nameParts[0][0].toUpperCase() + nameParts[1][0].toUpperCase();
   }
 }
 
-const currentPath = window.location.pathname;
-const menuLinks = [
-  { id: 'summaryLink', path: '/html/summary.html' },
-  { id: 'addTaskLink', path: '/html/add-task.html' },
-  { id: 'boardLink', path: '/html/board.html' },
-  { id: 'contactsLink', path: '/html/contacts.html' },
-  { id: 'privacyPolicyLink', path: '/html/privacy-policy.html' },
-  { id: 'legalNoticeLink', path: '/html/legal-notice.html' },
-];
-
+/**
+ * Highlights the active menu link based on the current page path.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const checkLinks = setInterval(() => {
     const menuLink = document.getElementById('summaryLink');
@@ -197,7 +254,8 @@ document.addEventListener("DOMContentLoaded", () => {
           element.classList.remove('menu-main-link-activated');
           element.classList.remove('menu-legal-section-link-activated');
         }
-      })
+      });
     }
   }, 10);
 });
+
