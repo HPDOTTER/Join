@@ -291,7 +291,10 @@ async function ifCurrentTaskPushMembers(members) {
  */
 async function overlayAddSubtask() {
   const task = tasks[currentTask];
-  const input = document.getElementById('subtaskInput');
+  const input = document.getElementById('subtaskInput'); 
+  if (!task.subtasks) {
+    task.subtasks = [];
+  }
   task.subtasks.push({ subtitel: input.value, isDone: false });
   input.value = '';
   await SaveLoadRender();
