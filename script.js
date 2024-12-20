@@ -270,7 +270,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     }
-    console.log('Schleife');
   }, 10);
 });
 
