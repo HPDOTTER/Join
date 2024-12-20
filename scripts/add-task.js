@@ -74,10 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
  * Selects the default category.
  */
 function selectDefaultCategory() {
-  // Select the category item element
   const categoryItem = document.querySelector('.dropdown-category-item[data-value="true"]');
-  
-  // Execute the selectCategory function with the selected element
   selectCategory(categoryItem);
 }
 
@@ -101,9 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('taskAdd');
   if (form) {
     form.addEventListener('submit', async (event) => {
-      event.preventDefault(); // Prevent the default form submission
-      await addTaskSave(); // Call the addTaskSave function
-      form.submit(); // Submit the form
+      event.preventDefault();
+      await addTaskSave();
+      form.submit();
     });
   }
 });

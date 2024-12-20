@@ -52,7 +52,7 @@ function hideForm() {
   const contactForm = document.getElementById('contactForm');
   contactForm.classList.add('hidden');
   setTimeout(() => {
-    contactForm.style.display = 'none'; // Or any other logic to completely hide it
+    contactForm.style.display = 'none';
   }, 190); // Match the duration of the animation
   document.getElementById('contactFormOverlay').style.display = 'none';
 }
@@ -175,7 +175,7 @@ function hideEditForm() {
   const editForm = document.getElementById('contactEditForm');
   editForm.classList.add('hidden');
   setTimeout(() => {
-    editForm.style.display = 'none'; // Or any other logic to completely hide it
+    editForm.style.display = 'none';
   }, 190);
   document.getElementById('contactEditOverlay').style.display = 'none';
   if (activeContactItem) {

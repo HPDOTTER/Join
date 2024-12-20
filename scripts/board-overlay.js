@@ -350,7 +350,7 @@ function closeNewTaskOverlay() {
   const newTaskOverlay = document.getElementById('new-task-overlay');
   newTaskOverlay.classList.add('hidden');
   setTimeout(() => {
-    newTaskOverlay.style.display = 'none'; // Or any other logic to completely hide it
+    newTaskOverlay.style.display = 'none';
   }, 190); // Match the duration of the animation
 }
 

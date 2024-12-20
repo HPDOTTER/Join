@@ -95,7 +95,7 @@ function urgentTasksFunction() {
 function displayUrgentTasksDate(date) {
     const taskDate = new Date(date);
     const year = taskDate.getFullYear();
-    const monthIndex = taskDate.getMonth(); // Months are zero-based
+    const monthIndex = taskDate.getMonth();
     const day = taskDate.getDate();
     const monthNames = [
         "January", "February", "March", "April", "May", "June",
