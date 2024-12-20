@@ -340,7 +340,6 @@ function openNewTaskOverlay(status) {
   renderContactsWithCheckboxes();
   attachSubtaskEventListeners();
   selectDefaultCategory();
-  currentTask = null;
   statusTask = status;
   setOverlayTaskPriority('2');
 }

@@ -139,6 +139,7 @@ function getTaskAssignedToTemplate(member, avatarColor) {
 }
 
 function getEditTaskOverlayTemplate(index, task) {
+  console.log(index);
   const formattedDates = formatDate(task.date);
   const taskMembersHtml = `
     <div class="task-overlay-content" id="task-overlay-content">

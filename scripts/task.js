@@ -1,14 +1,14 @@
 /**
  * Array to store filtered tasks.
  * @type {Array}
- */ 
-let filteredTasks = []; 
+ */
+let filteredTasks = [];
 
 /**
  * Reference to the element displaying the 'no tasks' message.
  * @type {HTMLElement}
  */
-const noTasksMessage = document.getElementById('noTasksMessage');
+const noTasksMessage = document.getElementById("noTasksMessage");
 
 /**
  * Renders all tasks into their respective columns.
@@ -18,10 +18,9 @@ const noTasksMessage = document.getElementById('noTasksMessage');
  */
 async function renderTasks() {
   await load();
-  const columns = document.querySelectorAll('.column .tasks');
-  columns.forEach(column => (column.innerHTML = ''));
+  const columns = document.querySelectorAll(".column .tasks");
+  columns.forEach((column) => (column.innerHTML = ""));
   tasksCurrentlyRendering(tasks);
-  currentTask = null;
 }
 
 /**
@@ -33,7 +32,9 @@ function tasksCurrentlyRendering(tasks) {
   const tasksToRender = filteredTasks.length ? filteredTasks : tasks;
   tasksToRender.forEach((task, index) => {
     taskTemplate(task, index);
-    const column = document.querySelector(`.column[data-status="${task.status}"] .tasks`);
+    const column = document.querySelector(
+      `.column[data-status="${task.status}"] .tasks`
+    );
     column.innerHTML += taskTemplate(task, index);
   });
   showDummydiv();
@@ -50,7 +51,7 @@ function calculateSubtaskCount(task) {
   let subtaskDone = 0;
   if (task.subtasks) {
     subtaskCount = task.subtasks.length;
-    task.subtasks.forEach(element => {
+    task.subtasks.forEach((element) => {
       if (element.isDone == true) {
         subtaskDone += 1;
       }
@@ -69,7 +70,7 @@ function calculateSubtaskCount(task) {
 function renderMembersPrio(task) {
   let html = `<section class="members-prio"><div class="avatar">`;
   html += renderMembers(task);
-  html += `</div>${setTaskPriority(task, '')}</section>`;
+  html += `</div>${setTaskPriority(task, "")}</section>`;
   return html;
 }
 
@@ -81,12 +82,16 @@ function renderMembersPrio(task) {
  */
 function renderMembers(task) {
   return task.members && task.members.length > 0
-    ? task.members.map(member => {
-      const contact = contacts.find(contact => contact.name === member);
-      const avatarColor = contact ? contact.color : 'orange';
-      return `<div class="contactAvatar" style="background-color: ${avatarColor}">${getInitials(member)}</div>`;
-    }).join('')
-    : '';
+    ? task.members
+        .map((member) => {
+          const contact = contacts.find((contact) => contact.name === member);
+          const avatarColor = contact ? contact.color : "orange";
+          return `<div class="contactAvatar" style="background-color: ${avatarColor}">${getInitials(
+            member
+          )}</div>`;
+        })
+        .join("")
+    : "";
 }
 
 /**
@@ -98,11 +103,11 @@ function renderMembers(task) {
  */
 function setTaskPriority(task, html) {
   if (task.priority == 1) {
-    html += `<div class="prio13 priodiv"><img src="../assets/img/PrioUrgent.svg" alt=""></div>`
+    html += `<div class="prio13 priodiv"><img src="../assets/img/PrioUrgent.svg" alt=""></div>`;
   } else if (task.priority == 2) {
-    html += `<div class="prio2 priodiv"><img src="../assets/img/PrioMedium.svg" alt=""></div>`
+    html += `<div class="prio2 priodiv"><img src="../assets/img/PrioMedium.svg" alt=""></div>`;
   } else if (task.priority == 3) {
-    html += `<div class="prio13 priodiv"><img src="../assets/img/PrioLow.svg" alt=""></div>`
+    html += `<div class="prio13 priodiv"><img src="../assets/img/PrioLow.svg" alt=""></div>`;
   }
   return html;
 }
@@ -117,7 +122,7 @@ function taskTitle(task) {
   if (task.titel) {
     return `<h1>${task.titel}</h1>`;
   } else {
-    return '';
+    return "";
   }
 }
 
@@ -128,11 +133,13 @@ function taskTitle(task) {
  * @returns {string} HTML string for the assigned members.
  */
 function taskAssignedTo(task) {
-  return task.members.map(member => {
-    const contact = contacts.find(contact => contact.name === member);
-    const avatarColor = contact ? contact.color : 'orange';
-    return getTaskAssignedToTemplate(member, avatarColor);
-  }).join('');
+  return task.members
+    .map((member) => {
+      const contact = contacts.find((contact) => contact.name === member);
+      const avatarColor = contact ? contact.color : "orange";
+      return getTaskAssignedToTemplate(member, avatarColor);
+    })
+    .join("");
 }
 
 /**
@@ -145,7 +152,7 @@ function taskDescription(task) {
   if (task.description) {
     return `<p class="taskDescriptionBoard">${task.description}</p>`;
   } else {
-    return '';
+    return "";
   }
 }
 
@@ -159,11 +166,11 @@ function taskDate(dateString) {
   if (dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     return `<div class="overlay-inline-elements"><b>Due date:</b> <p>${day}/${month}/${year}</p></div>`;
   } else {
-    return '';
+    return "";
   }
 }
 
@@ -172,18 +179,20 @@ function taskDate(dateString) {
  * @function
  */
 function filter() {
-  let filterText = document.getElementById('searchTask').value.toLowerCase();
-  const noTasksMessage = document.getElementById('noTasksMessage');
+  let filterText = document.getElementById("searchTask").value.toLowerCase();
+  const noTasksMessage = document.getElementById("noTasksMessage");
   if (filterText.length >= 3) {
-    filteredTasks = tasks.filter(task => task.titel.toLowerCase().includes(filterText));
+    filteredTasks = tasks.filter((task) =>
+      task.titel.toLowerCase().includes(filterText)
+    );
     if (filteredTasks.length === 0) {
-      noTasksMessage.style.display = 'block';
+      noTasksMessage.style.display = "block";
     } else {
-      noTasksMessage.style.display = 'none';
+      noTasksMessage.style.display = "none";
     }
   } else {
     filteredTasks = [];
-    noTasksMessage.style.display = 'none';
+    noTasksMessage.style.display = "none";
   }
   renderTasks();
 }
@@ -195,8 +204,10 @@ function filter() {
  */
 function startDrag(index) {
   currentDraggedElement = index;
-  const taskElement = document.querySelector(`.task[ondragstart="startDrag(${index})"]`);
-  taskElement.classList.add('dragging');
+  const taskElement = document.querySelector(
+    `.task[ondragstart="startDrag(${index})"]`
+  );
+  taskElement.classList.add("dragging");
 }
 
 /**
@@ -216,7 +227,7 @@ function allowDrop(ev) {
  * @returns {Promise<void>}
  */
 async function moveTo(status) {
-  tasks[currentDraggedElement]['status'] = status;
+  tasks[currentDraggedElement]["status"] = status;
   await save();
   await renderTasks();
   removeHighlight(status);
@@ -228,8 +239,10 @@ async function moveTo(status) {
  * @param {string} status - The status to highlight.
  */
 function highlight(status) {
-  const column = document.querySelector(`.column[data-status="${status}"] .tasks`);
-  column.classList.add('highlight');
+  const column = document.querySelector(
+    `.column[data-status="${status}"] .tasks`
+  );
+  column.classList.add("highlight");
 }
 
 /**
@@ -238,8 +251,10 @@ function highlight(status) {
  * @param {string} status - The status to remove the highlight from.
  */
 function removeHighlight(status) {
-  const column = document.querySelector(`.column[data-status="${status}"] .tasks`);
-  column.classList.remove('highlight');
+  const column = document.querySelector(
+    `.column[data-status="${status}"] .tasks`
+  );
+  column.classList.remove("highlight");
 }
 
 /**
@@ -247,10 +262,10 @@ function removeHighlight(status) {
  * @constant {Array<string>}
  */
 const dummyMessages = [
-  'No tasks to do',
-  'No tasks in progress',
-  'No tasks awaiting Feedback',
-  'No tasks done'
+  "No tasks to do",
+  "No tasks in progress",
+  "No tasks awaiting Feedback",
+  "No tasks done",
 ];
 
 /**
@@ -261,8 +276,8 @@ function showDummydiv() {
   for (let i = 1; i <= 4; i++) {
     const column = document.querySelector(`.column[data-status='${i}'] .tasks`);
     if (column && column.children.length === 0) {
-      const dummyDiv = document.createElement('div');
-      dummyDiv.classList.add('dummy');
+      const dummyDiv = document.createElement("div");
+      dummyDiv.classList.add("dummy");
       dummyDiv.innerText = dummyMessages[i - 1];
       column.appendChild(dummyDiv);
     }
@@ -277,7 +292,7 @@ function showDummydiv() {
  */
 function toggleTaskStatusSelectionMenu(event, index) {
   let menu = document.getElementById(`taskStatusSelectionMenu${index}`);
-  menu.classList.toggle('d-none');
+  menu.classList.toggle("d-none");
   event.stopPropagation();
 }
 
@@ -292,7 +307,7 @@ function toggleTaskStatusSelectionMenu(event, index) {
  */
 async function setTaskStatus(event, taskStatus, index) {
   toggleTaskStatusSelectionMenu(event, index);
-  tasks[index]['status'] = taskStatus;
+  tasks[index]["status"] = taskStatus;
   await save();
   await renderTasks();
 }
