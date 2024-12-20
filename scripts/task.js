@@ -21,6 +21,7 @@ async function renderTasks() {
   const columns = document.querySelectorAll('.column .tasks');
   columns.forEach(column => (column.innerHTML = ''));
   tasksCurrentlyRendering(tasks);
+  currentTask = null;
 }
 
 /**
