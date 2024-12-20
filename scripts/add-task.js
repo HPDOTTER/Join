@@ -123,7 +123,7 @@ function createNewTask() {
     categoryUser: selectedCategory,
     date: new Date(date),
     priority: selectedPriority,
-    status: statusTask,
+    status: 1,
     progress: 0,
     members: members,
     subtasks: subtasks

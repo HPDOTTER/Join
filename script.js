@@ -4,7 +4,6 @@
 let users = [];
 let tasks = [];
 let contacts = [];
-let statusTask = 1;
 let errors = [];
 const user = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
 
