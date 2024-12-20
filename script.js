@@ -234,6 +234,16 @@ function getInitials(name) {
   }
 }
 
+const currentPath = window.location.pathname;
+const menuLinks = [
+  { id: 'summaryLink', path: '/html/summary.html' },
+  { id: 'addTaskLink', path: '/html/add-task.html' },
+  { id: 'boardLink', path: '/html/board.html' },
+  { id: 'contactsLink', path: '/html/contacts.html' },
+  { id: 'privacyPolicyLink', path: '/html/privacy-policy.html' },
+  { id: 'legalNoticeLink', path: '/html/legal-notice.html' },
+];
+
 /**
  * Highlights the active menu link based on the current page path.
  */
