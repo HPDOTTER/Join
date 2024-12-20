@@ -22,14 +22,14 @@
   <script src="../scripts/dataStorage.js"></script>
   <script src="../scripts/board-overlay.js"></script>
 </head>
-<body onload="init(); renderContactsWithCheckboxes()">
+<body onload="init(); renderContactsWithCheckboxes(); attachSubtaskEventListeners()">
   <div class="site-wrapper">
     <header w3-include-html="header.html"></header>
     <div class="site-body-wrapper">
       <div class="menu-bar-left">
         <div w3-include-html="menu-bar.html"></div>
       </div>
-      <div class="content-wrapper">
+      <form id="addTaskForm" onsubmit="addTaskSave(event)" class="content-wrapper"> 
         <div id="taskAdd" class="add-task-area">
 
           <div class="add-task-info-element">
@@ -64,7 +64,7 @@
         
           <div class="add-task-info-element">
             <label for="taskAssignedTo">Assigned to <span>(optional)</span></label>
-            <button class="add-task-assigned-to-button" onclick="toggleDropdown()">
+            <button type="button" class="add-task-assigned-to-button" onclick="toggleDropdown()">
               <p id="addTaskAssignedToValue">Select contacts to assign</p>
               <img class="icon-add-task-assigned-to-button-arrow">
             </button>
@@ -80,7 +80,7 @@
 
           <div class="add-task-info-element">
             <label>Category</label>
-            <button class="add-task-category-button" id="add-task-category-button" onclick="toggleCategoryDropdown()">
+            <button type="button" class="add-task-category-button" id="add-task-category-button" onclick="toggleCategoryDropdown()">
               <p id="addTaskCategoryValue">Select task category</p>
               <img class="icon-add-task-category-button-arrow">
             </button>
@@ -95,9 +95,9 @@
             <div class="add-task-category-button">
               <input type="text" id="subtaskInput" placeholder="Add new subtask">
               <div class="ifSubtaskvalue" id="ifSubtaskvalue">
-                <button onclick="clearSubtask()" class="iconSubtask"><img src="../assets/icons/icon-cancel-active.png"></button>
+                <button type="button" onclick="clearSubtask()" class="iconSubtask"><img src="../assets/icons/icon-cancel-active.png"></button>
                 <div class="subtaskDevider"></div>
-                <button onclick="addSubtask()" class="iconSubtask"><img src="../assets/icons/icon-check-active.png" ></button>
+                <button type="button" onclick="addSubtask()" class="iconSubtask"><img src="../assets/icons/icon-check-active.png" ></button>
               </div>
               <label for="subtaskInput" id="addSubtaskPlus"><img class="icon-add-subtask-button-plus"></label>
             </div>
@@ -107,16 +107,16 @@
 
         </div>
         <div class="add-task-button-area">
-          <button class="button-secondary add-task-button-clear" onclick="addTaskCancel()">
+          <button type="button" class="button-secondary add-task-button-clear" onclick="addTaskCancel()">
             Clear
             <img class="icon-cancel">
           </button>
-          <button class="button-primary add-task-button-create-task" onclick="addTaskSave(); showToastMessage('Task added to board', '../assets/icons/icon-toast-message-task-added.svg')">
+          <button type="submit" class="button-primary add-task-button-create-task">
             Create Task
             <img class="icon-check">
           </button>
         </div>
-      </div>
+      </form>
     </div>
     <div w3-include-html="toast-message.html"></div>
   </div>

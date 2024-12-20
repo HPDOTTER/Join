@@ -64,7 +64,8 @@ const selectCategory = (element) => {
 /**
  * Saves the newly created task and navigates to the board page.
  */
-async function addTaskSave() {
+async function addTaskSave(event) {
+  event.preventDefault(); 
   const newTask = createNewTask();
   if (newTask.titel && newTask.date) {
     tasks.push(newTask);
@@ -75,6 +76,17 @@ async function addTaskSave() {
     showToastMessage('Task added to board', '../assets/icons/icon-toast-message-task-added.svg');
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('taskAdd');
+  if (form) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Prevent the default form submission
+      await addTaskSave(); // Call the addTaskSave function
+      form.submit(); // Submit the form
+    });
+  }
+});
 
 /**
  * Creates a new task object based on form inputs.
