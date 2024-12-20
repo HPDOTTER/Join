@@ -61,6 +61,10 @@ const selectCategory = (element) => {
   dropdown.classList.remove('active');
 };
 
+
+/**
+ * Selects the default category when the DOM is fully loaded.
+ */
 document.addEventListener('DOMContentLoaded', () => {
   if (!window.location.href.includes('board.html')) {
     selectDefaultCategory();
@@ -68,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Selects the default category when the DOM is fully loaded.
+ * Selects the default category.
  */
 function selectDefaultCategory() {
   // Select the category item element
