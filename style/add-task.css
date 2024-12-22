@@ -319,6 +319,12 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
   gap: 4px;
 }
 
+.subtask-buttons {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
 @media (max-width: 900px) {
   .add-task-area {
     width: 100%;

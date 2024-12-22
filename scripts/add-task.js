@@ -314,21 +314,88 @@ function createLabel(contact, index) {
   return label;
 }
 
+
+
 /**
  * Adds a new subtask to the current task.
  */
 function addSubtask() {
   let inputfield = document.getElementById('subtaskInput').value;
-  let subtask = document.getElementById('taskAddSubtasksContent');
-  let addTaskBoard = document.getElementById('taskAdd')
-  if (window.location.href.includes('add-task.html') || addTaskBoard) {
-    subtask.innerHTML += `<li class="listitems">• ${inputfield}</li>`;
-  } else if (window.location.href.includes('board.html')) {
-    subtask.innerHTML += `<li class="listitems editOverlaylistitems">• ${subtask.subtitel}<div class="subtaskbuttons"><button onclick="overlayEditSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-edit.png"></button><div class="subtaskDevider"></div><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button></div></li>`;
+  let subtaskContainer = document.getElementById('taskAddSubtasksContent');
+  let addTaskBoard = document.getElementById('taskAdd');
+
+  if (inputfield.length >= 3) {
+    const subtaskId = `subtask-${Date.now()}`; // Unique ID for the subtask
+    const subtaskHtml = `
+      <li class="listitems" id="${subtaskId}">
+        • <span class="subtask-title">${inputfield}</span>
+        <div class="subtask-buttons">
+          <button onclick="editSubtask('${subtaskId}')" class="addSubtask">
+            <img src="../assets/icons/icon-edit.png" alt="Edit">
+          </button>
+          <div class="subtaskDivider"></div>
+          <button onclick="deleteSubtask('${subtaskId}')" class="addSubtask">
+            <img src="../assets/icons/icon-delete.png" alt="Delete">
+          </button>
+        </div>
+      </li>
+    `;
+
+    subtaskContainer.innerHTML += subtaskHtml;
+
+    // Add subtask to the array
+    subtasks.push({ id: subtaskId, title: inputfield, isDone: false });
+
+    // Clear input field
+    clearSubtask();
   }
-  subtasks.push({ 'subtitel': inputfield, 'isDone': false });
-  clearSubtask();
 }
+
+/**
+ * Edits an existing subtask.
+ */
+function editSubtask(subtaskId) {
+  const subtaskElement = document.getElementById(subtaskId);
+  const titleElement = subtaskElement.querySelector('.subtask-title');
+  const newTitle = prompt("Edit subtask:", titleElement.textContent);
+  if (newTitle && newTitle.trim().length >= 3) {
+    titleElement.textContent = newTitle.trim();
+    // Update the corresponding subtask in the array
+    const subtask = subtasks.find(sub => sub.id === subtaskId);
+    if (subtask) subtask.title = newTitle.trim();
+  }
+}
+
+/**
+ * Deletes an existing subtask.
+ */
+function deleteSubtask(subtaskId) {
+  const subtaskElement = document.getElementById(subtaskId);
+  subtaskElement.remove();
+  // Remove the corresponding subtask from the array
+  subtasks = subtasks.filter(sub => sub.id !== subtaskId);
+}
+
+
+
+
+/**
+ * Adds a new subtask to the current task.
+ */
+// function addSubtask() {
+//   let inputfield = document.getElementById('subtaskInput').value;
+//   let subtask = document.getElementById('taskAddSubtasksContent');
+//   let addTaskBoard = document.getElementById('taskAdd')
+//   if (inputfield.length >= 3) {
+//     if (window.location.href.includes('add-task.html') || addTaskBoard) {
+//       subtask.innerHTML += `<li class="listitems">• ${inputfield}</li>`;
+//     } else if (window.location.href.includes('board.html')) {
+//       subtask.innerHTML += `<li class="listitems editOverlaylistitems">• ${subtask.subtitel}<div class="subtaskbuttons"><button onclick="overlayEditSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-edit.png"></button><div class="subtaskDevider"></div><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button></div></li>`;
+//     }
+//     subtasks.push({ 'subtitel': inputfield, 'isDone': false });
+//     clearSubtask();
+//   }
+// }
 
 /**
  * Clears the subtask input field.
