@@ -50,6 +50,14 @@ const toggleCategoryDropdown = () => {
 };
 
 /**
+ * Remove the visibility of the category dropdown.
+ */
+const removeCategoryDropdown = () => {
+  const dropdown = document.getElementById('categoryDropdown');
+  dropdown.classList.remove('active');
+};
+
+/**
  * Selects a category from the dropdown.
  * @param {HTMLElement} element - The dropdown item element.
  */
@@ -177,6 +185,16 @@ const toggleDropdown = () => {
   const button = document.getElementById("addTaskAssignedToValue");
   const dropdownMenu = document.getElementById("taskAssignedToMenu");
   dropdownMenu.classList.toggle("active");
+  button.innerHTML = dropdownMenu.classList.contains("active") ? "" : "Select contacts to assign";
+};
+
+/**
+ * Deactivate the visibility of the "Assigned To" dropdown menu.
+ */
+const deactivateDropdown = () => {
+  const button = document.getElementById("addTaskAssignedToValue");
+  const dropdownMenu = document.getElementById("taskAssignedToMenu");
+  dropdownMenu.classList.remove("active");
   button.innerHTML = dropdownMenu.classList.contains("active") ? "" : "Select contacts to assign";
 };
 
