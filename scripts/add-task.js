@@ -314,8 +314,6 @@ function createLabel(contact, index) {
   return label;
 }
 
-
-
 /**
  * Adds a new subtask to the current task.
  */
@@ -323,7 +321,6 @@ function addSubtask() {
   let inputfield = document.getElementById('subtaskInput').value;
   let subtaskContainer = document.getElementById('taskAddSubtasksContent');
   let addTaskBoard = document.getElementById('taskAdd');
-
   if (inputfield.length >= 3) {
     const subtaskId = `subtask-${Date.now()}`; // Unique ID for the subtask
     const subtaskHtml = `
@@ -340,12 +337,9 @@ function addSubtask() {
         </div>
       </li>
     `;
-
     subtaskContainer.innerHTML += subtaskHtml;
-
     // Add subtask to the array
     subtasks.push({ id: subtaskId, title: inputfield, isDone: false });
-
     // Clear input field
     clearSubtask();
   }
@@ -375,27 +369,6 @@ function deleteSubtask(subtaskId) {
   // Remove the corresponding subtask from the array
   subtasks = subtasks.filter(sub => sub.id !== subtaskId);
 }
-
-
-
-
-/**
- * Adds a new subtask to the current task.
- */
-// function addSubtask() {
-//   let inputfield = document.getElementById('subtaskInput').value;
-//   let subtask = document.getElementById('taskAddSubtasksContent');
-//   let addTaskBoard = document.getElementById('taskAdd')
-//   if (inputfield.length >= 3) {
-//     if (window.location.href.includes('add-task.html') || addTaskBoard) {
-//       subtask.innerHTML += `<li class="listitems">• ${inputfield}</li>`;
-//     } else if (window.location.href.includes('board.html')) {
-//       subtask.innerHTML += `<li class="listitems editOverlaylistitems">• ${subtask.subtitel}<div class="subtaskbuttons"><button onclick="overlayEditSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-edit.png"></button><div class="subtaskDevider"></div><button onclick="overlayDeleteSubtask('${subtask.subtitel}')" class="addSubtask"><img src="../assets/icons/icon-delete.png"></button></div></li>`;
-//     }
-//     subtasks.push({ 'subtitel': inputfield, 'isDone': false });
-//     clearSubtask();
-//   }
-// }
 
 /**
  * Clears the subtask input field.
