@@ -106,6 +106,8 @@ function hideDetail() {
   currentContact = null;
 }
 
+
+
 /**
  * Adds a new contact and updates the contact list.
  * @returns {Promise<void>}
@@ -121,6 +123,7 @@ async function addContact() {
     await save();
     renderContacts();
     hideForm();
+    showToastMessage('Contact succesfully created', '');
   }
 }
 
