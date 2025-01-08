@@ -341,41 +341,27 @@ function addSubtask() {
   let addTaskBoard = document.getElementById('taskAdd');
   if (inputfield.length >= 3) {
     const subtaskId = `subtask-${Date.now()}`; // Unique ID for the subtask
-    const subtaskHtml = `
-      <li class="listitems" id="${subtaskId}">
-        • <span class="subtask-title">${inputfield}</span>
-        <div class="subtask-buttons">
-          <button onclick="editSubtask('${subtaskId}')" class="addSubtask">
-            <img src="../assets/icons/icon-edit.png" alt="Edit">
-          </button>
-          <div class="subtaskDivider"></div>
-          <button onclick="deleteSubtask('${subtaskId}')" class="addSubtask">
-            <img src="../assets/icons/icon-delete.png" alt="Delete">
-          </button>
-        </div>
-      </li>
-    `;
-    subtaskContainer.innerHTML += subtaskHtml;
+    subtaskContainer.innerHTML += subtaskHtml(subtaskId, inputfield);
     // Add subtask to the array
     subtasks.push({ id: subtaskId, title: inputfield, isDone: false });
     // Clear input field
     clearSubtask();
+  } else {
+    alert("Subtask must be at least 3 characters long.");
   }
 }
 
 /**
  * Edits an existing subtask.
+ * @param {string} subtaskId - The id of the subtask to edit.
  */
 function editSubtask(subtaskId) {
   const subtaskElement = document.getElementById(subtaskId);
   const titleElement = subtaskElement.querySelector('.subtask-title');
-  const newTitle = prompt("Edit subtask:", titleElement.textContent);
-  if (newTitle && newTitle.trim().length >= 3) {
-    titleElement.textContent = newTitle.trim();
-    // Update the corresponding subtask in the array
-    const subtask = subtasks.find(sub => sub.id === subtaskId);
-    if (subtask) subtask.title = newTitle.trim();
-  }
+  const subtask = titleElement.textContent;
+  subtaskElement.innerHTML = editSubtaskHTML(subtask, subtaskId);
+  subtaskElement.classList.add('overlaySubtaskEdit');
+  subtaskElement.classList.remove('editOverlaylistitems');
 }
 
 /**
@@ -386,6 +372,38 @@ function deleteSubtask(subtaskId) {
   subtaskElement.remove();
   // Remove the corresponding subtask from the array
   subtasks = subtasks.filter(sub => sub.id !== subtaskId);
+}
+
+
+/**
+ * accept the changed subtask.
+ */
+function acceptChangedSubtask(subtaskId) {
+  const subtaskElement = document.getElementById(subtaskId);
+  const input = document.getElementsByClassName('overlayEditSubtask')[0];
+  const subtaskContainer = document.getElementById('taskAddSubtasksContent');
+  if (input.value.length < 3) {
+    alert("Subtask must be at least 3 characters long.");
+    event.preventDefault();
+  } else {
+    subtaskElement.subtitel = input.value;
+    subtaskElement.classList.remove('overlaySubtaskEdit');
+    subtaskElement.classList.add('editOverlaylistitems');
+    const oldSubtaskElement = document.getElementById(subtaskId);
+    if (oldSubtaskElement) {
+      oldSubtaskElement.remove();
+    }
+    subtaskContainer.innerHTML += subtaskHtml(subtaskId, input.value);
+  }
+}
+
+/**
+ * Clears the edit subtask input field.
+ */
+function clearSubtaskEdit() {
+  event.preventDefault();
+  const subtaskElement = document.getElementById('editSubtaskValue');
+  subtaskElement.value = '';
 }
 
 /**

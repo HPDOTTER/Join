@@ -323,6 +323,9 @@ input[type="checkbox"][class="contact-checkbox"]:hover + label {
   display: flex;
   justify-content: center;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
 }
 
 @media (max-width: 900px) {

@@ -292,13 +292,17 @@ async function ifCurrentTaskPushMembers(members) {
 async function overlayAddSubtask() {
   const task = tasks[currentTask];
   const input = document.getElementById('subtaskInput');
-  if (!task.subtasks) {
-    task.subtasks = [];
+  if (input.value.length >= 3) {
+    if (!task.subtasks) {
+      task.subtasks = [];
+    }
+    task.subtasks.push({ subtitel: input.value, isDone: false });
+    input.value = '';
+    await SaveLoadRender();
+    showSubtasks(currentTask);
+  } else {
+    alert('Please enter a subtask with at least 3 characters.');
   }
-  task.subtasks.push({ subtitel: input.value, isDone: false });
-  input.value = '';
-  await SaveLoadRender();
-  showSubtasks(currentTask);
 }
 
 /**

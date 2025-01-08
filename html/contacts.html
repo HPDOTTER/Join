@@ -134,8 +134,7 @@
       </div>
       <div class="contact-add-form-body">
         <div class="contact-detail-avatar"></div>
-        <form class="contact-add-form-input-section"
-          onsubmit="addContact(); return false">
+        <form class="contact-add-form-input-section" onsubmit="return false">
           <div class="input-wrapper">
             <input type="text" placeholder="Name" class="input" id="contactListName" required>
             <label for="contactListName">
@@ -143,7 +142,7 @@
             </label>
           </div>
           <div class="input-wrapper">
-            <input type="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="input" id="contactListEmail" required>
+            <input type="email" placeholder="Email" class="input" id="contactListEmail" required>
             <label for="contactListEmail">
               <img src="../assets/icons/icon-mail.svg" alt="mail">
             </label>

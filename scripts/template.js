@@ -139,7 +139,6 @@ function getTaskAssignedToTemplate(member, avatarColor) {
 }
 
 function getEditTaskOverlayTemplate(index, task) {
-  console.log(index);
   const formattedDates = formatDate(task.date);
   const taskMembersHtml = `
     <div class="task-overlay-content" id="task-overlay-content">
@@ -295,4 +294,40 @@ function getNewTaskOverlayTemplate() {
       </div>
     `;
   return newTaskOverlayHtml;
+}
+
+/**
+ * Generates the HTML template for a new subtask on the Add Task page.
+ * @returns {string} - The HTML string for the Add Task page.
+ */
+function subtaskHtml(subtaskId, inputValue) {
+  return `<li class="listitems" id="${subtaskId}">
+            <span class="subtask-title">${inputValue}</span>
+            <div class="subtask-buttons">
+              <button onclick="editSubtask('${subtaskId}')" class="addSubtask">
+                <img src="../assets/icons/icon-edit.png" alt="Edit">
+              </button>
+              <div class="subtaskDevider"></div>
+              <button onclick="deleteSubtask('${subtaskId}')" class="addSubtask">
+                <img src="../assets/icons/icon-delete.png" alt="Delete">
+              </button>
+            </div>
+          </li>`;
+}
+
+/**
+ * Generates the HTML template for editing subtask on the Add Task page.
+ * @returns {string} - The HTML string for the Add Task page.
+ */
+function editSubtaskHTML(subtask, subtaskId) {
+  return `<input id="editSubtaskValue" class="overlayEditSubtask" type="text" value="${subtask}">
+          <div class="subtaskbuttons">
+            <button onclick="clearSubtaskEdit()" class="addSubtask">
+              <img src="../assets/icons/icon-cancel-active.png">
+            </button>
+            <div class="subtaskDevider"></div>
+            <button onclick="acceptChangedSubtask('${subtaskId}')" class="addSubtask">
+              <img src="../assets/icons/icon-check-active.png">
+            </button>
+          </div>`;
 }

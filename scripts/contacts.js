@@ -127,6 +127,8 @@ async function addContact() {
   }
 }
 
+
+
 /**
  * Opens the edit form with the current contact's details.
  */
