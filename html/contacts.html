@@ -102,13 +102,13 @@
             </label>
           </div>
           <div class="input-wrapper">
-            <input type="email" placeholder="Email" class="input" id="editEmail" required>
+            <input type="email" placeholder="Email" pattern="[a-z0-9\._%+\-]+@[a-z0-9\.\-]+\.[a-z]{2,3}" class="input" id="editEmail" required>
             <label for="editEmail">
               <img src="../assets/icons/icon-mail.svg" alt="mail">
             </label>
           </div>
           <div class="input-wrapper">
-            <input type="tel" placeholder="Phone" class="input" id="editPhone" required>
+            <input type="tel" placeholder="Phone" pattern="\+?[1-9]\d{1,14}" class="input" id="editPhone" required>
             <label for="editPhone">
               <img src="../assets/icons/icon-phone.svg" alt="phone">
             </label>
@@ -134,7 +134,8 @@
       </div>
       <div class="contact-add-form-body">
         <div class="contact-detail-avatar"></div>
-        <form class="contact-add-form-input-section" onsubmit="return false">
+        <form class="contact-add-form-input-section"
+          onsubmit="addContact(); return false">
           <div class="input-wrapper">
             <input type="text" placeholder="Name" class="input" id="contactListName" required>
             <label for="contactListName">
@@ -142,13 +143,13 @@
             </label>
           </div>
           <div class="input-wrapper">
-            <input type="email" placeholder="Email" class="input" id="contactListEmail" required>
+            <input type="email" placeholder="Email" pattern="[a-z0-9\._%+\-]+@[a-z0-9\.\-]+\.[a-z]{2,3}" class="input" id="contactListEmail" required>
             <label for="contactListEmail">
               <img src="../assets/icons/icon-mail.svg" alt="mail">
             </label>
           </div>
           <div class="input-wrapper">
-            <input type="tel" placeholder="Phone" class="input" id="contactListPhone" required>
+            <input type="tel" placeholder="Phone" pattern="\+?[1-9]\d{1,14}" class="input" id="contactListPhone" required>
             <label for="contactListPhone">
               <img src="../assets/icons/icon-phone.svg" alt="phone">
             </label>
